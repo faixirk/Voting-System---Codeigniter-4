@@ -20,4 +20,9 @@ class User_Login extends BaseController{
         session()->set($data);
         return true;
     }
+
+    public function reset_password(){
+        $data['title'] = 'Forgot Password';
+        return view('reset_password', $data);
+    }
 }

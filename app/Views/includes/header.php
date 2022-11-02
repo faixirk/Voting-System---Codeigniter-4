@@ -62,7 +62,7 @@
     </div>
 </nav>
 <div class="bottom-bar fixed-bottom text-center">
-        <a href="https://script.bugfinder.net/prophecy" class="text-dark">
+        <a href="<?= base_url('/')?>" class="text-dark">
             <i class="fa fa-home"></i>
             Home        </a>
         <a href="javascript:void(0)" class="text-dark" onclick="toggleSidebar('leftbar')">
@@ -73,7 +73,7 @@
             <i class="fal fa-ticket-alt"></i>
             Bet Slip        </a>
 
-                    <a href="https://script.bugfinder.net/prophecy/login" class="text-dark">
+                    <a href="#" class="text-dark">
                 <i class="fa fa-sign-in"></i>
                 Login            </a>
         

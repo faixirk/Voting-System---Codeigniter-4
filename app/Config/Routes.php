@@ -57,6 +57,8 @@ $routes->get('/', 'Home::index');
  $routes->get('/contact', 'Home::contact');
  
  $routes->get('user/register', 'Registration::index');
+ $routes->get('user/login', 'User_Login::index');
+ $routes->get('user/reset/password', 'User_Login::reset_password');
 
 
 

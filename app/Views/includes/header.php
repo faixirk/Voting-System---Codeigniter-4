@@ -20,19 +20,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" href="https://script.bugfinder.net/prophecy">Home </a>
+                    <a class="nav-link active" href="<?= base_url('/')?>">Home </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="https://script.bugfinder.net/prophecy/about">About</a>
+                    <a class="nav-link " href="<?= base_url('/about-us') ?>">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="https://script.bugfinder.net/prophecy/faq">FAQ</a>
+                    <a class="nav-link " href="<?= base_url('/faq')?>">FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="https://script.bugfinder.net/prophecy/blog">Blog</a>
+                    <a class="nav-link " href="<?= base_url('/blog')?>">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="https://script.bugfinder.net/prophecy/contact">Contact</a>
+                    <a class="nav-link " href="<?= base_url('/contact')?>">Contact</a>
                 </li>
             </ul>
         </div>

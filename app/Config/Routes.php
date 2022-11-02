@@ -50,6 +50,16 @@ $routes->get('/', 'Home::index');
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
+
+ $routes->get('/about-us', 'Home::about_us');
+ $routes->get('/faq', 'Home::faq');
+ $routes->get('/blog', 'Home::blog');
+ $routes->get('/contact', 'Home::contact');
+ 
+ $routes->get('user/register', 'Registration::index');
+
+
+
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }

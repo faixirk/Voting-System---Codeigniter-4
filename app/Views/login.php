@@ -204,7 +204,7 @@ include 'includes/head.php';
                     <button type="submit" class="btn-custom w-100">sign in</button>
                     <div class="bottom">
                         Don't have an account?
-                        <a href="https://script.bugfinder.net/prophecy/register">Create account</a>
+                        <a href="<?= base_url('user/register')?>">Create account</a>
                     </div>
                 </form>
             </div>
@@ -229,7 +229,7 @@ include 'includes/head.php';
                     aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="login-form" id="signup-form" action="https://script.bugfinder.net/prophecy/register" method="post">
+                <form class="login-form" id="signup-form" action="<?= base_url('user/register')?> method="post">
                     <input type="hidden" name="_token" value="ycLlHW7a8pFg4OBJ5hULtengNv95iXr0URiYWzeJ">                    <div class="row g-4">
                         <div class="input-box col-12">
                             <input

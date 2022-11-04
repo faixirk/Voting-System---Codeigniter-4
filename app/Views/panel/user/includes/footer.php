@@ -225,19 +225,16 @@
     };
 </script>
 <script>
- setInterval(()=>{
-    var w = $(window).width();
-console.log(w);
- },2000)
- var width = $(window).width();
+  
+    var width = $(window).width();
 
     if ((width >= 992)) {
         $('#userList').removeClass('leftbar');
     } else {
         $('#userList').addClass('leftbar');
     }
-    $('#userLst').click(()=>{
-        $('#userList').removeClass('d-none d-lg-block'); 
+    $('#userLst').click(() => {
+        $('#userList').removeClass('d-none d-lg-block');
         $('#userList').addClass('d-block');
     });
 </script>

@@ -1,3 +1,7 @@
+    
+    <?php
+    $activePage = basename($_SERVER['PHP_SELF']);
+    ?>
     <!-- wrapper -->
     <div class="wrapper">
         <!-- leftbar -->
@@ -22,30 +26,30 @@
             </div>
             <ul class="main">
                 <li>
-                    <a href="<?= base_url('user/dashboard') ?>" class="active">
+                    <a href="<?= base_url('user/dashboard') ?>" class="<?= ($activePage == 'dashboard') ? 'active':''; ?>">
                         <i class="fal fa-home"></i>
                         Dashboard </a>
                 </li>
 
 
                 <li>
-                    <a href="<?= base_url('user/chats') ?>" class="">
+                    <a href="<?= base_url('user/chats') ?>" class="<?= ($activePage == 'chats') ? 'active' : '' ?>">
                         <i class="far fa-comment-dots"></i>
                         Chats </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('user/groups') ?>">
+                    <a href="<?= base_url('user/groups') ?> " class="<?=($activePage == 'groups') ? 'active': ''  ?>" >
                         <i class="fal fa-users-cog"></i>
                         Groups </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('user/history') ?>">
+                    <a href="<?= base_url('user/history') ?>" class="<?=($activePage == 'groups') ? 'history': ''  ?>">
                         <i class="fal fa-history" aria-hidden="true"></i>
                         Voting history </a>
                 </li>
 
                 <li>
-                    <a href="<?= base_url('user/profile') ?>" class="">
+                    <a href="<?= base_url('user/profile') ?>" class="<?=($activePage == 'profile') ? 'active': ''  ?>">
                         <i class="fal fa-user"></i>
                         personal profile </a>
                 </li>

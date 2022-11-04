@@ -72,6 +72,7 @@ $routes->group('',function($routes){
 // $routes->group('user',['filter'=>'AuthCheck'],function($routes){
 $routes->group('user',function($routes){
     $routes->get('chats', 'Chats_Controller::index');
+    $routes->get('groups', 'Groups_Controller::index');
 });
 
 //  ------- X ------ All User Routes --------- X -------

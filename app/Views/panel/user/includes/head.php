@@ -26,7 +26,7 @@
     <meta property="og:title" content="Voting - An Online Betting Platform">
     <meta property="og:description" content="Voting - An Online Betting Platform">
     <meta property="og:image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png" />
-    <meta property="og:image:type" content="image/png" /> 
+    <meta property="og:image:type" content="image/png" />
 
 
 
@@ -41,5 +41,12 @@
     <script src="https://script.bugfinder.net/prophecy/assets/admin/js/fontawesome/fontawesomepro.js"></script>
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/style.css" />
 
+    <style>
+        /* .chats  li:hover {
+            background: var(--primary);
+            color: var(--white); 
 
+        } */
+  
+    </style>
 </head>

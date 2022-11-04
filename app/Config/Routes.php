@@ -67,6 +67,17 @@ $routes->group('',function($routes){
     $routes->match(['get','post'],'register/add', 'Registration_Controller::registrationUser');
 });
 
+//  ----------------- All User Routes ------------------
+// Chats
+// $routes->group('user',['filter'=>'AuthCheck'],function($routes){
+$routes->group('user',function($routes){
+    $routes->get('chats', 'Chats_Controller::index');
+});
+
+//  ------- X ------ All User Routes --------- X -------
+
+
+
  $routes->get('/about-us', 'Home::about_us');
  $routes->get('/faq', 'Home::faq');
  $routes->get('/blog', 'Home::blog');

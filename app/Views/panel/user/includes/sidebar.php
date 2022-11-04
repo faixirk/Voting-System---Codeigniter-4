@@ -6,6 +6,7 @@
                 <button class="remove-class-btn light btn-custom" onclick="removeClass('userPanelSideBar')">
                     <i class="fal fa-chevron-left"></i>Back </button>
             </div>
+           
             <div class="top profile">
                 <h4 class="d-flex justify-content-between p-2">
                     Profile
@@ -14,7 +15,7 @@
                             <i class="fal fa-sign-out-alt"></i>
                         </button>
                     </a>
-                    
+
                 </h4>
                 <img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="..." />
                 <h5> User</h5>
@@ -29,19 +30,19 @@
 
                 <li>
                     <a href="<?= base_url('user/chats') ?>" class="">
-                    <i class="far fa-comment-dots"></i>
+                        <i class="far fa-comment-dots"></i>
                         Chats </a>
                 </li>
                 <li>
                     <a href="<?= base_url('user/groups') ?>">
-                    <i class="fal fa-users-cog"></i>
+                        <i class="fal fa-users-cog"></i>
                         Groups </a>
-                </li> 
+                </li>
                 <li>
                     <a href="<?= base_url('user/history') ?>">
                         <i class="fal fa-history" aria-hidden="true"></i>
                         Voting history </a>
-                </li> 
+                </li>
 
                 <li>
                     <a href="<?= base_url('user/profile') ?>" class="">
@@ -50,7 +51,7 @@
                 </li>
                 <li>
                     <a href="<?= base_url('user/logout') ?>" class="">
-                    <i class="fal fa-sign-out-alt"></i>
+                        <i class="fal fa-sign-out-alt"></i>
                         Logout </a>
                 </li>
             </ul>

@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/Voting-System/';
+    public $baseURL = 'http://localhost/voting/';
 
     /**
      * --------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $indexPage = 'index.php';
+    public $indexPage = '';
 
     /**
      * --------------------------------------------------------------------------

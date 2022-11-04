@@ -38,13 +38,16 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/aos.css') ?>" />
 
     <script src="<?= base_url('public/assets/js/fontawesomepro.js') ?>"></script>
-
+    <meta name="<?= csrf_token() ?>" content="<?= csrf_hash(); ?>">
 
     <style>
         .modal .text-box,
         .login-section .text-box {
             background: url(https://script.bugfinder.net/prophecy/assets/uploads/logo/loginImage.png);
             background-size: cover;
+        }
+        #swal2-title{
+            color:  black !important;
         }
     </style>
 

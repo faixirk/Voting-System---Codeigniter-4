@@ -25,7 +25,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-// $routes->setAutoRoute(false);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -36,6 +36,8 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
+
 
 /*
  * --------------------------------------------------------------------
@@ -51,17 +53,25 @@ $routes->get('/', 'Home::index');
  * needing to reload it.
  */
 
+
+// Login
+$routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes){
+    $routes->match(['get','post'],'login','Login_Controller::index'); 
+    $routes->post('login/auth', 'Login_Controller::loginVerification');
+});
+
+// Registration
+$routes->group('',function($routes){
+    $routes->get('register','Registration_Controller::index'); 
+    $routes->match(['get','post'],'register/add', 'Registration_Controller::registrationUser');
+});
+
  $routes->get('/about-us', 'Home::about_us');
  $routes->get('/faq', 'Home::faq');
  $routes->get('/blog', 'Home::blog');
  $routes->get('/contact', 'Home::contact');
  
-// Admin Login
-$routes->get('/admin', 'Admin_Login::index');
-$routes->post('/admin/login', 'Admin_Login::login');
-$routes->match(['get','post'],'/admin/dashboard', 'Admin_Dashboard::index');
-
- $routes->get('user/register', 'Registration::index');
+//  $routes->get('user/register', 'Registration::index');
  $routes->get('user/login', 'User_Login::index');
  $routes->get('user/reset/password', 'User_Login::reset_password');
 

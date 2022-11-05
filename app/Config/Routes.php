@@ -56,6 +56,11 @@ $routes->get('/', 'Home::index');
  $routes->get('/blog', 'Home::blog');
  $routes->get('/contact', 'Home::contact');
  
+// Admin Login
+$routes->get('/admin', 'Admin_Login::index');
+$routes->post('/admin/login', 'Admin_Login::login');
+$routes->match(['get','post'],'/admin/dashboard', 'Admin_Dashboard::index');
+
  $routes->get('user/register', 'Registration::index');
  $routes->get('user/login', 'User_Login::index');
  $routes->get('user/reset/password', 'User_Login::reset_password');

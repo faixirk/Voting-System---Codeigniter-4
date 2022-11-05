@@ -9,7 +9,6 @@ include 'includes/sidebar.php';
 
 
 
-
 <!-- rightbar -->
 <div class="rightbar" id="rightbar">
     <div class="my-1 d-lg-none">

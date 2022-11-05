@@ -85,28 +85,28 @@
     </div>
 </div>
 
-<script src="<?= base_url('public/assets/js/bootstrap.bundle.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/masonry.pkgd.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery-3.6.0.min.js')?>"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/bootstrap.bundle.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/masonry.pkgd.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery-3.6.0.min.js"></script>
 
 
-<script src="<?= base_url('public/assets/js/jquery.skitter.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery.easing.1.3.js')?>"></script>
-<script src="<?= base_url('public/assets/js/owl.carousel.min.js')?>"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.skitter.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.easing.1.3.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/owl.carousel.min.js"></script>
 
 
-<script src="<?= base_url('public/assets/js/jquery.waypoints.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery.counterup.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/aos.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery.fancybox.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/script.js')?>"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.waypoints.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.counterup.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/aos.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.fancybox.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/script.js"></script>
 
 
-<script src="<?= base_url('public/assets/js/pusher.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/vue.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/axios.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
-
+<script src="https://script.bugfinder.net/prophecy/assets/global/js/pusher.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/global/js/vue.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/global/js/axios.min.js"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/global/js/notiflix-aio-2.7.0.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--Start of Google analytic Script-->
 <script async src="<?= base_url('public/assets/js/gtag/google-analytic.js')?>"></script>
 <script>
@@ -532,7 +532,9 @@
         });
 
         $('#login-form').submit(e => {
-                e.preventDefault();
+                // e.preventDefault();
+                swal.fire("tested");
+
                 var email = $('#email1').val();
                 var pass = $('#password1').val();
 
@@ -558,7 +560,7 @@
                                     'text': response.message
                                 }).then((error) => {
                                     $('#loginModal').hide(); 
-                                    window.location.replace = 'www.google.com';
+                                    window.location.replace = '/';
                                 })
                             } else {
                                 swal.fire({

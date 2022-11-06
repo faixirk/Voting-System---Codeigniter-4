@@ -1,10 +1,10 @@
 <body>
-<!-- <div class="preloader">
+<div class="preloader">
     <div class="lds-ripple">
         <div class="lds-pos"></div>
         <div class="lds-pos"></div>
     </div>
-</div> -->
+</div>
 
 <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
      data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
@@ -115,11 +115,11 @@
 
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        <img src="https://script.bugfinder.net/prophecy/assets/uploads/admin/627a4928ec4a51652181288.jpg"
+                        <img src="#"
                              alt="user"
                              class="rounded-circle width-40p">
                         <span class="ml-2 d-none d-lg-inline-block"><span class="text-dark">Hello,</span> <span
-                                class="text-dark">admin</span> <i
+                                class="text-dark"><?= session('name'); ?></span> <i
                                 data-feather="chevron-down"
                                 class="svg-icon"></i></span>
                     </a>
@@ -127,23 +127,23 @@
 
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
 
-                        <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/profile">
+                        <a class="dropdown-item" href="<?= base_url('admin/profile')?>">
                             <i class="svg-icon mr-2 ml-1 icon-user"></i>
                             Profile                        </a>
 
-                        <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/password">
+                        <a class="dropdown-item" href="<?= base_url('admin/password')?>">
                             <i class="svg-icon mr-2 ml-1 icon-settings"></i>
                             Password                        </a>
 
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/logout"
+                        <a class="dropdown-item" href="<?= base_url('admin/logout')?>"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
                                 data-feather="power" class="svg-icon mr-2 ml-1"></i>
                             Logout
                         </a>
-                        <form id="logout-form" action="https://script.bugfinder.net/prophecy/admin/logout" method="POST" class="d-none">
-                            <input type="hidden" name="_token" value="8icYtUekISIcd3II4Lf13xpVwKngTOfTXqO18vIm">                        </form>
+                        <form id="logout-form" action="<?= base_url('admin/logout')?>" method="POST" class="d-none">
+                            <input type="hidden" name="_token" value="Z01n56aiJaPYjOYNxpjAZhpYPXqJGXpjQdgO9En2">                        </form>
 
                     </div>
                 </li>

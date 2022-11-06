@@ -6,23 +6,23 @@ use App\Libraries\Validation;
 use CodeIgniter\Controller;
 use App\Models\Admin_Model;
 
-class Admin_Login extends BaseController
+class Admin_Login_Controller extends BaseController
 {
     public function index()
     {
         $data['title'] = 'Login';
         return view('admin/admin_login', $data);
     }
-    public function login()
+    public function loginVerify()
     {
         helper(['form']);
         $validation = $this->validate([
             'email' => [
-                'rules' => 'required|valid_email',
+                'rules' => 'required|valid_email|is_not_unique[admin.admin_email]',
                 'errors' => [
                     'required' => 'Email is required',
                     'valid_email' => 'Enter a valid email address',
-                    // 'is_not_unique' => 'This email is not registered on our service'
+                    'is_not_unique' => 'This email is not registered on our service',
                 ]
             ],
             'password' => [
@@ -39,10 +39,11 @@ class Admin_Login extends BaseController
             $data['validation'] = $this->validator;
             return view('admin/admin_login', $data); // 
         } else {
+            $adminModel = new Admin_Model();
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-            $adminModel = new Admin_Model();
             $emailCheck = $adminModel->where('admin_email', $email)->first();
+        
             $passwordCheck = Validation::check($password, $emailCheck['admin_pass']);
             if ($passwordCheck) {
                 $this->setUserSession($emailCheck);
@@ -67,5 +68,10 @@ class Admin_Login extends BaseController
         ];
         session()->set($data);
         return true;
+    }
+    protected function logout(){
+        die('dasd');
+        session()->destroy();
+        return redirect()->to('admin');
     }
 }

@@ -1,749 +1,290 @@
-<?php
+<?php 
 include 'includes/head.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
 ?>
 
 
+   
 
+    <div class="page-wrapper">
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-7 align-self-center">
+                    <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">    Result History</h4>
 
-<div class="page-wrapper">
-    <div class="page-breadcrumb">
-        <div class="row">
-            <div class="col-7 align-self-center">
-                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> Dashboard</h4>
+                    <div class="d-flex align-items-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb m-0 p-0">
+                                <li class="breadcrumb-item text-muted active" aria-current="page">Dashboard</li>
+                                <li class="breadcrumb-item text-muted" aria-current="page">    Result History</li>
+                            </ol>
+                        </nav>
+                    </div>
 
-                <div class="d-flex align-items-center">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb m-0 p-0">
-                            <li class="breadcrumb-item text-muted active" aria-current="page">Dashboard</li>
-                            <li class="breadcrumb-item text-muted" aria-current="page"> Dashboard</li>
-                        </ol>
-                    </nav>
                 </div>
 
             </div>
+        </div>
 
+            <div class="page-header card card-primary m-0 m-md-4 my-4 m-md-0 p-5 shadow">
+        <div class="row justify-content-between">
+            <div class="col-md-12">
+                <form action="https://script.bugfinder.net/prophecy/admin/result/history/search" method="get">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" name="search" value="" class="form-control"
+                                       placeholder="Questions or teams name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="date" class="form-control" name="date_time" id="datepicker"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button type="submit" class="btn w-100  btn-primary"><i
+                                        class="fas fa-search"></i> Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    <div class="card card-primary m-0 m-md-4  m-md-0 shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="categories-show-table table table-hover table-striped table-bordered" id="zero_config">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>SL No.</th>
+                        <th>Question</th>
+                        <th class="text-center">Match</th>
+                        <th>End Time</th>
+                        <th>Predictions</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                                            <tr>
+                            <td data-label="SL No.">1</td>
+                            <td data-label="Question">Who will win?</td>
+                            <td data-label="Match">
+                                <div class="d-lg-flex d-block align-items-center ">
+                                    <div class="mr-3 cursor-pointer"
+                                         title="CSK">
+                                        <small
+                                            class="text-dark font-weight-bold">CSK</small>
+                                    </div>
+                                    <div class="mr-2 cursor-pointer"
+                                         title="CSK">
+                                        <img
+                                            src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c72f9c1a641662808825.png"
+                                            alt="user" class="rounded-circle" width="25" height="25">
+                                    </div>
+                                    <small class="font-italic mb-0 font-16 ">vs</small>
 
-
-    <div class="container-fluid">
-        <div class="row">
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">156</h2>
+                                    <div class="mr-3 ml-2 cursor-pointer"
+                                         title="KKR">
+                                        <img
+                                            src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c7326d060c1662808870.png"
+                                            alt="user" class="rounded-circle" width="25" height="25">
+                                    </div>
+                                    <div class="cursor-pointer" title="KKR">
+                                        <small
+                                            class="text-dark font-weight-bold">KKR</small>
+                                    </div>
                                 </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Users </h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i data-feather="users"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">156</h2>
+                            </td>
+                            <td data-label="End Time">
+                                11 Jul 2030 06:27 PM
+                            </td>
+                            <td data-label="Predictions"><span
+                                    class="badge badge-success">3</span></td>
+                            <td data-label="Action">
+
+                                <a href="https://script.bugfinder.net/prophecy/admin/result/winner/6">
+                                    <button type="button"
+                                            class="btn btn-outline-dark btn-sm optionInfo"
+                                            title="Select Winner">
+                                        <i class="fa fa-eye"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                </a>
+
+
+                                <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                        data-resource="{&quot;id&quot;:6,&quot;match_id&quot;:1,&quot;result_id&quot;:null,&quot;name&quot;:&quot;Who will win?&quot;,&quot;status&quot;:1,&quot;is_unlock&quot;:0,&quot;result&quot;:1,&quot;limit&quot;:100,&quot;creator_id&quot;:1,&quot;end_time&quot;:&quot;2030-07-11 18:27:00&quot;,&quot;created_at&quot;:&quot;2022-09-11T04:26:25.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-18T05:54:44.000000Z&quot;,&quot;bet_invest_log_count&quot;:3,&quot;game_match&quot;:{&quot;id&quot;:1,&quot;category_id&quot;:26,&quot;tournament_id&quot;:28,&quot;team1_id&quot;:11,&quot;team2_id&quot;:13,&quot;name&quot;:&quot;1st round&quot;,&quot;start_date&quot;:&quot;2022-09-11 00:00:00&quot;,&quot;end_date&quot;:&quot;2031-06-11 00:00:00&quot;,&quot;status&quot;:1,&quot;is_unlock&quot;:0,&quot;created_at&quot;:&quot;2022-09-10T05:25:08.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-18T05:38:10.000000Z&quot;,&quot;game_team1&quot;:{&quot;id&quot;:11,&quot;name&quot;:&quot;CSK&quot;,&quot;image&quot;:&quot;631c72f9c1a641662808825.png&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-09-10T05:20:25.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-10T05:20:25.000000Z&quot;,&quot;category_id&quot;:26},&quot;game_team2&quot;:{&quot;id&quot;:13,&quot;name&quot;:&quot;KKR&quot;,&quot;image&quot;:&quot;631c7326d060c1662808870.png&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-09-10T05:21:10.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-10T05:21:10.000000Z&quot;,&quot;category_id&quot;:26}},&quot;bet_invest_log&quot;:[{&quot;id&quot;:4,&quot;bet_invest_id&quot;:5,&quot;user_id&quot;:1,&quot;match_id&quot;:1,&quot;question_id&quot;:6,&quot;bet_option_id&quot;:9,&quot;ratio&quot;:&quot;1.2&quot;,&quot;category_icon&quot;:&quot;&lt;i class=\&quot;far fa-cricket\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;category_name&quot;:&quot;Cricket&quot;,&quot;tournament_name&quot;:&quot;IPL&quot;,&quot;match_name&quot;:&quot;CSK vs KKR&quot;,&quot;question_name&quot;:&quot;Who will win?&quot;,&quot;option_name&quot;:&quot;CSK&quot;,&quot;status&quot;:3,&quot;created_at&quot;:&quot;2022-09-13T07:57:57.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-18T07:07:06.000000Z&quot;,&quot;bet_invest&quot;:{&quot;id&quot;:5,&quot;transaction_id&quot;:&quot;KMNO25R878VW&quot;,&quot;user_id&quot;:1,&quot;creator_id&quot;:null,&quot;invest_amount&quot;:&quot;100.00&quot;,&quot;return_amount&quot;:&quot;360.00&quot;,&quot;charge&quot;:&quot;26.00&quot;,&quot;remaining_balance&quot;:&quot;999999.99&quot;,&quot;ratio&quot;:&quot;3.6&quot;,&quot;status&quot;:1,&quot;isMultiBet&quot;:1,&quot;created_at&quot;:&quot;2022-09-13T07:57:57.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T05:24:29.000000Z&quot;}},{&quot;id&quot;:7,&quot;bet_invest_id&quot;:6,&quot;user_id&quot;:1,&quot;match_id&quot;:1,&quot;question_id&quot;:6,&quot;bet_option_id&quot;:11,&quot;ratio&quot;:&quot;1&quot;,&quot;category_icon&quot;:&quot;&lt;i class=\&quot;far fa-cricket\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;category_name&quot;:&quot;Cricket&quot;,&quot;tournament_name&quot;:&quot;IPL&quot;,&quot;match_name&quot;:&quot;CSK vs KKR&quot;,&quot;question_name&quot;:&quot;Who will win?&quot;,&quot;option_name&quot;:&quot;DRAW&quot;,&quot;status&quot;:-2,&quot;created_at&quot;:&quot;2022-09-14T07:18:45.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-17T02:45:11.000000Z&quot;,&quot;bet_invest&quot;:{&quot;id&quot;:6,&quot;transaction_id&quot;:&quot;K2NO25RS78VW&quot;,&quot;user_id&quot;:1,&quot;creator_id&quot;:null,&quot;invest_amount&quot;:&quot;100.00&quot;,&quot;return_amount&quot;:&quot;200.00&quot;,&quot;charge&quot;:&quot;0.00&quot;,&quot;remaining_balance&quot;:&quot;999999.99&quot;,&quot;ratio&quot;:&quot;2&quot;,&quot;status&quot;:-1,&quot;isMultiBet&quot;:1,&quot;created_at&quot;:&quot;2022-09-14T07:18:45.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T05:24:29.000000Z&quot;}},{&quot;id&quot;:8,&quot;bet_invest_id&quot;:6,&quot;user_id&quot;:1,&quot;match_id&quot;:1,&quot;question_id&quot;:6,&quot;bet_option_id&quot;:10,&quot;ratio&quot;:&quot;2&quot;,&quot;category_icon&quot;:&quot;&lt;i class=\&quot;far fa-cricket\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;category_name&quot;:&quot;Cricket&quot;,&quot;tournament_name&quot;:&quot;IPL&quot;,&quot;match_name&quot;:&quot;CSK vs KKR&quot;,&quot;question_name&quot;:&quot;Who will win?&quot;,&quot;option_name&quot;:&quot;KKR&quot;,&quot;status&quot;:2,&quot;created_at&quot;:&quot;2022-09-14T07:18:45.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-17T02:45:11.000000Z&quot;,&quot;bet_invest&quot;:{&quot;id&quot;:6,&quot;transaction_id&quot;:&quot;K2NO25RS78VW&quot;,&quot;user_id&quot;:1,&quot;creator_id&quot;:null,&quot;invest_amount&quot;:&quot;100.00&quot;,&quot;return_amount&quot;:&quot;200.00&quot;,&quot;charge&quot;:&quot;0.00&quot;,&quot;remaining_balance&quot;:&quot;999999.99&quot;,&quot;ratio&quot;:&quot;2&quot;,&quot;status&quot;:-1,&quot;isMultiBet&quot;:1,&quot;created_at&quot;:&quot;2022-09-14T07:18:45.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T05:24:29.000000Z&quot;}}]}"
+                                        data-action="https://script.bugfinder.net/prophecy/admin/match/question/update?6"
+                                        data-target="#edit-modal"
+                                        data-toggle="modal" data-backdrop="static"
+                                        title="Edit Question" disabled>
+                                    <i class="fa fa-edit"
+                                       aria-hidden="true"></i>
+                                </button>
+
+
+                                
+
+
+                                <a href="https://script.bugfinder.net/prophecy/admin/bet/user/6">
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-success investLogList">
+                                        <i class="fa fa-info-circle"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                                            <tr>
+                            <td data-label="SL No.">2</td>
+                            <td data-label="Question">Who will win?</td>
+                            <td data-label="Match">
+                                <div class="d-lg-flex d-block align-items-center ">
+                                    <div class="mr-3 cursor-pointer"
+                                         title="Real Madrid">
+                                        <small
+                                            class="text-dark font-weight-bold">REA</small>
+                                    </div>
+                                    <div class="mr-2 cursor-pointer"
+                                         title="Real Madrid">
+                                        <img
+                                            src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c79bd53baa1662810557.png"
+                                            alt="user" class="rounded-circle" width="25" height="25">
+                                    </div>
+                                    <small class="font-italic mb-0 font-16 ">vs</small>
+
+                                    <div class="mr-3 ml-2 cursor-pointer"
+                                         title="Liverpool">
+                                        <img
+                                            src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c79f3ca9dc1662810611.png"
+                                            alt="user" class="rounded-circle" width="25" height="25">
+                                    </div>
+                                    <div class="cursor-pointer" title="Liverpool">
+                                        <small
+                                            class="text-dark font-weight-bold">LIV</small>
+                                    </div>
                                 </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Active Users </h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i data-feather="users"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">6</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Today Join User</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i data-feather="users"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            </td>
+                            <td data-label="End Time">
+                                21 Sep 2022 08:01 PM
+                            </td>
+                            <td data-label="Predictions"><span
+                                    class="badge badge-success">2</span></td>
+                            <td data-label="Action">
 
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>2467356.86
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total User Fund</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fas fa-wallet"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                <a href="https://script.bugfinder.net/prophecy/admin/result/winner/1">
+                                    <button type="button"
+                                            class="btn btn-outline-dark btn-sm optionInfo"
+                                            title="Select Winner">
+                                        <i class="fa fa-eye"
+                                           aria-hidden="true"></i>
+                                    </button>
+                                </a>
 
 
-            <div class="col-md-12">
-                <h6 class="text-dark font-weight-bold">Payment Statistics</h6>
-            </div>
+                                <button type="button" class="btn btn-sm btn-outline-primary editBtn"
+                                        data-resource="{&quot;id&quot;:1,&quot;match_id&quot;:13,&quot;result_id&quot;:null,&quot;name&quot;:&quot;Who will win?&quot;,&quot;status&quot;:2,&quot;is_unlock&quot;:0,&quot;result&quot;:1,&quot;limit&quot;:100,&quot;creator_id&quot;:1,&quot;end_time&quot;:&quot;2022-09-21 20:01:00&quot;,&quot;created_at&quot;:&quot;2022-09-10T06:11:37.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-28T19:31:57.000000Z&quot;,&quot;bet_invest_log_count&quot;:2,&quot;game_match&quot;:{&quot;id&quot;:13,&quot;category_id&quot;:4,&quot;tournament_id&quot;:3,&quot;team1_id&quot;:20,&quot;team2_id&quot;:22,&quot;name&quot;:&quot;&quot;,&quot;start_date&quot;:&quot;2022-09-01 00:00:00&quot;,&quot;end_date&quot;:&quot;2026-01-04 00:00:00&quot;,&quot;status&quot;:1,&quot;is_unlock&quot;:0,&quot;created_at&quot;:&quot;2022-09-10T05:52:56.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T01:42:53.000000Z&quot;,&quot;game_team1&quot;:{&quot;id&quot;:20,&quot;name&quot;:&quot;Real Madrid&quot;,&quot;image&quot;:&quot;631c79bd53baa1662810557.png&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-09-10T05:49:17.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-10T05:49:17.000000Z&quot;,&quot;category_id&quot;:4},&quot;game_team2&quot;:{&quot;id&quot;:22,&quot;name&quot;:&quot;Liverpool&quot;,&quot;image&quot;:&quot;631c79f3ca9dc1662810611.png&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-09-10T05:50:11.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-10T05:50:11.000000Z&quot;,&quot;category_id&quot;:4}},&quot;bet_invest_log&quot;:[{&quot;id&quot;:1,&quot;bet_invest_id&quot;:3,&quot;user_id&quot;:1,&quot;match_id&quot;:13,&quot;question_id&quot;:1,&quot;bet_option_id&quot;:2,&quot;ratio&quot;:&quot;1.36&quot;,&quot;category_icon&quot;:&quot;&lt;i class=\&quot;far fa-futbol\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;category_name&quot;:&quot;Football&quot;,&quot;tournament_name&quot;:&quot;UFFA&quot;,&quot;match_name&quot;:&quot;Real Madrid vs Liverpool&quot;,&quot;question_name&quot;:&quot;Who will win?&quot;,&quot;option_name&quot;:&quot;Draw&quot;,&quot;status&quot;:-2,&quot;created_at&quot;:&quot;2022-09-13T07:46:10.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T04:11:10.000000Z&quot;,&quot;bet_invest&quot;:{&quot;id&quot;:3,&quot;transaction_id&quot;:&quot;KMNO25RS78VW&quot;,&quot;user_id&quot;:1,&quot;creator_id&quot;:null,&quot;invest_amount&quot;:&quot;10.00&quot;,&quot;return_amount&quot;:&quot;13.60&quot;,&quot;charge&quot;:&quot;0.50&quot;,&quot;remaining_balance&quot;:&quot;999999.99&quot;,&quot;ratio&quot;:&quot;1.36&quot;,&quot;status&quot;:-1,&quot;isMultiBet&quot;:0,&quot;created_at&quot;:&quot;2022-09-13T07:46:10.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T05:24:29.000000Z&quot;}},{&quot;id&quot;:6,&quot;bet_invest_id&quot;:5,&quot;user_id&quot;:1,&quot;match_id&quot;:13,&quot;question_id&quot;:1,&quot;bet_option_id&quot;:1,&quot;ratio&quot;:&quot;1.5&quot;,&quot;category_icon&quot;:&quot;&lt;i class=\&quot;far fa-futbol\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;category_name&quot;:&quot;Football&quot;,&quot;tournament_name&quot;:&quot;UFFA&quot;,&quot;match_name&quot;:&quot;Real Madrid vs Liverpool&quot;,&quot;question_name&quot;:&quot;Who will win?&quot;,&quot;option_name&quot;:&quot;REL&quot;,&quot;status&quot;:3,&quot;created_at&quot;:&quot;2022-09-13T07:57:57.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-18T07:07:06.000000Z&quot;,&quot;bet_invest&quot;:{&quot;id&quot;:5,&quot;transaction_id&quot;:&quot;KMNO25R878VW&quot;,&quot;user_id&quot;:1,&quot;creator_id&quot;:null,&quot;invest_amount&quot;:&quot;100.00&quot;,&quot;return_amount&quot;:&quot;360.00&quot;,&quot;charge&quot;:&quot;26.00&quot;,&quot;remaining_balance&quot;:&quot;999999.99&quot;,&quot;ratio&quot;:&quot;3.6&quot;,&quot;status&quot;:1,&quot;isMultiBet&quot;:1,&quot;created_at&quot;:&quot;2022-09-13T07:57:57.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-20T05:24:29.000000Z&quot;}}]}"
+                                        data-action="https://script.bugfinder.net/prophecy/admin/match/question/update?1"
+                                        data-target="#edit-modal"
+                                        data-toggle="modal" data-backdrop="static"
+                                        title="Edit Question" disabled>
+                                    <i class="fa fa-edit"
+                                       aria-hidden="true"></i>
+                                </button>
 
 
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>0
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Today's Deposit</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-hand-holding-usd"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>0
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">This Month Deposits</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fas fa-wallet"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>45262
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Deposit</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-hand-holding-usd"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>18
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Deposited Charge</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-hand-holding-usd"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                
 
 
-            <div class="col-md-12">
-                <h6 class="text-dark font-weight-bold">This Month Statistics</h6>
-            </div>
+                                <a href="https://script.bugfinder.net/prophecy/admin/bet/user/1">
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-success investLogList">
+                                        <i class="fa fa-info-circle"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                                        </tbody>
+                </table>
+                <nav id="pagination">
+    </nav>
 
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>0
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Bet Amount</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-money-bill"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>0
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Bet Win Amount</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-wallet"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">
-                                        <sup>$</sup>0
-                                    </h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Bet Refund Amount</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-hand-holding-usd"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">1</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Subscribers</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-thumbs-up"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h4 class="card-title">This Month's Summary</h4>
-                                <div>
-                                    <canvas id="line-chart" height="150"></canvas>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <h4 class="card-title">Gateway Uses</h4>
-                                <div>
-                                    <canvas id="pie-chart" height="280"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-md-12">
-                <h6 class="text-dark font-weight-bold">Payout Statistics</h6>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">15</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Pending Request</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fas fa-circle-notch"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">$0</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Today's Payout</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fas fa-hand-holding-usd"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">$0</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">This Month Payout</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-money-bill-wave"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">$0</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">This Month Charge</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fas fa-receipt"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-md-12">
-                <h6 class="text-dark font-weight-bold">Tickets</h6>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">1</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Closed Ticket</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-times-circle"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">2</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Replied Ticket</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-inbox"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">0</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Answered Ticket</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-check"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                <div class="card shadow border-right">
-                    <div class="card-body">
-                        <div class="d-flex d-lg-flex d-md-block align-items-center">
-                            <div>
-                                <div class="d-inline-flex align-items-center">
-                                    <h2 class="text-dark mb-1 font-weight-medium">2</h2>
-                                </div>
-                                <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Pending Ticket</h6>
-                            </div>
-                            <div class="ml-auto mt-md-3 mt-lg-0">
-                                <span class="opacity-7 text-muted"><i class="fa fa-spinner"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card shadow">
-                    <div class="card-body">
-                        <h4 class="card-title">Latest User</h4>
-                        <div class="table-responsive">
-                            <table class="categories-show-table table table-hover table-striped table-bordered">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Username</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Balance</th>
-                                        <th scope="col">Status</th>
-
-                                        <th scope="col">Action</th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td data-label="Username">
-                                            <a href="https://script.bugfinder.net/prophecy/admin/user/edit/156">
-                                                <div class="d-lg-flex d-block align-items-center ">
-                                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="user" class="rounded-circle" width="45" height="45"></div>
-                                                    <div class="">
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">MDMINTU</h5>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td data-label="Email">mdmintucom0@gmail.com</td>
-                                        <td data-label="Balance">$0</td>
-                                        <td data-label="Status" class="text-lg-center text-right">
-                                            <span class="badge badge-light">
-                                                <i class="fa fa-circle text-success success font-12"></i> Active</span>
-                                        </td>
-                                        <td data-label="Action">
-                                            <div class="dropdown show">
-                                                <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/156">
-                                                        <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
-
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/156">
-                                                        <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a>
-                                                    <button data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="156">
-                                                        <i class="fa fa-sign-in-alt text-primary pr-2" aria-hidden="true"></i> Login as User </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Username">
-                                            <a href="https://script.bugfinder.net/prophecy/admin/user/edit/155">
-                                                <div class="d-lg-flex d-block align-items-center ">
-                                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="user" class="rounded-circle" width="45" height="45"></div>
-                                                    <div class="">
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">Tojo206</h5>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td data-label="Email">paballonkuna1@gmail.com</td>
-                                        <td data-label="Balance">$0</td>
-                                        <td data-label="Status" class="text-lg-center text-right">
-                                            <span class="badge badge-light">
-                                                <i class="fa fa-circle text-success success font-12"></i> Active</span>
-                                        </td>
-                                        <td data-label="Action">
-                                            <div class="dropdown show">
-                                                <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/155">
-                                                        <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
-
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/155">
-                                                        <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a>
-                                                    <button data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="155">
-                                                        <i class="fa fa-sign-in-alt text-primary pr-2" aria-hidden="true"></i> Login as User </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Username">
-                                            <a href="https://script.bugfinder.net/prophecy/admin/user/edit/154">
-                                                <div class="d-lg-flex d-block align-items-center ">
-                                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="user" class="rounded-circle" width="45" height="45"></div>
-                                                    <div class="">
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">Jerry12</h5>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td data-label="Email">felixjeremiah2008@gmail.com</td>
-                                        <td data-label="Balance">$0</td>
-                                        <td data-label="Status" class="text-lg-center text-right">
-                                            <span class="badge badge-light">
-                                                <i class="fa fa-circle text-success success font-12"></i> Active</span>
-                                        </td>
-                                        <td data-label="Action">
-                                            <div class="dropdown show">
-                                                <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/154">
-                                                        <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
-
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/154">
-                                                        <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a>
-                                                    <button data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="154">
-                                                        <i class="fa fa-sign-in-alt text-primary pr-2" aria-hidden="true"></i> Login as User </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Username">
-                                            <a href="https://script.bugfinder.net/prophecy/admin/user/edit/153">
-                                                <div class="d-lg-flex d-block align-items-center ">
-                                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="user" class="rounded-circle" width="45" height="45"></div>
-                                                    <div class="">
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">canersalman</h5>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td data-label="Email">hepsialinir@gmail.com</td>
-                                        <td data-label="Balance">$0</td>
-                                        <td data-label="Status" class="text-lg-center text-right">
-                                            <span class="badge badge-light">
-                                                <i class="fa fa-circle text-success success font-12"></i> Active</span>
-                                        </td>
-                                        <td data-label="Action">
-                                            <div class="dropdown show">
-                                                <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/153">
-                                                        <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
-
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/153">
-                                                        <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a>
-                                                    <button data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="153">
-                                                        <i class="fa fa-sign-in-alt text-primary pr-2" aria-hidden="true"></i> Login as User </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                    <tr>
-                                        <td data-label="Username">
-                                            <a href="https://script.bugfinder.net/prophecy/admin/user/edit/152">
-                                                <div class="d-lg-flex d-block align-items-center ">
-                                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="user" class="rounded-circle" width="45" height="45"></div>
-                                                    <div class="">
-                                                        <h5 class="text-dark mb-0 font-16 font-weight-medium">SHOHAN</h5>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </td>
-                                        <td data-label="Email">shohanislam@gmail.com</td>
-                                        <td data-label="Balance">$0</td>
-                                        <td data-label="Status" class="text-lg-center text-right">
-                                            <span class="badge badge-light">
-                                                <i class="fa fa-circle text-success success font-12"></i> Active</span>
-                                        </td>
-                                        <td data-label="Action">
-                                            <div class="dropdown show">
-                                                <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                                </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/152">
-                                                        <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
-
-                                                    <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/152">
-                                                        <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a>
-                                                    <button data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="152">
-                                                        <i class="fa fa-sign-in-alt text-primary pr-2" aria-hidden="true"></i> Login as User </button>
-                                                </div>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
     </div>
-
-
-
-
-
-    <div class="modal fade" id="cron-info" role="dialog">
-        <div class="modal-dialog modal-lg">
+    
+    <div id="editModal" class="modal fade show" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-primary">
-                    <h5 class="modal-title">
-                        <i class="fas fa-info-circle"></i>
-                        Cron Job Set Up Instruction
-                    </h5>
-                    <button type="button" class="close cron-notification-close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title">Edit Question</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p class="bg-orange text-white p-2">
-                                <i>**To sending emails and updating match status and distribute bet winner amount automatically you need to setup cron job in your server. Make sure your job is running properly. We insist to set the cron job time as minimum as possible.**</i>
-                            </p>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <label><strong>Command for Email</strong></label>
-                            <div class="input-group ">
-                                <input type="text" class="form-control copyText" value="curl -s https://script.bugfinder.net/prophecy/queue-work" disabled>
-                                <div class="input-group-append">
-                                    <button class="input-group-text bg-primary btn btn-primary text-white copy-btn">
-                                        <i class="fas fa-copy"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <label><strong>Command for Match status update & Bet winner amount distribution</strong></label>
-                            <div class="input-group ">
-                                <input type="text" class="form-control copyText" value="curl -s https://script.bugfinder.net/prophecy/cron" disabled>
-                                <div class="input-group-append">
-                                    <button class="input-group-text bg-primary btn btn-primary text-white copy-btn">
-                                        <i class="fas fa-copy"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <p class="bg-dark text-white p-2">
-                                *To turn off this pop up go to <a href="https://script.bugfinder.net/prophecy/admin/basic-controls" class="text-orange">Basic control</a>
-                                and disable `Cron Set Up Pop Up`.* </p>
-                        </div>
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="Z01n56aiJaPYjOYNxpjAZhpYPXqJGXpjQdgO9En2">                    <div class="modal-body">
+                        <input type="hidden" class="questionId" name="questionId" value="">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control editName" name="name" value="" required>
+                                                    </div>
 
-                        <div class="col-md-12">
-                            <p class="text-muted"><span class="text-secondary font-weight-bold">N.B:</span>
-                                If you are unable to set up cron job, Here is a video tutorial for you <a href="https://www.youtube.com/watch?v=wuvTRT2ety0" target="_blank"><i class="fab fa-youtube"></i> Click Here </a>
-                            </p>
-                        </div>
+                        <div class="form-group">
+                            <label class="text-dark">Status </label>
+                            <select id="editStatus" class="form-control editStatus"
+                                    name="status" required>
+                                <option value="">Select Status</option>
+                                <option value="1">Active</option>
+                                <option value="0">Pending</option>
+                                <option value="2">Closed</option>
+                            </select>
+                                                    </div>
+
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="datetime-local" class="form-control editTime" name="end_time"
+                                   id="editEndDate" required>
+                                                    </div>
+
                     </div>
-                </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="login_as_user" role="dialog">
-        <div class="modal-dialog">
+    
+    <div id="refundQuestion-Modal" class="modal fade show" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-primary">
-                    <h5 class="modal-title">Login as User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                    <h5 class="modal-title">Refund Confirmation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body">
-                    <p>Are you really want to login as user</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-dismiss="modal"><span>No</span></button>
-                    <form action="https://script.bugfinder.net/prophecy/admin/user/login" method="post" class="update-action">
-                        <input type="hidden" name="_token" value="8icYtUekISIcd3II4Lf13xpVwKngTOfTXqO18vIm"> <input type="hidden" class="userId" name="userId" value="" />
-                        <button type="submit" class="btn btn-primary"><span>Yes</span></button>
-                    </form>
-                </div>
+                <form method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="Z01n56aiJaPYjOYNxpjAZhpYPXqJGXpjQdgO9En2">                    <div class="modal-body">
+                        <p>Are you sure to refund this?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">No</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+<?php 
+include 'includes/footer.php';
+?>
+
+      

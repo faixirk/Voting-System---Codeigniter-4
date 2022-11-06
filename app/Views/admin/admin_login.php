@@ -60,15 +60,15 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label class="text-dark" for="pwd">Password</label>
-                                        <input id="password" type="password" class="form-control " name="password"  autocomplete="current-password">
-                                       
+                                        <input id="password" type="password" class="form-control " name="password" autocomplete="current-password">
+
                                     </div>
                                 </div>
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    <a href="https://script.bugfinder.net/prophecy/admin/password/reset" class="text-danger">Forgot Your Password?</a>
+                                    <a href="#" class="text-danger">Forgot Your Password?</a>
                                 </div>
                             </div>
                         </form>

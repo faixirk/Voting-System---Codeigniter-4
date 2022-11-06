@@ -8,6 +8,7 @@ class Sub_Category_Model extends Model{
     protected $returnType = 'array';
     protected $allowedFields = [
         'sub_cat_title',
+        'status',
         'sub_cat_icon',
         'created_at',
         'cat_id'

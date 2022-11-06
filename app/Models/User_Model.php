@@ -10,6 +10,7 @@ class User_Model extends Model {
         'user_email', 
         'user_pass',
         'pic',
+        'status',
         'created_at'
     ];
 }

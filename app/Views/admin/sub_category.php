@@ -299,8 +299,17 @@ include 'includes/sidebar.php';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                    <form action="" method="post" class="deleteRoute">
-                        <input type="hidden" name="_token" value="4ZvvhSDniAgyDNzYYrYeijtw2k7B3dgaXfgDnh5k"> <input type="hidden" name="_method" value="delete"> <button type="submit" class="btn btn-primary">Yes</button>
+                    <form id="form2"  class="deleteRoute">
+                    <input data-id="{$id}" type="hidden" name="<?=csrf_token()?>" value="<?=csrf_hash()?>">  
+                        
+                        <button id="loadingBtn1" class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Verifying...
+                        </button>
+                        <button id="updateBtn1" type="submit" class="btn btn-primary">Yes</button>
+
+
+                                                
                     </form>
                 </div>
             </div>
@@ -312,7 +321,7 @@ include 'includes/sidebar.php';
     ?>
 
     <script>
-        $(document).ready(function() {
+       
             $(document).ready(function() {
                 $('#loadingBtn').hide();
                 $("#updateBtn").click((e) => {
@@ -356,6 +365,42 @@ include 'includes/sidebar.php';
 
                     }
                 });
+            });
+      
+    </script>
+    <script>
+        $(document).ready(function(){
+            $('#loadingBtn1').hide();
+            $('#updateBtn1').click((e)=>{
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: '<?= base_url() ?>' + "/admin/delete/sub-category/" + id,
+                    data: $('#form2').serialize(),
+                    beforeSend: function() {
+                            $('#updateBtn1').hide();
+                            $('#loadingBtn1').show();
+                        },
+                        success: function(response) {
+                            if (response == 1) {
+                                swal.fire({
+                                    'icon' : 'success',
+                                    'text': "Successfully Deleted!"
+                                });
+                                $('#updateBtn1').show();
+                                $('#loadingBtn1').hide();
+                            }  else {
+                                toastr.error('Invalid response');
+                                $('#updateBtn1').show();
+                                $('#loadingBtn1').hide();
+                            }
+                        },
+                        error: (error) => {
+                            console.log(JSON.stringify(error));
+                        },
+                    
+                });
+
             });
         });
     </script>

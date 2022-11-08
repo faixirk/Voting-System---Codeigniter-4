@@ -6,7 +6,7 @@
             <ul id="sidebarnav">
 
                                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/dashboard" aria-expanded="false">
+                        <a class="sidebar-link" href="<?= base_url('admin/dashboard') ?>" aria-expanded="false">
                             <i data-feather="home" class="feather-icon"></i>
                             <span class="hide-menu">Dashboard</span>
                         </a>

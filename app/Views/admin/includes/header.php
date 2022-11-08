@@ -138,7 +138,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="<?= base_url('admin/logout')?>"
                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
+                        document.getElementById('logout-form').submit();"><i
                                 data-feather="power" class="svg-icon mr-2 ml-1"></i>
                             Logout
                         </a>

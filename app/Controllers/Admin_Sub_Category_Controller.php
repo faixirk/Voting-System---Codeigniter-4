@@ -75,4 +75,15 @@ class Admin_Sub_Category_Controller extends BaseController{
             
             }
     }
+    public function deleteSubCategory($id = null){
+        $sub_cat = new Sub_Category_Model();
+        $res = $sub_cat->delete(['sub_cat_id'=> $id]);
+        if($res){
+            echo 1;
+        }
+        else{
+            echo 0;
+        }
+
+    }
 }

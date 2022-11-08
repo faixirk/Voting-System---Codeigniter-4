@@ -60,7 +60,6 @@ include 'includes/sidebar.php';
 
                             <th scope="col" class="text-center">SL No.</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Sub Category</th>
                             <th scope="col" class="text-center">Icon</th>
                             <th scope="col" class="text-center">Status</th>
 
@@ -80,9 +79,7 @@ include 'includes/sidebar.php';
                                 <?= $cat['cat_title']; ?>
                             </td>
                             
-                            <td data-label="Active Team">
-                                <span class="badge badge-success">6</span>
-                            </td>
+                           
                             
                             <td data-label="Icon" class="text-lg-center text-right">
                                 <?= $cat['cat_icon']; ?>
@@ -106,7 +103,7 @@ include 'includes/sidebar.php';
                                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item editBtn" href="javascript:void(0)" data-title="Cricket" data-icon="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-status="1" data-action="https://script.bugfinder.net/prophecy/admin/category/update/26">
+                                        <a class="dropdown-item editBtn" href="javascript:void(0)" data-title="Cricket" data-icon="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-status="1" data-target="editModal" data-action="https://script.bugfinder.net/prophecy/admin/category/update/26">
                                             <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
 
                                         <a class="dropdown-item notiflix-confirm" href="javascript:void(0)" data-target="#delete-modal" data-route="https://script.bugfinder.net/prophecy/admin/category/delete/26" data-toggle="modal">

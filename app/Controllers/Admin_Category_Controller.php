@@ -61,4 +61,7 @@ class Admin_Category_Controller extends BaseController
             }
         }
     }
+    public function deleteCategory($id = null){
+        
+    }
 }

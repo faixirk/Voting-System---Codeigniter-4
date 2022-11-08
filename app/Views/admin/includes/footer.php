@@ -35,6 +35,7 @@
     <script>
         'use script'
         $(document).on('click', '.editBtn', function () {
+            alert('dasdas');
             var modal = $('#editModal');
             var obj = $(this).data('resource');
             modal.find('input[name=name]').val(obj.name);

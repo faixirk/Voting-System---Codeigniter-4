@@ -372,6 +372,7 @@ include 'includes/sidebar.php';
         $(document).ready(function(){
             $('#loadingBtn1').hide();
             $('#updateBtn1').click((e)=>{
+                var id = $(this).val();
                 e.preventDefault();
                 $.ajax({
                     type: "POST",

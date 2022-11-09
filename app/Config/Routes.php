@@ -88,7 +88,45 @@ $routes->group('user',function($routes){
  $routes->get('user/login', 'User_Login::index');
  $routes->get('user/reset/password', 'User_Login::reset_password');
 
+ //Admin Login
+$routes->group('admin',['filter'=>'AlreadyLoggedIn'],function($routes){
+$routes->get('', 'Admin_Login_Controller::index');
+$routes->post('login', 'Admin_Login_Controller::loginVerify');
+});
 
+//Admin Dashboard 
+$routes->match(['get','post'], 'admin/dashboard', 'Admin_Dashboard_Controller::index');
+
+//Admin Profile
+$routes->group('admin',function($routes){
+    $routes->get('profile', 'Admin_Profile_Controller::index');
+    $routes->post('profile/update', 'Admin_Profile_Controller::profileUpdate');
+    $routes->post('profile/photo/update', 'Admin_Profile_Controller::updatePic');
+    $routes->get('password', 'Admin_Password_Controller::index');
+    $routes->match(['get','post'],'password/update', 'Admin_Password_Controller::updatePassword');
+
+});
+//Admin User Controller
+$routes->match(['get','post'],'admin/users', 'Admin_User_Controller::index');
+
+
+//Admin  Category Controller
+$routes->group('admin',function($routes){
+$routes->get('category', 'Admin_Category_Controller::index');
+$routes->post('add/category', 'Admin_Category_Controller::addCategory');
+$routes->post('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
+});
+
+//Admin Sub Category Controller
+$routes->group('admin',function($routes){
+$routes->get('sub-category', 'Admin_Sub_Category_Controller::index');
+$routes->post('add/sub-category','Admin_Sub_Category_Controller::addSubCategory');
+$routes->post('delete/sub-category/(:num)', 'Admin_Category_Controller::deleteSubCategory/$1');
+
+});
+
+//Admin Logout
+$routes->match(['get','post'],'admin/logout', 'Admin_Login_Controller::logout');
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';

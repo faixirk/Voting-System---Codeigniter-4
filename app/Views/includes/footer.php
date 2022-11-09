@@ -107,7 +107,23 @@
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/axios.min.js"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/notiflix-aio-2.7.0.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!--Start of Google analytic Script-->
+<script async src="<?= base_url('public/assets/js/gtag/google-analytic.js')?>"></script>
+<script>
+    "use strict";
+    $(document).ready(function() {
+        var MEASUREMENT_ID = "";
+        window.dataLayer = window.dataLayer || [];
 
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', MEASUREMENT_ID);
+    });
+</script>
+<!--End of Google analytic Script-->
 
 
 
@@ -516,7 +532,9 @@
         });
 
         $('#login-form').submit(e => {
-                e.preventDefault();
+                // e.preventDefault();
+                swal.fire("tested");
+
                 var email = $('#email1').val();
                 var pass = $('#password1').val();
 
@@ -542,7 +560,7 @@
                                     'text': response.message
                                 }).then((error) => {
                                     $('#loginModal').hide(); 
-                                    window.location.replace = 'www.google.com';
+                                    window.location.replace = '/';
                                 })
                             } else {
                                 swal.fire({

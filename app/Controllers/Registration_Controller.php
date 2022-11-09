@@ -102,7 +102,7 @@ class Registration_Controller extends BaseController
             $l_name = $this->request->getPost('l_name');
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-            $data = ['first_name' => $f_name, 'last_name' => $l_name, 'user_email' => $email, 'user_pass' => password_hash($password, PASSWORD_DEFAULT)];
+            $data = ['first_name' => $f_name, 'last_name' => $l_name, 'user_email' => $email, 'user_pass' => password_hash($password, PASSWORD_BCRYPT)];
             $res = $user->save($data);
             if ($res) {
 

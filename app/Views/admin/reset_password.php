@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png">
-    <title>Admin Login | Prophecy</title>
+    <title>Admin Reset Password | Prophecy</title>
     <link href="https://script.bugfinder.net/prophecy/assets/admin/css/style.min.css" rel="stylesheet">
         <style>
-        .logoWidth-64 img{
-            width: 64px!important;
+        .auth-wrapper .auth-box {
+            min-width: 600px;
         }
     </style>
 </head>
@@ -33,36 +34,29 @@
 
                     <div class="col-lg-6 col-md-7 bg-white">
                             <div class="p-3">
-        <div class="text-center logoWidth-64">
+        <div class="text-center">
             <img src=" https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png" alt="wrapkit">
         </div>
-        <h2 class="mt-3 text-center">Admin Login</h2>
+        <h2 class="mt-3 text-center">Reset Password</h2>
 
-        <form method="POST" action="https://script.bugfinder.net/prophecy/admin" aria-label="Login">
-            <input type="hidden" name="_token" value="ycLlHW7a8pFg4OBJ5hULtengNv95iXr0URiYWzeJ">            <div class="row mb-5">
+        <form method="POST" action="https://script.bugfinder.net/prophecy/admin/password/email" class=" mt-4">
+            <input type="hidden" name="_token" value="IdpY7XBECfD9R5G8qsuyNxszzVLNuZAmmjUjl3tc">            <div class="row">
+
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="text-dark" for="email">Email Or Username</label>
-                        <input id="username" type="text"
-                               class="form-control
-                                                                                            " name="username"
-                               value="admin"  autocomplete="off" autofocus>
-
-                                                                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="form-group">
-                        <label class="text-dark" for="pwd">Password</label>
-                        <input id="password" type="password" class="form-control "
-                               name="password" value="admin" autocomplete="current-password">
+                        <label class="text-dark" for="pwd">Enter Email Address</label>
+                        <input  type="email" class="form-control" name="email" value="" required autocomplete="off">
                                             </div>
                 </div>
+
                 <div class="col-lg-12 text-center">
-                    <button type="submit" class="btn btn-block btn-dark">Sign In</button>
+                    <button type="submit" class="btn btn-block btn-dark">Send to reset link</button>
                 </div>
+
                 <div class="col-lg-12 text-center mt-5">
-                    <a href="https://script.bugfinder.net/prophecy/admin/password/reset" class="text-danger">Forgot Your Password?</a>
+                    Click to  <a href="https://script.bugfinder.net/prophecy/admin" class="text-danger">Sign In</a>
                 </div>
+
             </div>
         </form>
     </div>

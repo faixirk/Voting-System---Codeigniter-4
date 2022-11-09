@@ -8,6 +8,7 @@ class Category_Model extends Model{
     protected $returnType = 'array';
     protected $allowedFields = [
       'cat_title',
+      'cat_status',
       'cat_icon',
       'have_sub_cat',
       'admin_id'

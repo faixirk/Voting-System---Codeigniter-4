@@ -4,7 +4,7 @@ include 'includes/header.php';
 include 'includes/sidebar.php';
 ?>
 
- 
+
 <!-- rightbar -->
 <div class="rightbar" id="rightbar">
     <div class="my-1 d-lg-none">
@@ -151,30 +151,12 @@ include 'includes/sidebar.php';
         </a>
 
 
-
+    <?php foreach($categories as $cat): ?>
         <a href="https://script.bugfinder.net/prophecy/category/football/4" class="">
-            <i class="far fa-futbol" aria-hidden="true"></i> <span>Football</span>
+            <i class="far fa-futbol" aria-hidden="true"></i> <span><?= $cat['cat_title']; ?></span>
         </a>
-
-        <a href="https://script.bugfinder.net/prophecy/category/cricket/26" class="">
-            <i class="far fa-cricket" aria-hidden="true"></i> <span>Cricket</span>
-        </a>
-
-        <a href="https://script.bugfinder.net/prophecy/category/badminton/3" class="">
-            <i class="far fa-shuttlecock" aria-hidden="true"></i> <span>Badminton</span>
-        </a>
-
-        <a href="https://script.bugfinder.net/prophecy/category/chess/5" class="">
-            <i class="far fa-chess" aria-hidden="true"></i> <span>Chess</span>
-        </a>
-
-        <a href="https://script.bugfinder.net/prophecy/category/basketball/6" class="">
-            <i class="far fa-basketball-ball" aria-hidden="true"></i> <span>Basketball</span>
-        </a>
-
-        <a href="https://script.bugfinder.net/prophecy/category/hockey/7" class="">
-            <i class="far fa-field-hockey" aria-hidden="true"></i> <span>Hockey</span>
-        </a>
+    <?php endforeach; ?>
+      
     </div>
     <!-- live match table -->
     <div v-if="showType == 'live'" v-for="(item, index) in allSports_filter" class="table-parent table-responsive d-sm-block d-none">
@@ -452,6 +434,6 @@ include 'includes/sidebar.php';
 
 </div>
 
-<?php 
+<?php
 include 'includes/footer.php';
 ?>

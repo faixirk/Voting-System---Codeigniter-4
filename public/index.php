@@ -29,9 +29,9 @@ chdir(FCPATH);
 
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
-require FCPATH . '../app/Config/Paths.php';
+$pathsConfig = FCPATH . 'app/Config/Paths.php';
 // ^^^ Change this line if you move your application folder
-
+require FCPATH . '../app/Config/Paths.php';
 $paths = new Config\Paths();
 
 // Location of the framework bootstrap file.

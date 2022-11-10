@@ -43,9 +43,9 @@
                         Groups </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('user/history') ?>" class="<?=($activePage == 'groups') ? 'history': ''  ?>">
+                    <a href="<?= base_url('user/votes') ?>" class="<?=($activePage == 'groups') ? 'history': ''  ?>">
                         <i class="fal fa-history" aria-hidden="true"></i>
-                        Voting history </a>
+                        Votes </a>
                 </li>
 
                 <li>

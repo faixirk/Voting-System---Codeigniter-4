@@ -75,6 +75,11 @@ $routes->group('user',function($routes){
     $routes->get('groups', 'Groups_Controller::index');
 });
 
+// votes
+$routes->group('user',function($routes){
+    $routes->get('votes', 'Votes_Controller::index');
+    $routes->get('groups', 'Groups_Controller::index');
+});
 //  ------- X ------ All User Routes --------- X -------
 
 

@@ -20,6 +20,7 @@
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/pusher.min.js"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/vue.min.js"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/axios.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <link

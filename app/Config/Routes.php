@@ -35,8 +35,9 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'User_Dashboard::index');
- 
+$routes->get('/', 'Home::index');
+// $routes->get('/server', 'Server::index');
+
 
 
 
@@ -56,23 +57,29 @@ $routes->get('/', 'User_Dashboard::index');
 
 
 // Login
-$routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes){
-    $routes->match(['get','post'],'login','Login_Controller::index'); 
+$routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+    $routes->match(['get', 'post'], 'login', 'Login_Controller::index');
     $routes->post('login/auth', 'Login_Controller::loginVerification');
 });
 
 // Registration
-$routes->group('',function($routes){
-    $routes->get('register','Registration_Controller::index'); 
-    $routes->match(['get','post'],'register/add', 'Registration_Controller::registrationUser');
+$routes->group('', function ($routes) {
+    $routes->get('register', 'Registration_Controller::index');
+    $routes->match(['get', 'post'], 'register/add', 'Registration_Controller::registrationUser');
 });
+
+//Dashboard
+
+$routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
 
 //  ----------------- All User Routes ------------------
 // Chats
 // $routes->group('user',['filter'=>'AuthCheck'],function($routes){
-$routes->group('user',function($routes){
+$routes->group('user', function ($routes) {
     $routes->get('chats', 'Chats_Controller::index');
     $routes->get('groups', 'Groups_Controller::index');
+    $routes->match(['get', 'post'],'chat', 'Chats_Controller::chat');
+    $routes->get('getmsg', 'Chats_Controller::msg');
 });
 
 // votes
@@ -91,54 +98,52 @@ $routes->group('user',function($routes){
 
 
 
- $routes->get('/about-us', 'Home::about_us');
- $routes->get('/faq', 'Home::faq');
- $routes->get('/blog', 'Home::blog');
- $routes->get('/contact', 'Home::contact');
- 
-//  $routes->get('user/register', 'Registration::index');
- $routes->get('user/login', 'User_Login::index');
- $routes->get('user/reset/password', 'User_Login::reset_password');
+$routes->get('/about-us', 'Home::about_us');
+$routes->get('/faq', 'Home::faq');
+$routes->get('/blog', 'Home::blog');
+$routes->get('/contact', 'Home::contact');
 
- //Admin Login
-$routes->group('admin',['filter'=>'AlreadyLoggedIn'],function($routes){
-$routes->get('', 'Admin_Login_Controller::index');
-$routes->post('login', 'Admin_Login_Controller::loginVerify');
+//  $routes->get('user/register', 'Registration::index');
+$routes->get('user/login', 'User_Login::index');
+$routes->get('user/reset/password', 'User_Login::reset_password');
+
+//Admin Login
+$routes->group('admin', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
+    $routes->get('', 'Admin_Login_Controller::index');
+    $routes->post('login', 'Admin_Login_Controller::loginVerify');
 });
 
 //Admin Dashboard 
-$routes->match(['get','post'], 'admin/dashboard', 'Admin_Dashboard_Controller::index');
+$routes->match(['get', 'post'], 'admin/dashboard', 'Admin_Dashboard_Controller::index');
 
 //Admin Profile
-$routes->group('admin',function($routes){
+$routes->group('admin', function ($routes) {
     $routes->get('profile', 'Admin_Profile_Controller::index');
     $routes->post('profile/update', 'Admin_Profile_Controller::profileUpdate');
     $routes->post('profile/photo/update', 'Admin_Profile_Controller::updatePic');
     $routes->get('password', 'Admin_Password_Controller::index');
-    $routes->match(['get','post'],'password/update', 'Admin_Password_Controller::updatePassword');
-
+    $routes->match(['get', 'post'], 'password/update', 'Admin_Password_Controller::updatePassword');
 });
 //Admin User Controller
-$routes->match(['get','post'],'admin/users', 'Admin_User_Controller::index');
+$routes->match(['get', 'post'], 'admin/users', 'Admin_User_Controller::index');
 
 
 //Admin  Category Controller
-$routes->group('admin',function($routes){
-$routes->get('category', 'Admin_Category_Controller::index');
-$routes->post('add/category', 'Admin_Category_Controller::addCategory');
-$routes->post('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
+$routes->group('admin', function ($routes) {
+    $routes->get('category', 'Admin_Category_Controller::index');
+    $routes->post('add/category', 'Admin_Category_Controller::addCategory');
+    $routes->post('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
 });
 
 //Admin Sub Category Controller
-$routes->group('admin',function($routes){
-$routes->get('sub-category', 'Admin_Sub_Category_Controller::index');
-$routes->post('add/sub-category','Admin_Sub_Category_Controller::addSubCategory');
-$routes->post('delete/sub-category/(:num)', 'Admin_Category_Controller::deleteSubCategory/$1');
-
+$routes->group('admin', function ($routes) {
+    $routes->get('sub-category', 'Admin_Sub_Category_Controller::index');
+    $routes->post('add/sub-category', 'Admin_Sub_Category_Controller::addSubCategory');
+    $routes->post('delete/sub-category/(:num)', 'Admin_Category_Controller::deleteSubCategory/$1');
 });
 
 //Admin Logout
-$routes->match(['get','post'],'admin/logout', 'Admin_Login_Controller::logout');
+$routes->match(['get', 'post'], 'admin/logout', 'Admin_Login_Controller::logout');
 
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';

@@ -84,7 +84,6 @@
         </div>
     </div>
 </div>
-
 <script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/bootstrap.bundle.min.js"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/masonry.pkgd.min.js"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery-3.6.0.min.js"></script>
@@ -554,6 +553,7 @@
                         success: (response) => { 
                             if (response.status) {
                                 $('#login-form').trigger("reset");
+                                
                                 swal.fire({
                                     'icon': 'success',
                                     'title': 'Authenticated',
@@ -562,6 +562,7 @@
                                     $('#loginModal').hide(); 
                                     window.location.replace = '/';
                                 })
+                                window.location.href = base_url + "/user/dashboard";
                             } else {
                                 swal.fire({
                                     'icon': 'error',

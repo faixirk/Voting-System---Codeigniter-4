@@ -78,7 +78,14 @@ $routes->group('user',function($routes){
 // votes
 $routes->group('user',function($routes){
     $routes->get('votes', 'Votes_Controller::index');
-    $routes->get('groups', 'Groups_Controller::index');
+    $routes->get('groups', 'Groups_Controller::index'); 
+});
+
+// votes
+$routes->group('user',function($routes){ 
+    $routes->post('addvote', 'Votes_Controller::addVote');
+    $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
+    $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
 //  ------- X ------ All User Routes --------- X -------
 

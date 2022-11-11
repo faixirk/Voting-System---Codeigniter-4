@@ -1,4 +1,4 @@
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"  ></script>
 <script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/bootstrap.bundle.min.js"></script>
 
  
@@ -27,7 +27,7 @@
   href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
   type="text/css"
 />
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 

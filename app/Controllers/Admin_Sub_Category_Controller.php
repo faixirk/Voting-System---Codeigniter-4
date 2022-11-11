@@ -18,7 +18,14 @@ class Admin_Sub_Category_Controller extends BaseController{
         // die('asdd');
         return view('admin/sub_category', $data);
     }
-    
+    function getSubCategory($id = null){
+        $sub_cat = new Sub_Category_Model();
+        $data= $sub_cat->select('	sub_cat_id ,sub_cat_title,cat_id')->where('cat_id',$id)->findAll();
+        if($data){
+            return json_encode($data); 
+        }         
+        return null; 
+    }
     public function addSubCategory(){
         $cat = new Category_Model();
         $parent_id = $this->request->getPost('category');

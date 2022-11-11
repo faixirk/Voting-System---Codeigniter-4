@@ -130,4 +130,8 @@ class Login_Controller extends BaseController
         $data['title'] = 'Forgot Password';
         return view('reset_password', $data);
     }
+    public function logout(){
+        session()->destroy();
+        return redirect()->to('/');
+    }
 }

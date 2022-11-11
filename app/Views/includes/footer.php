@@ -531,8 +531,7 @@
         });
 
         $('#login-form').submit(e => {
-                // e.preventDefault();
-                swal.fire("tested");
+                e.preventDefault();
 
                 var email = $('#email1').val();
                 var pass = $('#password1').val();

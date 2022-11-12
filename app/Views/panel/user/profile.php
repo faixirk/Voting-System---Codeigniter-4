@@ -194,7 +194,6 @@ include 'includes/sidebar.php';
     $('#updateProfile').show();
     $('#profileUpdateLoading').hide();
     $("#image").on("change", function() {
-        e.preventDefault();
         if (this.files[0].size > 2000000) {
             swal.fire("Please upload file less than 2MB. Thanks!!");
             $(this).val('');
@@ -207,6 +206,7 @@ include 'includes/sidebar.php';
             } else {
                 $('#updateProfile').show();
                 $('#updateProfile').click((e) => {
+                    e.preventDefault();
                     var formdata = new FormData(document.getElementById('imageForm'));
                     e.preventDefault();
                     $.ajax({

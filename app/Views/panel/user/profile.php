@@ -20,13 +20,13 @@ include 'includes/sidebar.php';
             <div class="card secbg br-4">
                 <div class="card-body br-4">
                     <form method="post" action="" enctype="multipart/form-data" id="imageForm">
+                        <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                         <div class="form-group">
-                            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
 
                             <div class="image-input ">
                                 <label for="image-upload" id="image-label"><i class="fas fa-upload"></i></label>
-                                <input type="file" name="image" placeholder="Choose image" id="image">
-                                <img id="image_preview_container" class="preview-image" src="" alt="preview image">
+                                <input type="file" name="profileimage" placeholder="Choose image" id="image">
+                                <img id="image_preview_container" class="preview-image" src="<?= base_url('public/uploads/profile/'.session('pic'))?>" alt="preview image">
                             </div>
 
                         </div>
@@ -41,8 +41,8 @@ include 'includes/sidebar.php';
                             </button>
                             <button id="updateProfile" type="submit" class="btn-custom w-100"><span>Image Update</span></button></button>
                         </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
         <div class="col-sm-8">
@@ -188,15 +188,17 @@ include 'includes/sidebar.php';
 </div>
 
 <?= include 'includes/footer.php'  ?>
+
 <script>
+    
     $('#updateProfile').show();
     $('#profileUpdateLoading').hide();
     $("#image").on("change", function() {
+        e.preventDefault();
         if (this.files[0].size > 2000000) {
             swal.fire("Please upload file less than 2MB. Thanks!!");
             $(this).val('');
         } else {
-            alert('dasd');
             // $('#updateProfile').click((e)=>{
             var ext = $(this).val().split('.').pop().toLowerCase();
             if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
@@ -205,16 +207,16 @@ include 'includes/sidebar.php';
             } else {
                 $('#updateProfile').show();
                 $('#updateProfile').click((e) => {
-                    alert(asdas);
-                    // var formdata = new FormData(document.getElementById('imageForm'));
+                    var formdata = new FormData(document.getElementById('imageForm'));
                     e.preventDefault();
                     $.ajax({
                         type: "POST",
                         url: '<?= base_url() ?>' + "/user/photo/update",
-                        data: $('#imageForm').serialize(),
-                        contentType: false,
-                        // neither object neither string  by default its true;
+                        data: formdata,
                         processData: false,
+                        contentType: false,
+                        cache: false,
+                        dataType: "json",
                         beforeSend: function() {
                             $('#updateProfile').hide();
                             $('#profileUpdateLoading').show();
@@ -223,19 +225,37 @@ include 'includes/sidebar.php';
                         success: function(response) {
                             if (response == 1) {
                                 $('#profileUpdateLoading').hide();
+                            $('#updateProfile').show();
                                 $('#image').val('');
-                                toastr.success("Successfully Updated");
-                                loadLogo();
+                                swal.fire({
+                                'icon': 'success',
+                                'text': "Successfully Updated!",
+                            });
+                            // loadLogo();
                             } else if (response == 2) {
                                 $('#updateProfile').show();
                                 $('#profileUpdateLoading').hide();
                                 $('#image').val('');
-                                toastr.error("Invalid Image Format! Image Format Must Be JPG, JPEG or PNG.");
+                                swal.fire("Invalid Image Format! Image Format Must Be JPG, JPEG or PNG.");
 
-                            } else {
+                            } 
+                            else if (response == 3) {
                                 $('#updateProfile').show();
                                 $('#profileUpdateLoading').hide();
-                                toastr.error('Invalid error occur. Try again');
+                                $('#image').val('');
+                                swal.fire("Data could not be stored. Contact admin!");
+
+                            }else if (response == 4) {
+                                $('#updateProfile').show();
+                                $('#profileUpdateLoading').hide();
+                                $('#image').val('');
+                                swal.fire("File is not valid.");
+
+                            }
+                            else {
+                                $('#updateProfile').show();
+                                $('#profileUpdateLoading').hide();
+                                swal.fire('Invalid error occur. Try again');
                                 $('#image').val('');
 
 

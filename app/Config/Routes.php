@@ -73,6 +73,7 @@ $routes->group('', function ($routes) {
 
 $routes->group('user', function($routes){
       $routes->get('profile', 'User_Profile_Controller::index');
+      $routes->get('logo', 'User_Profile_Controller::loadLogo');
       $routes->post('profile/update', 'User_Profile_Controller::profileUpdate');
       $routes->post('password/update', 'User_Profile_Controller::passwordUpdate');
       $routes->post('photo/update', 'User_Profile_Controller::profileimageUpdate');
@@ -91,6 +92,18 @@ $routes->group('user', function ($routes) {
     $routes->get('getmsg', 'Chats_Controller::msg');
 });
 
+// votes
+$routes->group('user',function($routes){
+    $routes->get('votes', 'Votes_Controller::index');
+    $routes->get('groups', 'Groups_Controller::index'); 
+});
+
+// votes
+$routes->group('user',function($routes){ 
+    $routes->post('addvote', 'Votes_Controller::addVote');
+    $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
+    $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
+});
 //  ------- X ------ All User Routes --------- X -------
 
 

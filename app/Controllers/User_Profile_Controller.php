@@ -122,31 +122,34 @@ class User_Profile_Controller extends BaseController{
             }
         }
     }
-    public function profileimageUpdate(){
-        echo 1;
+    public function loadLogo()
+    {
+        $header = new User_Model();
+        $data = $header->first();
+        echo json_encode($data);
     }
 
-    public function profileimageUpdate1()
+    public function profileimageUpdate()
     {
         $validationRule = [
-            'image' => [ 
+            'profileimage' => [ 
                 'rules'=>[
-                    'uploaded[image]',
-                    'mime_in[image,image/jpg,image/jpeg,image/png]',
+                    'uploaded[profileimage]',
+                    'mime_in[profileimage,image/jpg,image/jpeg,image/png]',
                 ]
             ],
         ];
         
-        if (! $this->validate($validationRule)) { 
+        if (!$this->validate($validationRule)) { 
             echo 2;
         }else{
-            if($file = $this->request->getFile('image')){
+            if($file = $this->request->getFile('profileimage')){
                 if($file->isValid() && !$file->hasMoved()){
                     $old_pic = session('pic');
                     
                     $path = './public/uploads/profile/';
                     if($old_pic!='avatar.jpg'){
-                    if(file_exists($path.$old_pic)){
+                    if(is_file($path.$old_pic)){
                         unlink($path.$old_pic); 
                     }}
                     $newName = $file->getRandomName();
@@ -158,16 +161,20 @@ class User_Profile_Controller extends BaseController{
                     $query = $user->update(); 
                     if($query){ 
                         session()->set('pic',$newName);
+                        //success
                         echo 1;
                     }else{
+                        //query failed
                         echo 3;
                     }
                 }else{
-                    echo 3;
+                    //file not valid and has moved
+                    echo 4;
 
                 }
             }else{
-                echo 3;
+                //file not get
+                echo 5;
 
             }
         }

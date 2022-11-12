@@ -14,8 +14,18 @@ class Admin_Category_Controller extends BaseController
         $data['categories'] = $categories->findAll();
         return view('admin/category', $data);
     }
+  
+    function getCategories(){
+        $categories = new Category_Model();
+        $data= $categories->select('cat_id ,cat_title,have_sub_cat')->findAll();
+        if($data){
+            return json_encode($data); 
+        }
+        return false;
+    }
     public function addCategory()
     {
+        
 
         if ($this->request->getMethod() == 'post') {
 

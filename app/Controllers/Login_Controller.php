@@ -9,8 +9,13 @@ class Login_Controller extends BaseController
 {
     public function index()
     {
+        if(!session('isLoggedIn')){
         $data['title'] = 'User Login';
         return view('login', $data);
+        }
+        else{
+            return redirect()->to('user/dashboard');
+        }
     }
     public function loginVerification()
     {

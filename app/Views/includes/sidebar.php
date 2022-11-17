@@ -17,10 +17,11 @@
         <ul class="main">
             <li>
                 <a class="active" href="https://script.bugfinder.net/prophecy">
-                    <i class="far fa-globe-americas"></i> <span>All Sports</span>
+                    <i class="far fa-globe-americas"></i> <span>All Categories</span>
                 </a>
             </li>
             <?php foreach($categories as $key => $cat): ?>
+                <?php if($cat['cat_status'] == 'on'){ ?>
             <li>
                 <a class="dropdown-toggle " data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="true" aria-controls="collapseExample">
                     <i class="far fa-futbol" aria-hidden="true"></i><?= $cat['cat_title']; ?>
@@ -42,6 +43,7 @@
                 </div>
                 <?php } ?> 
             </li>
+            <?php } ?>
         <?php endforeach; ?>
             
         </ul>

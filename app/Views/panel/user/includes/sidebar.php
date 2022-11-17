@@ -21,8 +21,8 @@
                     </a>
 
                 </h4>
-                <img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="..." />
-                <h5> User</h5>
+                <img id="logo"  src="<?= base_url('public/uploads/profile/'.session('pic'))?>" alt="..." />
+                <h5> <?= session('f_name') ?></h5>
             </div>
             <ul class="main">
                 <li>

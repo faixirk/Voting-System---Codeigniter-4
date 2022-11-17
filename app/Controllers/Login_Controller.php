@@ -9,8 +9,13 @@ class Login_Controller extends BaseController
 {
     public function index()
     {
+        if(!session('isLoggedIn')){
         $data['title'] = 'User Login';
         return view('login', $data);
+        }
+        else{
+            return redirect()->to('user/dashboard');
+        }
     }
     public function loginVerification()
     {
@@ -129,5 +134,9 @@ class Login_Controller extends BaseController
     {
         $data['title'] = 'Forgot Password';
         return view('reset_password', $data);
+    }
+    public function logout(){
+        session()->destroy();
+        return redirect()->to('/');
     }
 }

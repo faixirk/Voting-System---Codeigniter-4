@@ -61,15 +61,25 @@ $routes->group('', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
     $routes->match(['get', 'post'], 'login', 'Login_Controller::index');
     $routes->post('login/auth', 'Login_Controller::loginVerification');
 });
-
+// Logout
+$routes->get('user/logout', 'Login_Controller::logout');
 // Registration
 $routes->group('', function ($routes) {
     $routes->get('register', 'Registration_Controller::index');
     $routes->match(['get', 'post'], 'register/add', 'Registration_Controller::registrationUser');
 });
 
-//Dashboard
+//Profile
 
+$routes->group('user', function($routes){
+      $routes->get('profile', 'User_Profile_Controller::index');
+      $routes->get('logo', 'User_Profile_Controller::loadLogo');
+      $routes->post('profile/update', 'User_Profile_Controller::profileUpdate');
+      $routes->post('password/update', 'User_Profile_Controller::passwordUpdate');
+      $routes->post('photo/update', 'User_Profile_Controller::profileimageUpdate');
+});
+
+//Dashboard
 $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
 
 //  ----------------- All User Routes ------------------

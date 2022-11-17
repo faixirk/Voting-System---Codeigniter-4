@@ -21,6 +21,7 @@
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/vue.min.js"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <link
@@ -31,7 +32,22 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
+<!-- <script>
+  loadLogo();
+  function loadLogo() {
+    $.ajax({
+      url: "<?= base_url() ?>" + "/user/logo",
+      type: "GET",
+      dataType: "JSON",
+      success: function(data) {
+        var path = `<?= base_url("/public/uploads/profile/") ?>/${data.pic}`; 
+        $("#logo").attr("src",`${path}`); 
+        $('#image_preview_container').attr("src",`${path}`); 
+      }, 
 
+    });
+  }
+</script> -->
 <script>
     "use strict";
     var root = document.querySelector(':root');

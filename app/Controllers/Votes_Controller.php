@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Category_Model;
+use App\Models\Sub_Category_Model;
+use App\Models\Votes_Model;
 
 class Votes_Controller extends BaseController
 {
@@ -10,6 +13,28 @@ class Votes_Controller extends BaseController
         $data['title'] = 'Votes';
         return view('panel/user/votes', $data);
     }
+    // show public votes on index page
+    function showPublicVotes(){
+        $cat = new Category_Model();
+        $sub_cat = new Sub_Category_Model();
+        $publiVotes = new Votes_Model();
+        $data['votes'] = $publiVotes->select()
+                        ->join('category', 'category.cat_id=sub_category.cat_id')
+                        ->where('type','public')
+                        ->findAll();
+
+    }
+    // show user votes with session id
+    function showMyVotes(){
+        $cat = new Category_Model();
+        $sub_cat = new Sub_Category_Model();
+        $votes = new Votes_Model();
+        $data['votes'] = $votes->select()
+                        ->join('category', 'category.cat_id=sub_category.cat_id')
+                        ->where('user_id',session('id'))
+                        ->findAll();
+    }
+
     function addVote()
     {
         $security = \Config\Services::security();
@@ -80,9 +105,12 @@ class Votes_Controller extends BaseController
                 'subCategory_id' => $subCategory,
                 'description' => $description,
                 'type' => $voteType,
+                'user_id'=>session('id')
             ];
 
             return $this->response->setJSON(['status' => 'success', 'message' => 'User registered successfully']);
         }
     }
+
 }
+

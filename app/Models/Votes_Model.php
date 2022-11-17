@@ -13,5 +13,6 @@ class Votes_Model extends Model {
         'subCategory_id',
         'description',
         'type',
+        'user_id'
     ];
 }

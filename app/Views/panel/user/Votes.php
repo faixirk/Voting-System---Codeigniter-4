@@ -136,7 +136,6 @@ include 'includes/sidebar.php';
 </div>
 <?= include 'includes/footer.php'  ?>
 <script>
-    swal.fire('testing');
     renderList = (id, obj) => {
         if (obj) {
             $.each(JSON.parse(obj), (key, value) => {
@@ -163,14 +162,17 @@ include 'includes/sidebar.php';
 
 
         // set some basic validation
-        $.post("<?= base_url() ?>/user/addvote", $('#vote-form').serialize(), (result) => {
+        $.post("<?= base_url() ?>/user/addvote",  $('#vote-form').serialize(), (result) => {
             console.log(result);
             if (result.errors) {
                 $(result.errors).each(function(key, value) {
-                $('#errorMesg').html(value);
-            });
+                    $('#errorMesg').html(value);
+                });
             };
-     
-        })
+
+        }).fail(function(){
+    alert("Error!");
+});
+        return false;
     })
 </script>

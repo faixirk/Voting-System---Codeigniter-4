@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Category_Model;
+use App\Models\Sub_Category_Model;
+
 
 class Votes_Controller extends BaseController
 {
@@ -8,6 +11,10 @@ class Votes_Controller extends BaseController
     {
 
         $data['title'] = 'Votes';
+        $cat = new Category_Model();
+        $subcat = new Sub_Category_Model();
+        $data['categories'] = $cat->findAll();
+        $data['subcategories'] = $subcat->findAll();
         return view('panel/user/votes', $data);
     }
     function addVote()

@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <?= csrf_meta() ?>
 
     <meta name="description" content="Voting - An Online Voting Platform">
     <meta name="keywords" content="bet, voting, betting, cricket, gambling, game, hyip, invest, ipl, , online voting, soccer, sports">

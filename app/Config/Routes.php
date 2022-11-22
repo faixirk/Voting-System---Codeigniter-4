@@ -71,12 +71,12 @@ $routes->group('', function ($routes) {
 
 //Profile
 
-$routes->group('user', function($routes){
-      $routes->get('profile', 'User_Profile_Controller::index');
-      $routes->get('logo', 'User_Profile_Controller::loadLogo');
-      $routes->post('profile/update', 'User_Profile_Controller::profileUpdate');
-      $routes->post('password/update', 'User_Profile_Controller::passwordUpdate');
-      $routes->post('photo/update', 'User_Profile_Controller::profileimageUpdate');
+$routes->group('user', function ($routes) {
+    $routes->get('profile', 'User_Profile_Controller::index');
+    $routes->get('logo', 'User_Profile_Controller::loadLogo');
+    $routes->post('profile/update', 'User_Profile_Controller::profileUpdate');
+    $routes->post('password/update', 'User_Profile_Controller::passwordUpdate');
+    $routes->post('photo/update', 'User_Profile_Controller::profileimageUpdate');
 });
 
 //Dashboard
@@ -88,22 +88,26 @@ $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
 $routes->group('user', function ($routes) {
     $routes->get('chats', 'Chats_Controller::index');
     $routes->get('groups', 'Groups_Controller::index');
-    $routes->match(['get', 'post'],'chat', 'Chats_Controller::chat');
+    $routes->match(['get', 'post'], 'chat', 'Chats_Controller::chat');
     $routes->get('getmsg', 'Chats_Controller::msg');
+    $routes->get('groups/requests', 'Groups_Controller::requests_index');
+    $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
 });
 
 // votes
-$routes->group('user',function($routes){
+$routes->group('user', function ($routes) {
     $routes->get('votes', 'Votes_Controller::index');
-    $routes->get('groups', 'Groups_Controller::index'); 
+    $routes->get('groups', 'Groups_Controller::index');
+    $routes->post('addgroup', 'Groups_Controller::add_group');
 });
 
 // votes
-$routes->group('user',function($routes){ 
+$routes->group('user', function ($routes) {
     $routes->post('addvote', 'Votes_Controller::addVote');
     $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
+
 //  ------- X ------ All User Routes --------- X -------
 
 

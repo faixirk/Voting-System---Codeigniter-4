@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Prophecy - An Online Betting Platform">
     <meta name="keywords" content="bet, bet365, betting, cricket, gambling, game, hyip, invest, ipl, live, lottery, online betting, online game, soccer, sports">
-    
+
     <link rel="shortcut icon" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/logo.png">
     <title><?= $title ?></title>
     <link rel="icon" type="image/png" sizes="16x16" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png">
-    
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Prophecy | Home">
@@ -46,8 +46,25 @@
             background: url(https://script.bugfinder.net/prophecy/assets/uploads/logo/loginImage.png);
             background-size: cover;
         }
-        #swal2-title{
-            color:  black !important;
+
+        #swal2-title {
+            color: black !important;
+        }
+
+        .btn-custom1 {
+            width: 75px;
+            height: 35px;
+            text-align: center;
+            text-transform: capitalize;
+            font-size: 15px;
+            font-weight: 600;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 3px;
+            -webkit-transition: 0.4s;
+            transition: 0.4s;
+            float: right;
         }
     </style>
 

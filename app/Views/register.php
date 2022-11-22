@@ -21,7 +21,7 @@ include 'includes/header.php';
                 </div>
                 <div class="col-lg-6">
                     <div class="form-wrapper d-flex align-items-center h-100">
-                        <form action="https://script.bugfinder.net/prophecy/register" method="post">
+                        <form action="" method="post">
                             <input type="hidden" name="_token" value="FGTjCAXsL4YpaaSt6nAMNhsrl75tDOALaOXwN2KG">                            <div class="row g-4">
                                 <div class="col-12">
                                     <h4>register here</h4>

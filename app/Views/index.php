@@ -6,9 +6,7 @@ if (session('isLoggedIn') == true) {
     include 'includes/header.php';
 }
 include 'includes/sidebar.php';
-// echo '<pre>';
-// print_r($groups);
-// die();
+
 ?>
 
 
@@ -27,9 +25,15 @@ include 'includes/sidebar.php';
             <div class="d-flex flex-column">
                 <ul class="list-group ">
                     <?php foreach ($groups as $g) : ?>
+                        
                         <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
-                         
-                            <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>                                                     
+                    <?php foreach ($requests as $r) {  if(!isset($r['has_joined'])){?>
+                            <button value="<?= $r['group_id'] ?>" class="btn-custom1 ">Join</button> 
+                        <?php } 
+                        else if(isset($r['has_joined']) && $r['has_joined'] == 'true'){  ?>
+                            <button value="<?= $r['group_id'] ?>" class="btn-custom1 ">Open</button>
+                            <?php } } ?>
+                        
                             <div class="spinner-border" role="status">
                                 <span class="sr-only">Loading...</span>
                             </div>

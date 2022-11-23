@@ -19,9 +19,9 @@ class Home extends BaseController
         $group = new Groups_Model();
         $user = new User_Model();
         $requests = new Requests_Model();
-        $data['requests'] = $requests->select()->join('user', 'user.user_id=requests.user_id')->findAll();
         $data['categories'] = $cat->findAll();
         $data['groups'] = $group->findAll();
+        $data['requests'] = $requests->findAll();
         $data['user'] = $user->findAll();
         // echo '<pre>';
         // print_r($data);

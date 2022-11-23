@@ -92,15 +92,14 @@ class Groups_Controller extends BaseController
         }
     }
     public function setRequest($id){
-         $users = new Groups_Model();
          $requests = new Requests_Model();
          $check = $requests->where('group_id', $id)->first();
          if($check){
          $requests->set('has_joined', 'true');
          $requests->where('group_id', $id);
          $query = $requests->update();
-        //  print_r($query);
-        //  die();
+         print_r($query);
+         die();
          if($query){
             //has joined set to 1
             echo 1;

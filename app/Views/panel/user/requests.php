@@ -7,11 +7,33 @@ include 'includes/sidebar.php';
     <div>
         <h4> Requests</h4>
     </div>
-    <ul class="list-group">
-        <li class="list-group-item">First item</li>
-        <li class="list-group-item">Second item</li>
-        <li class="list-group-item">Third item</li>
-    </ul>
+    <table class="table">
+        <tr class="h6">
+            <th>First Name </th>
+            <th>Last Name </th>
+            <th>Email </th>
+            <th>Group Request</th>
+            <th>Manage</th>
+        </tr>
+        <?php foreach ($requests as $r) : ?>
+            <?php if($r['has_joined'] == 'false'){?>
+
+            <tr>
+                <td> <?= $r['first_name'] ?></td>
+                <td> <?= $r['last_name'] ?></td>
+                <td> <?= $r['user_email'] ?></td>
+                <td><?= $r['group_name'] ?> </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" value="<?= $r['group_id'] ?>" class="btn btn-success btn1">Accept</button>
+                        <button type="button" value="<?= $r['request_id'] ?>" class="btn btn-danger btn2">Decline</button>
+                    </div>
+                </td>
+            </tr>
+            <?php } ?>
+            <?php endforeach; ?>
+
+    </table>
 
 
 
@@ -80,6 +102,68 @@ include 'includes/sidebar.php';
                     alert('error');
                 }
             })
-        })
+        });
+
+        $(".btn1").click(function(event){
+            var id = $(this).val();
+            $.ajax({
+              type: "GET",
+              url: '<?= base_url() ?>' + "/user/groups/requests/accept/" + id,
+              success: function(data){
+                if(data == 1){
+                    swal.fire({
+                            'icon': 'success',
+                            'text': "Request Accepted",
+                        });
+                        setInterval('location.reload()', 2000);
+                }
+                
+                else{
+                    swal.fire({
+                            'icon': 'error',
+                            'text': "Unexpected Error! Contact admin.",
+                        });
+
+                }
+              },
+              error: function(data){
+                swal.fire({
+                            'icon': 'error',
+                            'text': "Unexpected Error! Contact admin.",
+                        });
+              }
+            });
+        });
+        $(".btn2").click(function(event){
+           var id = $(this).val();
+           $.ajax({
+            type: "GET",
+            url: '<?= base_url()?>' + "/user/groups/requests/delete/" + id,
+            success: function(data){
+                if(data ==1){
+                swal.fire({
+                            'icon': 'success',
+                            'text': "Request Declined!",
+                        });
+                        setInterval('location.reload()', 2000);
+                    }
+                else{
+                    swal.fire({
+                            'icon': 'success',
+                            'text': "Unexpected Error! Contact admin.",
+
+                        });
+                }
+            },
+            error: function(data){
+                swal.fire({
+                            'icon': 'success',
+                            'text': "Unexpected Error! Contact admin.",
+
+                        });
+            }
+
+           });
+        });
     });
 </script>

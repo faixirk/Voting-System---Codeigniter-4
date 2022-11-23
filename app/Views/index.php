@@ -26,11 +26,15 @@ include 'includes/sidebar.php';
         <div class="mb-2">
             <div class="d-flex flex-column">
                 <ul class="list-group ">
-                  <?php foreach ($groups as $g): ?>
-                    <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
-                    <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
-                </li>
-                  <?php endforeach; ?>
+                    <?php foreach ($groups as $g) : ?>
+                        <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
+                         
+                            <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>                                                     
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
                 <!-- <div class="dropdown">
                     <button class="dropdown-toggle">
@@ -445,21 +449,52 @@ include 'includes/sidebar.php';
 include 'includes/footer.php';
 ?>
 <script>
-   
-    $(document).ready(function(){
-        $(".btn-custom1").click(function(e){
-           var id = $(this).val();
-           alert(id);
-           $.ajax({
-              url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
-            success:function(data){
-                   alert(data);
-            },
-            error: function(){
-                alert('error!');
-            }
-           });
+    $(document).ready(function() {
+        $(".spinner-border").hide();
+        $(".btn-custom1").click(function(e) {
+            var id = $(this).val();
+            alert(id);
+            $.ajax({
+                url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
+                beforeSend: function() {
+                    $(".btn-custom1").hide();
+                    $(".spinner-border").show();
+                },
+                success: function(data) {
+                    if (data == 0) {
+                        swal.fire({
+                            'icon': 'success',
+                            'text': "Request Sent!",
+                        });
+                        $(".btn-custom1").show();
+                        $(".spinner-border").hide();
+                        // alert(data);
+                    } 
+                    else if(data == 2){
+                        swal.fire({
+                            'icon': 'error',
+                            'text': "Request Already Sent!",
+                        });
+                        $(".btn-custom1").show();
+                        $(".spinner-border").hide();
+                    }
+                    else {
+                        swal.fire({
+                            'icon': 'error',
+                            'text': "Request Failed!",
+                        });
+                        $(".btn-custom1").show();
+                        $(".spinner-border").hide();
+                    }
+                },
+                error: function() {
+                    swal.fire({
+                            'icon': 'info',
+                            'text': "Something unexpected happened. Please contact admin",
+                        });
+                }
+            });
         })
 
-    });    
+    });
 </script>

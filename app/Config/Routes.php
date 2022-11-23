@@ -70,7 +70,6 @@ $routes->group('', function ($routes) {
 });
 
 //Profile
-
 $routes->group('user', function ($routes) {
     $routes->get('profile', 'User_Profile_Controller::index');
     $routes->get('logo', 'User_Profile_Controller::loadLogo');

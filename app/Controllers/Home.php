@@ -9,8 +9,7 @@ use App\Models\Groups_Model;
 class Home extends BaseController
 {
     public function index()
-    {
-         
+    { 
         $data['title'] = 'Voting System';
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();

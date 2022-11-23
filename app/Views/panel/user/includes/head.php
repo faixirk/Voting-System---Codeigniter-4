@@ -41,7 +41,9 @@
 
     <script src="https://script.bugfinder.net/prophecy/assets/admin/js/fontawesome/fontawesomepro.js"></script>
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/style.css" />
-    
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
     <style>
         /* .chats  li:hover {
             background: var(--primary);

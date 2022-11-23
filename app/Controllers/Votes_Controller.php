@@ -13,9 +13,11 @@ class Votes_Controller extends BaseController
 
         $data['title'] = 'Votes';
         $cat = new Category_Model();
-        $subcat = new Sub_Category_Model();
-        $data['categories'] = $cat->findAll();
-        $data['subcategories'] = $subcat->findAll();
+        $votes = new Votes_Model();
+
+        // $data['myvotes'] = $votes->select()
+            // ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
+        // $data['myvotes'] = $cat->where('user_id', 2); 
         return view('panel/user/votes', $data);
     }
     // show public votes on index page
@@ -66,16 +68,13 @@ class Votes_Controller extends BaseController
                     'message' => $this->validator->getError('teamB'),
                 ];
                 echo json_encode($data);
-            }
-            else if ($this->validator->hasError('category')) {
+            } else if ($this->validator->hasError('category')) {
                 $data = [
                     'status' => false,
                     'message' => $this->validator->getError('category'),
                 ];
                 echo json_encode($data);
-            }
-           
-            else if ($this->validator->hasError('voteType')) {
+            } else if ($this->validator->hasError('voteType')) {
                 $data = [
                     'status' => false,
                     'message' => $this->validator->getError('voteType'),
@@ -89,33 +88,33 @@ class Votes_Controller extends BaseController
             $teamA  = $this->request->getPost('teamA');
             $teamB  = $this->request->getPost('teamB');
             $category  = $this->request->getPost('category');
-            $subCategory  = $this->request->getPost('subCategory'); 
+            $subCategory  = $this->request->getPost('subCategory');
             $description  = $this->request->getPost('description');
-            $voteType  = $this->request->getPost('voteType'); 
+            $voteType  = $this->request->getPost('voteType');
             $data = [
                 'team_a' => $teamA,
-                'team_b' => $teamB, 
+                'team_b' => $teamB,
                 'category_id' => $category,
                 'subCategory_id' => $subCategory,
                 'description' => $description,
                 'type' => $voteType,
                 'user_id' => 2
                 // 'user_id' => session('id')
-            ]; 
-                $query = $votes->save($data);
-                if ($query) {
-                    $data = [
-                        'status' => true,
-                        'message' => 'Successfully created.'
-                    ];
-                    echo json_encode($data);
-                } else {
-                    $data = [
-                        'status' => false,
-                        'message' => 'Error occured while creating vote.'
-                    ];
-                    echo json_encode($data);
-                } 
+            ];
+            $query = $votes->save($data);
+            if ($query) {
+                $data = [
+                    'status' => true,
+                    'message' => 'Successfully created.'
+                ];
+                echo json_encode($data);
+            } else {
+                $data = [
+                    'status' => false,
+                    'message' => 'Error occured while creating vote.'
+                ];
+                echo json_encode($data);
+            }
             exit(0);
         }
     }

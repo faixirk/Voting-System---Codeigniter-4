@@ -66,6 +66,12 @@
             transition: 0.4s;
             float: right;
         }
+        
+
+        .spinner-border{
+            float: right;
+
+        }
     </style>
 
 </head>

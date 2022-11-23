@@ -31,6 +31,7 @@
 
 
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/bootstrap.min.css" />
+    
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/animate.css" />
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/owl.carousel.min.css" />
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/owl.theme.default.min.css" />
@@ -40,6 +41,7 @@
 
     <script src="https://script.bugfinder.net/prophecy/assets/admin/js/fontawesome/fontawesomepro.js"></script>
     <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/style.css" />
+    
     <style>
         /* .chats  li:hover {
             background: var(--primary);
@@ -88,5 +90,6 @@
   float: left;
   color: #999;
 }
+
     </style>
 </head>

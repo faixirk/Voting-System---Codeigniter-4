@@ -91,6 +91,8 @@ $routes->group('user', function ($routes) {
     $routes->get('getmsg', 'Chats_Controller::msg');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
+    $routes->get('groups/requests/accept/(:num)', 'Groups_Controller::setRequest/$1');
+    $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
 });
 
 // votes

@@ -7,8 +7,6 @@ class Groups_Model extends Model{
     protected $primaryKey = 'group_id';
     protected $allowedFields = [
      'group_name',
-    //  'group_description',
-     'has_joined',
      'cat_id',
      'sub_cat_id',
      'user_id'

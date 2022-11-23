@@ -61,7 +61,7 @@ include 'includes/sidebar.php';
 
                 <!-- Tab panes -->
                 <div class="tab-content ">
-                    <div id="home" class="container mt-4 tab-pane   active">
+                    <div id="home">
 
                         <form action="" id="profileForm">
                             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
@@ -137,7 +137,7 @@ include 'includes/sidebar.php';
                     </div>
 
 
-                    <div id="menu1" class="container mt-4 tab-pane ">
+                    <div id="menu1" class="mt-4">
 
                         <form method="post" action="" id="passwordForm">
                             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">

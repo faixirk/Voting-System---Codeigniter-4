@@ -54,7 +54,7 @@ include 'includes/sidebar.php';
                                                 <?php foreach ($subcategories as $sub_cat) { ?>
                                                     <?php if ($sub_cat['cat_id'] == $cat['cat_id']) { ?>
                                                         <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
-                                                            <option default value="0">Choose...</option>
+                                                            <option default value="1">Choose...</option>
                                                         </select>
                                                     <?php } ?>
                                                 <?php } ?>

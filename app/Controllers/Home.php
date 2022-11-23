@@ -11,7 +11,8 @@ use App\Models\Requests_Model;
 class Home extends BaseController
 {
     public function index()
-    { 
+    {
+         
         $data['title'] = 'Voting System';
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
@@ -28,7 +29,9 @@ class Home extends BaseController
         //Both quereis can be used to find sub categories
         // $data['sub_categories'] = $sub_cat->findAll();
         $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();
-       
+        $data['votes'] = $cat->select()
+        ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
+        $data['votes'] = $cat->where('type','public');
         return view('index', $data);
     }
     public function about_us(){

@@ -49,16 +49,16 @@ class Votes_Controller extends BaseController
             "teamB" => 'required|trim',
             "category" => 'required|trim',
             // "subCategory" => 'trim',
-            "teamABanner" => [
-                'uploaded[teamABanner]',
-                'mime_in[image/png, image/jpg, image/jpeg, image/gif]',
-                'max_size[teamABanner,4096]',
-            ],
-            "teamBBanner" => [
-                'uploaded[teamBBanner]',
-                'mime_in[image/png, image/jpg, image/jpeg, image/gif]',
-                'max_size[teamBBanner,4096]',
-            ],
+            // "teamABanner" => [
+            //     'uploaded[teamABanner]',
+            //     'mime_in[teamABanner,image/jpg,image/jpeg,image/png]',
+            //     'max_size[teamABanner,4096]',
+            // ],
+            // "teamBBanner" => [
+            //     'uploaded[teamBBanner]',
+            //     'mime_in[teamBBanner,image/jpg,image/jpeg,image/png]',
+            //     'max_size[teamBBanner,4096]',
+            // ],
             "description" => 'required|trim|min_length[15]|max_length[150]',
             "voteType" => 'required|trim',
         ];
@@ -91,27 +91,21 @@ class Votes_Controller extends BaseController
             //     ];
             //     echo json_encode($data);
             // }
-            else if ($this->validator->hasError('teamABanner')) {
-                $data = [
-                    'status' => false,
-                    'message' => $this->validator->getError('teamABanner'),
-                ];
-                echo json_encode($data);
-            }
-            else if ($this->validator->hasError('teamBBanner')) {
-                $data = [
-                    'status' => false,
-                    'message' => $this->validator->getError('teamBBanner'),
-                ];
-                echo json_encode($data);
-            }
-            else if ($this->validator->hasError('teamBBanner')) {
-                $data = [
-                    'status' => false,
-                    'message' => $this->validator->getError('teamBBanner'),
-                ];
-                echo json_encode($data);
-            }
+            // else if ($this->validator->hasError('teamABanner')) {
+            //     $data = [
+            //         'status' => false,
+            //         'message' => $this->validator->getError('teamABanner'),
+            //     ];
+            //     echo json_encode($data);
+            // }
+            // else if ($this->validator->hasError('teamBBanner')) {
+            //     $data = [
+            //         'status' => false,
+            //         'message' => $this->validator->getError('teamBBanner'),
+            //     ];
+            //     echo json_encode($data);
+            // }
+           
             else if ($this->validator->hasError('voteType')) {
                 $data = [
                     'status' => false,
@@ -127,8 +121,8 @@ class Votes_Controller extends BaseController
             $teamB  = $this->request->getPost('teamB');
             $category  = $this->request->getPost('category');
             $subCategory  = $this->request->getPost('subCategory');
-            $teamABanner = $security->sanitizeFilename($this->request->getFile('teamABanner'));
-            $teamBBanner = $security->sanitizeFilename($this->request->getFile('teamBBanner'));
+            $teamABanner = ($this->request->getFile('teamABanner'));
+            $teamBBanner = ($this->request->getFile('teamBBanner'));
             $description  = $this->request->getPost('description');
             $voteType  = $this->request->getPost('voteType');
 

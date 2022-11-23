@@ -25,15 +25,10 @@ include 'includes/sidebar.php';
             <div class="d-flex flex-column">
                 <ul class="list-group ">
                     <?php foreach ($groups as $g) : ?>
-                        
+
                         <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
-                    <?php foreach ($requests as $r) {  if(!isset($r['has_joined'])){?>
-                            <button value="<?= $r['group_id'] ?>" class="btn-custom1 ">Join</button> 
-                        <?php } 
-                        else if(isset($r['has_joined']) && $r['has_joined'] == 'true'){  ?>
-                            <button value="<?= $r['group_id'] ?>" class="btn-custom1 ">Open</button>
-                            <?php } } ?>
-                        
+                            <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
+
                             <div class="spinner-border" role="status">
                                 <span class="sr-only">Loading...</span>
                             </div>
@@ -359,7 +354,7 @@ include 'includes/sidebar.php';
         </table>
     </div>
 
-    <div class="live-matches d-sm-none" v-if="showType == 'live'">
+    <!-- <div class="live-matches d-sm-none" v-if="showType == 'live'">
         <h5>Live Matches</h5>
         <div class="live-matches-slider owl-carousel">
             <div class="box" v-for="(item, index) in allSports_filter">
@@ -443,7 +438,7 @@ include 'includes/sidebar.php';
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 
@@ -473,16 +468,14 @@ include 'includes/footer.php';
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
                         // alert(data);
-                    } 
-                    else if(data == 2){
+                    } else if (data == 2) {
                         swal.fire({
-                            'icon': 'error',
+                            'icon': 'info',
                             'text': "Request Already Sent!",
                         });
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
-                    }
-                    else {
+                    } else {
                         swal.fire({
                             'icon': 'error',
                             'text': "Request Failed!",
@@ -493,9 +486,9 @@ include 'includes/footer.php';
                 },
                 error: function() {
                     swal.fire({
-                            'icon': 'info',
-                            'text': "Something unexpected happened. Please contact admin",
-                        });
+                        'icon': 'info',
+                        'text': "Something unexpected happened. Please contact admin",
+                    });
                 }
             });
         })

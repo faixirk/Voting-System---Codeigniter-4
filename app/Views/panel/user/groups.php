@@ -5,25 +5,25 @@ include 'includes/sidebar.php';
 ?>
 <div class="content user-panel chats">
     <div>
-        <h4> Chats</h4>
+        <h4> Groups</h4>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-6 mb-2">
+        <!-- <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
-                    <h2 class="price">Genral Purpose</h2>
-                    <p class="info">Admin: <small>Username</small><br><small>02-34-2020</small></p> 
+                    <h2 class="price">Public Groups</h2>
+                    <p class="info">Admin: <small><?= session('f_name') ?></small><br><small>02-34-2020</small></p>
                 </div>
                 <div class="dashboard__card-icon">
                     <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/bet.png" alt="...">
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
-                    <h2 class="price">Genral Purpose</h2>
-                    <p class="info">Admin: <small>Username</small><br><small>02-34-2020</small></p> 
+                    <h2 class="price"><a href="<?= base_url('user/groups/requests')?>" style="color:white" >Requests </a></h2>
+                    <p class="info">Admin: <small><?= session('f_name') ?></small><br><small>02-34-2020</small></p>
                 </div>
                 <div class="dashboard__card-icon">
                     <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/bet.png" alt="...">
@@ -35,16 +35,145 @@ include 'includes/sidebar.php';
                 <div class="dashboard__card-content">
                     <h2 class="price">Create Group</h2>
                 </div>
-                <div class="dashboard__card-icon">
-                    <img src="<?= base_url('public/assets/images/icons/plus.png') ?>" alt="...">
+                <div class="dashboard__card-icon" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                    <button id="addModelBtn" type="submit"><img src="<?= base_url('public/assets/images/icons/plus.png') ?>" alt="..."></button>
+                </div>
+            </div>
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Create Group</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="p-0 m-0" id="group-form" style="width: 100% !important; max-width: 100% !important" enctype="multipart/form-data">
+                                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+                                <div class="row mb-3">
+                                    <div class="alert alert-danger" id="errorMesg" role="alert">
+
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label for="team1">Group Name</label>
+                                        <input type="text" class="form-control" name="group">
+                                    </div>
+
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="form-group col-md-6">
+                                        <label for="categ">Category</label>
+                                        <select class="custom-select form-control mr-sm-2" name="category" required id="categ">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="subCateg">Sub Category</label>
+                                        <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row mb-3">
+                                <div class="form-group col-12">
+                                    <label for="desc">Description</label>
+                                    <textarea name="description" class="form-control" id="desc" required></textarea>
+                                </div>
+                            </div> -->
+                                <!-- <div class="row mb-3">
+                                <div class="form-group col-12">
+                                    <label for="type">Type</label>
+                                    <select class="custom-select form-control mr-sm-2" class="voteType" id="type" required>
+                                        <option selected>Choose...</option>
+                                        <option value="public">Public</option>
+                                        <option disabled value="2">Private</option>
+                                    </select>
+                                </div>
+                            </div> -->
+
+                                <div class="modal-footer mr-3 my-2">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" id="addGroup" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-       
-        
+
+
+
 
     </div>
 
 </div>
 
 <?= include 'includes/footer.php'  ?>
+
+<script>
+    
+    renderList = (id, obj) => {
+        if (obj) {
+            $.each(JSON.parse(obj), (key, value) => {
+                $('#' + id).append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
+            })
+        } else {
+            $('#' + id).append('<option disabled value=' + 0 + '>' + "Empty List" + '</option>');
+        }
+
+    }
+    $('#addModelBtn').click(() => {
+        $.get("<?= base_url() ?>/user/getcategory", (result) => {
+            renderList("categ", result);
+        });
+    })
+    $('#categ').change(() => {
+        var id = $('#categ').find('option:selected').val();
+        $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
+            renderList("subCateg", result);
+        })
+    })
+    $(document).ready(function() {
+
+        $('#group-form').submit((e) => {
+            e.preventDefault();
+
+            // set some basic validation
+            $.ajax({
+                type: "POST",
+                url: '<?= base_url() ?>' + "/user/addgroup",
+                dataType: "JSON",
+                data: $('#group-form').serialize(),
+                success: function(response) {
+                     if(response==1){
+                        swal.fire({
+                                'icon': 'success',
+                                'text': "Successfully Added!",
+                            });
+                     }
+                     else if(response==2){
+                        swal.fire({
+                                'icon': 'danger',
+                                'text': "Error! Please conact admin.",
+                            });
+                     }
+                     else{
+                        swal.fire({
+                                'icon': 'danger',
+                                'text': "Please Enter Correct Data!",
+                            });
+                     }
+                },
+                error: function(err) {
+                    $("#msg_err").text(err.responseJSON.messages.message);
+                    alert('error');
+                }
+            })
+        })
+    });
+</script>

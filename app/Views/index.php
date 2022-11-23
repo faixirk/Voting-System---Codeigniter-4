@@ -1,31 +1,38 @@
 <?php
 include 'includes/head.php';
-include 'includes/header.php';
+if (session('isLoggedIn') == true) {
+    include 'panel/user/includes/header.php';
+} else {
+    include 'includes/header.php';
+}
 include 'includes/sidebar.php';
+// echo '<pre>';
+// print_r($groups);
+// die();
 ?>
 
 
 <!-- rightbar -->
 <div class="rightbar" id="rightbar">
-    <div class="my-1 d-lg-none">
-        <button class="remove-class-btn light btn-custom" onclick="removeClass('rightbar')">
-            <i class="fal fa-chevron-left"></i> Back </button>
-    </div>
+
     <div class="top mb-3 d-flex">
-        <button class="btn-custom me-1">
+        <button class="btn-custom me-1" disabled>
             <i class="fas fa-podcast"></i>
-            bet slip </button>
-        <a href="https://script.bugfinder.net/prophecy/user/bet-history" class="btn-custom2 light">
-            <i class="fas fa-meteor"></i>
-            my bets </a>
+            Private Rooms </button>
+
     </div>
 
-    <div :class="{ 'd-none': 0 == betSlip.length }">
+    <div class="col-12">
         <div class="mb-2">
-            <div class="d-flex justify-content-between">
-                <p class="mb-0">Your Bets {{ betSlip.length }}</p>
-
-                <div class="dropdown">
+            <div class="d-flex flex-column">
+                <ul class="list-group ">
+                  <?php foreach ($groups as $g): ?>
+                    <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
+                    <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
+                </li>
+                  <?php endforeach; ?>
+                </ul>
+                <!-- <div class="dropdown">
                     <button class="dropdown-toggle">
                         <i class="fal fa-cog"></i>
                     </button>
@@ -47,11 +54,11 @@ include 'includes/sidebar.php';
                         </div>
                         <button class="btn-custom w-100">save changes</button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
-        <template>
+        <!-- <template>
             <div v-for="(item, index) in betSlip" class="bet-box mb-2" :class="{'bet-box-disable':(item.is_unlock_match == 1 || item.is_unlock_question == 1)}">
                 <p class="series d-flex align-items-start">
                     <span>
@@ -95,7 +102,7 @@ include 'includes/sidebar.php';
             <input class="form-control" value="1" v-model="form.amount" @keyup="calc(form.amount)" type="number" data-zeros="true" :max="999999" />
             <button type="button" class="increment btn-custom" @click="increment()">+</button>
         </div>
-        <button type="button" @click="betPlace" class=" btn-custom w-100">place bet</button>
+        <button type="button" @click="betPlace" class=" btn-custom w-100">place bet</button> -->
     </div>
 </div>
 
@@ -151,12 +158,12 @@ include 'includes/sidebar.php';
         </a>
 
 
-    <?php foreach($categories as $cat): ?>
-        <a href="https://script.bugfinder.net/prophecy/category/football/4" class="">
-            <i class="far fa-futbol" aria-hidden="true"></i> <span><?= $cat['cat_title']; ?></span>
-        </a>
-    <?php endforeach; ?>
-      
+        <?php foreach ($categories as $cat) : ?>
+            <a href="https://script.bugfinder.net/prophecy/category/football/4" class="">
+                <i class="far fa-futbol" aria-hidden="true"></i> <span><?= $cat['cat_title']; ?></span>
+            </a>
+        <?php endforeach; ?>
+
     </div>
     <!-- live match table -->
     <div v-if="showType == 'live'" v-for="(item, index) in allSports_filter" class="table-parent table-responsive d-sm-block d-none">
@@ -437,3 +444,22 @@ include 'includes/sidebar.php';
 <?php
 include 'includes/footer.php';
 ?>
+<script>
+   
+    $(document).ready(function(){
+        $(".btn-custom1").click(function(e){
+           var id = $(this).val();
+           alert(id);
+           $.ajax({
+              url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
+            success:function(data){
+                   alert(data);
+            },
+            error: function(){
+                alert('error!');
+            }
+           });
+        })
+
+    });    
+</script>

@@ -48,15 +48,29 @@ include 'includes/sidebar.php';
                                 <div class="form-group col-md-6">
                                     <label for="categ">Category</label>
                                     <select class="custom-select form-control mr-sm-2" name="category" required id="categ">
-                                        <option selected>Choose...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="subCateg">Sub Category</label>
-                                    <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
-                                        <option selected>Choose...</option>
-                                    </select>
-                                </div>
+                                            <?php foreach ($categories as $cat) : ?>
+                                            <option value="<?= $cat['cat_id'] ?>" selected><?= $cat['cat_title'] ?></option>
+                                            <?php if ($cat['have_sub_cat']) { ?>
+                                                <?php foreach ($subcategories as $sub_cat) { ?>
+                                                    <?php if ($sub_cat['cat_id'] == $cat['cat_id']) { ?>
+                                                        <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
+                                                        <option selected>Choose...</option>
+                                                    </select>
+                                                <?php } ?>
+                                            <?php } ?>
+                                            <?php } ?>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+
+                                        <!-- <div class="form-group col-md-6">
+                                            <label for="subCateg">Sub Category</label>
+
+
+                                                    
+
+                                        </div> -->
+
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group col-md-6">
@@ -136,43 +150,42 @@ include 'includes/sidebar.php';
 </div>
 <?= include 'includes/footer.php'  ?>
 <script>
-    renderList = (id, obj) => {
-        if (obj) {
-            $.each(JSON.parse(obj), (key, value) => {
-                $('#' + id).append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
-            })
-        } else {
-            $('#' + id).append('<option disabled value=' + 0 + '>' + "Empty List" + '</option>');
-        }
+    // swal.fire('testing');
+    // renderList = (id, obj) => {
+    //     if (obj) {
+    //         $.each(JSON.parse(obj), (key, value) => {
+    //             $('#' + id).append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
+    //         })
+    //     } else {
+    //         $('#' + id).append('<option disabled value=' + 0 + '>' + "Empty List" + '</option>');
+    //     }
 
-    }
-    $('#addModelBtn').click(() => {
-        $.get("<?= base_url() ?>/user/getcategory", (result) => {
-            renderList("categ", result);
-        });
-    })
-    $('#categ').change(() => {
-        var id = $('#categ').find('option:selected').val();
-        $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
-            renderList("subCateg", result);
-        })
-    })
+    // }
+    // $('#addModelBtn').click(() => {
+    //     $.get("<?= base_url() ?>/user/getcategory", (result) => {
+    //         renderList("categ", result);
+    //     });
+    // })
+    // $('#categ').change(() => {
+    //     var id = $('#categ').find('option:selected').val();
+    //     $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
+    //         renderList("subCateg", result);
+    //     })
+    // })
+    var formdata = new FormData(document.getElementById('vote-form'));
     $('#vote-form').submit((e) => {
         e.preventDefault();
-
-
         // set some basic validation
-        $.post("<?= base_url() ?>/user/addvote",  $('#vote-form').serialize(), (result) => {
+        $.post("<?= base_url() ?>/user/addvote", formdata, (result) => {
             console.log(result);
             if (result.errors) {
                 $(result.errors).each(function(key, value) {
                     $('#errorMesg').html(value);
                 });
-            };
+            } else {
 
-        }).fail(function(){
-    alert("Error!");
-});
-        return false;
+            }
+
+        })
     })
 </script>

@@ -1,5 +1,4 @@
-    
-    <?php
+<?php
     $activePage = basename($_SERVER['PHP_SELF']);
     ?>
     <!-- wrapper -->

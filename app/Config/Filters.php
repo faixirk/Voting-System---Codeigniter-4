@@ -38,8 +38,8 @@ class Filters extends BaseConfig
            // 'honeypot',
             // 'csrf',
             // 'invalidchars',
-            'AuthCheck',
-            'AlreadyLoggedIn'
+            // 'AuthCheck',
+            // 'AlreadyLoggedIn'
         ],
         'after' => [
             // 'toolbar',

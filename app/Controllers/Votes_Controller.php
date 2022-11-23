@@ -11,6 +11,10 @@ class Votes_Controller extends BaseController
     {
 
         $data['title'] = 'Votes';
+        $cat = new Category_Model();
+        $subcat = new Sub_Category_Model();
+        $data['categories'] = $cat->findAll();
+        $data['subcategories'] = $subcat->findAll();
         return view('panel/user/votes', $data);
     }
     // show public votes on index page

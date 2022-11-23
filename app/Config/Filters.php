@@ -35,7 +35,7 @@ class Filters extends BaseConfig
      */
     public $globals = [
         'before' => [
-            'honeypot',
+           // 'honeypot',
             // 'csrf',
             // 'invalidchars',
             // 'AuthCheck',
@@ -43,7 +43,7 @@ class Filters extends BaseConfig
         ],
         'after' => [
             // 'toolbar',
-            'honeypot',
+           // 'honeypot',
             // 'secureheaders',
         ],
     ];

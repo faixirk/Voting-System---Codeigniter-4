@@ -126,4 +126,15 @@ class Groups_Controller extends BaseController
             echo 2;
         }
     }
+    public function private_index(){
+        $data = [];
+        $data['title'] = 'Private | User';
+        $user = new User_Model();
+        $request = new Requests_Model();
+        $data['private'] = $user->select()->join('requests', 'requests.user_id=user.user_id')->findAll();
+        // echo '<pre>';
+        // print_r($data);
+        // die();
+        return view('panel\user\private_voting', $data);
+    }
 }

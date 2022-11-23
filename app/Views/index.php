@@ -452,7 +452,6 @@ include 'includes/footer.php';
         $(".spinner-border").hide();
         $(".btn-custom1").click(function(e) {
             var id = $(this).val();
-            alert(id);
             $.ajax({
                 url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
                 beforeSend: function() {
@@ -472,7 +471,9 @@ include 'includes/footer.php';
                         swal.fire({
                             'icon': 'info',
                             'text': "Request Already Sent!",
-                        });
+                        }).then(() => {
+                                    window.location.href = "<?= base_url()?>" + '/user/groups/private';
+                                });
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
                     } else {

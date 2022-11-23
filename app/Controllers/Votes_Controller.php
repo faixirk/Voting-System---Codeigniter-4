@@ -24,10 +24,10 @@ class Votes_Controller extends BaseController
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
         $publiVotes = new Votes_Model();
-        $data['votes'] = $publiVotes->select()
-            ->join('category', 'category.cat_id=sub_category.cat_id')
-            ->where('type', 'public')
-            ->findAll();
+        $data['category'] = $cat->select()
+            ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.cat_id')->findAll();
+            $data['category'] = $cat->where('type','public');
+            
     }
     // show user votes with session id
     function showMyVotes()
@@ -121,8 +121,8 @@ class Votes_Controller extends BaseController
             $teamB  = $this->request->getPost('teamB');
             $category  = $this->request->getPost('category');
             $subCategory  = $this->request->getPost('subCategory');
-            $teamABanner = ($this->request->getFile('teamABanner'));
-            $teamBBanner = ($this->request->getFile('teamBBanner'));
+            $teamABanner = $this->request->getFile('teamABanner');
+            $teamBBanner = $this->request->getFile('teamBBanner');
             $description  = $this->request->getPost('description');
             $voteType  = $this->request->getPost('voteType');
 

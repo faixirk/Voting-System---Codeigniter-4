@@ -48,17 +48,7 @@ class Votes_Controller extends BaseController
             "teamA" => 'required|trim',
             "teamB" => 'required|trim',
             "category" => 'required|trim',
-            // "subCategory" => 'trim',
-            // "teamABanner" => [
-            //     'uploaded[teamABanner]',
-            //     'mime_in[teamABanner,image/jpg,image/jpeg,image/png]',
-            //     'max_size[teamABanner,4096]',
-            // ],
-            // "teamBBanner" => [
-            //     'uploaded[teamBBanner]',
-            //     'mime_in[teamBBanner,image/jpg,image/jpeg,image/png]',
-            //     'max_size[teamBBanner,4096]',
-            // ],
+            "subCategory" => 'trim',
             "description" => 'required|trim|min_length[15]|max_length[150]',
             "voteType" => 'required|trim',
         ];
@@ -84,27 +74,6 @@ class Votes_Controller extends BaseController
                 ];
                 echo json_encode($data);
             }
-            // else if ($this->validator->hasError('subCategory')) {
-            //     $data = [
-            //         'status' => false,
-            //         'message' => $this->validator->getError('subCategory'),
-            //     ];
-            //     echo json_encode($data);
-            // }
-            // else if ($this->validator->hasError('teamABanner')) {
-            //     $data = [
-            //         'status' => false,
-            //         'message' => $this->validator->getError('teamABanner'),
-            //     ];
-            //     echo json_encode($data);
-            // }
-            // else if ($this->validator->hasError('teamBBanner')) {
-            //     $data = [
-            //         'status' => false,
-            //         'message' => $this->validator->getError('teamBBanner'),
-            //     ];
-            //     echo json_encode($data);
-            // }
            
             else if ($this->validator->hasError('voteType')) {
                 $data = [
@@ -120,44 +89,19 @@ class Votes_Controller extends BaseController
             $teamA  = $this->request->getPost('teamA');
             $teamB  = $this->request->getPost('teamB');
             $category  = $this->request->getPost('category');
-            $subCategory  = $this->request->getPost('subCategory');
-            $teamABanner = ($this->request->getFile('teamABanner'));
-            $teamBBanner = ($this->request->getFile('teamBBanner'));
+            $subCategory  = $this->request->getPost('subCategory'); 
             $description  = $this->request->getPost('description');
-            $voteType  = $this->request->getPost('voteType');
-
-            // $b1 = $security->sanitizeFilename($this->request->getFile('teamABanner'));
-
-            $image = \Config\Services::image();
-            $b1 = $this->request->getFile('teamABanner');
-            $image->withFile($b1)
-                ->resize(100, 100, true, 'height')
-                ->save(FCPATH . '/uploads/' . $b1->getRandomName);
-            $b1->move(WRITEPATH . 'uploads');
-
-            $b1_name = $b1->getName();
-
-            // $teamBBanner = $security->sanitizeFilename($this->request->getFile('teamBBanner'));
-            $b2 = $this->request->getFile('teamBBanner');
-            $image->withFile($b2)
-                ->resize(100, 100, true, 'height')
-                ->save(FCPATH . '/uploads/' . $b2->getRandomName());
-            $b2->move(WRITEPATH . 'uploads');
-
-            $b2_name = $b2->getName();
-
+            $voteType  = $this->request->getPost('voteType'); 
             $data = [
                 'team_a' => $teamA,
-                'team_b' => $teamB,
-                'team_a_banner' => $b1_name,
-                'team_b_banner' => $b2_name,
+                'team_b' => $teamB, 
                 'category_id' => $category,
                 'subCategory_id' => $subCategory,
                 'description' => $description,
                 'type' => $voteType,
-                'user_id' => session('id')
-            ];
-            if ($this->$security->xss_clean($data)) {
+                'user_id' => 2
+                // 'user_id' => session('id')
+            ]; 
                 $query = $votes->save($data);
                 if ($query) {
                     $data = [
@@ -171,10 +115,7 @@ class Votes_Controller extends BaseController
                         'message' => 'Error occured while creating vote.'
                     ];
                     echo json_encode($data);
-                }
-            } else {
-                return false;
-            }
+                } 
             exit(0);
         }
     }

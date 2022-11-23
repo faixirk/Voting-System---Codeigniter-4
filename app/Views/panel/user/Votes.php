@@ -24,67 +24,29 @@ include 'includes/sidebar.php';
                         <form onsubmit="return false" class="p-0 m-0" id="vote-form" style="width: 100% !important; max-width: 100% !important" enctype="multipart/form-data">
                             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                             <div class="row mb-3">
-                                <div class="alert alert-danger" id="errorMesg" role="alert">
-
-                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="team1">Team A</label>
-                                    <select class="custom-select form-control mr-sm-2" id="team1" name="teamA" required>
-                                        <option default value="0">Choose...</option>
-                                        <option value="India">India</option>
-                                        <option value="Eng">Eng</option>
-                                    </select>
+                                    <input type="text" class="form-control" placeholder="Team A" name="teamA" id="team1">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="team2">Team B</label>
-                                    <select class="custom-select form-control mr-sm-2" id="team2" name="teamB" required>
-                                        <option default value="0">Choose...</option>
-                                        <option value="Pakinstan">Pakinstan</option>
-                                        <option value="UK">UK</option>
-                                    </select>
+                                    <input type="text" class="form-control" placeholder="Team B" name="teamB" id="team2">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group col-md-6">
                                     <label for="categ">Category</label>
                                     <select class="custom-select form-control mr-sm-2" name="category" required id="categ">
-                                        <?php foreach ($categories as $cat) : ?>
-                                            <option value="<?= $cat['cat_id'] ?>" selected><?= $cat['cat_title'] ?></option>
-                                            <?php if ($cat['have_sub_cat']) { ?>
-                                                <?php foreach ($subcategories as $sub_cat) { ?>
-                                                    <?php if ($sub_cat['cat_id'] == $cat['cat_id']) { ?>
-                                                        <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
-                                                            <option default value="1">Choose...</option>
-                                                        </select>
-                                                    <?php } ?>
-                                                <?php } ?>
-                                            <?php } ?>
-                                        <?php endforeach; ?>
+                                        <option selected>Choose...</option>
                                     </select>
                                 </div>
-
-                                <!-- <div class="form-group col-md-6">
-                                            <label for="subCateg">Sub Category</label>
-
-
-                                                    
-
-                                        </div> -->
-
-                            </div>
-                            <div class="row mb-3">
                                 <div class="form-group col-md-6">
-                                    <label for="customFile">Team A Banner</label>
-                                    <div class="custom-file">
-                                        <input type="file" name="teamABanner" id="customFile" required>
-                                    </div>
+                                    <label for="subCateg">Sub Category</label>
+                                    <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
+                                        <option selected>Choose...</option>
+                                    </select>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="customFile2">Team B Banner</label>
-                                    <div class="custom-file">
-                                        <input type="file" name="teamBBanner" id="customFile2" required>
-                                    </div>
-                                </div>
+                                          
                             </div>
                             <div class="row mb-3">
                                 <div class="form-group col-12">
@@ -115,7 +77,7 @@ include 'includes/sidebar.php';
         </div>
     </div>
     <div class="row p-4">
-        <table class="table table-hover table-responsive">
+        <table id="votesTable" class="table table-hover table-responsive" style="width: 100%;">
             <thead class="thead-inverse">
                 <tr>
                     <th>ID</th>
@@ -148,7 +110,7 @@ include 'includes/sidebar.php';
     </div>
 
 </div>
-<?= include 'includes/footer.php'  ?>
+<?php include 'includes/footer.php'  ?>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
 <script>
@@ -156,42 +118,42 @@ include 'includes/sidebar.php';
         // I use element.value instead value here, value parameter was always null
         return arg != element.value;
     }, "Value must not equal arg.");
-    $.validator.addMethod('filesize', function(value, element, param) {
-        return this.optional(element) || (element.files[0].size <= param * 1000000)
-    }, 'File size must be less than {0} MB');
 </script>
-<script>
-    // swal.fire('testing');
-    // renderList = (id, obj) => {
-    //     if (obj) {
-    //         $.each(JSON.parse(obj), (key, value) => {
-    //             $('#' + id).append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
-    //         })
-    //     } else {
-    //         $('#' + id).append('<option disabled value=' + 0 + '>' + "Empty List" + '</option>');
-    //     }
+<script> 
+    $('#votesTable').DataTable(); 
+    renderList = (id, obj) => {
+        if (obj) {
+            $.each(JSON.parse(obj), (key, value) => {
+                $('#' + id).append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
+            })
+        } else {
+            $('#' + id).append('<option value=' + 99 + '>' + "Empty List" + '</option>');
+        }
 
-    // }
-    // $('#addModelBtn').click(() => {
-    //     $.get("<?= base_url() ?>/user/getcategory", (result) => {
-    //         renderList("categ", result);
-    //     });
-    // })
-    // $('#categ').change(() => {
-    //     var id = $('#categ').find('option:selected').val();
-    //     $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
-    //         renderList("subCateg", result);
-    //     })
-    // })
+    }
+    $('#addModelBtn').click(() => {
+        $.get("<?= base_url() ?>/user/getcategory", (result) => {
+            renderList("categ", result);
+        });
+    })
+    $('#categ').change(() => {
+        var id = $('#categ').find('option:selected').val();
+        $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
+            console.log(result);
+            renderList("subCateg", result);
+        })
+    })
     $('#vote-form').validate({
         rules: {
             teamA: {
                 required: true,
-                valueNotEquals: "0"
+                minlength: 10,
+                maxlength: 50
             },
             teamB: {
                 required: true,
-                valueNotEquals: "0"
+                minlength: 10,
+                maxlength: 50
             },
             category: {
                 required: true,
@@ -201,16 +163,7 @@ include 'includes/sidebar.php';
                 required: true,
                 valueNotEquals: "0"
             },
-            teamABanner: {
-                required: true,
-                extension: "png|jpe?g|gif",
-                filesize: 1,
-            },
-            teamBBanner: {
-                required: true,
-                extension: "png|jpe?g|gif",
-                filesize: 1,
-            },
+
             description: {
                 required: true,
                 minlength: 15,
@@ -222,20 +175,12 @@ include 'includes/sidebar.php';
             },
         },
         messages: {
-            teamA: {
-                valueNotEquals: "Please select team a!"
-            },
-            teamB: {
-                valueNotEquals: "Please select team b!"
-            },
             category: {
                 valueNotEquals: "Please select an category!"
             },
             subCategory: {
                 valueNotEquals: "Please select an sub category!"
             },
-            teamABanner: "Banner must be JPG, GIF or PNG, less than 1MB",
-            teamBBanner: "Banner must be JPG, GIF or PNG, less than 1MB",
             voteType: {
                 valueNotEquals: "Please select vote type!"
             },
@@ -248,16 +193,16 @@ include 'includes/sidebar.php';
                 console.log(result.status);
                 console.log(result.message);
                 if (result.status == true) {
-                    swal.fire(
-                        'success',
-                        'Success',
-                        result.message
-                    ).then(() => {
+                    swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: result.message,
+                    }).then(() => {
                         // window.location = '<?= base_url() ?>/login';
                     })
                 } else {
                     swal.fire(
-                         'warning',
+                        'warning',
                         'Failed',
                         result.message
                     )

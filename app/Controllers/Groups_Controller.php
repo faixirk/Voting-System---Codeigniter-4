@@ -60,8 +60,15 @@ class Groups_Controller extends BaseController
     {
         $data['title'] = 'Requests | User';
         $requests = new Requests_Model();
-        $data['requests'] = $requests->select()->join('groups', 'groups.group_id=requests.group_id')->join('user', 'user.user_id=requests.user_id')->findAll();
-       
+        //--------- join requests->groups && requests->users ----------------------------------------------
+        $data['requests'] = $requests->select()->join('groups', 'groups.group_id=requests.group_id')->join('user', 'user.user_id=requests.user_id');
+        //-------------------- END 'JOIN' -----------------------------------------------------------------
+
+        //------------------- find all data where creator id matches session id of user --------------------
+        $data['requests'] = $requests->where('creator_id', session('user_id'))->findAll();
+        //----------------------- END 'WHERE' --------------------------------------------------------------
+
+    
         return view('panel/user/requests', $data);
     }
     public function requests($id)
@@ -70,25 +77,28 @@ class Groups_Controller extends BaseController
         $group = new Groups_Model();
         $user = new User_Model();
         $requests = new Requests_Model();
-        $checkUser = $group->where('group_id', $id)->findAll();
-        $check = $user->where('user_id', $checkUser[0]['user_id'])->findAll();
-        $requestCheck = $requests->where('group_id', $id)->findAll();
-        $data = [
-            'user_id' => session('user_id'),
-            'group_id' => $id,
-            'creator_id' => $check[0]['user_id'],
-            'status' => '1'
-        ];
-
-        if (!$requestCheck) {
+        $checkGroup = $group->where('group_id', $id)->findAll();  //matches the group from user passed to groups table
+    
+       
+        if(session('isLoggedIn') == true){  //true if user is logged in
+            $data = [
+                'user_id' => session('user_id'),   //user who is logged in
+                'group_id' => $id,                
+                'creator_id' => $checkGroup[0]['user_id'],  //user who created the group
+                'status' => '1'   
+            ];
             $query = $requests->insert($data);
             if ($query) {
+                //query successful
                 echo 0;
             } else {
+                // query failed to update
                 echo 1;
             }
-        } else {
-            echo 2;
+        }
+        else{
+            //true if user is not logged in
+               echo 3;
         }
     }
     public function setRequest($id){
@@ -98,8 +108,7 @@ class Groups_Controller extends BaseController
          $requests->set('has_joined', 'true');
          $requests->where('group_id', $id);
          $query = $requests->update();
-         print_r($query);
-         die();
+        
          if($query){
             //has joined set to 1
             echo 1;

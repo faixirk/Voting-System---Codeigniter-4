@@ -459,6 +459,7 @@ include 'includes/footer.php';
                     $(".spinner-border").show();
                 },
                 success: function(data) {
+                    // alert(data);
                     if (data == 0) {
                         swal.fire({
                             'icon': 'success',
@@ -466,7 +467,6 @@ include 'includes/footer.php';
                         });
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
-                        // alert(data);
                     } else if (data == 2) {
                         swal.fire({
                             'icon': 'info',
@@ -476,7 +476,15 @@ include 'includes/footer.php';
                                 });
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
-                    } else {
+                    }else if (data == 3) {
+                        swal.fire({
+                            'icon': 'info',
+                            'text': "You need to login to join the group",
+                        })
+                        $(".btn-custom1").show();
+                        $(".spinner-border").hide();
+                    } 
+                    else {
                         swal.fire({
                             'icon': 'error',
                             'text': "Request Failed!",

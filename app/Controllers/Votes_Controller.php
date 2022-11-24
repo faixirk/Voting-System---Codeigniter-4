@@ -15,9 +15,12 @@ class Votes_Controller extends BaseController
         $cat = new Category_Model();
         $votes = new Votes_Model();
 
-        // $data['myvotes'] = $votes->select()
-            // ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
-        // $data['myvotes'] = $cat->where('user_id', 2); 
+        $data['votes'] = $cat->select()
+        ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id');
+        $data['votes'] = $cat->where('user_id', session('user_id'))->findAll(); 
+        // echo '<pre>';
+        // print_r($data);
+        // die();
         return view('panel/user/votes', $data);
     }
     // show public votes on index page

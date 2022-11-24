@@ -1,7 +1,4 @@
 <?php
-
-print_r($myvotes);
-die;
 include 'includes/head.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';

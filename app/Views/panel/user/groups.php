@@ -5,7 +5,7 @@ include 'includes/sidebar.php';
 ?>
 <div class="content user-panel chats">
     <div>
-        <h4> Groups</h4>
+        <h4> Rooms</h4>
     </div>
     <div class="row">
         <!-- <div class="col-lg-4 col-md-6 mb-2">
@@ -33,7 +33,7 @@ include 'includes/sidebar.php';
         <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
-                    <h2 class="price">Create Group</h2>
+                    <h2 class="price">Create Room</h2>
                 </div>
                 <div class="dashboard__card-icon" data-toggle="modal" data-target=".bd-example-modal-lg">
 

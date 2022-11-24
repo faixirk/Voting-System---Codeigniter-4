@@ -39,7 +39,7 @@
                 <li>
                     <a href="<?= base_url('user/groups') ?> " class="<?=($activePage == 'groups') ? 'active': ''  ?>" >
                         <i class="fal fa-users-cog"></i>
-                        Groups </a>
+                        Rooms </a>
                 </li>
                 <li>
                     <a href="<?= base_url('user/votes') ?>" class="<?=($activePage == 'groups') ? 'history': ''  ?>">

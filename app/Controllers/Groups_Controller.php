@@ -77,16 +77,21 @@ class Groups_Controller extends BaseController
         $group = new Groups_Model();
         $user = new User_Model();
         $requests = new Requests_Model();
-        $checkGroup = $group->where('group_id', $id)->findAll();  //matches the group from user passed to groups table
-    
+        $checkGroup = $group->where('group_id', $id)->findAll();  //matches the group id from user passed to groups table
+        $checkUser = $user->select()->join('requests', 'requests.user_id = user.user_id','left');
+        $checkUser = $user->where('group_id', $id)->findAll();
+        $checkRequest = $requests->where('user_id', $checkUser[0]['user_id'])->findAll(); 
+        print_r( $checkRequest);
+        die();
        
         if(session('isLoggedIn') == true){  //true if user is logged in
             $data = [
                 'user_id' => session('user_id'),   //user who is logged in
                 'group_id' => $id,                
                 'creator_id' => $checkGroup[0]['user_id'],  //user who created the group
-                'status' => '1'   
+                'status' => '1'   //already joined the group
             ];
+            if(!$checkRequest){
             $query = $requests->insert($data);
             if ($query) {
                 //query successful
@@ -94,6 +99,11 @@ class Groups_Controller extends BaseController
             } else {
                 // query failed to update
                 echo 1;
+            } 
+        }
+            else{
+                //request already sent
+                echo 2;
             }
         }
         else{

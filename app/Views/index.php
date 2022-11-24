@@ -459,7 +459,7 @@ include 'includes/footer.php';
                     $(".spinner-border").show();
                 },
                 success: function(data) {
-                    // alert(data);
+                    alert(data);
                     if (data == 0) {
                         swal.fire({
                             'icon': 'success',
@@ -471,9 +471,7 @@ include 'includes/footer.php';
                         swal.fire({
                             'icon': 'info',
                             'text': "Request Already Sent!",
-                        }).then(() => {
-                                    window.location.href = "<?= base_url()?>" + '/user/groups/private';
-                                });
+                        })
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
                     }else if (data == 3) {

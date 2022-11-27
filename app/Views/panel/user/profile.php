@@ -23,10 +23,10 @@ include 'includes/sidebar.php';
                         <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                         <div class="form-group">
 
-                            <div class="image-input ">
+                            <div id="profileImg" class="image-input ">
                                 <label for="image-upload" id="image-label"><i class="fas fa-upload"></i></label>
                                 <input type="file" name="profileimage" placeholder="Choose image" id="image">
-                                <img id="image_preview_container" class="preview-image" src="<?= base_url('public/uploads/profile/'.session('pic'))?>" alt="preview image">
+                                <img id="image_preview_container" src="<?= base_url('public/uploads/profile/'.session('pic'))?>" class="preview-image"  alt="preview image">
                             </div>
 
                         </div>
@@ -190,10 +190,12 @@ include 'includes/sidebar.php';
 <?= include 'includes/footer.php'  ?>
 
 <script>
-    
+    $(document).ready(function(){
+
     $('#updateProfile').show();
     $('#profileUpdateLoading').hide();
-    $("#image").on("change", function() {
+    $("#image").on("change", function(e) {
+        e.preventDefault();
         if (this.files[0].size > 2000000) {
             swal.fire("Please upload file less than 2MB. Thanks!!");
             $(this).val('');
@@ -207,6 +209,10 @@ include 'includes/sidebar.php';
                 $('#updateProfile').show();
                 $('#updateProfile').click((e) => {
                     e.preventDefault();
+                    if($('#image').val() == ''){
+                      swal.fire("Please select an image to upload!");
+                    }
+                    else{
                     var formdata = new FormData(document.getElementById('imageForm'));
                     e.preventDefault();
                     $.ajax({
@@ -223,14 +229,17 @@ include 'includes/sidebar.php';
 
                         },
                         success: function(response) {
-                            if (response == 1) {
+                            if (response.success) {
                                 $('#profileUpdateLoading').hide();
                             $('#updateProfile').show();
                                 $('#image').val('');
                                 swal.fire({
                                 'icon': 'success',
-                                'text': "Successfully Updated!",
+                                'text': response.message,
                             });
+                            $('#logo').attr('src', '<?= base_url() ?>' + "/public/uploads/profile/" + response.path);
+                            $('#image_preview_container').attr('src', '<?= base_url() ?>' + "/public/uploads/profile/" + response.path);
+                            
                             // loadLogo();
                             } else if (response == 2) {
                                 $('#updateProfile').show();
@@ -262,13 +271,16 @@ include 'includes/sidebar.php';
                             }
                         },
                     });
-                });
+            }
+        });
 
             }
 
             // })
         }
     });
+});
+
 </script>
 <script>
     $(document).ready(function() {

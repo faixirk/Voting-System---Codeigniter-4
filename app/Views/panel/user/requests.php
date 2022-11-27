@@ -144,8 +144,9 @@ include 'includes/sidebar.php';
                 swal.fire({
                             'icon': 'success',
                             'text': "Request Declined!",
-                        });
-                        setInterval('location.reload()', 2000);
+                        }).then(() => {
+                        window.location.reload(); 
+                    })
                     }
                 else{
                     swal.fire({

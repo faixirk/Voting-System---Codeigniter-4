@@ -51,9 +51,9 @@
                                 Groups </a>
                         </li>
                         <li>
-                            <a href="<?= base_url('user/history') ?>" class="dropdown-item">
+                            <a href="<?= base_url('user/votes') ?>" class="dropdown-item">
                                 <i class="fal fa-history" aria-hidden="true"></i>
-                                Voting history </a>
+                                Votes </a>
                         </li>
 
                         <li>

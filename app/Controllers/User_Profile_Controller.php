@@ -161,8 +161,13 @@ class User_Profile_Controller extends BaseController{
                     $query = $user->update(); 
                     if($query){ 
                         session()->set('pic',$newName);
+                        $data = [
+                            'success' => true,
+                            'message' => "Successfully Updated!",
+                            'path' => $newName
+                        ];
                         //success
-                        echo 1;
+                        return $this->response->setJSON($data);
                     }else{
                         //query failed
                         echo 3;

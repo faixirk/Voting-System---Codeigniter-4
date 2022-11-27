@@ -77,21 +77,21 @@ class Groups_Controller extends BaseController
         $group = new Groups_Model();
         $user = new User_Model();
         $requests = new Requests_Model();
+        $userID = session('user_id');
         $checkGroup = $group->where('group_id', $id)->findAll();  //matches the group id from user passed to groups table
-        $checkUser = $user->select()->join('requests', 'requests.user_id = user.user_id','left');
-        $checkUser = $user->where('group_id', $id)->findAll();
-        $checkRequest = $requests->where('user_id', $checkUser[0]['user_id'])->findAll(); 
-        print_r( $checkRequest);
-        die();
+        $checkUser = $requests->select('*');
+        $checkUser = $requests->where('group_id', $id);
+        $checkUser = $requests->where('user_id', $userID)->get()->getResult();
+        
        
         if(session('isLoggedIn') == true){  //true if user is logged in
             $data = [
                 'user_id' => session('user_id'),   //user who is logged in
                 'group_id' => $id,                
                 'creator_id' => $checkGroup[0]['user_id'],  //user who created the group
-                'status' => '1'   //already joined the group
+                'status' => '1'   //request sent => 1 otherwise 0
             ];
-            if(!$checkRequest){
+            if(!$checkUser){ //if request is not already sent then true
             $query = $requests->insert($data);
             if ($query) {
                 //query successful

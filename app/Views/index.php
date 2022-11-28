@@ -29,9 +29,7 @@ include 'includes/sidebar.php';
                         <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
 
-                            <div class="spinner-border" role="status">
-                                <span class="sr-only">Loading...</span>
-                            </div>
+                            
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -449,14 +447,12 @@ include 'includes/footer.php';
 ?>
 <script>
     $(document).ready(function() {
-        $(".spinner-border").hide();
         $(".btn-custom1").click(function(e) {
             var id = $(this).val();
             $.ajax({
                 url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
                 beforeSend: function() {
                     $(".btn-custom1").hide();
-                    $(".spinner-border").show();
                 },
                 success: function(data) {
                     if (data == 0) {
@@ -465,21 +461,18 @@ include 'includes/footer.php';
                             'text': "Request Sent!",
                         });
                         $(".btn-custom1").show();
-                        $(".spinner-border").hide();
                     } else if (data == 2) {
                         swal.fire({
                             'icon': 'info',
                             'text': "Request Already Sent!",
                         })
                         $(".btn-custom1").show();
-                        $(".spinner-border").hide();
                     }else if (data == 3) {
                         swal.fire({
                             'icon': 'info',
                             'text': "You need to login to join the group",
                         })
                         $(".btn-custom1").show();
-                        $(".spinner-border").hide();
                     } 
                     else {
                         swal.fire({
@@ -487,7 +480,6 @@ include 'includes/footer.php';
                             'text': "Request Failed!",
                         });
                         $(".btn-custom1").show();
-                        $(".spinner-border").hide();
                     }
                 },
                 error: function() {

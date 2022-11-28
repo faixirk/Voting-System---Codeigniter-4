@@ -107,6 +107,7 @@ $routes->group('user', function ($routes) {
 // votes
 $routes->group('user', function ($routes) {
     $routes->post('addvote', 'Votes_Controller::addVote');
+    $routes->post('countvote', 'Votes_Controller::addVoteCount');
     $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });

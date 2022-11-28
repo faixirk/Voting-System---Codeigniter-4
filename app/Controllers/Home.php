@@ -6,6 +6,8 @@ use App\Models\Sub_Category_Model;
 use App\Models\Groups_Model;
 use App\Models\User_Model;
 use App\Models\Requests_Model;
+use App\Models\Votes_Model;
+use App\Models\Votes_Results_Model;
 
 
 class Home extends BaseController
@@ -19,19 +21,23 @@ class Home extends BaseController
         $group = new Groups_Model();
         $user = new User_Model();
         $requests = new Requests_Model();
+        $votes = new Votes_Model();
+        $results = new Votes_Results_Model();
+
         $data['categories'] = $cat->findAll();
         $data['groups'] = $group->findAll();
         $data['requests'] = $requests->findAll();
         $data['user'] = $user->findAll();
-        // echo '<pre>';
-        // print_r($data);
-        // die();
+
+        $data['votes'] = $votes->where('type','public')->findAll();
+
+
         //Both quereis can be used to find sub categories
         // $data['sub_categories'] = $sub_cat->findAll();
         $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();
-        $data['votes'] = $cat->select()
-        ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
-        $data['votes'] = $cat->where('type','public');
+        // $data['votes'] = $cat->select()
+        // ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
+        // $data['votes'] = $cat->where('type','public');
         return view('index', $data);
     }
     public function about_us(){

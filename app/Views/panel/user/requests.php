@@ -114,8 +114,10 @@ include 'includes/sidebar.php';
                     swal.fire({
                             'icon': 'success',
                             'text': "Request Accepted",
-                        });
-                        setInterval('location.reload()', 2000);
+                        }).then(() => {
+                        window.location.reload();
+                    })
+
                 }
                 
                 else{

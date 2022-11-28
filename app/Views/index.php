@@ -25,7 +25,7 @@ include 'includes/sidebar.php';
             <div class="d-flex flex-column">
                 <ul class="list-group ">
                     <?php foreach ($groups as $g) : ?>
-                              
+
                         <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
 
@@ -394,51 +394,70 @@ include 'includes/sidebar.php';
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-    <div class="live-matches d-sm-none" v-if="showType == 'upcoming'">
-        <h5>Upcoming Matches</h5>
-        <div class="live-matches-slider owl-carousel">
-            <div class="box" v-for="(item, index) in upcoming_filter">
-                <h5 class="mb-3">{{ item.game_tournament.name }}</h5>
-                <div class="row d-flex justify-content-around align-items-center">
-                    <div class="col-3 team">
-                        <img class="img-fluid" :src="item.team1_img" alt="..." />
-                        <p>{{ item.team1}}</p>
-                    </div>
-                    <div class="col-6">
-                        <span>{{item.name}} </span>
-                        <h5 v-if="0 < item.questions.length ">{{ slicedArray(item.questions).name}}</h5>
-                        <button class="btn-custom w-75 my-2" @click="goMatch(item)">See More</button>
-                    </div>
-                    <div class="col-3 team">
-                        <img class="img-fluid" :src="item.team2_img" alt="..." />
-                        <p>{{ item.team2}}</p>
-                    </div>
-
-                    <div class="col-12 align-self-end">
-
-                        <div v-if="0 < item.questions.length" class="d-flex justify-content-between">
-                            <button class="btn-light" type="button" :class="{ disabled: (option.is_unlock_question == 1 || option.is_unlock_match == 1) }" :disabled="option.is_unlock_question == 1 || option.is_unlock_match == 1 " :title="option.option_name" @click="addToSlip(option)" v-for="(option, index) in (slicedArray(item.questions).options)">
-
-                                <i v-if="option.is_unlock_question == 1 || option.is_unlock_match == 1" class="fas fa-lock-alt"></i>
-                                {{ option.ratio }}
-                            </button>
-
-                        </div>
-
-                        <div v-else class="d-flex justify-content-between">
-                            <button type="button" disabled class="btn-light disabled downgrade-mobile">-</button>
-                            <button type="button" disabled class="btn-light disabled downgrade-mobile">-</button>
-                            <button type="button" disabled class="btn-light disabled downgrade-mobile">-</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div> -->
+
+    <!-- Public Votes -->
+    <?php foreach ($votes as $vote) : ?>
+        <div class="table-parent table-responsive ">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+
+                        </th>
+                        <th>
+
+                        </th>
+
+                        <th class="col-2">
+                            Team A
+                        </th>
+                        <th class="col-2">
+                            Team B
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <p><span>
+                                    Team A
+                                </span></p>
+                            <p><span>
+                                    Team B
+                                </span></p>
+                            <p><span class="float-end"><a href="" class="me-2 d-none"><i aria-hidden="true" class="fal fa-chart-bar"></i></a></span></p>
+                        </td>
+                        <td>
+                            <p><span><img src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c79bd53baa1662810557.png" alt="..">
+                                    <?= $vote['team_a'] ?>
+                                </span></p>
+                            <p><span><img src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c79f3ca9dc1662810611.png" alt="..">
+                                    <?= $vote['team_b'] ?>
+                                </span></p>
+                            <p><span class="float-end"><a href="" class="me-2 d-none"><i aria-hidden="true" class="fal fa-chart-bar"></i></a></span></p>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-evenly w-100">
+                                <button type="button" class="voteCount teamA"  value="<?= $vote['vote_id'] ?>">Vote</button>
+
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex justify-content-evenly w-100">
+                                <button type="button" class="voteCount teamB" value="<?= $vote['vote_id'] ?>" >Vote
+
+                                </button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <?php endforeach; ?>
+
 
 </div>
 
@@ -449,9 +468,39 @@ include 'includes/footer.php';
 ?>
 <script>
     $(document).ready(function() {
+
+        $(".voteCount").click(function() {
+            var id = $(this).val(); 
+            var classType = this.className.split(" ")[1];
+            var data = {id, classType};
+
+            $.post("user/countvote", { id, classType }, (result)=> { 
+                var obj = JSON.parse(result);
+                            console.log(obj);
+                            if(obj.status==true){
+                                Swal.fire(
+                                'Voted',
+                                'Thanks for vote.',
+                                'success'
+                            )
+                                }else{
+                                    Swal.fire(
+                                'Failed',
+                                obj.message,
+                                'info'
+                            )
+                            }
+                            }
+                            
+                        
+            );
+
+        });
+
+
         $(".spinner-border").hide();
         $(".btn-custom1").click(function(e) {
-            var id = $(this).val();
+            var id = $(this);
             $.ajax({
                 url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
                 beforeSend: function() {
@@ -473,15 +522,14 @@ include 'includes/footer.php';
                         })
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
-                    }else if (data == 3) {
+                    } else if (data == 3) {
                         swal.fire({
                             'icon': 'info',
                             'text': "You need to login to join the group",
                         })
                         $(".btn-custom1").show();
                         $(".spinner-border").hide();
-                    } 
-                    else {
+                    } else {
                         swal.fire({
                             'icon': 'error',
                             'text': "Request Failed!",

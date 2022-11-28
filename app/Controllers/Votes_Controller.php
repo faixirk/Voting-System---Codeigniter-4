@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Category_Model;
 use App\Models\Sub_Category_Model;
 use App\Models\Votes_Model;
+use App\Models\Votes_Results_Model;
 
 class Votes_Controller extends BaseController
 {
@@ -23,6 +24,74 @@ class Votes_Controller extends BaseController
         // die();
         return view('panel/user/votes', $data);
     }
+
+    // Add vote 
+    function addVoteCount(){
+        if(session('isLoggedIn')){
+
+        $id = $this->request->getPost('id');
+        $type = $this->request->getPost('classType');
+        $results = new Votes_Results_Model();
+        if($id!=null && $type !=null){
+            $isUnique = $results->select('*');
+            $isUnique = $results->where('user_id',session('user_id'));       // check use_id exist in table
+            $isUnique = $results->where('vote_id',$id)->first();    
+            if($isUnique){                                              // If found then send back | already voted
+                $data = [
+                    'status'=> false,
+                    'message'=> 'Already Voted.'
+                ];
+                echo json_encode($data);
+            }else{
+
+
+                $addVote = [
+                    'vote_id' => $id,
+                    'user_id' => session('user_id'),
+                    'teama_vote' => ($type=='teamA') ? "1" : '0',
+                    'teamb_vote' => ($type=='teamB') ? '1' : '0',
+                ];
+
+                $query = $results->save($addVote);
+                if($query){
+                    $data = [
+                        'status'=> true,
+                        'message'=> "Voted"
+                    ];
+                    echo json_encode($data);
+                }
+                else{
+                    $data = [
+                        'status'=> false,
+                        'message'=> "Internal Server error" 
+                    ];
+                    echo json_encode($data);
+                }
+
+            }  
+
+
+        }else{
+            $data = [
+                'status'=> false,
+                'message'=> "Internal Server error" 
+            ];
+            echo json_encode($data);
+        }
+
+        
+    }else{
+        $data = [
+            'status'=> false,
+            'message'=> "Please Login First" 
+        ];
+        echo json_encode($data);
+    }
+        
+
+    }
+
+
     // show public votes on index page
     function showPublicVotes()
     {

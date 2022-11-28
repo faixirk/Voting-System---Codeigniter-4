@@ -7,19 +7,13 @@
                 <i class="fal fa-chevron-left"></i> Back </button>
         </div>
         <div class="top p-1 d-flex">
-            <button @click="liveUpComing('live')" type="button" :class="{light: (showType == 'upcoming')}" class="btn-custom me-1">
+            <button disabled type="button" :class="{light: (showType == 'upcoming')}" class="btn-custom me-1">
                 <i class="las la-podcast"></i>
-                Live </button>
-            <button @click="liveUpComing('upcoming')" type="button" :class="{light: (showType == 'live')}" class="btn-custom ">
-                <i class="las la-meteor"></i>
-                Upcoming </button>
+                All Categories </button>
+            
         </div>
         <ul class="main">
-            <li>
-                <a class="active" href="https://script.bugfinder.net/prophecy">
-                    <i class="far fa-globe-americas"></i> <span>All Categories</span>
-                </a>
-            </li>
+           
             <?php foreach($categories as $key => $cat): ?>
                 <?php if($cat['cat_status'] == 'on'){ ?>
             <li>

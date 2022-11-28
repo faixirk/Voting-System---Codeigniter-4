@@ -94,6 +94,7 @@ $routes->group('user', function ($routes) {
     $routes->get('groups/requests/accept/(:num)', 'Groups_Controller::setRequest/$1');
     $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
     $routes->get('groups/private', 'Groups_Controller::private_index');
+    $routes->get('groups/private/single/(:num)', 'Groups_Controller::single_room/$1');
 });
 
 // votes
@@ -106,6 +107,7 @@ $routes->group('user', function ($routes) {
 // votes
 $routes->group('user', function ($routes) {
     $routes->post('addvote', 'Votes_Controller::addVote');
+    $routes->post('countvote', 'Votes_Controller::addVoteCount');
     $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });

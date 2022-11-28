@@ -88,20 +88,20 @@ include 'includes/sidebar.php';
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td scope="row"></td>
-                    <td>Adnan a</td>
-                    <td>Adnan</td>
-                    <td>10-21-2022</td>
-                    <td><span class="badge badge-primary">Active</span> </td>
-                </tr>
-                <tr>
-                    <td scope="row"></td>
-                    <td>Adnan a</td>
-                    <td>Adnan</td>
-                    <td>10-21-2022</td>
-                    <td><span class="badge badge-primary">Active</span> </td>
-                </tr>
+
+                <?php
+                $count = 1;
+                foreach ($votes as $v) :  ?>
+                    <tr>
+                        <td scope="row"><?= $count++; ?></td>
+                        <td><?= $v['team_a'] ?></td>
+                        <td><?= $v['team_b'] ?></td>
+                        <td><?= $v['description'] ?></td>
+                        <td><button class="btn btn-danger" onclick="deleteVote(<?= $v['vote_id'] ?>)">Delete</button> </td>
+                    </tr>
+                <?php endforeach; ?>
+
+
             </tbody>
         </table>
 
@@ -119,40 +119,102 @@ include 'includes/sidebar.php';
         return arg != element.value;
     }, "Value must not equal arg.");
 </script>
-<script> 
-    $('#votesTable').DataTable(); 
-    renderList = (id, obj) => {
-        if (obj) {
-            $.each(JSON.parse(obj), (key, value) => {
-                $('#' + id).append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
-            })
-        } else {
-            $('#' + id).append('<option value=' + 99 + '>' + "Empty List" + '</option>');
-        }
+<script>
+    $('#votesTable').DataTable();
 
-    }
+    function deleteVote(id) {
+        if (id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete this vote!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }
+            ).then((result) => {
+                if (result.isConfirmed) {
+                    
+                    $.post("deletevote", {
+                            id
+                        }, (result) => { 
+                            var obj = JSON.parse(result);
+                            
+                            console.log(obj);
+                            if(obj.status == true)
+                           {
+                            window.location.reload();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your vote has been deleted.',
+                                'success'
+                            )
+                           } else if(obj.status == 500){
+                            Swal.fire(
+                                'Failed!',
+                                'Internal server error!',
+                                'error'
+                            )
+                           }
+                           else{
+                            Swal.fire(
+                                'Failed!',
+                                obj.message,
+                                'error'
+                            )
+                           }
+                        })
+                        .fail(function(result) {
+                            console.log(result);
+                            Swal.fire(
+                                'Failed!',
+                                'Failed to delete.',
+                                'error'
+                            )
+                        })
+
+
+
+                }
+            })
+        }
+    };
+
     $('#addModelBtn').click(() => {
         $.get("<?= base_url() ?>/user/getcategory", (result) => {
-            renderList("categ", result);
+            console.log(result);
+            if (result) {
+                $.each(JSON.parse(result), (key, value) => {
+                    $('#categ').append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
+                })
+            } else {
+                $('#categ').append('<option value=' + 99 + '>' + "Empty List" + '</option>');
+            }
         });
     })
     $('#categ').change(() => {
         var id = $('#categ').find('option:selected').val();
         $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
-            console.log(result);
-            renderList("subCateg", result);
+            if (result) {
+                $.each(JSON.parse(result), (key, value) => {
+                    $('#subCateg').append('<option value=' + value.sub_cat_id + '>' + value.sub_cat_title + '</option>');
+                })
+            } else {
+                $('#subCateg').append('<option value=' + 99 + '>' + "Empty List" + '</option>');
+            }
         })
     })
     $('#vote-form').validate({
         rules: {
             teamA: {
                 required: true,
-                minlength: 10,
+                minlength: 3,
                 maxlength: 50
             },
             teamB: {
                 required: true,
-                minlength: 10,
+                minlength: 3,
                 maxlength: 50
             },
             category: {
@@ -193,12 +255,13 @@ include 'includes/sidebar.php';
                 console.log(result.status);
                 console.log(result.message);
                 if (result.status == true) {
+                    $('form').trigger("reset");
                     swal.fire({
                         icon: 'success',
                         title: 'Success',
                         text: result.message,
                     }).then(() => {
-                        // window.location = '<?= base_url() ?>/login';
+                        window.location.reload();
                     })
                 } else {
                     swal.fire(

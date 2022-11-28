@@ -25,7 +25,7 @@ include 'includes/sidebar.php';
             <div class="d-flex flex-column">
                 <ul class="list-group ">
                     <?php foreach ($groups as $g) : ?>
-                              
+
                         <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
 

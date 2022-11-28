@@ -45,14 +45,15 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
     <style>
+      
         /* .chats  li:hover {
             background: var(--primary);
             color: var(--white); 
 
         } */
         .container {
-  border: 2px solid #dedede;
-  background-color: #f1f1f1;
+  /* border: 2px solid #dedede; */
+  /* background-color: #f1f1f1; */
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;

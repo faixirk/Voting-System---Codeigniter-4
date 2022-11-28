@@ -134,7 +134,6 @@ class Groups_Controller extends BaseController
     }
     public function deleteRequest($id){
         $request = new Requests_Model();
-        $request->where('request_id',$id)->first;
         $query = $request->delete($id);
         if($query){
             //record deleted successfully
@@ -149,11 +148,24 @@ class Groups_Controller extends BaseController
         $data = [];
         $data['title'] = 'Private | User';
         $user = new User_Model();
-        $request = new Requests_Model();
-        $data['private'] = $user->select()->join('requests', 'requests.user_id=user.user_id')->findAll();
+        $groups = new Groups_Model();
+        $data['private'] = $groups->select()->join('requests','requests.group_id=groups.group_id')->findAll();
+        // $data['private'] = $request->where('user_id', $userID)->get()->getResult();
         // echo '<pre>';
         // print_r($data);
         // die();
         return view('panel\user\private_voting', $data);
+    }
+    public function single_room($id){
+        $data['title'] = 'Private Room';
+        $groups = new Groups_Model();
+        $users = new User_Model();
+        $requests = new Requests_Model();
+        $data['members'] = $requests->select('*')->join('user','user.user_id=requests.user_id');
+        $data['members'] = $requests->where('group_id', $id)->findAll();
+        // echo '<pre>';
+        // print_r($data);
+        // die();
+        return view('panel/user/single_voting', $data);
     }
 }

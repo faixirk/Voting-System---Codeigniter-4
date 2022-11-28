@@ -2,18 +2,36 @@
 include 'includes/head.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
+
 ?>
 <div class="content user-panel chats">
     <div>
-        <h4> Private Voting</h4>
+        <h4> Rooms</h4>
+        <p>Following are the room(s) which you have joined. Voting and chat in these rooms will be private. If you see no rooms then either you didn't sent the request to join any room or the request was not yet accepted. Please be patient until the admin accepts your request.</p>
     </div>
-    <div class="row align-items-end">
-        <div class="col">
-            <?php foreach ($private as $p) : ?>
-               <?=   $p['first_name'];  ?>
+    <table class="table">
+        <tr class="h6">
+            <th>Room ID</th>
+            <th>Room Name</th>
+        </tr>
+        <?php $userID = session('user_id'); 
+        ?>
+        <?php foreach ($private as $p): ?>
+          <?php  if($userID == $p['user_id']){ 
+             if($p['has_joined'] == 'true'){?>
+
+            <tr>
+                <td><?= $p['group_id'] ?> </td>
+                <td><a href="<?= base_url('user/groups/private/single/'. $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
+               
+            </tr>
+            <?php } 
+            else{ echo 'No data to show'; }?>
+             <?php } ?>
             <?php endforeach; ?>
-        </div>
-    </div>
+
+    </table>
+
 
 
 

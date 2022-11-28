@@ -8,17 +8,17 @@ include 'includes/sidebar.php';
         <h4> Rooms</h4>
     </div>
     <div class="row">
-        <!-- <div class="col-lg-4 col-md-6 mb-2">
+        <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
-                    <h2 class="price">Public Groups</h2>
-                    <p class="info">Admin: <small><?= session('f_name') ?></small><br><small>02-34-2020</small></p>
+                    <h2 class="price"><a href="<?= base_url('user/groups/private')?>" style="color:white" >Private Rooms</a></h2>
+                    <p class="info">User: <small><?= session('f_name') ?></small><br><small>02-34-2020</small></p>
                 </div>
                 <div class="dashboard__card-icon">
                     <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/bet.png" alt="...">
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">

@@ -87,13 +87,14 @@ $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
 $routes->group('user', function ($routes) {
     $routes->get('chats', 'Chats_Controller::index');
     $routes->get('groups', 'Groups_Controller::index');
-    $routes->match(['get', 'post'], 'chat', 'Chats_Controller::chat');
-    $routes->get('getmsg', 'Chats_Controller::msg');
+    $routes->match(['get', 'post'], 'chat/(:num)', 'Chats_Controller::chat/$1');
+    $routes->get('getmsg/(:num)', 'Chats_Controller::msg/$1');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
     $routes->get('groups/requests/accept/(:num)', 'Groups_Controller::setRequest/$1');
     $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
     $routes->get('groups/private', 'Groups_Controller::private_index');
+    $routes->get('groups/private/single/(:num)', 'Groups_Controller::single_room/$1');
 });
 
 // votes

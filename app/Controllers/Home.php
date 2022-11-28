@@ -23,9 +23,7 @@ class Home extends BaseController
         $data['groups'] = $group->findAll();
         $data['requests'] = $requests->findAll();
         $data['user'] = $user->findAll();
-        // echo '<pre>';
-        // print_r($data);
-        // die();
+
         //Both quereis can be used to find sub categories
         // $data['sub_categories'] = $sub_cat->findAll();
         $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();

@@ -149,8 +149,6 @@ class Groups_Controller extends BaseController
         $data['title'] = 'Private | User';
         $user = new User_Model();
         $groups = new Groups_Model();
-        $userID = session('user_id');
-        $request = new Requests_Model();
         $data['private'] = $groups->select()->join('requests','requests.group_id=groups.group_id')->findAll();
         // $data['private'] = $request->where('user_id', $userID)->get()->getResult();
         // echo '<pre>';

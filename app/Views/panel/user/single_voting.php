@@ -8,14 +8,17 @@ include 'includes/header.php';
     <div>
       <h3>Room Members</h3>
       <table class="table">
-        <th>ID</th>
+        <th>Group ID</th>
+        <th>User ID</th>
         <th>Name</th>
-        <?php foreach ($members as $m) : ?>
+        <?php foreach ($members as $m) : 
+          if($m['has_joined'] == 'true'){?>
           <tr>
+            <td id="groupID"><?= $m['group_id']?></td>
             <td><?= $m['user_id'] ?></td>
             <td><?= $m['first_name'] ?></td>
           </tr>
-        <?php endforeach; ?>
+        <?php } endforeach; ?>
       </table>
     </div>
 
@@ -35,16 +38,15 @@ include 'includes/header.php';
            <form id="chatForm" action="" class="col-md-12 col-lg-9"  method="POST">
 
              <div class="d-flex flex-row justify-content-start mb-4">
-               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">
-              <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                <p class="small mb-0">Hello and thank you for visiting MDBootstrap. Please click the video
-                  below.</p>
-                </div>
+               <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;"> -->
+              <!-- <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);"> -->
+                <p  id="getmsg" class="small mb-0"></p>
+                <!-- </div> -->
               </div>
               
-              <div class="d-flex flex-row justify-content-end mb-4">
+              <!-- <div class="d-flex flex-row justify-content-end mb-4">
                 <div class="p-3 me-3 border" style="border-radius: 15px; background-color: #fbfbfb;">
-                  <p class="small mb-0">Thank you, I really like your product.</p>
+                  <p   class="small mb-0">Thank you, I really like your product.</p>
               </div>
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava2-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;">
             </div>
@@ -66,7 +68,7 @@ include 'includes/header.php';
               <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
                 <p class="small mb-0">...</p>
               </div>
-            </div>
+            </div> -->
             
             <div class="form-outline">
               <textarea class="form-control" name="message" id="msg" rows="4"></textarea>
@@ -82,10 +84,10 @@ include 'includes/header.php';
         </div>
 
       </div>
-      <div id="getmsg">
+      <!-- <div id="getmsg">
 
 
-      </div>
+      </div> -->
     </div>
 
   </div>
@@ -102,15 +104,17 @@ include 'includes/header.php';
       showmsg();
 
       function showmsg() {
+        var id = $("#groupID").html();
         $.ajax({
           type: "GET",
-          url: '<?= base_url() ?>' + "/user/getmsg",
+          url: '<?= base_url() ?>' + "/user/getmsg/" + id,
           async: true,
           dataType: 'JSON',
           success: function(data) {
             var html = "";
             for (i = 0; i < data.length; i++) {
               html +=
+              "<div class='p-3 ms-3 mt-2' style='border-radius: 15px; background-color: rgba(57, 192, 237,.2);'>" +
                 data[i].username +
                 "<p>" + data[i].message + "</p>" +
                 "<span class='time-right'>" + data[i].created_at + "</span></div>";
@@ -126,10 +130,11 @@ include 'includes/header.php';
       $("#send").on('click', function(e) {
         e.preventDefault();
         var msg = $("#msg").val();
-        // alert('dasd');
+        var id = $("#groupID").html();
+        
         $.ajax({
           type: "POST",
-          url: '<?= base_url() ?>' + "/user/chat",
+          url: '<?= base_url() ?>' + "/user/chat/" + id,
           dataType: 'JSON',
           data: {
             message: msg

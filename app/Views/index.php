@@ -220,8 +220,6 @@ include 'includes/footer.php';
                             'text': "You need to login to join the group",
                         })
                         $(".btn-custom1").show();
-                    } else {
-                        $(".spinner-border").hide();
                     } 
                     else {
                         swal.fire({

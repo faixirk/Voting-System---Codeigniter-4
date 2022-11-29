@@ -25,15 +25,21 @@ include 'includes/sidebar.php';
             <div class="d-flex flex-column">
                 <ul class="list-group ">
                     <?php foreach ($groups as $g) : ?>
-                           <?php foreach($requests as $req): ?>
                        
                         <li class="list-group-item text-white bg-secondary"><?= $g['group_name'] ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
+
+
                         </li>
                         
                     <?php endforeach; ?>
                         
                 </ul>
+
+            </div>
+        </div>
+
+
                 
             </div>
         </div>
@@ -96,78 +102,51 @@ include 'includes/sidebar.php';
 
         <?php foreach ($categories as $cat) : ?>
             <a href="#" class="">
+            <a href="#" class="">
                 <i class="far fa-futbol" aria-hidden="true"></i> <span><?= $cat['cat_title']; ?></span>
             </a>
         <?php endforeach; ?>
 
     </div>
+ 
     
 
-
-    
-
+ 
 
     <!-- Public Votes -->
-    <?php foreach ($votes as $vote) : ?>
-        <div class="table-parent table-responsive ">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="text-center">
-
-                        </th>
-                        <th>
-
-                        </th>
-
-                        <th class="col-2">
-                            Team A
-                        </th>
-                        <th class="col-2">
-                            Team B
-                        </th>
-
-                    </tr>
-                </thead>
+    <div class="table-parent table-responsive ">
+        <?php foreach ($votes as $vote) : ?> 
+            <table class="table table-striped"> 
                 <tbody>
                     <tr>
-                        <td>
+                        <td class="text-center"></td>
+                        <td class="d-sm-flex d-xl-block d-lg-block">
                             <p><span>
-                                    Team A
-                                </span></p>
+                                    <?= $vote['team_a'] ?> 
+                                </span>[A]</p>
                             <p><span>
-                                    Team B
-                                </span></p>
-                            <p><span class="float-end"><a href="" class="me-2 d-none"><i aria-hidden="true" class="fal fa-chart-bar"></i></a></span></p>
-                        </td>
-                        <td>
-                            <p><span><img src="#" alt="..">
-                                    <?= $vote['team_a'] ?>
-                                </span></p>
-                            <p><span><img src="#" alt="..">
-                                    <?= $vote['team_b'] ?>
-                                </span></p>
-                            <p><span class="float-end"><a href="" class="me-2 d-none"><i aria-hidden="true" class="fal fa-chart-bar"></i></a></span></p>
-                        </td>
+                                    <?= $vote['team_b'] ?> 
+                                </span>[B]</p>
+                            <!-- <p>
+                                <span class="float-end"><a href="#" class="me-2 d-none"><i aria-hidden="true" class="fal fa-chart-bar"></i></a></span>
+                            </p> -->
+                        </td> 
                         <td>
                             <div class="d-flex justify-content-evenly w-100">
-                                <button type="button" class="voteCount teamA"  value="<?= $vote['vote_id'] ?>">Vote</button>
 
+                                <button type="button" class="voteCount teamA" value="<?= $vote['vote_id'] ?>">Vote Team A</button>
+                                <button type="button" class="voteCount teamB" value="<?= $vote['vote_id'] ?>">Vote Team B</button>
                             </div>
-                        </td>
-                        <td>
-                            <div class="d-flex justify-content-evenly w-100">
-                                <button type="button" class="voteCount teamB" value="<?= $vote['vote_id'] ?>" >Vote
 
-                                </button>
-                            </div>
-                        </td>
-
+                        </td> 
                     </tr>
                 </tbody>
             </table>
-        </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
+
+
+
 
 
 </div>
@@ -181,35 +160,40 @@ include 'includes/footer.php';
     $(document).ready(function() {
 
         $(".voteCount").click(function() {
-            var id = $(this).val(); 
+            var id = $(this).val();
             var classType = this.className.split(" ")[1];
-            var data = {id, classType};
+            var data = {
+                id,
+                classType
+            };
 
-            $.post("user/countvote", { id, classType }, (result)=> { 
-                var obj = JSON.parse(result);
-                            console.log(obj);
-                            if(obj.status==true){
-                                Swal.fire(
-                                'Voted',
-                                'Thanks for vote.',
-                                'success'
-                            )
-                                }else{
-                                    Swal.fire(
-                                'Failed',
-                                obj.message,
-                                'info'
-                            )
-                            }
-                            }
-                            
-                        
+            $.post("user/countvote", {
+                    id,
+                    classType
+                }, (result) => {
+                    var obj = JSON.parse(result);
+                    console.log(obj);
+                    if (obj.status == true) {
+                        Swal.fire(
+                            'Voted',
+                            'Thanks for vote.',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire(
+                            'Failed',
+                            obj.message,
+                            'info'
+                        )
+                    }
+                }
+
+
             );
 
         });
 
 
-        $(".spinner-border").hide();
         $(".btn-custom1").click(function(e) {
             var id = $(this).val();
             $.ajax({
@@ -230,13 +214,13 @@ include 'includes/footer.php';
                             'text': "Request Already Sent!",
                         })
                         $(".btn-custom1").show();
-                        $(".spinner-border").hide();
-                    }else if (data == 3) {
+                    } else if (data == 3) {
                         swal.fire({
                             'icon': 'info',
                             'text': "You need to login to join the group",
                         })
                         $(".btn-custom1").show();
+                    } else {
                         $(".spinner-border").hide();
                     } 
                     else {

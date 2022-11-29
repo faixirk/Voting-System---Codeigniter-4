@@ -34,13 +34,13 @@ include 'includes/header.php';
             <p class="mb-0 fw-bold">Live chat</p>
             <i class="fas fa-times"></i>
           </div>
-          <div class="card-body">
+          <div class="card-body ">
            <form id="chatForm" action="" class="col-md-12 col-lg-9"  method="POST">
 
-             <div class="d-flex flex-row justify-content-start mb-4">
+             <div class="d-flex  flex-row justify-content-start mb-4">
                <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;"> -->
               <!-- <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);"> -->
-                <p  id="getmsg" class="small mb-0"></p>
+                <p  id="getmsg" class="small mb-0 " ></p>
                 <!-- </div> -->
               </div>
               
@@ -114,7 +114,7 @@ include 'includes/header.php';
             var html = "";
             for (i = 0; i < data.length; i++) {
               html +=
-              "<div class='p-3 ms-3 mt-2' style='border-radius: 15px; background-color: rgba(57, 192, 237,.2);'>" +
+              "<div class='p-3 ms-3 mt-2 ' style='border-radius: 15px; background-color: rgba(57, 192, 237,.2);'>" +
                 data[i].username +
                 "<p>" + data[i].message + "</p>" +
                 "<span class='time-right'>" + data[i].created_at + "</span></div>";

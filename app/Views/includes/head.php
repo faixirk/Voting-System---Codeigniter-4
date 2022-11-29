@@ -8,23 +8,23 @@
     <meta name="description" content="Prophecy - An Online Betting Platform">
     <meta name="keywords" content="bet, bet365, betting, cricket, gambling, game, hyip, invest, ipl, live, lottery, online betting, online game, soccer, sports">
 
-    <link rel="shortcut icon" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png" type="image/x-icon">
-    <link rel="apple-touch-icon" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/logo.png">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link rel="apple-touch-icon" href="#">
     <title><?= $title ?></title>
-    <link rel="icon" type="image/png" sizes="16x16" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="#">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Prophecy | Home">
-    <meta itemprop="name" content="Prophecy | Home">
-    <meta itemprop="description" content="Prophecy - An Online Betting Platform">
-    <meta itemprop="image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png600x315">
+    <meta name="apple-mobile-web-app-title" content="Daily Voting | Home">
+    <meta itemprop="name" content="Voting | Home">
+    <meta itemprop="description" content="Daily Voting - An Online Voting Platform">
+    <!-- <meta itemprop="image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png600x315"> -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Prophecy - An Online Betting Platform">
+    <meta property="og:title" content="Daily Voting - An Online Voting Platform">
     <meta property="og:description" content="Prophecy - An Online Betting Platform">
-    <meta property="og:image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png" />
+    <!-- <meta property="og:image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png" /> -->
     <meta property="og:image:type" content="image/png" />
-    <meta property="og:url" content="https://script.bugfinder.net/prophecy">
+    <!-- <meta property="og:url" content="https://script.bugfinder.net/prophecy"> -->
     <meta name="twitter:card" content="summary_large_image">
 
 
@@ -43,7 +43,7 @@
     <style>
         .modal .text-box,
         .login-section .text-box {
-            background: url(https://script.bugfinder.net/prophecy/assets/uploads/logo/loginImage.png);
+            background: url();
             background-size: cover;
         }
 

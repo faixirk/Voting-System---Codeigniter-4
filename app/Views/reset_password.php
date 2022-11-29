@@ -67,7 +67,7 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <form action="https://script.bugfinder.net/prophecy/contact" method="post">
+                    <form action="#" method="post">
                         <input type="hidden" name="_token" value="FGTjCAXsL4YpaaSt6nAMNhsrl75tDOALaOXwN2KG">                        <h4>just drop us a line</h4>
                         <div class="row g-3">
                             <div class="input-box col-md-6">

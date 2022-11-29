@@ -48,7 +48,7 @@
                         <li>
                             <a href="<?= base_url('user/groups') ?> " class="dropdown-item">
                                 <i class="fal fa-users-cog"></i>
-                                Groups </a>
+                                Rooms </a>
                         </li>
                         <li>
                             <a href="<?= base_url('user/votes') ?>" class="dropdown-item">
@@ -59,7 +59,7 @@
                         <li>
                             <a href="<?= base_url('user/profile') ?>" class="dropdown-item">
                                 <i class="fal fa-user"></i>
-                                personal profile </a>
+                                Personal Profile </a>
                         </li>
 
                         <li>

@@ -21,7 +21,7 @@ include 'includes/header.php';
                 <div class="row align-items-center">
                     <div class="col-lg-6">
                         <div class="img-box">
-                            <img src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f5985a94bb1661950341.png"
+                            <img src="#"
                                  alt="..." class="img-fluid"/>
                         </div>
                     </div>
@@ -59,7 +59,7 @@ Our platform has been designed from the ground up to be tailored to the unique f
                                     <div class="upper">
                                         <div class="img-box">
                                             <img
-                                                src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f5c8a46f771661951114.jpg"
+                                                src="#"
                                                 alt="..."/>
                                         </div>
                                         <div class="client-info">
@@ -75,7 +75,7 @@ Our platform has been designed from the ground up to be tailored to the unique f
                                     <div class="upper">
                                         <div class="img-box">
                                             <img
-                                                src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f5cb10eb391661951153.jpg"
+                                                src="#"
                                                 alt="..."/>
                                         </div>
                                         <div class="client-info">
@@ -91,7 +91,7 @@ Our platform has been designed from the ground up to be tailored to the unique f
                                     <div class="upper">
                                         <div class="img-box">
                                             <img
-                                                src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f5ccc0e6411661951180.jpg"
+                                                src="#"
                                                 alt="..."/>
                                         </div>
                                         <div class="client-info">

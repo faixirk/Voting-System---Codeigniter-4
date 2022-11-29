@@ -16,12 +16,12 @@
             <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
                     class="ti-menu ti-close"></i></a>
             <div class="navbar-brand">
-                <a href="https://script.bugfinder.net/prophecy">
+                <a href="#">
 
                     <span class="logo-text">
-                        <img src="https://script.bugfinder.net/prophecy/assets/uploads/logo/admin-logo.png" alt="homepage"
+                        <img src="#" alt="homepage"
                              class="dark-logo"/>
-                        <img src="https://script.bugfinder.net/prophecy/assets/uploads/logo/admin-logo.png" class="light-logo"
+                        <img src="#" class="light-logo"
                              alt="homepage"/>
                     </span>
                 </a>

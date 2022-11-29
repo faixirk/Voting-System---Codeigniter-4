@@ -30,7 +30,7 @@ include 'includes/sidebar.php';
             <div class="page-header card card-primary m-0 m-md-4 my-4 m-md-0 p-5 shadow">
         <div class="row justify-content-between">
             <div class="col-md-12">
-                <form action="https://script.bugfinder.net/prophecy/admin/result/history/search" method="get">
+                <form action="#" method="get">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">

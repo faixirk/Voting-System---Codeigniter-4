@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png">
-    <title>Admin Login | Prophecy</title>
-    <link href="https://script.bugfinder.net/prophecy/assets/admin/css/style.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="#">
+    <title>Admin Login | Daily Voting</title>
+    <link href="<?= base_url('public/assets/css/style.min.css')?>" rel="stylesheet">
     <style>
         .logoWidth-64 img {
             width: 64px !important;
@@ -26,15 +26,15 @@
             </div>
         </div>
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(https://script.bugfinder.net/prophecy/assets/uploads/logo/auth-bg.jpg) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(<?= base_url('public/assets/uploads/logo/auth-bg.jpg')?>) no-repeat center center;">
             <div class="auth-box row">
-                <div class="col-lg-6 col-md-5 modal-bg-img" style="background-image: url(https://script.bugfinder.net/prophecy/assets/uploads/logo/theme.jpg);">
+                <div class="col-lg-6 col-md-5 modal-bg-img" style="background-image: url(<?= base_url('public/assets/uploads/logo/theme.jpg')?>);">
                 </div>
 
                 <div class="col-lg-6 col-md-7 bg-white">
                     <div class="p-3">
                         <div class="text-center logoWidth-64">
-                            <img src=" https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png" alt="wrapkit">
+                            <img src=" #" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">Admin Login</h2>
 
@@ -80,11 +80,11 @@
 
 
 
-    <script src="https://script.bugfinder.net/prophecy/assets/global/js/jquery.min.js"></script>
-    <script src="https://script.bugfinder.net/prophecy/assets/global/js/popper.min.js"></script>
-    <script src="https://script.bugfinder.net/prophecy/assets/global/js/bootstrap.min.js"></script>
+    <script src="<?= base_url('public/assets/js/jquery.min.js')?>"></script>
+    <script src="<?= base_url('public/assets/js/popper.min.js')?>"></script>
+    <script src="<?= base_url('public/assets/js/bootstrap.min.js')?>"></script>
 
-    <script src="https://script.bugfinder.net/prophecy/assets/global/js/notiflix-aio-2.7.0.min.js"></script>
+    <script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
 
     <script>
         $(document).ready(function() {

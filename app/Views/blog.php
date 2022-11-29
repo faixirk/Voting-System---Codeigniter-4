@@ -25,12 +25,12 @@ include 'includes/header.php';
                                                     <div class="blog-box row">
                                 <div class="col-md-6 img-box">
                                     <img
-                                        src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f689d875941661954205.jpg"
+                                        src="#"
                                         class="img-fluid"
                                         alt="..."/>
                                 </div>
                                 <div class="col-md-6 text-box">
-                                    <a href="https://script.bugfinder.net/prophecy/blog-details/learn-about-ui8-coin-and-earn-an-all-access-pass/92"
+                                    <a href="#"
                                        class="title">
                                         Learn about UI8 coin and earn an All-Access Pass                                    </a>
                                     <div class="date-author">
@@ -40,18 +40,18 @@ include 'includes/header.php';
                                     </div>
                                     <p>
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt quas, asperiores sed itaque officiis quae est nulla dolores voluptatem accusa...                                    </p>
-                                    <a href="https://script.bugfinder.net/prophecy/blog-details/learn-about-ui8-coin-and-earn-an-all-access-pass/92" class="read-more">Read more</a>
+                                    <a href="#" class="read-more">Read more</a>
                                 </div>
                             </div>
                                                     <div class="blog-box row">
                                 <div class="col-md-6 img-box">
                                     <img
-                                        src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f68c0ac95a1661954240.jpg"
+                                        src="#"
                                         class="img-fluid"
                                         alt="..."/>
                                 </div>
                                 <div class="col-md-6 text-box">
-                                    <a href="https://script.bugfinder.net/prophecy/blog-details/learn-about-ui8-coin-and-earn-an-all-access-pass/93"
+                                    <a href="#"
                                        class="title">
                                         Learn about UI8 coin and earn an All-Access Pass                                    </a>
                                     <div class="date-author">
@@ -61,18 +61,18 @@ include 'includes/header.php';
                                     </div>
                                     <p>
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt quas, asperiores sed itaque officiis quae est nulla dolores voluptatem accusa...                                    </p>
-                                    <a href="https://script.bugfinder.net/prophecy/blog-details/learn-about-ui8-coin-and-earn-an-all-access-pass/93" class="read-more">Read more</a>
+                                    <a href="#" class="read-more">Read more</a>
                                 </div>
                             </div>
                                                     <div class="blog-box row">
                                 <div class="col-md-6 img-box">
                                     <img
-                                        src="https://script.bugfinder.net/prophecy/assets/uploads/content/630f68e06248f1661954272.jpg"
+                                        src="#"
                                         class="img-fluid"
                                         alt="..."/>
                                 </div>
                                 <div class="col-md-6 text-box">
-                                    <a href="https://script.bugfinder.net/prophecy/blog-details/learn-about-ui8-coin-and-earn-an-all-access-pass/94"
+                                    <a href="#"
                                        class="title">
                                         Learn about UI8 coin and earn an All-Access Pass                                    </a>
                                     <div class="date-author">
@@ -82,7 +82,7 @@ include 'includes/header.php';
                                     </div>
                                     <p>
                                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt quas, asperiores sed itaque officiis quae est nulla dolores voluptatem accusa...                                    </p>
-                                    <a href="https://script.bugfinder.net/prophecy/blog-details/learn-about-ui8-coin-and-earn-an-all-access-pass/94" class="read-more">Read more</a>
+                                    <a href="#" class="read-more">Read more</a>
                                 </div>
                             </div>
                         

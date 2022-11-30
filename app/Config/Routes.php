@@ -69,14 +69,7 @@ $routes->group('', function ($routes) {
     $routes->match(['get', 'post'], 'register/add', 'Registration_Controller::registrationUser');
 });
 
-//Profile
-$routes->group('user', function ($routes) {
-    $routes->get('profile', 'User_Profile_Controller::index');
-    $routes->get('logo', 'User_Profile_Controller::loadLogo');
-    $routes->post('profile/update', 'User_Profile_Controller::profileUpdate');
-    $routes->post('password/update', 'User_Profile_Controller::passwordUpdate');
-    $routes->post('photo/update', 'User_Profile_Controller::profileimageUpdate');
-});
+ 
 
 //Dashboard
 $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
@@ -85,8 +78,20 @@ $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
 // Chats
 // $routes->group('user',['filter'=>'AuthCheck'],function($routes){
 $routes->group('user', function ($routes) {
+    // Profile
+    $routes->get('profile', 'User_Profile_Controller::index');
+    $routes->get('logo', 'User_Profile_Controller::loadLogo');
+    $routes->post('profile/update', 'User_Profile_Controller::profileUpdate');
+    $routes->post('password/update', 'User_Profile_Controller::passwordUpdate');
+    $routes->post('photo/update', 'User_Profile_Controller::profileimageUpdate');
+    // Chats
     $routes->get('chats', 'Chats_Controller::index');
+
+    // Groups
     $routes->get('groups', 'Groups_Controller::index');
+    $routes->get('votes', 'Votes_Controller::index');
+    $routes->get('groups', 'Groups_Controller::index');
+    $routes->post('addgroup', 'Groups_Controller::add_group');
     $routes->match(['get', 'post'], 'chat/(:num)', 'Chats_Controller::chat/$1');
     $routes->get('getmsg/(:num)', 'Chats_Controller::msg/$1');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
@@ -95,22 +100,16 @@ $routes->group('user', function ($routes) {
     $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
     $routes->get('groups/private', 'Groups_Controller::private_index');
     $routes->get('groups/private/single/(:num)', 'Groups_Controller::single_room/$1');
-});
 
-// votes
-$routes->group('user', function ($routes) {
-    $routes->get('votes', 'Votes_Controller::index');
-    $routes->get('groups', 'Groups_Controller::index');
-    $routes->post('addgroup', 'Groups_Controller::add_group');
-});
-
-// votes
-$routes->group('user', function ($routes) {
+    // Votes
     $routes->post('addvote', 'Votes_Controller::addVote');
     $routes->post('countvote', 'Votes_Controller::addVoteCount');
+    $routes->post('getDesc', 'Votes_Controller::getDescription');
     $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
+
+ 
 
 //  ------- X ------ All User Routes --------- X -------
 

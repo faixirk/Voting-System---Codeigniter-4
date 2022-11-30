@@ -5,9 +5,11 @@
     <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?= base_url('/') ?>">
-                <img src="https://script.bugfinder.net/prophecy/assets/uploads/logo/logo.png" alt="homepage">
+                <img src="<?= base_url('/public/assets/DVL.png')?>" alt="homepage">
             </a>
-            <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler p-0" type="button"
+             data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">

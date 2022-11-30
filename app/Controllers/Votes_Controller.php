@@ -16,79 +16,126 @@ class Votes_Controller extends BaseController
         $cat = new Category_Model();
         $votes = new Votes_Model();
 
-        $data['votes'] = $cat->select()
-        ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id');
-        $data['votes'] = $cat->where('user_id', session('user_id'))->findAll(); 
-        // echo '<pre>';
-        // print_r($data);
-        // die();
+
+        $data['votes'] = $votes->where('user_id', session('user_id'))->findAll();
         return view('panel/user/votes', $data);
     }
 
-    // Add vote 
-    function addVoteCount(){
-        if(session('isLoggedIn')){
+    // Get description
+    function getDescription()
+    {
+        if (session('isLoggedIn')) {
 
-        $id = $this->request->getPost('id');
-        $type = $this->request->getPost('classType');
-        $results = new Votes_Results_Model();
-        if($id!=null && $type !=null){
-            $isUnique = $results->select('*');
-            $isUnique = $results->where('user_id',session('user_id'));       // check use_id exist in table
-            $isUnique = $results->where('vote_id',$id)->first();    
-            if($isUnique){                                              // If found then send back | already voted
+            $id = $this->request->getPost('id'); 
+            $votes = new Votes_Model(); 
+
+            if ($id != null ) { 
+
+                $isUnique = $votes->select('vote_id, description');      // check use_id exist in table
+                $isUnique = $votes->where('vote_id', $id)->first(); 
+                if ($isUnique) {                                              // If found then send back | already voted
+                    $data = [
+                        'status' => true,  
+                        'description' => $isUnique['description']
+
+                    ];
+                    echo json_encode($data);
+                } else {
+                    $data = [
+                        'status' => false,
+                        'message' => "Internal Server error"
+                    ];
+                    echo json_encode($data);
+ 
+                }
+            } else {
                 $data = [
-                    'status'=> false,
-                    'message'=> 'Already Voted.'
+                    'status' => false,
+                    'message' => "Internal Server error"
                 ];
                 echo json_encode($data);
-            }else{
-
-
-                $addVote = [
-                    'vote_id' => $id,
-                    'user_id' => session('user_id'),
-                    'teama_vote' => ($type=='teamA') ? "1" : '0',
-                    'teamb_vote' => ($type=='teamB') ? '1' : '0',
-                ];
-
-                $query = $results->save($addVote);
-                if($query){
-                    $data = [
-                        'status'=> true,
-                        'message'=> "Voted"
-                    ];
-                    echo json_encode($data);
-                }
-                else{
-                    $data = [
-                        'status'=> false,
-                        'message'=> "Internal Server error" 
-                    ];
-                    echo json_encode($data);
-                }
-
-            }  
-
-
-        }else{
+            }
+        } else {
             $data = [
-                'status'=> false,
-                'message'=> "Internal Server error" 
+                'status' => false,
+                'message' => "Please Login First"
             ];
             echo json_encode($data);
         }
-
-        
-    }else{
-        $data = [
-            'status'=> false,
-            'message'=> "Please Login First" 
-        ];
-        echo json_encode($data);
     }
-        
+    // Add vote 
+    function addVoteCount()
+    {
+        if (session('isLoggedIn')) {
 
+            $id = $this->request->getPost('id');
+            $type = $this->request->getPost('classType');
+            $results = new Votes_Results_Model();
+            $counterA = new Votes_Results_Model();
+            $counterB = new Votes_Results_Model();
+            if ($id != null && $type != null) {
+
+                $countA = $counterA->where('vote_id', $id);
+                $countA = $counterA->where('teama_vote', 1);
+                $countA = $counterA->countAllResults();
+
+                $countB = $counterB->where('vote_id', $id);
+                $countB = $counterB->where('teamb_vote', 1);
+                $countB = $counterB->countAllResults();
+
+                $isUnique = $results->select('*');
+                $isUnique = $results->where('user_id', session('user_id'));       // check use_id exist in table
+                $isUnique = $results->where('vote_id', $id)->first();
+                if ($isUnique) {                                              // If found then send back | already voted
+                    $data = [
+                        'status' => false,
+                        'message' => 'Already Voted.',
+                        'teamA' => $countA,
+                        'teamB' => $countB,
+
+                    ];
+                    echo json_encode($data);
+                } else {
+
+
+                    $addVote = [
+                        'vote_id' => $id,
+                        'user_id' => session('user_id'),
+                        'teama_vote' => ($type == 'teamA') ? "1" : '0',
+                        'teamb_vote' => ($type == 'teamB') ? '1' : '0',
+                    ];
+
+                    $query = $results->save($addVote);
+                    if ($query) {
+                        $data = [
+                            'status' => true,
+                            'message' => "Voted",
+                            'teamA' => ($type == 'teamA') ? $countA + 1 : $countA,
+                            'teamB' => ($type == 'teamB') ? $countB + 1 : $countB,
+                        ];
+                        echo json_encode($data);
+                    } else {
+                        $data = [
+                            'status' => false,
+                            'message' => "Internal Server error"
+                        ];
+                        echo json_encode($data);
+                    }
+                }
+            } else {
+                $data = [
+                    'status' => false,
+                    'message' => "Internal Server error"
+                ];
+                echo json_encode($data);
+            }
+        } else {
+            $data = [
+                'status' => false,
+                'message' => "Please Login First"
+            ];
+            echo json_encode($data);
+        }
     }
 
 
@@ -100,8 +147,7 @@ class Votes_Controller extends BaseController
         $publiVotes = new Votes_Model();
         $data['category'] = $cat->select()
             ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.cat_id')->findAll();
-            $data['category'] = $cat->where('type','public');
-            
+        $data['category'] = $cat->where('type', 'public');
     }
     // show user votes with session id
     function showMyVotes()

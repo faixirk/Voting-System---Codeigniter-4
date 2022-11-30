@@ -42,7 +42,7 @@
             
         </ul>
 
-        <div class="bottom p-1">
-            <a href="https://script.bugfinder.net/prophecy/bet/result" class="btn-custom light w-100">results</a>
-        </div>
+        <!-- <div class="bottom p-1">
+            <a href="#" class="btn-custom light w-100">results</a>
+        </div> -->
     </div>

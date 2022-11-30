@@ -77,6 +77,7 @@ include 'includes/sidebar.php';
         </div>
     </div>
     <div class="row p-4">
+        
         <table id="votesTable" class="table table-hover table-responsive" style="width: 100%;">
             <thead class="thead-inverse">
                 <tr>
@@ -85,6 +86,7 @@ include 'includes/sidebar.php';
                     <th>Team B</th>
                     <th>Created At</th>
                     <th> Status</th>
+                    <th> Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -97,6 +99,12 @@ include 'includes/sidebar.php';
                         <td><?= $v['team_a'] ?></td>
                         <td><?= $v['team_b'] ?></td>
                         <td><?= $v['description'] ?></td>
+                        <td>
+                            <select class="form-select voteAction" name="vote_status" id="<?= $v['vote_id'] ?>">
+                                <option value="active">Active</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </td>
                         <td><button class="btn btn-danger" onclick="deleteVote(<?= $v['vote_id'] ?>)">Delete</button> </td>
                     </tr>
                 <?php endforeach; ?>
@@ -104,11 +112,7 @@ include 'includes/sidebar.php';
 
             </tbody>
         </table>
-
-
-
     </div>
-
 </div>
 <?php include 'includes/footer.php'  ?>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
@@ -132,38 +136,35 @@ include 'includes/sidebar.php';
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
-            }
-            ).then((result) => {
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    
+
                     $.post("deletevote", {
                             id
-                        }, (result) => { 
+                        }, (result) => {
                             var obj = JSON.parse(result);
-                            
+
                             console.log(obj);
-                            if(obj.status == true)
-                           {
-                            window.location.reload();
-                            Swal.fire(
-                                'Deleted!',
-                                'Your vote has been deleted.',
-                                'success'
-                            )
-                           } else if(obj.status == 500){
-                            Swal.fire(
-                                'Failed!',
-                                'Internal server error!',
-                                'error'
-                            )
-                           }
-                           else{
-                            Swal.fire(
-                                'Failed!',
-                                obj.message,
-                                'error'
-                            )
-                           }
+                            if (obj.status == true) {
+                                window.location.reload();
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your vote has been deleted.',
+                                    'success'
+                                )
+                            } else if (obj.status == 500) {
+                                Swal.fire(
+                                    'Failed!',
+                                    'Internal server error!',
+                                    'error'
+                                )
+                            } else {
+                                Swal.fire(
+                                    'Failed!',
+                                    obj.message,
+                                    'error'
+                                )
+                            }
                         })
                         .fail(function(result) {
                             console.log(result);
@@ -274,5 +275,12 @@ include 'includes/sidebar.php';
 
             })
         }
+    })
+</script>
+<script>
+    $('.voteAction').change(()=>{
+        var id = $('#type').find('option:selected').val();
+
+        alert(id);
     })
 </script>

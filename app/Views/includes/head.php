@@ -72,6 +72,10 @@
             float: right;
 
         }
+        .bg-secondary{
+            background-color: var(--bgDark) !important;
+
+        }
     </style>
 
 </head>

@@ -153,14 +153,16 @@ $routes->match(['get', 'post'], 'admin/user/delete/(:num)', 'Admin_User_Controll
 $routes->group('admin', function ($routes) {
     $routes->get('category', 'Admin_Category_Controller::index');
     $routes->post('add/category', 'Admin_Category_Controller::addCategory');
-    $routes->post('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
+    $routes->post('edit/category/(:num)', 'Admin_Category_Controller::editCategory/$1');
+    $routes->get('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
 });
 
 //Admin Sub Category Controller
 $routes->group('admin', function ($routes) {
     $routes->get('sub-category', 'Admin_Sub_Category_Controller::index');
     $routes->post('add/sub-category', 'Admin_Sub_Category_Controller::addSubCategory');
-    $routes->post('delete/sub-category/(:num)', 'Admin_Category_Controller::deleteSubCategory/$1');
+    $routes->post('edit/sub-category(:num)', 'Admin_Sub_Category_Controller::addSubCategory');
+    $routes->get('delete/sub-category/(:num)', 'Admin_Sub_Category_Controller::deleteSubCategory/$1');
 });
 
 //Admin Logout

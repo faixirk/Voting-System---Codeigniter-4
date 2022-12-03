@@ -95,68 +95,68 @@ include 'includes/sidebar.php';
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        <?php foreach($users as $u): 
+
+                        <?php foreach ($users as $u) :
                         ?>
-                        <tr>
-                            
-                            <td class="text-center">
-                                <input type="checkbox" id="chk-185" class="form-check-input row-tic tic-check" name="check" value="185" data-id="185">
-                                <label for="chk-185"></label>
-                            </td>
-                            <td data-label="No."><?= $u['user_id'] ?></td>
-                            <td data-label="User">
-                                
-                                <div class="d-lg-flex d-block align-items-center ">
-                                    <div class="mr-3"><img src="<?= base_url('public/uploads/profile/' . $u['pic']) ?>" alt="user" class="rounded-circle" width="45" height="45">
-                                </div>
-                                <div class="">
-                                        <h5 class="text-dark mb-0 font-16 font-weight-medium"><?= $u['first_name'] ?></h5>
-                                        <span class="text-muted font-14"><?= $u['user_email'] ?></span>
-                                    </div>
-                                </div>
-                            </td>
-                           
-                            <td data-label="Status" class="text-lg-center text-right">
-                                <span class="badge badge-light"> 
-                                    <?php if($u['status'] == 'Active'){?>
-                                       <i class="fa fa-circle text-success success font-12"></i> Active</span>
-                                       <?php } else{?> 
-                                     <i class="fa fa-circle text-danger danger font-12"></i> Inactive</span>
-                                      <?php } ?>
-                                   
-                             </td>
-                            <td data-label="Action">
-                                <div class="dropdown show ">
-                                    <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/185">
-                                            <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a> -->
-                                        <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/185">
-                                            <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a> -->
-                                        <button value="<?= $u['user_id']; ?>" data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="185">
-                                            <i class="fa fa-trash text-warning pr-2" aria-hidden="true"></i> Delete User </button>
+                            <tr>
+
+                                <td class="text-center">
+                                    <input type="checkbox" id="chk-185" class="form-check-input row-tic tic-check" name="check" value="185" data-id="185">
+                                    <label for="chk-185"></label>
+                                </td>
+                                <td data-label="No."><?= $u['user_id'] ?></td>
+                                <td data-label="User">
+
+                                    <div class="d-lg-flex d-block align-items-center ">
+                                        <div class="mr-3"><img src="<?= base_url('public/uploads/profile/' . $u['pic']) ?>" alt="user" class="rounded-circle" width="45" height="45">
                                         </div>
-                                </div>
-                            </td>
-                        </tr>
+                                        <div class="">
+                                            <h5 class="text-dark mb-0 font-16 font-weight-medium"><?= $u['first_name'] ?></h5>
+                                            <span class="text-muted font-14"><?= $u['user_email'] ?></span>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td data-label="Status" class="text-lg-center text-right">
+                                    <span class="badge badge-light">
+                                        <?php if ($u['status'] == 'Active') { ?>
+                                            <i class="fa fa-circle text-success success font-12"></i> Active</span>
+                                <?php } else { ?>
+                                    <i class="fa fa-circle text-danger danger font-12"></i> Inactive</span>
+                                <?php } ?>
+
+                                </td>
+                                <td data-label="Action">
+                                    <div class="dropdown show ">
+                                        <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/185">
+                                            <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a> -->
+                                            <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/185">
+                                            <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a> -->
+                                            <button value="<?= $u['user_id']; ?>" data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="185">
+                                                <i class="fa fa-trash text-danger pr-2" aria-hidden="true"></i> Delete User </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
+
+
+
+
+
+
+
+
+
+
                     </tbody>
                 </table>
-                 
+
 
             </div>
         </div>
@@ -215,7 +215,7 @@ include 'includes/sidebar.php';
                     <button type="button" class="btn btn-light" data-dismiss="modal"><span>No</span></button>
                     <form action="" method="post" class="update-action">
                         <input type="hidden" name="_token" value="zCIPBVp0XycU7LwUsNuesez68nr1s9jwp1REq3Jd"> <input type="hidden" class="userId" name="userId" value="" />
-                        <button  id="confirm" type="submit" class="btn btn-primary"><span>Yes</span></button>
+                        <button id="confirm" type="submit" class="btn btn-primary"><span>Yes</span></button>
                     </form>
                 </div>
             </div>
@@ -227,33 +227,32 @@ include 'includes/sidebar.php';
     include 'includes/footer.php';
     ?>
     <script>
-        $(document).ready(function(){
-            
-           $('.user-login').click(function(event){
-             var id = $(this).val();
-             $('#confirm').click(function(){
-                $.ajax({
-                    type: "GET",
-                    url: "<?= base_url()?>" + '/admin/user/delete/' + id,
-                    success:function(response){
-                        if(response==1){
-                        window.location.reload();
-                    }
-                    else{
-                        swal.fire({
-                            'icon': 'info',
-                            'text': "Oops! There was an error. Contact Admin!",
-                        });
-                    }
-                    },
-                    error:function(data){
-                        swal.fire({
-                            'icon': 'error',
-                            'text': "Unexpected Error! Contact admin.",
-                        });
-                    }
-                });
-             })
-           });
+        $(document).ready(function() {
+
+            $('.user-login').click(function(event) {
+                var id = $(this).val();
+                $('#confirm').click(function() {
+                    $.ajax({
+                        type: "GET",
+                        url: "<?= base_url() ?>" + '/admin/user/delete/' + id,
+                        success: function(response) {
+                            if (response == 1) {
+                                window.location.reload();
+                            } else {
+                                swal.fire({
+                                    'icon': 'info',
+                                    'text': "Oops! There was an error. Contact Admin!",
+                                });
+                            }
+                        },
+                        error: function(data) {
+                            swal.fire({
+                                'icon': 'error',
+                                'text': "Unexpected Error! Contact admin.",
+                            });
+                        }
+                    });
+                })
+            });
         });
     </script>

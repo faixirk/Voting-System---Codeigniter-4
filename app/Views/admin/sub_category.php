@@ -8,13 +8,13 @@ include 'includes/sidebar.php';
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> Team List</h4>
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1"> Sub Category List</h4>
 
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
                             <li class="breadcrumb-item text-muted active" aria-current="page">Dashboard</li>
-                            <li class="breadcrumb-item text-muted" aria-current="page"> Team List</li>
+                            <li class="breadcrumb-item text-muted" aria-current="page"> Sub Category List</li>
                         </ol>
                     </nav>
                 </div>
@@ -59,58 +59,57 @@ include 'includes/sidebar.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($sub_category as $sub_cat): ?>
-                        <tr>
-                            <td class="text-center">
-                                <input type="checkbox" id="chk-23" class="form-check-input row-tic tic-check" name="check" value="23" data-id="23">
-                                <label for="chk-23"></label>
-                            </td>
+                        <?php foreach ($sub_category as $sub_cat) : ?>
+                            <tr>
+                                <td class="text-center">
+                                    <input type="checkbox" id="chk-23" class="form-check-input row-tic tic-check" name="check" value="23" data-id="23">
+                                    <label for="chk-23"></label>
+                                </td>
 
-                            <td data-label="SL No." class="text-center"><?= $sub_cat['sub_cat_id']; ?></td>
-                            <td data-label="Name">
-                                <div class="d-lg-flex d-block align-items-center ">
-                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/uploads/team/631c7a16600ce1662810646.png" alt="user" class="rounded-circle" width="25" height="25"></div>
-                                    <div class="mr-3">
-                                        <h5 class="text-dark mb-0 font-16 font-weight-medium"><?= $sub_cat['sub_cat_title']; ?></h5>
+                                <td data-label="SL No." class="text-center"><?= $sub_cat['sub_cat_id']; ?></td>
+                                <td data-label="Name">
+                                    <div class="d-lg-flex d-block align-items-center ">
+                                        <div class="mr-3"><img src="" alt="user" class="rounded-circle" width="25" height="25"></div>
+                                        <div class="mr-3">
+                                            <h5 class="text-dark mb-0 font-16 font-weight-medium"><?= $sub_cat['sub_cat_title']; ?></h5>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td data-label="Category" class="text-dark">
-                                <i class="far fa-futbol" aria-hidden="true"></i>
-                                <?= $sub_cat['cat_title'];?>
-                            </td>
-                            <td data-label="Status" class="text-lg-center text-right">
-                                <?php if($sub_cat['status'] == 'on'){
-                                echo '<span class="badge badge-light">
+                                </td>
+                                <td data-label="Category" class="text-dark">
+                                    <i class="far fa-futbol" aria-hidden="true"></i>
+                                    <?= $sub_cat['cat_title']; ?>
+                                </td>
+                                <td data-label="Status" class="text-lg-center text-right">
+                                    <?php if ($sub_cat['status'] == 'on') {
+                                        echo '<span class="badge badge-light">
                                     <i class="fa fa-circle text-success success font-12"></i> Active</span>';
-                                }
-                                else{
-                                    echo '<span class="badge badge-light">
+                                    } else {
+                                        echo '<span class="badge badge-light">
                                     <i class="fa fa-circle text-danger danger font-12"></i> Inactive</span>';
-                                }
-                                ?>
-                            </td>
+                                    }
+                                    ?>
+                                </td>
 
-                            <td data-label="Action">
+                                <td data-label="Action">
 
-                                <div class="dropdown show dropup text-lg-center text-right">
-                                    <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item editBtn" href="javascript:void(0)" data-title="Barcelona" data-status="1" data-category_id="4" data-category="{&quot;id&quot;:4,&quot;name&quot;:&quot;Football&quot;,&quot;icon&quot;:&quot;&lt;i class=\&quot;far fa-futbol\&quot; aria-hidden=\&quot;true\&quot;&gt;&lt;\/i&gt;&quot;,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2022-09-03T01:05:01.000000Z&quot;,&quot;updated_at&quot;:&quot;2022-09-06T05:36:25.000000Z&quot;}" data-image="https://script.bugfinder.net/prophecy/assets/uploads/team/631c7a16600ce1662810646.png" data-action="https://script.bugfinder.net/prophecy/admin/team/update/23">
-                                            <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
+                                    <div class="dropdown show dropup text-lg-center text-right">
+                                        <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <button class="dropdown-item editBtn" href="javascript:void(0)" data-title="<?= $sub_cat['sub_cat_title']; ?>" data-status="<?= $sub_cat['status']; ?>" data-category_id="<?= $sub_cat['sub_cat_id']; ?>" data-target="#editModal" data-toggle="modal" data-image="">
+                                                <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </button>
 
-                                        <a class="dropdown-item notiflix-confirm" href="javascript:void(0)" data-target="#delete-modal" data-route="https://script.bugfinder.net/prophecy/admin/team/delete/23" data-toggle="modal">
-                                            <i class="fa fa-trash-alt text-danger pr-2" aria-hidden="true"></i> Delete </a>
+                                            <button class="dropdown-item notiflix-confirm deleteSubCat" data-target="#delete-modal" data-toggle="modal" value="<?= $sub_cat['sub_cat_id'] ?>">
+                                                <i class="fa fa-trash-alt text-danger pr-2" aria-hidden="true"></i> Delete </button>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
-                       
-            
+
+
                     </tbody>
                 </table>
             </div>
@@ -227,7 +226,7 @@ include 'includes/sidebar.php';
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-primary">
-                    <h5 class="modal-title">Edit Team</h5>
+                    <h5 class="modal-title">Edit Sub Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -236,21 +235,12 @@ include 'includes/sidebar.php';
                     <input type="hidden" name="_token" value="4ZvvhSDniAgyDNzYYrYeijtw2k7B3dgaXfgDnh5k">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label class="text-dark">Game Category </label>
+                            <label class="text-dark">Category </label>
                             <select id="editCategory" class="form-control selectpicker" data-show-content="true" data-live-search="true" name="category" required>
-                                <option value="">Select Game Category</option>
+                                <option value="">Select Category</option>
                                 <option value="3" data-content="&lt;i class=&quot;far fa-shuttlecock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Badminton">
                                 </option>
-                                <option value="6" data-content="&lt;i class=&quot;far fa-basketball-ball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Basketball">
-                                </option>
-                                <option value="5" data-content="&lt;i class=&quot;far fa-chess&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Chess">
-                                </option>
-                                <option value="26" data-content="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cricket">
-                                </option>
-                                <option value="4" data-content="&lt;i class=&quot;far fa-futbol&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Football">
-                                </option>
-                                <option value="7" data-content="&lt;i class=&quot;far fa-field-hockey&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Hockey">
-                                </option>
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -299,17 +289,13 @@ include 'includes/sidebar.php';
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-                    <form id="form2"  class="deleteRoute">
-                    <input data-id="{$id}" type="hidden" name="<?=csrf_token()?>" value="<?=csrf_hash()?>">  
-                        
-                        <button id="loadingBtn1" class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Verifying...
-                        </button>
+                    <form id="form2" class="deleteRoute">
+                        <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+
                         <button id="updateBtn1" type="submit" class="btn btn-primary">Yes</button>
 
 
-                                                
+
                     </form>
                 </div>
             </div>
@@ -321,87 +307,78 @@ include 'includes/sidebar.php';
     ?>
 
     <script>
-       
-            $(document).ready(function() {
-                $('#loadingBtn').hide();
-                $("#updateBtn").click((e) => {
-                    e.preventDefault();
-
-                    if ($('#subcatTitle').val() != "" || $('#image').val() != "") {
-                        $.ajax({
-                            type: "POST",
-                            url: "<?= base_url() ?>" + '/admin/add/sub-category',
-                            data: $('#form1').serialize(),
-                            beforeSend: function() {
-                                $('#updateBtn').hide();
-                                $('#loadingBtn').show();
-                            },
-                            success: function(response) {
-                                console.log(response);
-                                swal.fire(response);
-                                if (response == 1) {
-                                    swal.fire({
-                                        'icon': 'success',
-                                        'text': "Successfully Added!"
-                                    });
-                                    $('#updateBtn').show();
-                                    $('#loadingBtn').hide();
-                                } else if (response == 2) {
-                                    swal.fire('Error while adding sub category. Contact admin');
-                                    $('#updateBtn').show();
-                                    $('#loadingBtn').hide();
-                                } else {
-                                    swal.fire('Validation failed');
-                                    $('#updateBtn').show();
-                                    $('#loadingBtn').hide();
-                                }
-                            },
-                            error: (error) => {
-                                console.log(JSON.stringify(error));
-                            },
-                        });
-                    } else {
-                        swal.fire("All fields are required.");
-
-                    }
-                });
-            });
-      
-    </script>
-    <script>
-        $(document).ready(function(){
-            $('#loadingBtn1').hide();
-            $('#updateBtn1').click((e)=>{
-                var id = $(this).val();
+        //--------------------- Admin Add Sub Category -----------------
+        $(document).ready(function() {
+            $('#loadingBtn').hide();
+            $("#updateBtn").click((e) => {
                 e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: '<?= base_url() ?>' + "/admin/delete/sub-category/" + id,
-                    data: $('#form2').serialize(),
-                    beforeSend: function() {
-                            $('#updateBtn1').hide();
-                            $('#loadingBtn1').show();
+
+                if ($('#subcatTitle').val() != "" || $('#image').val() != "") {
+                    $.ajax({
+                        type: "POST",
+                        url: "<?= base_url() ?>" + '/admin/add/sub-category',
+                        data: $('#form1').serialize(),
+                        beforeSend: function() {
+                            $('#updateBtn').hide();
+                            $('#loadingBtn').show();
                         },
                         success: function(response) {
+                            console.log(response);
+                            swal.fire(response);
                             if (response == 1) {
                                 swal.fire({
-                                    'icon' : 'success',
-                                    'text': "Successfully Deleted!"
+                                    'icon': 'success',
+                                    'text': "Successfully Added!"
                                 });
-                                $('#updateBtn1').show();
-                                $('#loadingBtn1').hide();
-                            }  else {
-                                toastr.error('Invalid response');
-                                $('#updateBtn1').show();
-                                $('#loadingBtn1').hide();
+                                $('#updateBtn').show();
+                                $('#loadingBtn').hide();
+                            } else if (response == 2) {
+                                swal.fire('Error while adding sub category. Contact admin');
+                                $('#updateBtn').show();
+                                $('#loadingBtn').hide();
+                            } else {
+                                swal.fire('Validation failed');
+                                $('#updateBtn').show();
+                                $('#loadingBtn').hide();
                             }
                         },
                         error: (error) => {
                             console.log(JSON.stringify(error));
                         },
-                    
-                });
+                    });
+                } else {
+                    swal.fire("All fields are required.");
 
+                }
             });
         });
+        // -----------------------------------------------------------------------------------------
+
+        //-------------------------- Admin Delete Sub Category -------------------------------------
+        $('.deleteSubCat').click(function(event) {
+            var id = $(this).val();
+            $('#updateBtn1').click(function() {
+                $.ajax({
+                    type: "GET",
+                    url: "<?= base_url() ?>" + '/admin/delete/sub-category/' + id,
+                    success: function(data) {
+                        if (data == 1) {
+                            window.location.reload();
+                        } else {
+                            swal.fire({
+                                'icon': 'info',
+                                'text': "Oops! There was an error. Contact Admin!",
+                            });
+                        }
+                    },
+                    error(data) {
+                        swal.fire({
+                            'icon': 'error',
+                            'text': "Unexpected Error! Contact admin.",
+                        });
+                    }
+                });
+            });
+        });
+        // -------------------------------------------------------------------------------------------
     </script>

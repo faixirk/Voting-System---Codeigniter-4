@@ -42,7 +42,7 @@
                 <div class="notification-panel" id="pushNotificationArea">
 
                     <!-- login register button -->
-                    <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#registerModal">
+                    <button class="btn-custom" id="registerBtn" data-bs-toggle="modal" data-bs-target="#registerModal">
                         Join </button>
                     <button class="btn-custom" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
                         Login </button>
@@ -56,11 +56,11 @@
             Home </a>
         <a href="javascript:void(0)" class="text-dark" onclick="toggleSidebar('leftbar')">
             <i class="far fa-globe-americas"></i>
-            Sports </a>
+            Categories </a>
 
         <a href="javascript:void(0)" class="text-dark" onclick="toggleSidebar('rightbar')">
             <i class="fal fa-ticket-alt"></i>
-            Bet Slip </a>
+            Private Rooms </a>
 
         <a href="#" class="text-dark">
             <i class="fa fa-sign-in"></i>

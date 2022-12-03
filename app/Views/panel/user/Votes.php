@@ -1,4 +1,5 @@
 <?php
+
 include 'includes/head.php';
 include 'includes/header.php';
 include 'includes/sidebar.php';
@@ -9,7 +10,7 @@ include 'includes/sidebar.php';
         <div class="col-6">
             <h4> Votes</h4>
         </div>
-        <div class="col-6"><button type="button" id="addModelBtn" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add Vote</button></div>
+        <div class="col-12 "><button type="button" id="addModelBtn" class="btn btn-primary w-100" data-toggle="modal" data-target=".bd-example-modal-lg">Add Vote</button></div>
 
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -49,6 +50,19 @@ include 'includes/sidebar.php';
                                           
                             </div>
                             <div class="row mb-3">
+                                <div class="form-group col-md-6">
+                                    <label for="banner1">Banner 1</label>
+                                    <input type="file" class="form-control" placeholder="Team A Banner" name="banner1" id="banner1">
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="banner2">Banner 2</label>
+                                    <input type="file" class="form-control" placeholder="Team B Banner" name="banner2" id="banner2">
+
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
                                 <div class="form-group col-12">
                                     <label for="desc">Description</label>
                                     <textarea name="description" class="form-control" id="desc" required></textarea>
@@ -77,7 +91,7 @@ include 'includes/sidebar.php';
         </div>
     </div>
     <div class="row p-4">
-        
+
         <table id="votesTable" class="table table-hover table-responsive" style="width: 100%;">
             <thead class="thead-inverse">
                 <tr>
@@ -226,7 +240,12 @@ include 'includes/sidebar.php';
                 required: true,
                 valueNotEquals: "0"
             },
-
+            banner1: {
+                extension: "png|jpeg|jpg",
+            },
+            banner2: {
+                extension: "png|jpeg|jpg"
+            },
             description: {
                 required: true,
                 minlength: 15,
@@ -247,11 +266,28 @@ include 'includes/sidebar.php';
             voteType: {
                 valueNotEquals: "Please select vote type!"
             },
+            banner1: {
+                extension: "Only PNG , JPEG , JPG, GIF File Allowed",
+            },
+            banner1: {
+                extension: "Only PNG , JPEG , JPG, GIF File Allowed",
+            }
 
         },
         submitHandler: (form, e) => {
-            e.preventDefault();
-            $.post("addvote", $('form').serialize(), (data) => {
+            e.preventDefault(); 
+            
+            
+            $.post("addvote", {
+                teamA,
+                teamB,
+                category,
+                subCategory,
+                description,
+                voteType,
+                banner1,
+                banner2
+            }, (data) => {
                 var result = JSON.parse(data);
                 console.log(result.status);
                 console.log(result.message);
@@ -278,7 +314,7 @@ include 'includes/sidebar.php';
     })
 </script>
 <script>
-    $('.voteAction').change(()=>{
+    $('.voteAction').change(() => {
         var id = $('#type').find('option:selected').val();
 
         alert(id);

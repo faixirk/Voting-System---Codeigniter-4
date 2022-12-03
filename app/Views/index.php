@@ -26,16 +26,16 @@ include 'includes/sidebar.php';
                 <ul class="list-group ">
                     <?php foreach ($groups as $g) : ?>
 
-                        <li class="list-group-item text-white bg-secondary"><?= substr($g['group_name'], 0,16) ?>
+                        <li class="list-group-item text-white bg-secondary"><?= substr($g['group_name'], 0, 16) ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
 
 
                         </li>
                     <?php endforeach; ?>
-                </ul> 
+                </ul>
             </div>
         </div>
- 
+
     </div>
 </div>
 
@@ -101,35 +101,51 @@ include 'includes/sidebar.php';
 
     <div class="live-matches ">
         <!-- <h5>Voting</h5> -->
-        <?php foreach ($votes as $vote) : ?>
-
-<div class="box">
-    <h5 class="mb-3">WHO WILL WIN?</h5>
-    <div class="row d-flex justify-content-around align-items-center">
-        <div class="col-3 team">
-            <img src="<?= base_url('/public/assets/A.png') ?>" alt="..." class="img-fluid">
-            <p><?= $vote['team_a'] ?></p>
-        </div>
-        <div class="col-6"><span> </span>
-            <!----> <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
-        </div>
-        <div class="col-3 team">
-            <img src="<?= base_url('/public/assets/B.png') ?>" alt="..." class="img-fluid">
-            <p><?= $vote['team_b'] ?></p>
-        </div>
-        <div class="col-12 align-self-end">
-            <div class="d-flex justify-content-between">
-                <button type="button" class="voteCount teamA teamA<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team A </button>
-                <button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result<?= $vote['vote_id'] ?>"></button>
-                <button type="button" class="voteCount teamB teamB<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team B</button>
-            </div>
-        </div>
-    </div>
-</div>
-<?php endforeach; ?>
-    </div>
-
+        <?php if (session('isLoggedIn') == true) { ?>
+            <a href="<?= base_url('user/votes') ?>" class="btn-custom w-100 my-2"> Add Votes </a>
   
+        <?php } else { ?>
+            <button class="btn-custom w-100 my-2" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
+            Add Votes </button>
+        <?php }  ?>
+
+
+        <?php
+        if ($votes) {
+            foreach ($votes as $vote) : ?>
+
+                <div class="box">
+                    <h5 class="mb-3">WHO WILL WIN?</h5>
+                    <div class="row d-flex justify-content-around align-items-center">
+                        <div class="col-3 team">
+                            <img src="<?= base_url('/public/assets/A.png') ?>" alt="..." class="img-fluid">
+                            <p><?= $vote['team_a'] ?></p>
+                        </div>
+                        <div class="col-6"><span> </span>
+                            <!----> <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
+                        </div>
+                        <div class="col-3 team">
+                            <img src="<?= base_url('/public/assets/B.png') ?>" alt="..." class="img-fluid">
+                            <p><?= $vote['team_b'] ?></p>
+                        </div>
+                        <div class="col-12 align-self-end">
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="voteCount teamA teamA<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team A </button>
+                                <button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result<?= $vote['vote_id'] ?>"></button>
+                                <button type="button" class="voteCount teamB teamB<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team B</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach;
+        } else { ?>
+            <div class="box">
+                <h5 class="mb-3">Empty List.</h5>
+            </div>
+        <?php } ?>
+    </div>
+
+
 
 
 </div>
@@ -145,18 +161,19 @@ include 'includes/footer.php';
     $(document).ready(function() {
 
 
-        $(".btn-info").click(function(){
+        $(".btn-info").click(function() {
             var id = $(this).val();
             if (id != null) {
-                $.post("user/getDesc", {id
+                $.post("user/getDesc", {
+                        id
                     }, (result) => {
                         var obj = JSON.parse(result);
-                        if (obj.status == true) { 
+                        if (obj.status == true) {
                             Swal.fire(
                                 'Description',
                                 ` <center>  ${obj.description} </center> `,
                             )
-                        } else { 
+                        } else {
 
                             Swal.fire(
                                 'Failed',
@@ -168,7 +185,7 @@ include 'includes/footer.php';
 
 
                 );
-            } 
+            }
         })
         $(".voteCount").click(function() {
             var id = $(this).val();

@@ -29,7 +29,7 @@ class Home extends BaseController
         $data['requests'] = $requests->findAll();
         $data['user'] = $user->findAll();
 
-        $data['votes'] = $votes->where('type','public')->findAll();
+        $data['votes'] = $votes->where('type','public')->orderBy('vote_id','desc')->findAll();
 
 
         //Both quereis can be used to find sub categories

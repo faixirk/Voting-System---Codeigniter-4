@@ -1,25 +1,25 @@
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"  ></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url('public/assets/js/jquery-3.6.1.min.js')?>"  ></script>
+<script src="<?= base_url('public/assets/js/bootstrap.bundle.min.js')?>"></script>
 
  
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" ></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" ></script>
+<script src="<?= base_url('public/assets/js/popper.min.js')?>" ></script>
+<script src="<?= base_url('public/assets/js/bootstrap.min.js')?>" ></script>
 
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/owl.carousel.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/masonry.pkgd.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.waypoints.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.counterup.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.easing.1.3.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.skitter.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/aos.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.fancybox.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/script.js"></script>
+<script src="<?= base_url('public/assets/js/owl.carousel.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/masonry.pkgd.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.waypoints.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.counterup.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.easing.1.3.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.skitter.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/aos.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.fancybox.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/script.js')?>"></script>
 
 
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/notiflix-aio-2.7.0.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/pusher.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/vue.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/axios.min.js"></script>
+<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/pusher.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/vue.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/axios.min.js')?>"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

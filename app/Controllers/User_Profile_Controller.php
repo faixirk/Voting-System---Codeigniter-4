@@ -9,6 +9,9 @@ class User_Profile_Controller extends BaseController{
     public function index(){
         $data = [];
         $data['title'] = 'User | Profile';
+        $user = new User_Model();
+        $data['user'] = $user->where('user_id', session('user_id'))->first();
+      
         return view('panel/user/profile', $data);
     }
     public function profileUpdate(){

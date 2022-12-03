@@ -31,10 +31,10 @@ include 'includes/sidebar.php';
             content: "\f142";
         }
     </style>
-    <div class="page-header card card-primary m-0 m-md-4 my-4 m-md-0 p-5 shadow">
+    <!-- <div class="page-header card card-primary m-0 m-md-4 my-4 m-md-0 p-5 shadow">
         <div class="row justify-content-between">
             <div class="col-md-12">
-                <form action="https://script.bugfinder.net/prophecy/admin/users/search" method="get">
+                <form action="" method="get">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -66,7 +66,7 @@ include 'includes/sidebar.php';
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="card card-primary m-0 m-md-4 my-4 m-md-0 shadow">
         <div class="card-body">
 
@@ -90,17 +90,16 @@ include 'includes/sidebar.php';
                             </th>
                             <th scope="col">No.</th>
                             <th scope="col">User</th>
-                            <th scope="col">Last Login</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         
+                        <?php foreach($users as $u): 
+                        ?>
                         <tr>
-                            <?php foreach($users as $u): 
                             
-                            ?>
                             <td class="text-center">
                                 <input type="checkbox" id="chk-185" class="form-check-input row-tic tic-check" name="check" value="185" data-id="185">
                                 <label for="chk-185"></label>
@@ -109,7 +108,7 @@ include 'includes/sidebar.php';
                             <td data-label="User">
                                 
                                 <div class="d-lg-flex d-block align-items-center ">
-                                    <div class="mr-3"><img src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="user" class="rounded-circle" width="45" height="45">
+                                    <div class="mr-3"><img src="<?= base_url('public/uploads/profile/' . $u['pic']) ?>" alt="user" class="rounded-circle" width="45" height="45">
                                 </div>
                                 <div class="">
                                         <h5 class="text-dark mb-0 font-16 font-weight-medium"><?= $u['first_name'] ?></h5>
@@ -118,27 +117,27 @@ include 'includes/sidebar.php';
                                 </div>
                             </td>
                            
-                            <td data-label="Last Login">1 hour ago</td>
                             <td data-label="Status" class="text-lg-center text-right">
-                                <span class="badge badge-light">
-                                    <?php if($u['status'] == 'active'){   echo '<i class="fa fa-circle text-success success font-12"></i> Active</span>';
-                                    }else{
-                                        echo '<i class="fa fa-circle text-danger danger font-12"></i> Inactive</span>';
-
-                                    } ?>
-                            </td>
+                                <span class="badge badge-light"> 
+                                    <?php if($u['status'] == 'Active'){?>
+                                       <i class="fa fa-circle text-success success font-12"></i> Active</span>
+                                       <?php } else{?> 
+                                     <i class="fa fa-circle text-danger danger font-12"></i> Inactive</span>
+                                      <?php } ?>
+                                   
+                             </td>
                             <td data-label="Action">
                                 <div class="dropdown show ">
                                     <a class="dropdown-toggle p-3" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/185">
-                                            <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a>
-                                        <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/185">
-                                            <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a>
-                                        <button data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="185">
-                                            <i class="fa fa-sign-in-alt text-primary pr-2" aria-hidden="true"></i> Login as User </button>
+                                        <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/edit/185">
+                                            <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a> -->
+                                        <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/185">
+                                            <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a> -->
+                                        <button id="<?= $u['user_id']; ?>" data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="185">
+                                            <i class="fa fa-trash text-warning pr-2" aria-hidden="true"></i> Delete User </button>
                                         </div>
                                 </div>
                             </td>
@@ -157,7 +156,7 @@ include 'includes/sidebar.php';
                         
                     </tbody>
                 </table>
-                <nav id="pagination">
+                 <nav id="pagination">
                     <ul class="pagination wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.35s">
 
                         <li class="disabled page-item">
@@ -207,13 +206,13 @@ include 'includes/sidebar.php';
                             <a href="https://script.bugfinder.net/prophecy/admin/users?page=2" class="page-link" rel="next">&raquo;</a>
                         </li>
                     </ul>
-                </nav>
+                </nav> 
 
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="all_active" role="dialog">
+    <!-- <div class="modal fade" id="all_active" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-primary">
@@ -250,29 +249,38 @@ include 'includes/sidebar.php';
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="modal fade" id="login_as_user" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header modal-colored-header bg-primary">
-                    <h5 class="modal-title">Login as User</h5>
+                    <h5 class="modal-title">Delete User</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you really want to login as user</p>
+                    <p>Do you really want to delete as user</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal"><span>No</span></button>
-                    <form action="https://script.bugfinder.net/prophecy/admin/user/login" method="post" class="update-action">
+                    <form action="" method="post" class="update-action">
                         <input type="hidden" name="_token" value="zCIPBVp0XycU7LwUsNuesez68nr1s9jwp1REq3Jd"> <input type="hidden" class="userId" name="userId" value="" />
-                        <button type="submit" class="btn btn-primary"><span>Yes</span></button>
+                        <button  type="submit" class="btn btn-primary"><span>Yes</span></button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+
     <?php
     include 'includes/footer.php';
     ?>
+    <script>
+        $(document).ready(function(){
+           $('.user-login').click(function(event){
+             var id = $(this).val();
+             alert(id);
+           });
+        });
+    </script>

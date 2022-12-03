@@ -92,7 +92,9 @@ $routes->group('user', function ($routes) {
     $routes->get('votes', 'Votes_Controller::index');
     $routes->get('groups', 'Groups_Controller::index');
     $routes->post('addgroup', 'Groups_Controller::add_group');
+    $routes->match(['get', 'post'], 'chat', 'Chats_Controller::public_chat');
     $routes->match(['get', 'post'], 'chat/(:num)', 'Chats_Controller::chat/$1');
+    $routes->get('getmsg', 'Chats_Controller::public_msg');
     $routes->get('getmsg/(:num)', 'Chats_Controller::msg/$1');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
@@ -109,9 +111,10 @@ $routes->group('user', function ($routes) {
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
 
- 
+ //  $routes->get('user/register', 'Registration::index');
+$routes->get('user/login', 'User_Login::index');
+$routes->get('user/reset/password', 'User_Login::reset_password');
 
-//  ------- X ------ All User Routes --------- X -------
 
 
 
@@ -120,9 +123,9 @@ $routes->get('/faq', 'Home::faq');
 $routes->get('/blog', 'Home::blog');
 $routes->get('/contact', 'Home::contact');
 
-//  $routes->get('user/register', 'Registration::index');
-$routes->get('user/login', 'User_Login::index');
-$routes->get('user/reset/password', 'User_Login::reset_password');
+//  ------- X ------ All User Routes --------- X -------
+
+//  -------------- All Admin Routes ---------=-------
 
 //Admin Login
 $routes->group('admin', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
@@ -165,3 +168,4 @@ $routes->match(['get', 'post'], 'admin/logout', 'Admin_Login_Controller::logout'
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+//  ------- X ------ All Admin Routes --------- X -------

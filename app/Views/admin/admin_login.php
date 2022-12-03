@@ -26,15 +26,15 @@
             </div>
         </div>
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(<?= base_url('public/assets/uploads/logo/auth-bg.jpg')?>) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(<?= base_url('public/uploads/logo/auth-bg.jpg')?>) no-repeat center center;">
             <div class="auth-box row">
-                <div class="col-lg-6 col-md-5 modal-bg-img" style="background-image: url(<?= base_url('public/assets/uploads/logo/theme.jpg')?>);">
+                <div class="col-lg-6 col-md-5 modal-bg-img" style="background-image: url(<?= base_url('public/uploads/logo/theme.jpg')?>);">
                 </div>
 
                 <div class="col-lg-6 col-md-7 bg-white">
                     <div class="p-3">
                         <div class="text-center logoWidth-64">
-                            <img src=" #" alt="wrapkit">
+                            <img src="<?= base_url('public/uploads/logo/profile.png')?>" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">Admin Login</h2>
 
@@ -68,7 +68,6 @@
                                     <button type="submit" class="btn btn-block btn-dark">Sign In</button>
                                 </div>
                                 <div class="col-lg-12 text-center mt-5">
-                                    <a href="#" class="text-danger">Forgot Your Password?</a>
                                 </div>
                             </div>
                         </form>

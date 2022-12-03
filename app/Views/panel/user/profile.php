@@ -31,7 +31,7 @@ include 'includes/sidebar.php';
 
                         </div>
                         <h3></h3>
-                        <p>Joined At 04 Nov, 2022 11:15 AM</p>
+                        <p><?= $user['created_at'] ?></p>
                         <div class="submit-btn-wrapper text-center text-md-left">
                             <!-- <button type="submit" class="btn-custom w-100">
                                 <span>Image Update</span></button> -->

@@ -11,7 +11,11 @@ class Groups_Controller extends BaseController
 {
     public function index()
     {
-        $data['title'] = "Groups";
+        $data['title'] = "User | Groups";
+        $user = new User_Model();
+        $data['user'] = $user->select('*');
+        $data['user'] = $user->where('user_id', session('user_id'))->first();
+        
         return view('panel/user/groups', $data);
     }
     public function add_group()
@@ -151,10 +155,8 @@ class Groups_Controller extends BaseController
         $groups = new Groups_Model();
         $data['private'] = $groups->select()->join('requests','requests.group_id=groups.group_id')->findAll();
         // $data['private'] = $request->where('user_id', $userID)->get()->getResult();
-        // echo '<pre>';
-        // print_r($data);
-        // die();
-        return view('panel\user\private_voting', $data);
+        
+        return view('panel/user/private_voting', $data);
     }
     public function single_room($id){
         $data['title'] = 'Private Room';
@@ -163,9 +165,7 @@ class Groups_Controller extends BaseController
         $requests = new Requests_Model();
         $data['members'] = $requests->select('*')->join('user','user.user_id=requests.user_id');
         $data['members'] = $requests->where('group_id', $id)->findAll();
-        // echo '<pre>';
-        // print_r($data);
-        // die();
+      
         return view('panel/user/single_voting', $data);
     }
 }

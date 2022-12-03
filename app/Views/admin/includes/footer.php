@@ -1,24 +1,24 @@
 <footer class="footer text-center text-muted">
-            Copyrights © 2022 All Rights Reserved By Prophecy        </footer>
+            Copyrights © 2022 All Rights Reserved By Daily Voting       </footer>
 
     </div>
 </div>
 
 
 
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/jquery.min.js"></script>
+<script src="<?= base_url('public/assets/js/jquery.min.js')?>"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/popper.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/bootstrap.min.js"></script>
+<script src="<?= base_url('public/assets/js/bootstrap.min.js')?>"></script>
 
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/bootstrap4-toggle.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/app-style-switcher.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/feather.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/notiflix-aio-2.7.0.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/perfect-scrollbar.jquery.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/sidebarmenu.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/select2.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/admin-mart.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/admin/js/custom.js"></script>
+<script src="<?= base_url('public/assets/js/bootstrap4-toggle.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/app-style-switcher.js')?>"></script>
+<script src="<?= base_url('public/assets/js/feather.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/perfect-scrollbar.jquery.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/sidebarmenu.js')?>"></script>
+<script src="<?= base_url('public/assets/js/select2.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/admin-mart.js')?>"></script>
+<script src="<?= base_url('public/assets/js/custom.js')?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
@@ -28,9 +28,9 @@
         })
     })
 </script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/axios.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/vue.min.js"></script>
-<script src="https://script.bugfinder.net/prophecy/assets/global/js/pusher.min.js"></script>
+<script src="<?= base_url('public/assets/js/axios.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/vue.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/pusher.min.js')?>"></script>
 
     <script>
         'use script'

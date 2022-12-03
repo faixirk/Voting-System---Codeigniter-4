@@ -81,7 +81,7 @@ include 'includes/sidebar.php';
             </div>
 
             <div class="table-responsive">
-                <table class="categories-show-table table table-hover table-striped table-bordered">
+                <table id="users" class="categories-show-table table table-hover table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="text-center">
@@ -136,7 +136,7 @@ include 'includes/sidebar.php';
                                             <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </a> -->
                                         <!-- <a class="dropdown-item" href="https://script.bugfinder.net/prophecy/admin/user/send-email/185">
                                             <i class="fa fa-envelope text-success pr-2" aria-hidden="true"></i> Send Email </a> -->
-                                        <button id="<?= $u['user_id']; ?>" data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="185">
+                                        <button value="<?= $u['user_id']; ?>" data-toggle="modal" data-target="#login_as_user" class="dropdown-item user-login" data-id="185">
                                             <i class="fa fa-trash text-warning pr-2" aria-hidden="true"></i> Delete User </button>
                                         </div>
                                 </div>
@@ -156,57 +156,7 @@ include 'includes/sidebar.php';
                         
                     </tbody>
                 </table>
-                 <nav id="pagination">
-                    <ul class="pagination wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.35s">
-
-                        <li class="disabled page-item">
-                            <a href="#" class="page-link" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </li>
-
-
-
-
-
-                        <li class="page-item active">
-                            <a href="#" class="page-link">1<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=2" class="page-link">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=3" class="page-link">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=4" class="page-link">4</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=5" class="page-link">5</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=6" class="page-link">6</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=7" class="page-link">7</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=8" class="page-link">8</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=9" class="page-link">9</a>
-                        </li>
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=10" class="page-link">10</a>
-                        </li>
-
-
-                        <li class="page-item">
-                            <a href="https://script.bugfinder.net/prophecy/admin/users?page=2" class="page-link" rel="next">&raquo;</a>
-                        </li>
-                    </ul>
-                </nav> 
+                 
 
             </div>
         </div>
@@ -259,13 +209,13 @@ include 'includes/sidebar.php';
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 </div>
                 <div class="modal-body">
-                    <p>Do you really want to delete as user</p>
+                    <p>Do you really want to delete this user?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-dismiss="modal"><span>No</span></button>
                     <form action="" method="post" class="update-action">
                         <input type="hidden" name="_token" value="zCIPBVp0XycU7LwUsNuesez68nr1s9jwp1REq3Jd"> <input type="hidden" class="userId" name="userId" value="" />
-                        <button  type="submit" class="btn btn-primary"><span>Yes</span></button>
+                        <button  id="confirm" type="submit" class="btn btn-primary"><span>Yes</span></button>
                     </form>
                 </div>
             </div>
@@ -278,9 +228,32 @@ include 'includes/sidebar.php';
     ?>
     <script>
         $(document).ready(function(){
+            
            $('.user-login').click(function(event){
              var id = $(this).val();
-             alert(id);
+             $('#confirm').click(function(){
+                $.ajax({
+                    type: "GET",
+                    url: "<?= base_url()?>" + '/admin/user/delete/' + id,
+                    success:function(response){
+                        if(response==1){
+                        window.location.reload();
+                    }
+                    else{
+                        swal.fire({
+                            'icon': 'info',
+                            'text': "Oops! There was an error. Contact Admin!",
+                        });
+                    }
+                    },
+                    error:function(data){
+                        swal.fire({
+                            'icon': 'error',
+                            'text': "Unexpected Error! Contact admin.",
+                        });
+                    }
+                });
+             })
            });
         });
     </script>

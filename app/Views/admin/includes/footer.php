@@ -20,13 +20,18 @@
 <script src="<?= base_url('public/assets/js/admin-mart.js')?>"></script>
 <script src="<?= base_url('public/assets/js/custom.js')?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script>
 
     $(document).ready(function () {
         $('.notiflix-confirm').on('click', function () {
 
         })
-    })
+        $('#users').DataTable({
+        pagingType: 'full_numbers',
+    });
+    });
 </script>
 <script src="<?= base_url('public/assets/js/axios.min.js')?>"></script>
 <script src="<?= base_url('public/assets/js/vue.min.js')?>"></script>

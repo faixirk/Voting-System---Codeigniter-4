@@ -146,6 +146,7 @@ $routes->group('admin', function ($routes) {
 });
 //Admin User Controller
 $routes->match(['get', 'post'], 'admin/users', 'Admin_User_Controller::index');
+$routes->match(['get', 'post'], 'admin/user/delete/(:num)', 'Admin_User_Controller::deleteUser/$1');
 
 
 //Admin  Category Controller

@@ -55,7 +55,7 @@ class Admin_Login_Controller extends BaseController
             }
         }
     }
-    protected function setUserSession($user)
+    public function setUserSession($user)
     {
         $data = [
             'id' => $user['admin_id'],
@@ -69,9 +69,8 @@ class Admin_Login_Controller extends BaseController
         session()->set($data);
         return true;
     }
-    protected function logout(){
-        die('dasd');
+    public function logout(){
         session()->destroy();
-        return redirect()->to('admin');
+        return redirect()->to('/');
     }
 }

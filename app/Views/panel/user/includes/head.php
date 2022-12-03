@@ -7,43 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <?= csrf_meta() ?>
 
-    <meta name="description" content="Voting - An Online Voting Platform">
+    <meta name="description" content="Daily Voting - An Online Voting Platform">
     <meta name="keywords" content="bet, voting, betting, cricket, gambling, game, hyip, invest, ipl, , online voting, soccer, sports">
-    <link rel="shortcut icon" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
 
-    <link rel="apple-touch-icon" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/logo.png">
-    <title>Voting | Dashboard</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="https://script.bugfinder.net/prophecy/assets/uploads/logo/favicon.png">
+    <link rel="apple-touch-icon" href="#">
+    <title><?= $title; ?></title>
+    <link rel="icon" type="image/png" sizes="16x16" href="#">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="Prophecy | Dashboard">
+    <meta name="apple-mobile-web-app-title" content="Daily Voting | Dashboard">
 
     <meta itemprop="name" content="Voting | Dashboard">
     <meta itemprop="description" content="Voting - An Online Betting Platform">
-    <meta itemprop="image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png600x315">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Voting - An Online Betting Platform">
     <meta property="og:description" content="Voting - An Online Betting Platform">
-    <meta property="og:image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png" />
     <meta property="og:image:type" content="image/png" />
 
 
 
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/bootstrap.min.css')?>" />
     
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/animate.css" />
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/owl.carousel.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/owl.theme.default.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/skitter.css" />
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/aos.css" />
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/jquery.fancybox.min.css" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/animate.css')?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/owl.carousel.min.cs')?>s" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/owl.theme.default.min.css')?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/skitter.css')?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/aos.css')?>" />
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/jquery.fancybox.min.css')?>" />
 
-    <script src="https://script.bugfinder.net/prophecy/assets/admin/js/fontawesome/fontawesomepro.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://script.bugfinder.net/prophecy/assets/themes/betting/css/style.css" />
+    <script src="<?= base_url('public/assets/js/fontawesome/fontawesomepro.js')?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/style.css')?>" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
+
     <style>
       
         /* .chats  li:hover {
@@ -51,6 +50,13 @@
             color: var(--white); 
 
         } */
+      
+
+.DivWithScroll{
+    height:140px;
+    overflow:scroll;
+    overflow-x:hidden;
+}
         .container {
   /* border: 2px solid #dedede; */
   /* background-color: #f1f1f1; */

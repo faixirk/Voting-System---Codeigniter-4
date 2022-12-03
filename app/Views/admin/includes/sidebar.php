@@ -5,45 +5,45 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
 
-                                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="<?= base_url('admin/dashboard') ?>" aria-expanded="false">
-                            <i data-feather="home" class="feather-icon"></i>
-                            <span class="hide-menu">Dashboard</span>
-                        </a>
-                    </li>
-                
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="<?= base_url('admin/dashboard') ?>" aria-expanded="false">
+                        <i data-feather="home" class="feather-icon"></i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
 
-                                    <li class="sidebar-item">
+
+                <!-- <li class="sidebar-item">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/staff" aria-expanded="false">
                             <i data-feather="users" class="feather-icon"></i>
                             <span class="hide-menu">Role Permission</span>
                         </a>
-                    </li>
-                
+                    </li> -->
 
 
-                                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Manage Module</span></li>
 
-                    <li class="sidebar-item ">
-                        <a class="sidebar-link" href="<?= base_url('admin/category') ?>" aria-expanded="false">
-                            <i class="fas fa-tag"></i>
-                            <span class="hide-menu">Category</span>
-                        </a>
-                    </li>
-                    <!-- <li class="sidebar-item ">
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Manage Module</span></li>
+
+                <li class="sidebar-item ">
+                    <a class="sidebar-link" href="<?= base_url('admin/category') ?>" aria-expanded="false">
+                        <i class="fas fa-tag"></i>
+                        <span class="hide-menu">Category</span>
+                    </a>
+                </li>
+                <!-- <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/tournament/list" aria-expanded="false">
                             <i class="fas fa-gamepad"></i>
                             <span class="hide-menu">Tournament</span>
                         </a>
                     </li> -->
-                    <li class="sidebar-item ">
-                        <a class="sidebar-link" href="<?= base_url('admin/sub-category') ?>" aria-expanded="false">
-                            <i class="fa fa-users"></i>
-                            <span class="hide-menu">Sub Category</span>
-                        </a>
-                    </li>
-                    <!-- <li class="sidebar-item ">
+                <li class="sidebar-item ">
+                    <a class="sidebar-link" href="<?= base_url('admin/sub-category') ?>" aria-expanded="false">
+                        <i class="fa fa-users"></i>
+                        <span class="hide-menu">Sub Category</span>
+                    </a>
+                </li>
+                <!-- <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/match/list" aria-expanded="false">
                             <i class="fa fa-flag"></i>
                             <span class="hide-menu">Match</span>
@@ -52,8 +52,8 @@
 
 
 
-                                
-                    <li class="list-divider"></li>
+
+                <!-- <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Manage Result</span></li>
                     <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/result/history/pending" aria-expanded="false">
@@ -66,21 +66,21 @@
                             <i class="fas fa-check-circle"></i>
                             <span class="hide-menu">Close Result</span>
                         </a>
-                    </li>
-                
+                    </li> -->
 
-                                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Referral</span></li>
-                    <!-- <li class="sidebar-item ">
+
+                <!-- <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Referral</span></li> -->
+                <!-- <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/referral-commission" aria-expanded="false">
                             <i class="fas fa-users"></i>
                             <span class="hide-menu">Referral Commission</span>
                         </a>
                     </li> -->
-                
 
-                                    <!-- <li class="list-divider"></li> -->
-                    <!-- <li class="nav-small-cap"><span class="hide-menu">All Transaction </span></li>
+
+                <!-- <li class="list-divider"></li> -->
+                <!-- <li class="nav-small-cap"><span class="hide-menu">All Transaction </span></li>
 
                     <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/transaction" aria-expanded="false">
@@ -88,34 +88,34 @@
                             <span class="hide-menu">Transaction</span>
                         </a>
                     </li> -->
-                    <!-- <li class="sidebar-item ">
+                <!-- <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/commissions" aria-expanded="false">
                             <i class="fas fa-money-bill-alt"></i>
                             <span class="hide-menu">Commission</span>
                         </a>
                     </li> -->
 
-                    <!-- <li class="sidebar-item ">
+                <!-- <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/bet-history" aria-expanded="false">
                             <i class="fas fa-tag"></i>
                             <span class="hide-menu">Bet History</span>
                         </a>
                     </li> -->
-                
 
 
-                                    
-                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Manage User</span></li>
 
-                    <li class="sidebar-item ">
-                        <a class="sidebar-link" href="<?= base_url('admin/users') ?>" aria-expanded="false">
-                            <i class="fas fa-users"></i>
-                            <span class="hide-menu">All User</span>
-                        </a>
-                    </li>
 
-                    <!-- <li class="sidebar-item">
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Manage User</span></li>
+
+                <li class="sidebar-item ">
+                    <a class="sidebar-link" href="<?= base_url('admin/users') ?>" aria-expanded="false">
+                        <i class="fas fa-users"></i>
+                        <span class="hide-menu">All User</span>
+                    </a>
+                </li>
+
+                <!-- <li class="sidebar-item">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/users/kyc/pending"
                            aria-expanded="false">
                             <i class="fas fa-spinner"></i>
@@ -123,7 +123,7 @@
                         </a>
                     </li> -->
 
-                    <!-- <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/users/kyc"
                            aria-expanded="false">
                             <i class="fas fa-file-invoice"></i>
@@ -131,7 +131,7 @@
                         </a>
                     </li> -->
 
-                    <!-- <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/email-send"
                            aria-expanded="false">
                             <i class="fas fa-envelope-open"></i>
@@ -139,9 +139,9 @@
                         </a>
                     </li> -->
 
-                
 
-                                    <!-- <li class="list-divider"></li>
+
+                <!-- <li class="list-divider"></li>
                     <li class="nav-small-cap"><span class="hide-menu">Payment Settings</span></li>
                     <li class="sidebar-item ">
                         <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/payment-methods"
@@ -238,11 +238,11 @@
                             <span class="hide-menu">Subscriber List</span>
                         </a>
                     </li> -->
-                
 
-                
-                    <!-- <li class="list-divider"></li> -->
-                    <!-- <li class="nav-small-cap"><span class="hide-menu">Controls</span></li>
+
+
+                <!-- <li class="list-divider"></li> -->
+                <!-- <li class="nav-small-cap"><span class="hide-menu">Controls</span></li>
                                             <li class="sidebar-item">
                             <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/basic-controls" aria-expanded="false">
                                 <i class="fas fa-cogs"></i>
@@ -257,7 +257,7 @@
                             </a>
                         </li> -->
 
-                        <!-- <li class="sidebar-item">
+                <!-- <li class="sidebar-item">
                             <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                                 <i class="fas fa-envelope"></i>
                                 <span class="hide-menu">Email Settings</span>
@@ -323,27 +323,25 @@
                                 <span class="hide-menu">Manage Language</span>
                             </a>
                         </li> -->
-                    
-                
-
-                                    <li class="list-divider"></li>
-                    <li class="nav-small-cap"><span class="hide-menu">Theme Settings</span></li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/logo-seo" aria-expanded="false">
-                            <i class="fas fa-image"></i><span
-                                class="hide-menu">Manage Logo & SEO</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/breadcrumb" aria-expanded="false">
-                            <i class="fas fa-file-image"></i><span
-                                class="hide-menu">Manage Breadcrumb</span>
-                        </a>
-                    </li>
 
 
-                    <!-- <li class="sidebar-item ">
+
+                <li class="list-divider"></li>
+                <li class="nav-small-cap"><span class="hide-menu">Theme Settings</span></li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/logo-seo" aria-expanded="false">
+                        <i class="fas fa-image"></i><span class="hide-menu">Manage Logo & SEO</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link" href="https://script.bugfinder.net/prophecy/admin/breadcrumb" aria-expanded="false">
+                        <i class="fas fa-file-image"></i><span class="hide-menu">Manage Breadcrumb</span>
+                    </a>
+                </li>
+
+
+                <!-- <li class="sidebar-item ">
                         <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
                             <i class="fas fa-clipboard-list"></i>
                             <span class="hide-menu">Manage Content</span>

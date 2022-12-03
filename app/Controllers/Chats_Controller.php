@@ -4,9 +4,8 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Message_Model;
-use App\Models\User_Model;
-use App\Models\Groups_Model;
 use App\Models\Requests_Model;
+use App\Models\Public_Chat_Model;
 use CodeIgniter\API\ResponseTrait;
 
 
@@ -19,7 +18,34 @@ class Chats_Controller extends BaseController
 		$data['title'] = "Chats";
 		return view('panel/user/chats', $data);
 	}
+	public function public_chat()
+	{
 
+
+		if (!session()->get('f_name'))
+			return redirect()->to('/');
+
+		if ($this->request->getMethod() == 'post') {
+			$rules = [
+				'message' => 'required'
+			];
+
+			if (!$this->validate($rules)) {
+				return $this->fail($this->validator->getErrors());
+			} else {
+				$model = new Public_Chat_Model();
+
+					$msg = [
+						'username' => session()->get('f_name'),
+						'message' => $this->request->getVar('message'),
+					];
+					$model->save($msg);
+					return $this->respondCreated($msg);
+				
+			}
+		}
+		return view('panel/user/chats');
+	}
 	public function chat($id)
 	{
 
@@ -59,7 +85,12 @@ class Chats_Controller extends BaseController
 		}
 		return view('panel/user/chats');
 	}
-
+	public function public_msg()
+	{
+		$model = new Public_Chat_Model();
+		$data = $model->findAll();
+		return $this->respond($data);
+	}
 	public function msg($id)
 	{
 		$model = new Message_Model();

@@ -31,12 +31,11 @@ class Admin_Category_Controller extends BaseController
 
             $rules = [
                 'title' => [
-                    'rules'  => 'required|min_length[5]|max_length[100]|is_unique[category.cat_title]',
+                    'rules'  => 'required|min_length[5]|max_length[100]',
                     'errors' => [
                         'required' => 'Category name is required',
                         'min_length' => 'Category name at least 5 character',
                         'max_length' => 'Category name not greater than 100 character',
-                        'is_unique' => 'Category name already taken',
                     ]
 
                 ]
@@ -71,7 +70,67 @@ class Admin_Category_Controller extends BaseController
             }
         }
     }
+    public function editCategory($id){
+
+        if($this->request->getMethod() == 'post'){
+           
+            $rules = [
+                'title' => [
+                    'rules'  => 'required|min_length[5]|max_length[100]|is_unique[category.cat_title]',
+                    'errors' => [
+                        'required' => 'Category name is required',
+                        'min_length' => 'Category name at least 5 character',
+                        'max_length' => 'Category name not greater than 100 character',
+                        'is_unique' => 'Category name already taken',
+                    ]
+
+                ]
+
+            ];
+            if($this->validate($rules)){
+                $title = $this->request->getPost('title');
+                $status = $this->request->getPost('status');
+                $icon = $this->request->getPost('icon');
+                $newData = [
+                    'cat_title'  => $title,
+                    'cat_icon'   => $icon, // cat banner
+                    'cat_status' => $status, // if 0 it mean inactive 
+                    'admin_id' => session('id')
+
+                ];
+                $cat = new Category_Model();
+                $cat->set('cat_title', $title);
+                $cat->set('cat_icon', $icon);
+                $cat->set('cat_status', $status);
+                $cat->where('cat_id', $id);
+                $query = $cat->update();
+                if($query){
+                    //data updated
+                    echo 1;
+                }
+                else{
+                    //failed to update data
+                    echo 2;
+                }
+            }
+            else{
+                //validation failed
+                echo 3;
+            }
+        }
+
+    }
     public function deleteCategory($id = null){
-        
+        $cat = new Category_Model();
+        $query = $cat->delete(['cat_id' => $id]);
+        if($query){
+            //query successful
+            echo 1;
+        }
+        else{
+            //query failed
+            echo 2;
+
+        }
     }
 }

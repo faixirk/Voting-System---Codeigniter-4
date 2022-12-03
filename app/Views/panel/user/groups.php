@@ -12,10 +12,12 @@ include 'includes/sidebar.php';
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
                     <h2 class="price"><a href="<?= base_url('user/groups/private')?>" style="color:white" >Private Rooms</a></h2>
-                    <p class="info">User: <small><?= session('f_name') ?></small><br><small>02-34-2020</small></p>
+                    <p class="info">User: <small><?= session('f_name') ?></small><br><small><?= $user['created_at']; ?></small></p>
                 </div>
                 <div class="dashboard__card-icon">
-                    <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/bet.png" alt="...">
+                <a href="<?= base_url('user/groups/private')?>">
+                    <img src="<?= base_url('public/assets/images/icons/private.png') ?>" alt="...">
+                </a>
                 </div>
             </div>
         </div>
@@ -23,11 +25,14 @@ include 'includes/sidebar.php';
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
                     <h2 class="price"><a href="<?= base_url('user/groups/requests')?>" style="color:white" >Requests </a></h2>
-                    <p class="info">Admin: <small><?= session('f_name') ?></small><br><small>02-34-2020</small></p>
+                    <p class="info">Admin: <small><?= session('f_name') ?></small><br><small><?= $user['created_at']; ?></small></p>
                 </div>
                 <div class="dashboard__card-icon">
-                    <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/bet.png" alt="...">
-                </div>
+                <a href="<?= base_url('user/groups/requests')?>">
+                    <img src="<?= base_url('public/assets/images/icons/request.png') ?>" alt="..."> </button>
+                    </a>
+
+                    </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-2">
@@ -53,9 +58,7 @@ include 'includes/sidebar.php';
                             <form class="p-0 m-0" id="group-form" style="width: 100% !important; max-width: 100% !important" enctype="multipart/form-data">
                                 <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                                 <div class="row mb-3">
-                                    <div class="alert alert-danger" id="errorMesg" role="alert">
-
-                                    </div>
+                                    
                                     <div class="form-group col-md-12">
                                         <label for="team1">Group Name</label>
                                         <input type="text" class="form-control" name="group">
@@ -135,7 +138,13 @@ include 'includes/sidebar.php';
     $('#categ').change(() => {
         var id = $('#categ').find('option:selected').val();
         $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
-            renderList("subCateg", result);
+            if (result) {
+                $.each(JSON.parse(result), (key, value) => {
+                    $('#subCateg').append('<option value=' + value.sub_cat_id + '>' + value.sub_cat_title + '</option>');
+                })
+            } else {
+                $('#subCateg').append('<option value=' + 99 + '>' + "Empty List" + '</option>');
+            }
         })
     })
     $(document).ready(function() {

@@ -92,7 +92,9 @@ $routes->group('user', function ($routes) {
     $routes->get('votes', 'Votes_Controller::index');
     $routes->get('groups', 'Groups_Controller::index');
     $routes->post('addgroup', 'Groups_Controller::add_group');
+    $routes->match(['get', 'post'], 'chat', 'Chats_Controller::public_chat');
     $routes->match(['get', 'post'], 'chat/(:num)', 'Chats_Controller::chat/$1');
+    $routes->get('getmsg', 'Chats_Controller::public_msg');
     $routes->get('getmsg/(:num)', 'Chats_Controller::msg/$1');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
@@ -109,9 +111,10 @@ $routes->group('user', function ($routes) {
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
 
- 
+ //  $routes->get('user/register', 'Registration::index');
+$routes->get('user/login', 'User_Login::index');
+$routes->get('user/reset/password', 'User_Login::reset_password');
 
-//  ------- X ------ All User Routes --------- X -------
 
 
 
@@ -120,9 +123,9 @@ $routes->get('/faq', 'Home::faq');
 $routes->get('/blog', 'Home::blog');
 $routes->get('/contact', 'Home::contact');
 
-//  $routes->get('user/register', 'Registration::index');
-$routes->get('user/login', 'User_Login::index');
-$routes->get('user/reset/password', 'User_Login::reset_password');
+//  ------- X ------ All User Routes --------- X -------
+
+//  -------------- All Admin Routes ---------=-------
 
 //Admin Login
 $routes->group('admin', ['filter' => 'AlreadyLoggedIn'], function ($routes) {
@@ -143,20 +146,23 @@ $routes->group('admin', function ($routes) {
 });
 //Admin User Controller
 $routes->match(['get', 'post'], 'admin/users', 'Admin_User_Controller::index');
+$routes->match(['get', 'post'], 'admin/user/delete/(:num)', 'Admin_User_Controller::deleteUser/$1');
 
 
 //Admin  Category Controller
 $routes->group('admin', function ($routes) {
     $routes->get('category', 'Admin_Category_Controller::index');
     $routes->post('add/category', 'Admin_Category_Controller::addCategory');
-    $routes->post('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
+    $routes->post('edit/category/(:num)', 'Admin_Category_Controller::editCategory/$1');
+    $routes->get('delete/category/(:num)', 'Admin_Category_Controller::deleteCategory/$1');
 });
 
 //Admin Sub Category Controller
 $routes->group('admin', function ($routes) {
     $routes->get('sub-category', 'Admin_Sub_Category_Controller::index');
     $routes->post('add/sub-category', 'Admin_Sub_Category_Controller::addSubCategory');
-    $routes->post('delete/sub-category/(:num)', 'Admin_Category_Controller::deleteSubCategory/$1');
+    $routes->post('edit/sub-category/(:num)', 'Admin_Sub_Category_Controller::editSubCategory/$1');
+    $routes->get('delete/sub-category/(:num)', 'Admin_Sub_Category_Controller::deleteSubCategory/$1');
 });
 
 //Admin Logout
@@ -165,3 +171,4 @@ $routes->match(['get', 'post'], 'admin/logout', 'Admin_Login_Controller::logout'
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+//  ------- X ------ All Admin Routes --------- X -------

@@ -31,12 +31,11 @@ class Admin_Category_Controller extends BaseController
 
             $rules = [
                 'title' => [
-                    'rules'  => 'required|min_length[5]|max_length[100]|is_unique[category.cat_title]',
+                    'rules'  => 'required|min_length[5]|max_length[100]',
                     'errors' => [
                         'required' => 'Category name is required',
                         'min_length' => 'Category name at least 5 character',
                         'max_length' => 'Category name not greater than 100 character',
-                        'is_unique' => 'Category name already taken',
                     ]
 
                 ]

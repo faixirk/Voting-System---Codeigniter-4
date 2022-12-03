@@ -161,7 +161,7 @@ $routes->group('admin', function ($routes) {
 $routes->group('admin', function ($routes) {
     $routes->get('sub-category', 'Admin_Sub_Category_Controller::index');
     $routes->post('add/sub-category', 'Admin_Sub_Category_Controller::addSubCategory');
-    $routes->post('edit/sub-category(:num)', 'Admin_Sub_Category_Controller::addSubCategory');
+    $routes->post('edit/sub-category/(:num)', 'Admin_Sub_Category_Controller::editSubCategory/$1');
     $routes->get('delete/sub-category/(:num)', 'Admin_Sub_Category_Controller::deleteSubCategory/$1');
 });
 

@@ -444,12 +444,15 @@ include 'includes/sidebar.php';
                         else {
                                 swal.fire({
                                     'icon': 'info',
-                                    'text': "Oops! There was an error. Contact Admin!",
+                                    'text': "Validation Failed!",
                                 });
                             }
                     },
                     error: function(data){
-                        alert('fail');
+                        swal.fire({
+                                    'icon': 'info',
+                                    'text': "Oops! There was an error. Contact Admin!",
+                                });
 
                     }
 

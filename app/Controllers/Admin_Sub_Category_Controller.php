@@ -32,7 +32,7 @@ class Admin_Sub_Category_Controller extends BaseController
             if ($data) {
                 return json_encode($data);
             }
-        }else
+        } else
             return null;
     }
     public function addSubCategory()
@@ -41,7 +41,7 @@ class Admin_Sub_Category_Controller extends BaseController
         $parent_id = $this->request->getPost('category');
         if ($this->request->getMethod() == 'post') {
             $rules = [
-                'name' => [
+                'title' => [
                     'rules'  => 'required|min_length[5]|max_length[100]|is_unique[sub_category.sub_cat_title]',
                     'errors' => [
                         'required' => 'Sub Category name is required',
@@ -54,13 +54,9 @@ class Admin_Sub_Category_Controller extends BaseController
 
             if ($this->validate($rules)) {
                 $sub_cat = new Sub_Category_Model();
-                $name = $this->request->getVar('name');
+                $name = $this->request->getVar('title');
                 $status = $this->request->getVar('status');
-                //   $image = $this->request->getFile("image");
-                // if ($image->isValid() && !$image->hasMoved()) {
-                //   $path = './public/uploads/sub-services/';
-                //   $newName = $image->getRandomName();
-                //   $image->move($path, $newName);
+
                 $cat->set('have_sub_cat', 1);
                 $cat->where('cat_id', $parent_id);
                 $res = $cat->update();
@@ -69,7 +65,6 @@ class Admin_Sub_Category_Controller extends BaseController
                     $data = [
                         'sub_cat_title' => $name,
                         'status' => $status,
-                        // 'sub_cat_icon' => $newName,
                         'cat_id' => $parent_id
                     ];
                     $query = $sub_cat->insert($data);
@@ -78,13 +73,52 @@ class Admin_Sub_Category_Controller extends BaseController
                     //error while adding sub category data
                     echo 2;
                 }
-                // }
-                // else {
-                //   echo 3;
-                //  }
             } else {
                 //rules not validated
                 echo 0;
+            }
+        }
+    }
+    public function editSubCategory($id)
+    {
+        if ($this->request->getMethod() == 'post') {
+
+            $rules = [
+                'title' => [
+                    'rules'  => 'required|min_length[5]|max_length[100]',
+                    'errors' => [
+                        'required' => 'Sub Category name is required',
+                        'min_length' => 'Sub Category name at least 5 character',
+                        'max_length' => 'Sub Category name not greater than 100 character',
+                    ]
+                ]
+            ];
+            if ($this->validate($rules)) {
+                $cat_id = $this->request->getPost('category');
+                $sub_cat_title = $this->request->getPost('title');
+                $status = $this->request->getPost('status');
+
+                $cat = new Category_Model();
+                $sub_cat = new Sub_Category_Model();
+                $cat->set('have_sub_cat', 1);
+                $cat->where('cat_id', $cat_id);
+                $query = $cat->update();
+                $sub_cat->set('sub_cat_title', $sub_cat_title);
+                $sub_cat->set('status', $status);
+                $sub_cat->set('cat_id', $cat_id);
+                $sub_cat->where('sub_cat_id', $id);
+                $query2 = $sub_cat->update();
+                if ($query && $query2) {
+                    
+                    //data updated
+                    echo 1;
+                } else {
+                    //failed to update data
+                    echo 2;
+                }
+            } else {
+                //validation failed
+                echo 3;
             }
         }
     }

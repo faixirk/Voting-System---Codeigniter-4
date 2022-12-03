@@ -69,7 +69,7 @@ include 'includes/sidebar.php';
                                 <td data-label="SL No." class="text-center"><?= $sub_cat['sub_cat_id']; ?></td>
                                 <td data-label="Name">
                                     <div class="d-lg-flex d-block align-items-center ">
-                                        <div class="mr-3"><img src="" alt="user" class="rounded-circle" width="25" height="25"></div>
+
                                         <div class="mr-3">
                                             <h5 class="text-dark mb-0 font-16 font-weight-medium"><?= $sub_cat['sub_cat_title']; ?></h5>
                                         </div>
@@ -97,7 +97,7 @@ include 'includes/sidebar.php';
                                             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <button class="dropdown-item editBtn" href="javascript:void(0)" data-title="<?= $sub_cat['sub_cat_title']; ?>" data-status="<?= $sub_cat['status']; ?>" data-category_id="<?= $sub_cat['sub_cat_id']; ?>" data-target="#editModal" data-toggle="modal" data-image="">
+                                            <button class="dropdown-item editBtn"  value="<?= $sub_cat['sub_cat_id'] ?>" data-title="<?= $sub_cat['sub_cat_title'] ?>" data-status="<?= $sub_cat['status']; ?>" data-target="#editModal" data-toggle="modal">
                                                 <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </button>
 
                                             <button class="dropdown-item notiflix-confirm deleteSubCat" data-target="#delete-modal" data-toggle="modal" value="<?= $sub_cat['sub_cat_id'] ?>">
@@ -187,19 +187,9 @@ include 'includes/sidebar.php';
                         </div>
                         <div class="form-group">
                             <label class="text-dark">Name</label>
-                            <input type="text" class="form-control" name="name" id="subcatTitle">
+                            <input type="text" class="form-control" name="title" id="subcatTitle">
                         </div>
-                        <div class="form-group">
-                            <label for="image" class="text-dark">Image</label>
-                            <div class="image-input">
-                                <label for="image-upload" id="image-label"><i class="fas fa-upload"></i></label>
-                                <input type="file" name="image" placeholder="Choose image" id="">
-                                <!-- <img id="image_preview_container" class="preview-image" src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png" alt="preview image"> -->
-                            </div>
-                            <!-- <div>
-                                <span class="text-secondary">Image size 64x64 px</span>
-                            </div> -->
-                        </div>
+
 
                         <div class="form-group">
                             <label for="status" class="text-dark"> Status </label>
@@ -231,45 +221,39 @@ include 'includes/sidebar.php';
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="4ZvvhSDniAgyDNzYYrYeijtw2k7B3dgaXfgDnh5k">
+                <form id="form2" enctype="multipart/form-data">
+                    <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="text-dark">Category </label>
                             <select id="editCategory" class="form-control selectpicker" data-show-content="true" data-live-search="true" name="category" required>
-                                <option value="">Select Category</option>
-                                <option value="3" data-content="&lt;i class=&quot;far fa-shuttlecock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Badminton">
-                                </option>
+                                <?php
+                                echo '<option disabled>Select a Category</option>';
+
+                                foreach ($category as $c) {
+                                    echo '<option value="' . $c['cat_id'] . '">' . $c['cat_title'] . '</option>';
+                                }
+                                ?>
 
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="name" value="" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image" class="text-dark">Image</label>
-                            <div class="image-input ">
-                                <label for="image-upload" id="image-label"><i class="fas fa-upload"></i></label>
-                                <input type="file" name="image" placeholder="Choose image" id="editImage">
-                                <img id="edit_image_preview_container" class="preview-image" src="" alt="preview image">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name="title" value="" required>
                             </div>
-                            <div>
-                                <span class="text-secondary">Image size 64x64 px</span>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="edit-status" class="text-dark"> Status </label>
-                            <input data-toggle="toggle" id="edit-status" data-onstyle="success" data-offstyle="info" data-on="Active" data-off="Deactive" data-width="100%" type="checkbox" name="status">
-                        </div>
+
+
+                            <div class="form-group">
+                                <label for="edit-status" class="text-dark"> Status </label>
+                                <input data-toggle="toggle" id="edit-status" data-onstyle="success" data-offstyle="info" data-on="Active" data-off="Deactive" data-width="100%" type="checkbox" name="status">
+                            </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                    </div>
+                <div class="modal-footer">
+                    <button id="editConfirm" type="button" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                </div>
                 </form>
             </div>
         </div>
@@ -353,6 +337,48 @@ include 'includes/sidebar.php';
             });
         });
         // -----------------------------------------------------------------------------------------
+
+        //-------------------------- Admin Edit Category -------------------------------------------
+
+        $('.editBtn').click(function(event) {
+            var id = $(this).val();
+            $('#editConfirm').click(function() {
+
+                $.ajax({
+                    type: "POST",
+                    url: '<?= base_url() ?>' + "/admin/edit/sub-category/" + id,
+                    data: $('#form2').serialize(),
+                    success: function(data) {
+                        if (data == 1) {
+                            swal.fire({
+                                'icon': 'success',
+                                'text': "Sub Category Updated!",
+                            });
+                            window.location.reload();
+                        } else if (data == 2) {
+                            swal.fire({
+                                'icon': 'info',
+                                'text': "Error saving data! Please Contact Admin!",
+                            });
+                        } else {
+                            swal.fire({
+                                'icon': 'info',
+                                'text': "Validation Failed!",
+                            });
+                        }
+                    },
+                    error: function(data) {
+                        swal.fire({
+                            'icon': 'info',
+                            'text': "Oops! There was an error. Contact Admin!",
+                        });
+
+                    }
+                });
+            })
+        });
+
+        //------------------------------------------------------------------------------------------
 
         //-------------------------- Admin Delete Sub Category -------------------------------------
         $('.deleteSubCat').click(function(event) {

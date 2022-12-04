@@ -158,7 +158,6 @@ include 'includes/sidebar.php';
                         }, (result) => {
                             var obj = JSON.parse(result);
 
-                            console.log(obj);
                             if (obj.status == true) {
                                 window.location.reload();
                                 Swal.fire(
@@ -181,7 +180,6 @@ include 'includes/sidebar.php';
                             }
                         })
                         .fail(function(result) {
-                            console.log(result);
                             Swal.fire(
                                 'Failed!',
                                 'Failed to delete.',
@@ -198,7 +196,6 @@ include 'includes/sidebar.php';
 
     $('#addModelBtn').click(() => {
         $.get("<?= base_url() ?>/user/getcategory", (result) => {
-            console.log(result);
             if (result) {
                 $.each(JSON.parse(result), (key, value) => {
                     $('#categ').append('<option value=' + value.cat_id + '>' + value.cat_title + '</option>');
@@ -275,41 +272,38 @@ include 'includes/sidebar.php';
 
         },
         submitHandler: (form, e) => {
-            e.preventDefault(); 
-            
-            
-            $.post("addvote", {
-                teamA,
-                teamB,
-                category,
-                subCategory,
-                description,
-                voteType,
-                banner1,
-                banner2
-            }, (data) => {
-                var result = JSON.parse(data);
-                console.log(result.status);
-                console.log(result.message);
-                if (result.status == true) {
-                    $('form').trigger("reset");
-                    swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: result.message,
-                    }).then(() => {
-                        window.location.reload();
-                    })
-                } else {
-                    swal.fire(
-                        'warning',
-                        'Failed',
-                        result.message
-                    )
+            e.preventDefault();
+            let myform = document.getElementById("vote-form");
+            let fd = new FormData(myform);
+
+            $.ajax({
+                url: "<?= base_url() ?>" + '/user/addvote',
+                method: 'POST',
+                processData: false,
+                contentType: false,
+                data: fd,
+                success: (data) => {
+                    var result = JSON.parse(data);
+                    if (result.status == true) {
+                        $('form').trigger("reset");
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: result.message,
+                        }).then(() => {
+                            window.location.reload();
+                        })
+                    } else {
+                        swal.fire(
+                            'warning',
+                            'Failed',
+                            result.message
+                        )
+
+                    }
 
                 }
-
-            })
+            });
         }
     })
 </script>

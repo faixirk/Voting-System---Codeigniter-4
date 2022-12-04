@@ -164,8 +164,7 @@ class Votes_Controller extends BaseController
 
     function addVote()
     {
-        echo $this->request->getFile('banner1');
-        die;
+        
         $validation = [
             "teamA" => 'required|trim',
             "teamB" => 'required|trim',
@@ -283,8 +282,7 @@ class Votes_Controller extends BaseController
                 'banner2' => $newName2,
                 'description' => $description,
                 'type' => $voteType,
-                'user_id' => 2
-                // 'user_id' => session('id')
+                'user_id' => session('user_id') 
             ];
             $query = $votes->save($data);
             if ($query) {

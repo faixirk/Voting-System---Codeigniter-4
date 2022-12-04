@@ -110,7 +110,7 @@ include 'includes/footer.php';
     <script>
         $(document).ready(function() {
             $('#aboutBtn').click(function() {
-                if ($('#title').val() != '' && $('#sub-title').val() != '' && $('#description').val() != '' && $('#image').val() != '') {
+                if ($('#title').val() != '' && $('#sub-title').val() != '' && $('#description').val() != '') {
                     var formdata = new FormData(document.getElementById('aboutForm'));
                     $.ajax({
                         type: 'POST',

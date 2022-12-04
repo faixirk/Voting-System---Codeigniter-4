@@ -164,7 +164,9 @@ include 'includes/sidebar.php';
                                     'Deleted!',
                                     'Your vote has been deleted.',
                                     'success'
-                                )
+                                ).then(() => {
+                                    window.location.reload();
+                                })
                             } else if (obj.status == 500) {
                                 Swal.fire(
                                     'Failed!',

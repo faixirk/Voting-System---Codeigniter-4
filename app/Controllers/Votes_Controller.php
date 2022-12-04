@@ -21,7 +21,51 @@ class Votes_Controller extends BaseController
                 return redirect()->to('/');
         }
     }
+    function deleteVote()
+    {
+        $id =  $this->request->getPost('id');
+        if (is_numeric($id)) {
 
+            $votes = new Votes_Model();
+            $vote = $votes->where('vote_id', $id)->first();
+            if ($vote['user_id'] == session('user_id')) {
+                    // delete image
+                    $path = './public/uploads/votes/';
+
+                    if(file_exists($path.$vote['banner1']) || file_exists($path.$vote['banner2'])) {
+                        unlink(FCPATH . 'public/uploads/votes/' . $vote['banner1']);
+                        unlink(FCPATH . 'public/uploads/votes/' . $vote['banner2']);
+                    }
+            
+                $query = $votes->where('vote_id', $id)->delete();
+                if ($query) {
+                    $data = [
+                        'status' => true,
+                        'message' => 'Successfully deleted!.'
+                    ];
+                    echo json_encode($data);
+                } else {
+                    $data = [
+                        'status' => false,
+                        'message' => 'Error occured while deleting!.'
+                    ];
+                    echo json_encode($data);
+                }
+            } else {
+                $data = [
+                    'status' => false,
+                    'message' => 'Not Found your vote!.'
+                ];
+                echo json_encode($data);
+            }
+        } else {
+            $data = [
+                'status' => false,
+                'message' => 'Error occured while deleting!.'
+            ];
+            echo json_encode($data);
+        }
+    }
     // Get description
     function getDescription()
     {

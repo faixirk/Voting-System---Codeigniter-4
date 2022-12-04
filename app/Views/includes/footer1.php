@@ -8,7 +8,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="footer-box">
                         <a class="navbar-brand" href="javascript:void(0)">
-                            <img class="img-fluid" src="https://script.bugfinder.net/prophecy/assets/uploads/logo/logo.png" alt="..." /> </a>
+                            <img class="img-fluid" src="<?= base_url('public/uploads/logo/' . $logo['header_logo']) ?>" alt="..." /> </a>
                         <p>
                         <?= $contact['footer_short_details']?> </p>
                         <ul>
@@ -51,10 +51,10 @@
                         <h5>OUR Services</h5>
                         <ul>
                             <li>
-                                <a href="https://script.bugfinder.net/prophecy/terms-amp-conditions/95"> Terms &amp; Conditions</a>
+                                <a href="#"> Terms &amp; Conditions</a>
                             </li>
                             <li>
-                                <a href="https://script.bugfinder.net/prophecy/privacy-policy/96"> Privacy Policy</a>
+                                <a href="#"> Privacy Policy</a>
                             </li>
                         </ul>
                     </div>
@@ -63,15 +63,11 @@
                     <div class="footer-box">
                         
                         <div class="social-links">
-                            <a href="https://www.facebook.com/">
-                                <i class="fab fa-facebook"></i>
+                            <?php foreach($social as $s):?>
+                            <a href="<?= $s['link']?>">
+                                <i class="<?= $s['icon']?>"></i>
                             </a>
-                            <a href="https://twitter.com/">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
+                           <?php endforeach; ?>
                         </div>
                     </div>
                 </div>

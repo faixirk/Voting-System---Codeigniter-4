@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\Category_Model;
 use App\Models\Sub_Category_Model;
 use App\Models\Groups_Model;
@@ -11,12 +12,13 @@ use App\Models\Votes_Results_Model;
 use App\Models\About_Us_Model;
 use App\Models\Contact_Us_Model;
 use App\Models\Logos_Model;
+use App\Models\Social_Links_Model;
 
 class Home extends BaseController
 {
     public function index()
     {
-         
+
         $data['title'] = 'Voting System';
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
@@ -44,51 +46,56 @@ class Home extends BaseController
         // $data['votes'] = $cat->where('type','public');
         return view('index', $data);
     }
-    public function about_us(){
+    public function about_us()
+    {
         $data['title'] = 'About Us';
         $a = new About_Us_Model();
         $c = new Contact_Us_Model();
         $l = new Logos_Model();
+        $social = new Social_Links_Model();
 
+        $data['social'] = $social->findAll();
         $data['about'] = $a->first();
         $data['contact'] = $c->first();
         $data['logo'] = $l->first();
 
         return view('about_us', $data);
     }
-    function results(){
-        $data['title'] = 'Results';
-        $votes = new Votes_Model();
-        $results = new Votes_Results_Model();
-
-        return view('results', $data);
-
-    }
     public function faq(){
         $data['title'] = 'FAQ';
         $l = new Logos_Model();
         $c = new Contact_Us_Model();
+        $social = new Social_Links_Model();
+
+        $data['social'] = $social->findAll();
 
         $data['contact'] = $c->first();
         $data['logo'] = $l->first();
 
         return view('faq', $data);
     }
-    public function blog(){
+    public function blog()
+    {
         $data['title'] = 'Blog';
         $c = new Contact_Us_Model();
         $l = new Logos_Model();
 
         $data['contact'] = $c->first();
         $data['logo'] = $l->first();
+        $social = new Social_Links_Model();
+
+        $data['social'] = $social->findAll();
 
         return view('blog', $data);
     }
-    public function contact(){
+    public function contact()
+    {
         $data['title'] = 'Contact';
         $c = new Contact_Us_Model();
         $l = new Logos_Model();
+        $social = new Social_Links_Model();
 
+        $data['social'] = $social->findAll();
         $data['logo'] = $l->first();
         $data['contact'] = $c->first();
         return view('contact', $data);

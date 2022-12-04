@@ -49,7 +49,7 @@ class Admin_Sub_Category_Controller extends BaseController
         if ($this->request->getMethod() == 'post') {
             $rules = [
                 'title' => [
-                    'rules'  => 'required|min_length[5]|max_length[100]|is_unique[sub_category.sub_cat_title]',
+                    'rules'  => 'required|min_length[2]|max_length[100]|is_unique[sub_category.sub_cat_title]',
                     'errors' => [
                         'required' => 'Sub Category name is required',
                         'min_length' => 'Sub Category name at least 5 character',
@@ -92,7 +92,7 @@ class Admin_Sub_Category_Controller extends BaseController
 
             $rules = [
                 'title' => [
-                    'rules'  => 'required|min_length[5]|max_length[100]',
+                    'rules'  => 'required|min_length[2]|max_length[100]',
                     'errors' => [
                         'required' => 'Sub Category name is required',
                         'min_length' => 'Sub Category name at least 5 character',

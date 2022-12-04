@@ -1,6 +1,6 @@
 <?php
 include 'includes/head.php';
-if (session('isLoggedIn') == true) {
+if (session('type') == 'user') {
     include 'panel/user/includes/header.php';
 } else {
     include 'includes/header.php';

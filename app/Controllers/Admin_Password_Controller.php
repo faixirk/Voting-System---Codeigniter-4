@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Admin_Model;
 use App\Libraries\Validation;
+use App\Models\Logos_Model;
 
 class Admin_Password_Controller extends BaseController
 {
@@ -12,7 +13,9 @@ class Admin_Password_Controller extends BaseController
     public function index()
     {
         if (session('isLoggedIn') == true) {
+            $l = new Logos_Model();
 
+            $data['logo'] =$l->first();
             $data['title'] = 'Admin | Password';
             return view('admin/password_update', $data);
         } else {
@@ -51,7 +54,7 @@ class Admin_Password_Controller extends BaseController
                 $model = new Admin_Model();
                 $admin_info = $model->where('admin_id', session('id'))->first();
                 // verifying with db
-                if (password_verify($this->request->getPost('password'), $admin_info['admin_pass'])) {
+                if (password_verify($this->request->getPost('current_password'), $admin_info['admin_pass'])) {
                     // make is the custom lib fun -> convert pass into hash
                     $pass = Validation::make($this->request->getPost('password'));
                     $model->set('admin_pass', $pass);

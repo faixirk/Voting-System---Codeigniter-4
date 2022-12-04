@@ -87,7 +87,7 @@ include 'includes/sidebar.php';
     <!-- categories -->
     <div class="categories" id="categories">
         <a href="#" class="active">
-            <i class="far fa-globe-americas"></i> <span>All Sports</span>
+            <i class="far fa-globe-americas"></i> <span>All Categories</span>
         </a>
 
 
@@ -115,17 +115,17 @@ include 'includes/sidebar.php';
             foreach ($votes as $vote) : ?>
 
                 <div class="box">
-                    <h5 class="mb-3">WHO WILL WIN?</h5>
+                    <!-- <h5 class="mb-3">WHO WILL WIN?</h5> -->
                     <div class="row d-flex justify-content-around align-items-center">
                         <div class="col-3 team">
-                            <img src="<?= base_url('/public/assets/A.png') ?>" alt="..." class="img-fluid">
+                            <img src="<?= base_url()?>//public/uploads/votes/<?=$vote['banner2']?>" style="border-radius: 50%" alt="A" class="img-fluid">
                             <p><?= $vote['team_a'] ?></p>
                         </div>
                         <div class="col-6"><span> </span>
                             <!----> <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
                         </div>
                         <div class="col-3 team">
-                            <img src="<?= base_url('/public/assets/B.png') ?>" alt="..." class="img-fluid">
+                            <img src="<?= base_url()?>//public/uploads/votes/<?=$vote['banner2']?>" alt="B" style="border-radius: 50%" class="img-fluid">
                             <p><?= $vote['team_b'] ?></p>
                         </div>
                         <div class="col-12 align-self-end">
@@ -200,7 +200,6 @@ include 'includes/footer.php';
                         classType
                     }, (result) => {
                         var obj = JSON.parse(result);
-                        console.log(obj);
                         var classa = `.result${id}`;
                         if (obj.status == true) {
                             $(classa).text(`${obj.teamA} -- ${obj.teamB}`);

@@ -35,7 +35,7 @@
                     <button type="submit" id="loginBtn" class="btn-custom w-100">sign in</button>
                     <div class="bottom">
                         Don't have an account?
-                        <a href="<?= base_url('user/register') ?>">Create account</a>
+                        <a id="registerform" href="#">Create account</a>
                     </div>
                 </form>
             </div>
@@ -77,7 +77,7 @@
                     <button type="submit" id="submitBtn" class="btn-custom w-100 mt-3 login-signup-auth-btn">sign up</button>
                     <div class="bottom">
                         Already have an account?
-                        <button class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">Login here</button>
+                        <a class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">Login here</a>
                     </div>
                 </form>
             </div>
@@ -121,8 +121,7 @@
         gtag('js', new Date());
         gtag('config', MEASUREMENT_ID);
     });
-</script>
-<!--End of Google analytic Script-->
+</script> 
 
 
 
@@ -465,7 +464,11 @@
 
 <script>
     $(document).ready(function() {
-        var base_url = '<?= base_url() ?>';
+        $('#registerform').click(()=>{
+            $('#loginModal').hide(); 
+            $('#registerBtn').click();
+        })
+
         $('#signup-form').submit(e => {
             e.preventDefault();
             var f_name = $('#f_name').val();
@@ -561,7 +564,7 @@
                                     $('#loginModal').hide(); 
                                     window.location.replace = '/';
                                 })
-                                window.location.href = base_url + "/user/dashboard";
+                                window.location.href = '<?=base_url()?>'+ "/user/dashboard";
                             } else {
                                 swal.fire({
                                     'icon': 'error',

@@ -24,7 +24,7 @@ class Login_Controller extends BaseController
             $validation = [
                 'email' => [
                     'label'  => 'Email',
-                    'rules'  => 'required|valid_email',
+                    'rules'  => 'required|valid_email|trim',
                     'errors' => [
                         'required' => 'Enter a valid {field} address.'
                     ]

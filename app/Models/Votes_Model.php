@@ -9,6 +9,8 @@ class Votes_Model extends Model {
         'team_b',  
         'category_id',
         'subCategory_id',
+        'banner1',
+        'banner2',
         'description',
         'type',
         'user_id',

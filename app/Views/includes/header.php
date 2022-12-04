@@ -42,7 +42,7 @@
                 <div class="notification-panel" id="pushNotificationArea">
 
                     <!-- login register button -->
-                    <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#registerModal">
+                    <button class="btn-custom" id="registerBtn" data-bs-toggle="modal" data-bs-target="#registerModal">
                         Join </button>
                     <button class="btn-custom" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
                         Login </button>

@@ -11,20 +11,21 @@ class Votes_Controller extends BaseController
 {
     public function index()
     {
-
+        if (session('isLoggedIn')) {
         $data['title'] = 'Votes';
-        $cat = new Category_Model();
         $votes = new Votes_Model();
-
-
-        $data['votes'] = $votes->where('user_id', session('user_id'))->findAll();
+        $data['votes'] = $votes->where('user_id', session('user_id'));
+        $data['votes'] = $votes->orderBy('vote_id','desc')->findAll();
         return view('panel/user/votes', $data);
+        }else {
+                return redirect()->to('/');
+        }
     }
 
     // Get description
     function getDescription()
     {
-        if (session('isLoggedIn')) {
+        // if (session('isLoggedIn')) {
 
             $id = $this->request->getPost('id'); 
             $votes = new Votes_Model(); 
@@ -55,13 +56,13 @@ class Votes_Controller extends BaseController
                 ];
                 echo json_encode($data);
             }
-        } else {
-            $data = [
-                'status' => false,
-                'message' => "Please Login First"
-            ];
-            echo json_encode($data);
-        }
+        // } else {
+        //     $data = [
+        //         'status' => false,
+        //         'message' => "Please Login First"
+        //     ];
+        //     echo json_encode($data);
+        // }
     }
     // Add vote 
     function addVoteCount()
@@ -163,7 +164,8 @@ class Votes_Controller extends BaseController
 
     function addVote()
     {
-        $security = \Config\Services::security();
+        echo $this->request->getFile('banner1');
+        die;
         $validation = [
             "teamA" => 'required|trim',
             "teamB" => 'required|trim',
@@ -171,6 +173,19 @@ class Votes_Controller extends BaseController
             "subCategory" => 'trim',
             "description" => 'required|trim|min_length[15]|max_length[150]',
             "voteType" => 'required|trim',
+            'banner1' => [ 
+                'rules' => 'uploaded[banner1]'
+                    . '|is_image[banner1]'
+                    . '|mime_in[banner1,image/jpg,image/jpeg,image/gif,image/png]'
+                    . '|max_size[banner1,100]'
+                    . '|max_dims[banner1,768,768]'
+            ],
+            'banner2' => [ 
+                'rules'=>[
+                    'uploaded[banner2]',
+                    // 'mime_in[banner2,image/jpg,image/jpeg,image/png]',
+                ]
+            ],
         ];
         if ($this->validate($validation) == FALSE) {
             if ($this->validator->hasError('teamA')) {
@@ -198,6 +213,20 @@ class Votes_Controller extends BaseController
                     'message' => $this->validator->getError('voteType'),
                 ];
                 echo json_encode($data);
+            } else if($this->validator->hasError('banner1')){
+                $data =  [
+                    'status'=> false,
+                    'message' => $this->validator->getError('banner1')
+                ];
+                echo json_encode($data);
+
+            }else if($this->validator->hasError('banner2')){
+                $data =  [
+                    'status'=> false,
+                    'message' => $this->validator->getError('banner2')
+                ];
+                echo json_encode($data);
+
             }
         } else {
 
@@ -209,11 +238,49 @@ class Votes_Controller extends BaseController
             $subCategory  = $this->request->getPost('subCategory');
             $description  = $this->request->getPost('description');
             $voteType  = $this->request->getPost('voteType');
+            $file1 = $this->request->getFile('banner1');
+            $file2 = $this->request->getFile('banner2');
+            if($file1 && $file2){
+
+                if($file1->isValid() && !$file1->hasMoved() && $file2->isValid() && !$file2->hasMoved() ){
+                    
+                    
+                    $path = './public/uploads/votes/';
+                    
+                    $newName1 = $file1->getRandomName();
+                    $newName2 = $file2->getRandomName();
+
+                    $file1->move($path,$newName1);
+                    $file2->move($path,$newName2);
+                     
+                }else{
+                    //file not valid and has moved
+                    $data = [
+                        'status' => false,
+                        'message' => 'Error occured while creating vote.'
+                    ];
+                    echo json_encode($data);
+
+                }
+            }else{
+                //file not get
+                $data = [
+                    'status' => false,
+                    'message' => 'Error occured while creating vote.'
+                ];
+                echo json_encode($data);
+
+            }
+
+
             $data = [
                 'team_a' => $teamA,
                 'team_b' => $teamB,
                 'category_id' => $category,
+                'description' => $description,
                 'subCategory_id' => $subCategory,
+                'banner1' => $newName1,
+                'banner2' => $newName2,
                 'description' => $description,
                 'type' => $voteType,
                 'user_id' => 2

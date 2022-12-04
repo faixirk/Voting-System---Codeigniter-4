@@ -24,7 +24,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://localhost/voting/';
+    public $baseURL = 'http://localhost/Voting-System/';
 
     /**
      * --------------------------------------------------------------------------

@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?= base_url('/') ?>">
-                <img src="<?= base_url('/public/assets/DVL.png')?>" alt="homepage">
+                <img src="<?= base_url('public/uploads/logo/' . $logo['header_logo'])?>" alt="homepage">
             </a>
             <button class="navbar-toggler p-0" type="button"
              data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -20,12 +20,12 @@
                     <li class="nav-item">
                         <a class="nav-link " href="<?= base_url('/about-us') ?>">About</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link " href="<?= base_url('/faq') ?>">FAQ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href="<?= base_url('/blog') ?>">Blog</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link " href="<?= base_url('/contact') ?>">Contact</a>
                     </li>

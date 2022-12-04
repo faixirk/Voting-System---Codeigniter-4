@@ -2,6 +2,7 @@
 
 use CodeIgniter\Controller;
 use App\Models\User_Model;
+use App\Models\Logos_Model;
 
 class Admin_User_Controller extends BaseController{
     
@@ -10,6 +11,9 @@ class Admin_User_Controller extends BaseController{
         if(session('type') == 'admin'){
         $data['title'] = 'All Users';
         $user = new User_Model();
+        $l = new Logos_Model();
+
+        $data['logo'] =$l->first();
         $data['users'] = $user->findAll();
              
         return view('admin/users', $data);

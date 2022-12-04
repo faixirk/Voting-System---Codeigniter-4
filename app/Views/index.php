@@ -47,7 +47,7 @@ include 'includes/sidebar.php';
             <ul>
                 <li>
                     <a href="#">
-                        <img src="https://script.bugfinder.net/prophecy/assets/uploads/content/6323220cbcb231663246860.jpg" class="downBars" />
+                        <img src="<?= base_url('public/uploads/banners/banner1.jpeg') ?>" class="downBars" />
                     </a>
                     <div class="label_text">
                         <h2>Football</h2>
@@ -59,7 +59,7 @@ include 'includes/sidebar.php';
                 </li>
                 <li>
                     <a href="#">
-                        <img src="https://script.bugfinder.net/prophecy/assets/uploads/content/63232267df3401663246951.jpg" class="downBars" />
+                        <img src="" class="downBars" />
                     </a>
                     <div class="label_text">
                         <h2>Cricket</h2>
@@ -71,7 +71,7 @@ include 'includes/sidebar.php';
                 </li>
                 <li>
                     <a href="#">
-                        <img src="https://script.bugfinder.net/prophecy/assets/uploads/content/632322b1c7bcb1663247025.jpg" class="downBars" />
+                        <img src="" class="downBars" />
                     </a>
                     <div class="label_text">
                         <h2>Casino</h2>

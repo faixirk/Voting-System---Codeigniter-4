@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\Category_Model;
+use App\Models\Logos_Model;
 
 class Admin_Category_Controller extends BaseController
 {
@@ -11,6 +12,9 @@ class Admin_Category_Controller extends BaseController
     {
         $data['title'] = 'Admin | Category';
         $categories = new Category_Model();
+        $l = new Logos_Model();
+
+        $data['logo'] =$l->first();
         $data['categories'] = $categories->findAll();
         return view('admin/category', $data);
     }

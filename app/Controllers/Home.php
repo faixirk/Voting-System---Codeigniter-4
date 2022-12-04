@@ -8,7 +8,9 @@ use App\Models\User_Model;
 use App\Models\Requests_Model;
 use App\Models\Votes_Model;
 use App\Models\Votes_Results_Model;
-
+use App\Models\About_Us_Model;
+use App\Models\Contact_Us_Model;
+use App\Models\Logos_Model;
 
 class Home extends BaseController
 {
@@ -23,11 +25,13 @@ class Home extends BaseController
         $requests = new Requests_Model();
         $votes = new Votes_Model();
         $results = new Votes_Results_Model();
+        $l = new Logos_Model();
 
         $data['categories'] = $cat->findAll();
         $data['groups'] = $group->findAll();
         $data['requests'] = $requests->findAll();
         $data['user'] = $user->findAll();
+        $data['logo'] = $l->first();
 
         $data['votes'] = $votes->where('type','public')->orderBy('vote_id','desc')->findAll();
 
@@ -42,18 +46,43 @@ class Home extends BaseController
     }
     public function about_us(){
         $data['title'] = 'About Us';
+        $a = new About_Us_Model();
+        $c = new Contact_Us_Model();
+        $l = new Logos_Model();
+
+        $data['about'] = $a->first();
+        $data['contact'] = $c->first();
+        $data['logo'] = $l->first();
+
         return view('about_us', $data);
     }
     public function faq(){
         $data['title'] = 'FAQ';
+        $l = new Logos_Model();
+        $c = new Contact_Us_Model();
+
+        $data['contact'] = $c->first();
+        $data['logo'] = $l->first();
+
         return view('faq', $data);
     }
     public function blog(){
         $data['title'] = 'Blog';
+        $c = new Contact_Us_Model();
+        $l = new Logos_Model();
+
+        $data['contact'] = $c->first();
+        $data['logo'] = $l->first();
+
         return view('blog', $data);
     }
     public function contact(){
         $data['title'] = 'Contact';
+        $c = new Contact_Us_Model();
+        $l = new Logos_Model();
+
+        $data['logo'] = $l->first();
+        $data['contact'] = $c->first();
         return view('contact', $data);
     }
 }

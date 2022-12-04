@@ -5,6 +5,7 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\Category_Model;
 use App\Models\Sub_Category_Model;
+use App\Models\Logos_Model;
 
 
 class Admin_Sub_Category_Controller extends BaseController
@@ -14,7 +15,9 @@ class Admin_Sub_Category_Controller extends BaseController
     {
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
-        $data = [];
+        $l = new Logos_Model();
+
+        $data['logo'] =$l->first();
         $data['title'] = 'Admin | Sub Category';
         $data['category'] = $cat->findAll();
         $data['sub_category'] = $sub_cat->select()->join('category', 'sub_category.cat_id=category.cat_id')->findAll();

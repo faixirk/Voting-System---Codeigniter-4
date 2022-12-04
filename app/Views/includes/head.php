@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Prophecy - An Online Betting Platform">
+    <meta name="description" content="Daily Voting - An Online Voting Platform">
     <meta name="keywords" content="bet, bet365, betting, cricket, gambling, game, hyip, invest, ipl, live, lottery, online betting, online game, soccer, sports">
 
     <link rel="shortcut icon" href="#" type="image/x-icon">
@@ -21,7 +21,7 @@
     <!-- <meta itemprop="image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png600x315"> -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Daily Voting - An Online Voting Platform">
-    <meta property="og:description" content="Prophecy - An Online Betting Platform">
+    <meta property="og:description" content="Daily Voting - An Online Voting Platform">
     <!-- <meta property="og:image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png" /> -->
     <meta property="og:image:type" content="image/png" />
     <!-- <meta property="og:url" content="https://script.bugfinder.net/prophecy"> -->

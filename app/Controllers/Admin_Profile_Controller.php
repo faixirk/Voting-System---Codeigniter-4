@@ -2,11 +2,15 @@
 
 use CodeIgniter\Controller;
 use App\Models\Admin_Model;
+use App\Models\Logos_Model;
 
 class Admin_Profile_Controller extends BaseController{
     
     public function index(){
         $data['title'] = 'Admin | Profile';
+        $l = new Logos_Model();
+
+        $data['logo'] =$l->first();
         return view('admin/profile',$data);
     }
     public function profileUpdate(){

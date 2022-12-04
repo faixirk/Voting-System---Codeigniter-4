@@ -69,7 +69,7 @@ $routes->group('', function ($routes) {
     $routes->match(['get', 'post'], 'register/add', 'Registration_Controller::registrationUser');
 });
 
- 
+
 
 //Dashboard
 $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
@@ -111,7 +111,7 @@ $routes->group('user', function ($routes) {
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
 
- //  $routes->get('user/register', 'Registration::index');
+//  $routes->get('user/register', 'Registration::index');
 $routes->get('user/login', 'User_Login::index');
 $routes->get('user/reset/password', 'User_Login::reset_password');
 
@@ -164,6 +164,34 @@ $routes->group('admin', function ($routes) {
     $routes->post('edit/sub-category/(:num)', 'Admin_Sub_Category_Controller::editSubCategory/$1');
     $routes->get('delete/sub-category/(:num)', 'Admin_Sub_Category_Controller::deleteSubCategory/$1');
 });
+
+//Admin Logo Settings
+$routes->group('admin', function ($routes) {
+    $routes->get('logo-settings', 'Website_Settings_Controller::index');
+    $routes->post('logo/update', 'Website_Settings_Controller::logo_update');
+});
+
+//Admin Breadcumb Settings
+$routes->group('admin', function ($routes) {
+    $routes->get('breadcrumb', 'Website_Settings_Controller::index_breadcrumb');
+});
+
+//Admin Miscellenious
+$routes->group('admin', function ($routes) {
+    $routes->get('about_us', 'Website_Settings_Controller::index_aboutUs');
+    $routes->post('about_us/add', 'Website_Settings_Controller::add_aboutUs');
+    $routes->get('contact', 'Website_Settings_Controller::index_contact');
+    $routes->post('contact_us/add', 'Website_Settings_Controller::add_contactUs');
+    $routes->get('social', 'Website_Settings_Controller::index_social');
+    $routes->get('social/addView', 'Website_Settings_Controller::index_links');
+    $routes->post('social/addLinks', 'Website_Settings_Controller::linksUpdate');
+    $routes->get('social/links/edit/(:num)', 'Website_Settings_Controller::linksEditView/$1');
+    $routes->post('social/editLinks/(:num)', 'Website_Settings_Controller::linksEdit/$1');
+    $routes->get('link/delete/(:num)', 'Website_Settings_Controller::linkDelete/$1');
+    $routes->get('slider', 'Website_Settings_Controller::index_slider');
+
+});
+
 
 //Admin Logout
 $routes->match(['get', 'post'], 'admin/logout', 'Admin_Login_Controller::logout');

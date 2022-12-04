@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" sizes="16x16" href="#">
     <title><?= $title ?></title>
+    
+    <link href="https://script.bugfinder.net/prophecy/assets/admin/css/bootstrap-iconpicker.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url('public/assets/css/bootstrap4-toggle.min.css') ?>" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/all.min.css') ?>" />
     <link href="<?= base_url('public/assets/css/select2.min.css') ?>" rel="stylesheet">

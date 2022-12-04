@@ -98,5 +98,6 @@ include 'includes/header.php';
     
 
 <?php 
+include 'includes/footer1.php';
 include 'includes/footer.php';
 ?>

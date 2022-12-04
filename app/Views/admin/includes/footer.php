@@ -1,139 +1,90 @@
 <footer class="footer text-center text-muted">
-            Copyrights © 2022 All Rights Reserved By Daily Voting       </footer>
+    Copyrights © 2022 All Rights Reserved By Daily Voting </footer>
 
-    </div>
+</div>
 </div>
 
 
 
-<script src="<?= base_url('public/assets/js/jquery.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.min.js') ?>"></script>
 <script src="https://script.bugfinder.net/prophecy/assets/global/js/popper.min.js"></script>
-<script src="<?= base_url('public/assets/js/bootstrap.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/bootstrap.min.js') ?>"></script>
 
-<script src="<?= base_url('public/assets/js/bootstrap4-toggle.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/app-style-switcher.js')?>"></script>
-<script src="<?= base_url('public/assets/js/feather.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/perfect-scrollbar.jquery.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/sidebarmenu.js')?>"></script>
-<script src="<?= base_url('public/assets/js/select2.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/admin-mart.js')?>"></script>
-<script src="<?= base_url('public/assets/js/custom.js')?>"></script>
+<script src="<?= base_url('public/assets/js/bootstrap4-toggle.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/app-style-switcher.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/feather.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js') ?>"></script>
+<script src="https://script.bugfinder.net/prophecy/assets/admin/js/bootstrap-iconpicker.bundle.min.js"></script>
+<script src="<?= base_url('public/assets/js/perfect-scrollbar.jquery.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/sidebarmenu.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/select2.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/admin-mart.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/custom.js') ?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
 <script>
+        'use strict'
+        $(document).ready(function () {
+            
+            $('.iconPicker').iconpicker({
+                align: 'center', // Only in div tag
+                arrowClass: 'btn-danger',
+                arrowPrevIconClass: 'fas fa-angle-left',
+                arrowNextIconClass: 'fas fa-angle-right',
+                cols: 10,
+                footer: true,
+                header: true,
+                icon: 'fas fa-bomb',
+                iconset: 'fontawesome5',
+                labelHeader: '{0} of {1} pages',
+                labelFooter: '{0} - {1} of {2} icons',
+                placement: 'bottom', // Only in button tag
+                rows: 5,
+                search: true,
+                searchText: 'Search icon',
+                selectedClass: 'btn-success',
+                unselectedClass: ''
+            }).on('change', function (e) {
+                $(this).parent().siblings('.icon').val(`${e.icon}`);
+            });
 
-    $(document).ready(function () {
-        $('.notiflix-confirm').on('click', function () {
+        });
+    </script>
+<script>
+    $(document).ready(function() {
+        $('.notiflix-confirm').on('click', function() {
 
         })
         $('#users').DataTable({
-        pagingType: 'full_numbers',
-    });
+            pagingType: 'full_numbers',
+        });
     });
 </script>
-<script src="<?= base_url('public/assets/js/axios.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/vue.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/pusher.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/axios.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/vue.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/pusher.min.js') ?>"></script>
 
 <script>
-        $(function () {
-            $('select').selectpicker();
-        });
-    </script>
+    'use script'
+    $(document).on('click', '.editBtn', function() {
+        var modal = $('#editModal');
+        var obj = $(this).data('resource');
+        modal.find('input[name=name]').val(obj.name);
+        alert('dasdas');
+        $('.questionId').val(obj.id);
+        $('#editStatus').val(obj.status);
+        $('#editEndDate').val(obj.end_time);
+        modal.find('form').attr('action', $(this).data('action'));
+        modal.modal('show');
+    });
 
-        <script>
-        'use strict'
-        $(document).ready(function () {
-            $('.notiflix-confirm').on('click', function () {
-                var route = $(this).data('route');
-                $('.deleteRoute').attr('action', route)
-            })
-        });
-
-        $(document).on('click', '#check-all', function () {
-            $('input:checkbox').not(this).prop('checked', this.checked);
-        });
-
-        $(document).on('change', ".row-tic", function () {
-            let length = $(".row-tic").length;
-            let checkedLength = $(".row-tic:checked").length;
-            if (length == checkedLength) {
-                $('#check-all').prop('checked', true);
-            } else {
-                $('#check-all').prop('checked', false);
-            }
-        });
-
-        //multiple active
-        $(document).on('click', '.active-yes', function (e) {
-            e.preventDefault();
-            var allVals = [];
-            $(".row-tic:checked").each(function () {
-                allVals.push($(this).attr('data-id'));
-            });
-
-            var strIds = allVals;
-
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-                url: "https://script.bugfinder.net/prophecy/admin/category-active",
-                data: {strIds: strIds},
-                datatType: 'json',
-                type: "post",
-                success: function (data) {
-                    location.reload();
-
-                },
-            });
-        });
-
-        //multiple deactive
-        $(document).on('click', '.inactive-yes', function (e) {
-            e.preventDefault();
-            var allVals = [];
-            $(".row-tic:checked").each(function () {
-                allVals.push($(this).attr('data-id'));
-            });
-
-            var strIds = allVals;
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')},
-                url: "https://script.bugfinder.net/prophecy/admin/category-deactive",
-                data: {strIds: strIds},
-                datatType: 'json',
-                type: "post",
-                success: function (data) {
-                    location.reload();
-
-                }
-            });
-        });
-
-        $(document).on('click', '.editBtn', function () {
-
-            var modal = $('#editModal');
-            modal.find('input[name=title]').val($(this).data('title'));
-            modal.find('#editIcon').selectpicker('val', $(this).data('icon'));
-            modal.find('form').attr('action', $(this).data('action'));
-            if ($(this).data('status') == 1) {
-                $('#status').bootstrapToggle('on')
-            } else {
-                $('#status').bootstrapToggle('off')
-            }
-            modal.modal('show');
-        });
-
-        $(document).on('shown.bs.modal', '#editModal', function (e) {
-            $(document).off('focusin.modal');
-        });
-        $(document).on('shown.bs.modal', '#newModal', function (e) {
-            $(document).off('focusin.modal');
-        });
-
-    </script>
-
+    $(document).on('click', '.refundQuestion', function() {
+        var modal = $('#refundQuestion-Modal');
+        modal.find('form').attr('action', $(this).data('action'));
+        modal.modal('show');
+    });
+</script>
 
 <script>
     'use strict';
@@ -150,7 +101,7 @@
             getNotifications() {
                 let app = this;
                 axios.get("https://script.bugfinder.net/prophecy/admin/push-notification-show")
-                    .then(function (res) {
+                    .then(function(res) {
                         app.items = res.data;
                     })
             },
@@ -159,7 +110,7 @@
                 let url = "https://script.bugfinder.net/prophecy/admin/push-notification-readAt/0";
                 url = url.replace(/.$/, id);
                 axios.get(url)
-                    .then(function (res) {
+                    .then(function(res) {
                         if (res.status) {
                             app.getNotifications();
                             if (link != '#') {
@@ -172,7 +123,7 @@
                 let app = this;
                 let url = "https://script.bugfinder.net/prophecy/admin/push.notification.readAll";
                 axios.get(url)
-                    .then(function (res) {
+                    .then(function(res) {
                         if (res.status) {
                             app.items = [];
                         }
@@ -186,10 +137,10 @@
                     cluster: "ap2"
                 });
                 let channel = pusher.subscribe('admin-notification.' + "1");
-                channel.bind('App\\Events\\AdminNotification', function (data) {
+                channel.bind('App\\Events\\AdminNotification', function(data) {
                     app.items.unshift(data.message);
                 });
-                channel.bind('App\\Events\\UpdateAdminNotification', function (data) {
+                channel.bind('App\\Events\\UpdateAdminNotification', function(data) {
                     app.getNotifications();
                 });
             }
@@ -197,4 +148,5 @@
     });
 </script>
 </body>
+
 </html>

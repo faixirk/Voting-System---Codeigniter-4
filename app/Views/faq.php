@@ -137,5 +137,6 @@ include 'includes/header.php';
         </section>
     
 <?php
+include 'includes/footer1.php';
 include 'includes/footer.php';
 ?>

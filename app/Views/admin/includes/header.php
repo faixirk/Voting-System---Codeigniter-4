@@ -19,9 +19,9 @@
                 <a href="#">
 
                     <span class="logo-text">
-                        <img src="#" alt="homepage"
+                        <img src="<?= base_url('public/uploads/logo/'. $logo['header_logo'])?>" alt="homepage"
                              class="dark-logo"/>
-                        <img src="#" class="light-logo"
+                        <img src="<?= base_url('public/uploads/logo/'. $logo['header_logo'])?>" class="light-logo"
                              alt="homepage"/>
                     </span>
                 </a>
@@ -115,7 +115,7 @@
 
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
-                        <img src="#"
+                        <img src="<?= base_url('public/uploads/profile/avatar.jpg')?>"
                              alt="user"
                              class="rounded-circle width-40p">
                         <span class="ml-2 d-none d-lg-inline-block"><span class="text-dark">Hello,</span> <span

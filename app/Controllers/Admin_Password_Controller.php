@@ -11,8 +11,13 @@ class Admin_Password_Controller extends BaseController
 
     public function index()
     {
-        $data['title'] = 'Admin | Password';
-        return view('admin/password_update', $data);
+        if (session('isLoggedIn') == true) {
+
+            $data['title'] = 'Admin | Password';
+            return view('admin/password_update', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function updatePassword()
     {

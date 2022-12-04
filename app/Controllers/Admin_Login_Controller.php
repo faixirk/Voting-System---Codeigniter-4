@@ -10,8 +10,13 @@ class Admin_Login_Controller extends BaseController
 {
     public function index()
     {
-        $data['title'] = 'Login';
-        return view('admin/admin_login', $data);
+        if (session('isLoggedIn') != true) {
+
+            $data['title'] = 'Login';
+            return view('admin/admin_login', $data);
+        } else {
+            return redirect()->to('/');
+        }
     }
     public function loginVerify()
     {
@@ -43,7 +48,7 @@ class Admin_Login_Controller extends BaseController
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
             $emailCheck = $adminModel->where('admin_email', $email)->first();
-        
+
             $passwordCheck = Validation::check($password, $emailCheck['admin_pass']);
             if ($passwordCheck) {
                 $this->setUserSession($emailCheck);
@@ -69,7 +74,8 @@ class Admin_Login_Controller extends BaseController
         session()->set($data);
         return true;
     }
-    public function logout(){
+    public function logout()
+    {
         session()->destroy();
         return redirect()->to('/');
     }

@@ -13,6 +13,8 @@ class Admin_Sub_Category_Controller extends BaseController
 
     public function index()
     {
+        
+        if(session('isLoggedIn')==true){
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
         $l = new Logos_Model();
@@ -21,10 +23,12 @@ class Admin_Sub_Category_Controller extends BaseController
         $data['title'] = 'Admin | Sub Category';
         $data['category'] = $cat->findAll();
         $data['sub_category'] = $sub_cat->select()->join('category', 'sub_category.cat_id=category.cat_id')->findAll();
-        // echo '<pre>';
-        // print_r($data);
-        // die('asdd');
+    
         return view('admin/sub_category', $data);
+        }
+    else{
+        return redirect()->to('admin');
+    }
     }
     function getSubCategory($id = null)
     {

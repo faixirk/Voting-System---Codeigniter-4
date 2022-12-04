@@ -10,26 +10,32 @@ class Admin_Category_Controller extends BaseController
 {
     public function index()
     {
-        $data['title'] = 'Admin | Category';
-        $categories = new Category_Model();
-        $l = new Logos_Model();
+        if (session('isLoggedIn') == true) {
 
-        $data['logo'] =$l->first();
-        $data['categories'] = $categories->findAll();
-        return view('admin/category', $data);
+            $data['title'] = 'Admin | Category';
+            $categories = new Category_Model();
+            $l = new Logos_Model();
+
+            $data['logo'] = $l->first();
+            $data['categories'] = $categories->findAll();
+            return view('admin/category', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
-  
-    function getCategories(){
+
+    function getCategories()
+    {
         $categories = new Category_Model();
-        $data= $categories->select('cat_id ,cat_title,have_sub_cat')->findAll();
-        if($data){
-            return json_encode($data); 
+        $data = $categories->select('cat_id ,cat_title,have_sub_cat')->findAll();
+        if ($data) {
+            return json_encode($data);
         }
         return false;
     }
     public function addCategory()
     {
-        
+
 
         if ($this->request->getMethod() == 'post') {
 
@@ -50,34 +56,34 @@ class Admin_Category_Controller extends BaseController
 
                 $name = $this->request->getPost('title');
                 $status = $this->request->getPost('status');
-                $icon = $this->request->getPost('icon');        
-                        
-                $newData = [
-                            'cat_title'  => $name,
-                            'cat_icon'   => $icon, // cat banner
-                            'cat_status' => $status, // if 0 it mean inactive 
-                            'admin_id' => session('id')
+                $icon = $this->request->getPost('icon');
 
-                        ];
-                        $query = $model->insert($newData);
-                        if($query){
-                            //data inserted
-                        echo 1;
-                    } else {
-                        //query failed
-                        echo 2;
-                    }
-                
+                $newData = [
+                    'cat_title'  => $name,
+                    'cat_icon'   => $icon, // cat banner
+                    'cat_status' => $status, // if 0 it mean inactive 
+                    'admin_id' => session('id')
+
+                ];
+                $query = $model->insert($newData);
+                if ($query) {
+                    //data inserted
+                    echo 1;
+                } else {
+                    //query failed
+                    echo 2;
+                }
             } else {
                 //validation failed
                 echo 3;
             }
         }
     }
-    public function editCategory($id){
+    public function editCategory($id)
+    {
 
-        if($this->request->getMethod() == 'post'){
-           
+        if ($this->request->getMethod() == 'post') {
+
             $rules = [
                 'title' => [
                     'rules'  => 'required|min_length[5]|max_length[100]|is_unique[category.cat_title]',
@@ -91,7 +97,7 @@ class Admin_Category_Controller extends BaseController
                 ]
 
             ];
-            if($this->validate($rules)){
+            if ($this->validate($rules)) {
                 $title = $this->request->getPost('title');
                 $status = $this->request->getPost('status');
                 $icon = $this->request->getPost('icon');
@@ -108,33 +114,29 @@ class Admin_Category_Controller extends BaseController
                 $cat->set('cat_status', $status);
                 $cat->where('cat_id', $id);
                 $query = $cat->update();
-                if($query){
+                if ($query) {
                     //data updated
                     echo 1;
-                }
-                else{
+                } else {
                     //failed to update data
                     echo 2;
                 }
-            }
-            else{
+            } else {
                 //validation failed
                 echo 3;
             }
         }
-
     }
-    public function deleteCategory($id = null){
+    public function deleteCategory($id = null)
+    {
         $cat = new Category_Model();
         $query = $cat->delete(['cat_id' => $id]);
-        if($query){
+        if ($query) {
             //query successful
             echo 1;
-        }
-        else{
+        } else {
             //query failed
             echo 2;
-
         }
     }
 }

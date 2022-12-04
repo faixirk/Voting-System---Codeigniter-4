@@ -46,6 +46,14 @@ class Home extends BaseController
         // $data['votes'] = $cat->where('type','public');
         return view('index', $data);
     }
+    function results(){
+        $data['title'] = 'Results';
+        $votes = new Votes_Model();
+        $results = new Votes_Results_Model();
+
+        return view('results', $data);
+
+    }
     public function about_us()
     {
         $data['title'] = 'About Us';

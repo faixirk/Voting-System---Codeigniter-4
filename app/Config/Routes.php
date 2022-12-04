@@ -108,6 +108,7 @@ $routes->group('user', function ($routes) {
     $routes->post('countvote', 'Votes_Controller::addVoteCount');
     $routes->post('getDesc', 'Votes_Controller::getDescription');
     $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
+    $routes->post('deletevote', 'Votes_Controller::deleteVote');
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
 

@@ -43,45 +43,37 @@ include 'includes/sidebar.php';
 <div class="content">
     <!-- slider -->
     <div class="skitter-large-box">
-        <div class="skitter skitter-large with-dots">
-            <ul>
-                <li>
-                    <a href="#">
-                        <img src="<?= base_url('public/uploads/banners/banner1.jpeg') ?>" class="downBars" />
-                    </a>
+        <div class="skitter skitter-large with-dots" style="width: 1019.2px; height: 300px;">
+            <ul style="display: none;">
+                <li><a href="#">
+                        <img src="<?= base_url() ?>/public/uploads/banners/banner1.jpeg" class="downBars"></a>
                     <div class="label_text">
                         <h2>Football</h2>
-                        <p class="mb-4">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit unde.
-                        </p>
-                        <a href="#"><button class="btn-custom"> place a bet</button></a>
+                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> place a bet</button></a>
                     </div>
                 </li>
-                <li>
-                    <a href="#">
-                        <img src="" class="downBars" />
-                    </a>
+                <li><a href="<?= base_url() ?>/public/uploads/banners/banner2.jpeg" class="downBars"></a>
                     <div class="label_text">
                         <h2>Cricket</h2>
-                        <p class="mb-4">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit unde.
-                        </p>
-                        <a href="#"><button class="btn-custom"> find out more</button></a>
+                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> find out more</button></a>
                     </div>
                 </li>
-                <li>
-                    <a href="#">
-                        <img src="" class="downBars" />
-                    </a>
+                <li><a href="#"><img src="<?= base_url() ?>/public/uploads/banners/banner3.jpeg" class="downBars"></a>
                     <div class="label_text">
                         <h2>Casino</h2>
-                        <p class="mb-4">
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit unde.
-                        </p>
-                        <a href="#"><button class="btn-custom"> play now</button></a>
+                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> play now</button></a>
                     </div>
                 </li>
             </ul>
+            <a href="#" class="prev_button" style="display: none;">prev</a><a href="#" class="next_button" style="display: none;">next</a><span class="info_slide" style="display: none; left: 50%; transform: translateX(-50%);"><span class="image_number" rel="0" id="image_n_1_0">1</span> <span class="image_number image_number_select" rel="1" id="image_n_2_0">2</span> <span class="image_number" rel="2" id="image_n_3_0">3</span> </span>
+            <div class="container_skitter" style="width: 1019.2px; height: 300px;">
+                <div class="image">
+                    <a href="#" target="_self"><img class="image_main" src="<?= base_url() ?>/public/uploads/banners/banner5.jpeg" style="width: 100%; height: auto; display: inline;"></a>
+                    <div class="label_skitter" style="display: block;">
+                        <h2>Daily Voting</h2>
+                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> find out more</button></a>
+                    </div>
+                </div>   </div>
         </div>
     </div>
     <!-- categories -->
@@ -103,10 +95,10 @@ include 'includes/sidebar.php';
         <!-- <h5>Voting</h5> -->
         <?php if (session('isLoggedIn') == true) { ?>
             <a href="<?= base_url('user/votes') ?>" class="btn-custom w-100 my-2"> Add Votes </a>
-  
+
         <?php } else { ?>
             <button class="btn-custom w-100 my-2" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
-            Add Votes </button>
+                Add Votes </button>
         <?php }  ?>
 
 
@@ -118,14 +110,14 @@ include 'includes/sidebar.php';
                     <!-- <h5 class="mb-3">WHO WILL WIN?</h5> -->
                     <div class="row d-flex justify-content-around align-items-center">
                         <div class="col-3 team">
-                            <img src="<?= base_url()?>/public/uploads/votes/<?=$vote['banner1']?>" style="border-radius: 50%" alt="A" class="img-fluid">
+                            <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner1'] ?>" style="border-radius: 50%" alt="A" class="img-fluid">
                             <p><?= $vote['team_a'] ?></p>
                         </div>
                         <div class="col-6"><span> </span>
                             <!----> <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
                         </div>
                         <div class="col-3 team">
-                            <img src="<?= base_url()?>/public/uploads/votes/<?=$vote['banner2']?>" alt="B" style="border-radius: 50%" class="img-fluid">
+                            <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner2'] ?>" alt="B" style="border-radius: 50%" class="img-fluid">
                             <p><?= $vote['team_b'] ?></p>
                         </div>
                         <div class="col-12 align-self-end">

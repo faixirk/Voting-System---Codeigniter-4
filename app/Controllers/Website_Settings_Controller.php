@@ -12,28 +12,41 @@ class Website_Settings_Controller extends BaseController
 {
     public function index()
     {
-        $l = new Logos_Model();
-        $data['title'] = 'Logo Settings';
-        $data['logo'] = $l->first();
-        return view('admin/website_logo_settings', $data);
+        if (session('isLoggedIn') == true) {
+            $l = new Logos_Model();
+            $data['title'] = 'Logo Settings';
+            $data['logo'] = $l->first();
+            return view('admin/website_logo_settings', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function index_breadcrumb()
     {
-        $data['title'] = 'Breadcrumb';
-        $l = new Logos_Model();
+        if (session('isLoggedIn') == true) {
 
-        $data['logo'] = $l->first();
-        return view('admin/website_breadcrumb', $data);
+            $data['title'] = 'Breadcrumb';
+            $l = new Logos_Model();
+
+            $data['logo'] = $l->first();
+            return view('admin/website_breadcrumb', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function index_aboutUs()
     {
         $data['title'] = 'About Us';
-        $a = new About_Us_Model();
-        $l = new Logos_Model();
+        if (session('isLoggedIn') == true) {
+            $a = new About_Us_Model();
+            $l = new Logos_Model();
 
-        $data['logo'] = $l->first();
-        $data['about'] = $a->first();
-        return view('admin/about_us', $data);
+            $data['logo'] = $l->first();
+            $data['about'] = $a->first();
+            return view('admin/about_us', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function index_contact()
     {
@@ -48,31 +61,46 @@ class Website_Settings_Controller extends BaseController
     }
     public function index_social()
     {
-        $data['title'] = 'Social Links';
-        $l = new Logos_Model();
-        $social = new Social_Links_Model();
+        if (session('isLoggedIn') == true) {
 
-        $data['social'] = $social->findAll();
-        $data['logo'] = $l->first();
-        return view('admin/social', $data);
+            $data['title'] = 'Social Links';
+            $l = new Logos_Model();
+            $social = new Social_Links_Model();
+
+            $data['social'] = $social->findAll();
+            $data['logo'] = $l->first();
+            return view('admin/social', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function index_slider()
     {
         $data['title'] = 'Slider';
         $l = new Logos_Model();
+        if (session('isLoggedIn') == true) {
 
-        $data['logo'] = $l->first();
-        return view('admin/slider', $data);
+            $data['logo'] = $l->first();
+            return view('admin/slider', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function index_links()
+
     {
-        $data['title'] = 'Add Social Links';
-        $l = new Logos_Model();
+        if (session('isLoggedIn') == true) {
+            $data['title'] = 'Add Social Links';
+            $l = new Logos_Model();
 
 
-        $data['logo'] = $l->first();
-        return view('admin/add_social', $data);
+            $data['logo'] = $l->first();
+            return view('admin/add_social', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
+
     public function logo_update()
     {
         $validationRule = [
@@ -295,15 +323,20 @@ class Website_Settings_Controller extends BaseController
 
     public function linksEditView($id)
     {
-        $data['title'] = 'Edit Social Links';
-        $l = new Logos_Model();
-        $social = new Social_Links_Model();
+        if (session('isLoggedIn') == true) {
 
-        $data['logo'] = $l->first();
-        $data['social'] = $social->select();
-        $data['social'] = $social->where('id', $id)->first();
+            $data['title'] = 'Edit Social Links';
+            $l = new Logos_Model();
+            $social = new Social_Links_Model();
 
-        return view('admin/edit_social', $data);
+            $data['logo'] = $l->first();
+            $data['social'] = $social->select();
+            $data['social'] = $social->where('id', $id)->first();
+
+            return view('admin/edit_social', $data);
+        } else {
+            return redirect()->to('admin');
+        }
     }
     public function linksEdit($id)
     {
@@ -345,17 +378,16 @@ class Website_Settings_Controller extends BaseController
             }
         }
     }
-    public function linkDelete($id){
+    public function linkDelete($id)
+    {
         $social = new Social_Links_Model();
         $query = $social->delete($id);
-        if($query){
+        if ($query) {
             //deleted successfully
             echo 1;
-        }
-        else{
+        } else {
             //issue in query
             echo 0;
         }
-
     }
 }

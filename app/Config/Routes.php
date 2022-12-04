@@ -106,6 +106,7 @@ $routes->group('user', function ($routes) {
     // Votes
     $routes->post('addvote', 'Votes_Controller::addVote');
     $routes->post('countvote', 'Votes_Controller::addVoteCount');
+    $routes->post('updatestatus', 'Votes_Controller::updateVoteStatus');
     $routes->post('getDesc', 'Votes_Controller::getDescription');
     $routes->get('getcategory', 'Admin_Category_Controller::getCategories');
     $routes->post('deletevote', 'Votes_Controller::deleteVote');
@@ -123,6 +124,7 @@ $routes->get('/about-us', 'Home::about_us');
 $routes->get('/faq', 'Home::faq');
 $routes->get('/blog', 'Home::blog');
 $routes->get('/contact', 'Home::contact');
+$routes->get('/results', 'Home::results');
 
 //  ------- X ------ All User Routes --------- X -------
 

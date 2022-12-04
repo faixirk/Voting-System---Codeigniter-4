@@ -21,6 +21,49 @@ class Votes_Controller extends BaseController
                 return redirect()->to('/');
         }
     }
+    function updateVoteStatus(){
+        if (session('isLoggedIn')) {
+            $id = $this->request->getPost('id');
+            $status = $this->request->getPost('status');
+            if (is_numeric($id)&& $status!=null) {
+
+                $votes = new Votes_Model();
+                $vote = $votes->where('vote_id', $id)->first();
+                if ($vote['user_id'] == session('user_id')) {
+                      
+                    $query  = $votes->set('status',$status)->where('vote_id',$id); 
+                    $query = $votes->update();
+                    if ($query) {
+                        $data = [
+                            'status' => true,
+                            'message' => 'Successfully updated!.'
+                        ];
+                        echo json_encode($data);
+                    } else {
+                        $data = [
+                            'status' => false,
+                            'message' => 'Error occured while updaing!.'
+                        ];
+                        echo json_encode($data);
+                    }
+                } else {
+                    $data = [
+                        'status' => false,
+                        'message' => 'Not Found your vote!.'
+                    ];
+                    echo json_encode($data);
+                }
+            } else {
+                $data = [
+                    'status' => false,
+                    'message' => 'Error occured while deleting!.'
+                ];
+                echo json_encode($data);
+            }
+        }else {
+            return redirect()->to('/');
+    }
+    }
     function deleteVote()
     {
         $id =  $this->request->getPost('id');

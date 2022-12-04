@@ -33,7 +33,7 @@ class Home extends BaseController
         $data['user'] = $user->findAll();
         $data['logo'] = $l->first();
 
-        $data['votes'] = $votes->where('type','public')->orderBy('vote_id','desc')->findAll();
+        $data['votes'] = $votes->where('status','active')->orderBy('vote_id','desc')->findAll();
 
 
         //Both quereis can be used to find sub categories
@@ -55,6 +55,14 @@ class Home extends BaseController
         $data['logo'] = $l->first();
 
         return view('about_us', $data);
+    }
+    function results(){
+        $data['title'] = 'Results';
+        $votes = new Votes_Model();
+        $results = new Votes_Results_Model();
+
+        return view('results', $data);
+
     }
     public function faq(){
         $data['title'] = 'FAQ';

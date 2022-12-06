@@ -47,10 +47,20 @@ class Home extends BaseController
         return view('index', $data);
     }
     function results(){
-        $data['title'] = 'Results';
-        $votes = new Votes_Model();
-        $results = new Votes_Results_Model();
 
+        $data['title'] = 'Results';
+        $votes = new Votes_Model(); 
+        $a = new About_Us_Model();
+        $c = new Contact_Us_Model();
+        $l = new Logos_Model();
+        $social = new Social_Links_Model();
+
+        $data['social'] = $social->findAll();
+        $data['about'] = $a->first();
+        $data['contact'] = $c->first();
+        $data['logo'] = $l->first();
+
+        $data['votes'] = $votes->where('status','result')->orderBy('vote_id','desc')->findAll();
         return view('results', $data);
 
     }

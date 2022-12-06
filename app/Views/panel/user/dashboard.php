@@ -19,7 +19,7 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">103</h2>
+                            <h2 class="price"><?= ($totalVotes) ? $totalVotes : '0' ?></h2>
                             <p class="info">Total Votes</p>
                         </div>
                         <div class="dashboard__card-icon">
@@ -30,7 +30,7 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">43423</h2>
+                            <h2 class="price"><?= ($closeVotes) ? $closeVotes : '0' ?></h2>
                             <p class="info">Close Votes</p>
                         </div>
                         <div class="dashboard__card-icon">
@@ -41,7 +41,7 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">0</h2>
+                            <h2 class="price"><?= ($activeVotes) ? $activeVotes : '0' ?></h2>
                             <p class="info">Active Votes</p>
                         </div>
                         <div class="dashboard__card-icon">
@@ -52,7 +52,7 @@
                 <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">0</h2>
+                            <h2 class="price"><?= ($resultVotes) ? $resultVotes : '0' ?></h2>
                             <p class="info">Show Results</p>
                         </div>
                         <div class="dashboard__card-icon">

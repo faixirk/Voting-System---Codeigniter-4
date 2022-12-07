@@ -25,7 +25,7 @@ include 'includes/sidebar.php';
                         <td><?= $p['group_id'] ?> </td>
                         <td><a href="<?= base_url('user/groups/private/single/' . $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
 
-                        <td><?php if ($p['creator_id'] == session('user_id')) {
+                        <td><?php if ($p['user_id'] == session('user_id')) {
                                 echo 'Creator';
                             } else {
                                 echo 'Member';

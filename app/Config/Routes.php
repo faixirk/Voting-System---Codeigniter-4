@@ -100,7 +100,7 @@ $routes->group('user', function ($routes) {
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
     $routes->get('groups/requests/accept/(:num)', 'Groups_Controller::setRequest/$1');
     $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
-    $routes->get('groups/private', 'Groups_Controller::private_index');
+    $routes->get('groups/private', 'Groups_Controller::rooms');
     $routes->get('groups/private/single/(:num)', 'Groups_Controller::single_room/$1');
 
     // Votes

@@ -148,7 +148,7 @@ class Groups_Controller extends BaseController
             echo 2;
         }
     }
-    public function private_index(){
+    public function rooms(){
         $data = [];
         $data['title'] = 'Private | User';
         $user = new User_Model();
@@ -156,7 +156,7 @@ class Groups_Controller extends BaseController
         $data['private'] = $groups->select()->join('requests','requests.group_id=groups.group_id')->findAll();
         // $data['private'] = $request->where('user_id', $userID)->get()->getResult();
         
-        return view('panel/user/private_voting', $data);
+        return view('panel/user/rooms', $data);
     }
     public function single_room($id){
         $data['title'] = 'Private Room';

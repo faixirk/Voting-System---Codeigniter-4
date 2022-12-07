@@ -79,7 +79,6 @@ class Website_Settings_Controller extends BaseController
         $data['title'] = 'Slider';
         $l = new Logos_Model();
         if (session('isLoggedIn') == true) {
-
             $data['logo'] = $l->first();
             return view('admin/slider', $data);
         } else {

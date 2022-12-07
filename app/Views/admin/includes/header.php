@@ -35,54 +35,7 @@
 
         <div class="navbar-collapse collapse" id="navbarSupportedContent">
             <ul class="navbar-nav float-left mr-auto ml-3 pl-1">
-                <li class="nav-item dropdown" id="pushNotificationArea">
-                    <a class="nav-link dropdown-toggle pl-md-3 position-relative" href="javascript:void(0)"
-                       id="bell" role="button" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false">
-                        <span><i data-feather="bell" class="svg-icon"></i></span>
-                        <span class="badge badge-primary notify-no rounded-circle" v-cloak>{{ items.length }}</span>
-                    </a>
-
-                    <div class="dropdown-menu dropdown-menu-left mailbox animated bounceInDown">
-                        <ul class="list-style-none">
-                            <li>
-                                <div class="scrollable message-center notifications position-relative">
-                                    <!-- Message -->
-                                    <a v-for="(item, index) in items"
-                                       @click.prevent="readAt(item.id, item.description.link)"
-                                       href="javascript:void(0)"
-                                       class="message-item d-flex align-items-center border-bottom px-3 py-2">
-                                        <div class="btn btn-danger rounded-circle btn-circle">
-                                            <i :class="item.description.icon" class="text-white"></i>
-                                        </div>
-
-
-                                        <div class="w-75 d-inline-block v-middle pl-2">
-                                            <span class="font-12 text-nowrap d-block text-muted" v-cloak
-                                                  v-html="item.description.text"></span>
-                                            <span class="font-12 text-nowrap d-block text-muted" v-cloak>{{ item.formatted_date }}</span>
-                                        </div>
-                                    </a>
-
-
-                                </div>
-                            </li>
-                            <li>
-                                <a class="nav-link pt-3 text-center text-dark notification-clear-btn"
-                                   href="javascript:void(0);"
-                                   v-if="items.length > 0" @click.prevent="readAll">
-                                    <strong>Clear all</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-
-                                <a class="nav-link pt-3 text-center text-dark" href="javascript:void(0);" v-else>
-                                    <strong>No notification found</strong>
-                                </a>
-
-                            </li>
-                        </ul>
-                    </div>
-                </li>
+                
             </ul>
 
             <ul class="navbar-nav float-right">

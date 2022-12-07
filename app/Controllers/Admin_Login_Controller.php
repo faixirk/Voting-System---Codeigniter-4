@@ -15,7 +15,7 @@ class Admin_Login_Controller extends BaseController
             $data['title'] = 'Login';
             return view('admin/admin_login', $data);
         } else {
-            return redirect()->to('/');
+            return redirect()->to('/admin/dashboard');
         }
     }
     public function loginVerify()

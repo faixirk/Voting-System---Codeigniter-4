@@ -13,22 +13,30 @@ include 'includes/sidebar.php';
         <tr class="h6">
             <th>Room ID</th>
             <th>Room Name</th>
+            <th>Room Type</th>
         </tr>
-        <?php $userID = session('user_id'); 
+        <?php $userID = session('user_id');
         ?>
-        <?php foreach ($private as $p): ?>
-          <?php  if($userID == $p['user_id']){ 
-             if($p['has_joined'] == 'true'){?>
+        <?php foreach ($private as $p) : ?>
+            <?php if ($userID == $p['user_id']) {
+                if ($p['has_joined'] == 'true' || $p['creator_id'] == session('user_id')) { ?>
 
-            <tr>
-                <td><?= $p['group_id'] ?> </td>
-                <td><a href="<?= base_url('user/groups/private/single/'. $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
-               
-            </tr>
-            <?php } 
-            else{ echo 'No data to show'; }?>
-             <?php } ?>
-            <?php endforeach; ?>
+                    <tr>
+                        <td><?= $p['group_id'] ?> </td>
+                        <td><a href="<?= base_url('user/groups/private/single/' . $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
+
+                        <td><?php if ($p['creator_id'] == session('user_id')) {
+                                echo 'Creator';
+                            } else {
+                                echo 'Member';
+                            } ?></td>
+
+                    </tr>
+                <?php } else {
+                    echo 'No data to show';
+                } ?>
+            <?php } ?>
+        <?php endforeach; ?>
 
     </table>
 

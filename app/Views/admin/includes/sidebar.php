@@ -385,7 +385,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level base-level-line ">
                         <li class="sidebar-item  ">
-                            <a class="sidebar-link " href="">
+                            <a class="sidebar-link " href="<?= base_url('admin/slider')?>">
                                 <span class="hide-menu">Slider</span>
                             </a>
                         </li>

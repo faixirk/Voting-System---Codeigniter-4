@@ -67,7 +67,10 @@ $routes->get('user/logout', 'Login_Controller::logout');
 $routes->group('', function ($routes) {
     $routes->get('register', 'Registration_Controller::index');
     $routes->match(['get', 'post'], 'register/add', 'Registration_Controller::registrationUser');
+    
 });
+$routes->get('registration/activate/(:alphanum)', 'Registration_Controller::activate/$1');
+
 
 
 

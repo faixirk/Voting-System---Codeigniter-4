@@ -180,9 +180,7 @@ class Groups_Controller extends BaseController
         $requests = new Requests_Model();
         $data['members'] = $requests->select('*')->join('user','user.user_id=requests.user_id');
         $data['members'] = $requests->where('group_id', $id)->findAll();
-        // echo '<pre>';
-        // print_r($data);
-        // die();
+
       
         return view('panel/user/single_voting', $data);
     }

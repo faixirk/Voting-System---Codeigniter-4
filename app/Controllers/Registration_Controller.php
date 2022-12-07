@@ -15,7 +15,7 @@ class Registration_Controller extends BaseController
     }
     function registrationUser()
     {
- 
+
 
         helper(['form', 'url']);
         if (!$this->request->isAJAX()) {
@@ -44,7 +44,7 @@ class Registration_Controller extends BaseController
                 'rules'  => 'required|valid_email|is_unique[user.user_email,{email}]',
                 'errors' => [
                     'required' => 'Enter a valid {field} address.',
-                    'is_unique'=> 'Enter a unique {field} address.'
+                    'is_unique' => 'Enter a unique {field} address.'
                 ]
             ],
             'password' => [
@@ -60,58 +60,110 @@ class Registration_Controller extends BaseController
             if ($this->validator->hasError('f_name')) {
                 $data = [
                     'status' => false,
-                    'type' => "First Name", 
+                    'type' => "First Name",
                     'message' => $this->validator->getError('f_name'),
-                   ];
-                   return $this->response->setJSON($data);
+                ];
+                return $this->response->setJSON($data);
 
                 // echo sprintf('{"type":"f_name","message":"%s"}', addslashes((preg_replace('/\s+/', ' ', $this->validator->getError('f_name')))));
-            }
-            else if ($this->validator->hasError('l_name')) {
+            } else if ($this->validator->hasError('l_name')) {
                 $data = [
                     'status' => false,
-                    'type' => "Last Name", 
+                    'type' => "Last Name",
                     'message' => $this->validator->getError('l_name'),
-                   ];
-                   return $this->response->setJSON($data);
+                ];
+                return $this->response->setJSON($data);
                 // echo sprintf('{"type":"l_name","message":"%s"}', addslashes((preg_replace('/\s+/', ' ', $this->validator->getError('l_name')))));
-            }
-
-            else if ($this->validator->hasError('email')) {
+            } else if ($this->validator->hasError('email')) {
                 $data = [
                     'status' => false,
-                    'type' => "Email", 
+                    'type' => "Email",
                     'message' => $this->validator->getError('email'),
-                   ];
-                   return $this->response->setJSON($data);
+                ];
+                return $this->response->setJSON($data);
                 // echo sprintf('{"type":"email""message":"%s"}', addslashes((preg_replace('/\s+/', ' ', $this->validator->getError('email')))));
-            }
-
-            else if ($this->validator->hasError('password')) {
+            } else if ($this->validator->hasError('password')) {
                 $data = [
                     'status' => false,
-                    'type' => "Password", 
+                    'type' => "Password",
                     'message' => $this->validator->getError('password'),
-                   ];
-                   return $this->response->setJSON($data);
+                ];
+                return $this->response->setJSON($data);
                 // echo sprintf('{"type":"password""message":"%s"}', addslashes((preg_replace('/\s+/', ' ', $this->validator->getError('password')))));
             }
         } else {
+            $code = md5(str_shuffle('abcdefghiklmnoprstuvwxyz' . time()));
+
             $user = new User_Model();
             $f_name = $this->request->getPost('f_name');
             $l_name = $this->request->getPost('l_name');
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
-            $data = ['first_name' => $f_name, 'last_name' => $l_name, 'user_email' => $email, 'user_pass' => password_hash($password, PASSWORD_BCRYPT)];
+            $data = ['first_name' => $f_name, 'last_name' => $l_name, 'user_email' => $email, 'user_pass' => password_hash($password, PASSWORD_BCRYPT), 'code' => $code];
             $res = $user->save($data);
             if ($res) {
+                $email1 = \Config\Services::email();
 
-                echo sprintf('{"status":true,"message":"%s"}', 'Successfully Register.');
-                 
+                $to = $this->request->getPost('email');
+                $subject = 'Account Activation Link ';
+                $message = 'Hi ' . $this->request->getPost('f_name') . ",<br><br>Thanks for registering at our website. Your account has been created "
+                    . "successfully. Please click the link below to activate your account<br><br>"
+                    . "<a href='" . base_url() . "/registration/activate/" . $code . "' target='_blank'>Activate Now</a><br><br>Regards,<br>Team Daily Voting";
+
+                $email1->setTo($to);
+                $email1->setFrom('adnanqadirkhan@outlook.com', 'Account Created Successfully');
+
+                $email1->setSubject($subject);
+                $email1->setMessage($message);
+                if ($email1->send()) {
+
+                    echo sprintf('{"status":true,"message":"%s"}', 'Successfully Registered.');
+                }
             } else {
                 echo sprintf('{"status":false,"message":"%s"}', 'Failed to register.');
             }
         }
         exit();
+    }
+    public function activate($uniid = null)
+    {
+        $model = new User_Model();
+        $this->session = \Config\Services::session();
+        $this->email = \Config\Services::email();
+        $data = [];
+        if (!empty($uniid)) {
+            $userdata = $model->verifyUniid($uniid);
+            if ($userdata) {
+                if ($this->verifyExpiryTime($userdata->activation_date)) {
+                    if ($userdata->status == 'inactive') {
+                        $status = $model->updateStaus($uniid);
+                        if ($status == true) {
+                            $data['success'] = 'Account Activated successfully. Close the tab and return to login page.';
+                        }
+                    } else {
+                        $data['success'] = 'Your account is already activated';
+                    }
+                } else {
+                    $data['error'] = 'Sorry! Activation link was expired!';
+                }
+            } else {
+                $data['error'] = 'Sorry! We are Unable to find your account';
+            }
+        } else {
+            $data['error'] = 'Sorry! Unable to process your request';
+        }
+        return view('activate', $data);
+    }
+    public function verifyExpiryTime($regTime)
+    {
+        helper(['date', 'url']);
+        $currTime = now();
+        $registerTime = strtotime($regTime);
+        $diffTime = (int)$currTime - (int)$registerTime;
+        if (3600 > $diffTime) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

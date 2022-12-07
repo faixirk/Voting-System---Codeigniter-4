@@ -48,39 +48,27 @@ include 'includes/header.php';
                                                 <tr>
                                                     <td data-label="#">1</td>
                                                     <td data-label="Name"><?= $vote['team_b'] ?></td>
-                                                    <td data-label="Result" id="resultA<?= $vote['vote_id'] ?>">
-
-                                                        <script>
-                                                            var id = <?= $vote['vote_id'] ?>;
-                                                            $.post("getVoteA", id, (result) => {
-                                                                $('#resultA' + id).text(result);
-                                                            });
-                                                        </script>
-                                                    </td>
+                                                    <td data-label="Result">  <?= $vote['teama_votes'] ?> </td>
                                                 </tr>
                                                 <tr>
                                                     <td data-label="#">2</td>
                                                     <td data-label="Name"><?= $vote['team_b'] ?></td>
-                                                    <td data-label="Result" id="resultB<?= $vote['vote_id'] ?>">
-                                                        <script>
-                                                            var id = <?= $vote['vote_id'] ?>;
-                                                            $.post("getVoteB", id, (result) => {
-                                                                $('#resultB' + id).text(result);
-                                                            });
-                                                        </script>
-                                                    </td>
+                                                    <td data-label="Result" >  <?= $vote['teamb_votes'] ?></td>
                                                 </tr>
                                                 <tr>
                                                     <td data-label="#">3</td>
                                                     <td data-label="Name">Winner</td>
-                                                    <td data-label="Result" id="result<?= $vote['vote_id'] ?>">
-                                                        <script>
-                                                            var id = <?= $vote['vote_id'] ?>;
-                                                            $.post("winner", id, (result) => {
-                                                                $('#result' + id).text(result);
-                                                            });
-                                                        </script>
-                                                    </td>
+                                                    <td data-label="Result"> <?php if($vote['teamb_votes'] > $vote['teama_votes']){
+                                                        echo 'Team A Winner';
+                                                    } else if($vote['teamb_votes'] > $vote['teama_votes']){
+                                                        echo 'Team B Winner';
+                                                    }else if($vote['teamb_votes'] ==  $vote['teama_votes']){
+                                                        echo 'Witdraw';
+                                                    }else {
+                                                        echo 'Failed';
+                                                    }
+                                                    
+                                                    ?> </td>
                                                 </tr>
                                             </tbody>
                                         </table>

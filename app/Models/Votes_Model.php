@@ -13,6 +13,8 @@ class Votes_Model extends Model {
         'banner2',
         'description',
         'type',
+        'teama_votes',
+        'teamb_votes',
         'user_id',
         'status'
     ];

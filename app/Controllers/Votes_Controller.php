@@ -21,50 +21,9 @@ class Votes_Controller extends BaseController
             return redirect()->to('/');
         }
     }
-    // Votes Team A
-    function teamAVotes()
-    {
-        $counterA = new Votes_Results_Model();
-        $id = $this->request->getPost('id');
-        $countA = $counterA->where('vote_id', $id);
-        $countA = $counterA->where('teama_vote', 1);
-        $countA = $counterA->countAllResults();
-        echo $countA;
-    }
-    // Votes Team B
-    function teamBVotes()
-    {
-        $counterB = new Votes_Results_Model();
-        $id = $this->request->getPost('id');
-        $countB = $counterB->where('vote_id', $id);
-        $countB = $counterB->where('teamb_vote', 1);
-        $countB = $counterB->countAllResults();
-        echo $countB;
-    }
-    // Winner 
-    function winner()
-    {
-        $id = $this->request->getPost('id');
-        $counterA = new Votes_Results_Model();
-        $counterB = new Votes_Results_Model();
-        $countA = $counterA->where('vote_id', $id);
-        $countA = $counterA->where('teama_vote', 1);
-        $countA = $counterA->countAllResults();
-
-        $countB = $counterB->where('vote_id', $id);
-        $countB = $counterB->where('teamb_vote', 1);
-        $countB = $counterB->countAllResults();
-
-        if ($countA > $countB) {
-            echo "Team A is Winner";
-        } else if ($countA < $countB) {
-            echo "Team B is Winner";
-        } else if ($countA == $countB) {
-            echo 'Withdraw';
-        } else {
-            echo 'Failed to check';
-        }
-    }
+ 
+ 
+   
     function updateVoteStatus()
     {
         if (session('isLoggedIn')) {
@@ -76,21 +35,54 @@ class Votes_Controller extends BaseController
                 $vote = $votes->where('vote_id', $id)->first();
                 if ($vote['user_id'] == session('user_id')) {
 
-                    $query  = $votes->set('status', $status)->where('vote_id', $id);
-                    $query = $votes->update();
-                    if ($query) {
-                        $data = [
-                            'status' => true,
-                            'message' => 'Successfully updated!.'
-                        ];
-                        echo json_encode($data);
-                    } else {
-                        $data = [
-                            'status' => false,
-                            'message' => 'Error occured while updaing!.'
-                        ];
-                        echo json_encode($data);
+                    if($status == 'result'){
+                        $counterA = new Votes_Results_Model();
+                        $counterB = new Votes_Results_Model();
+                        $countA = $counterA->where('vote_id', $id);
+                        $countA = $counterA->where('teama_vote', 1);
+                        $countA = $counterA->countAllResults();
+        
+                        $countB = $counterB->where('vote_id', $id);
+                        $countB = $counterB->where('teamb_vote', 1);
+                        $countB = $counterB->countAllResults();
+
+                        $query  = $votes->set('teama_votes', $countA);
+                        $query  = $votes->set('teamb_votes', $countB);
+                        $query  = $votes->set('status', $status)->where('vote_id', $id);
+                        $query = $votes->update();
+                        if ($query) {
+                            $data = [
+                                'status' => true,
+                                'message' => 'Successfully updated!.'
+                            ];
+                            echo json_encode($data);
+                        } else {
+                            $data = [
+                                'status' => false,
+                                'message' => 'Error occured while updaing!.'
+                            ];
+                            echo json_encode($data);
+                        }
+
+
+                    }else{
+                        $query  = $votes->set('status', $status)->where('vote_id', $id);
+                        $query = $votes->update();
+                        if ($query) {
+                            $data = [
+                                'status' => true,
+                                'message' => 'Successfully updated!.'
+                            ];
+                            echo json_encode($data);
+                        } else {
+                            $data = [
+                                'status' => false,
+                                'message' => 'Error occured while updaing!.'
+                            ];
+                            echo json_encode($data);
+                        }
                     }
+
                 } else {
                     $data = [
                         'status' => false,

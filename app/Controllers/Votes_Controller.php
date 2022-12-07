@@ -12,26 +12,71 @@ class Votes_Controller extends BaseController
     public function index()
     {
         if (session('isLoggedIn')) {
-        $data['title'] = 'Votes';
-        $votes = new Votes_Model();
-        $data['votes'] = $votes->where('user_id', session('user_id'));
-        $data['votes'] = $votes->orderBy('vote_id','desc')->findAll();
-        return view('panel/user/votes', $data);
-        }else {
-                return redirect()->to('/');
+            $data['title'] = 'Votes';
+            $votes = new Votes_Model();
+            $data['votes'] = $votes->where('user_id', session('user_id'));
+            $data['votes'] = $votes->orderBy('vote_id', 'desc')->findAll();
+            return view('panel/user/votes', $data);
+        } else {
+            return redirect()->to('/');
         }
     }
-    function updateVoteStatus(){
+    // Votes Team A
+    function teamAVotes()
+    {
+        $counterA = new Votes_Results_Model();
+        $id = $this->request->getPost('id');
+        $countA = $counterA->where('vote_id', $id);
+        $countA = $counterA->where('teama_vote', 1);
+        $countA = $counterA->countAllResults();
+        echo $countA;
+    }
+    // Votes Team B
+    function teamBVotes()
+    {
+        $counterB = new Votes_Results_Model();
+        $id = $this->request->getPost('id');
+        $countB = $counterB->where('vote_id', $id);
+        $countB = $counterB->where('teamb_vote', 1);
+        $countB = $counterB->countAllResults();
+        echo $countB;
+    }
+    // Winner 
+    function winner()
+    {
+        $id = $this->request->getPost('id');
+        $counterA = new Votes_Results_Model();
+        $counterB = new Votes_Results_Model();
+        $countA = $counterA->where('vote_id', $id);
+        $countA = $counterA->where('teama_vote', 1);
+        $countA = $counterA->countAllResults();
+
+        $countB = $counterB->where('vote_id', $id);
+        $countB = $counterB->where('teamb_vote', 1);
+        $countB = $counterB->countAllResults();
+
+        if ($countA > $countB) {
+            echo "Team A is Winner";
+        } else if ($countA < $countB) {
+            echo "Team B is Winner";
+        } else if ($countA == $countB) {
+            echo 'Withdraw';
+        } else {
+            echo 'Failed to check';
+        }
+    }
+    function updateVoteStatus()
+    {
         if (session('isLoggedIn')) {
             $id = $this->request->getPost('id');
             $status = $this->request->getPost('status');
-            if (is_numeric($id)&& $status!=null) {
+            if (is_numeric($id) && $status != null) {
 
                 $votes = new Votes_Model();
                 $vote = $votes->where('vote_id', $id)->first();
                 if ($vote['user_id'] == session('user_id')) {
-                      
-                    $query  = $votes->set('status',$status)->where('vote_id',$id); 
+
+                    $query  = $votes->set('status', $status)->where('vote_id', $id);
                     $query = $votes->update();
                     if ($query) {
                         $data = [
@@ -60,9 +105,9 @@ class Votes_Controller extends BaseController
                 ];
                 echo json_encode($data);
             }
-        }else {
+        } else {
             return redirect()->to('/');
-    }
+        }
     }
     function deleteVote()
     {
@@ -72,14 +117,14 @@ class Votes_Controller extends BaseController
             $votes = new Votes_Model();
             $vote = $votes->where('vote_id', $id)->first();
             if ($vote['user_id'] == session('user_id')) {
-                    // delete image
-                    $path = './public/uploads/votes/';
+                // delete image
+                $path = './public/uploads/votes/';
 
-                    if(file_exists($path.$vote['banner1']) || file_exists($path.$vote['banner2'])) {
-                        unlink(FCPATH . 'public/uploads/votes/' . $vote['banner1']);
-                        unlink(FCPATH . 'public/uploads/votes/' . $vote['banner2']);
-                    }
-            
+                if (file_exists($path . $vote['banner1']) || file_exists($path . $vote['banner2'])) {
+                    unlink(FCPATH . 'public/uploads/votes/' . $vote['banner1']);
+                    unlink(FCPATH . 'public/uploads/votes/' . $vote['banner2']);
+                }
+
                 $query = $votes->where('vote_id', $id)->delete();
                 if ($query) {
                     $data = [
@@ -114,28 +159,20 @@ class Votes_Controller extends BaseController
     {
         // if (session('isLoggedIn')) {
 
-            $id = $this->request->getPost('id'); 
-            $votes = new Votes_Model(); 
+        $id = $this->request->getPost('id');
+        $votes = new Votes_Model();
 
-            if ($id != null ) { 
+        if ($id != null) {
 
-                $isUnique = $votes->select('vote_id, description');      // check use_id exist in table
-                $isUnique = $votes->where('vote_id', $id)->first(); 
-                if ($isUnique) {                                              // If found then send back | already voted
-                    $data = [
-                        'status' => true,  
-                        'description' => $isUnique['description']
+            $isUnique = $votes->select('vote_id, description');      // check use_id exist in table
+            $isUnique = $votes->where('vote_id', $id)->first();
+            if ($isUnique) {                                              // If found then send back | already voted
+                $data = [
+                    'status' => true,
+                    'description' => $isUnique['description']
 
-                    ];
-                    echo json_encode($data);
-                } else {
-                    $data = [
-                        'status' => false,
-                        'message' => "Internal Server error"
-                    ];
-                    echo json_encode($data);
- 
-                }
+                ];
+                echo json_encode($data);
             } else {
                 $data = [
                     'status' => false,
@@ -143,6 +180,13 @@ class Votes_Controller extends BaseController
                 ];
                 echo json_encode($data);
             }
+        } else {
+            $data = [
+                'status' => false,
+                'message' => "Internal Server error"
+            ];
+            echo json_encode($data);
+        }
         // } else {
         //     $data = [
         //         'status' => false,
@@ -251,7 +295,7 @@ class Votes_Controller extends BaseController
 
     function addVote()
     {
-        
+
         $validation = [
             "teamA" => 'required|trim',
             "teamB" => 'required|trim',
@@ -259,15 +303,15 @@ class Votes_Controller extends BaseController
             "subCategory" => 'trim',
             "description" => 'required|trim|min_length[15]|max_length[150]',
             "voteType" => 'required|trim',
-            'banner1' => [ 
+            'banner1' => [
                 'rules' => 'uploaded[banner1]'
                     . '|is_image[banner1]'
                     . '|mime_in[banner1,image/jpg,image/jpeg,image/gif,image/png]'
                     . '|max_size[banner1,100]'
                     . '|max_dims[banner1,768,768]'
             ],
-            'banner2' => [ 
-                'rules'=>[
+            'banner2' => [
+                'rules' => [
                     'uploaded[banner2]',
                     // 'mime_in[banner2,image/jpg,image/jpeg,image/png]',
                 ]
@@ -299,20 +343,18 @@ class Votes_Controller extends BaseController
                     'message' => $this->validator->getError('voteType'),
                 ];
                 echo json_encode($data);
-            } else if($this->validator->hasError('banner1')){
+            } else if ($this->validator->hasError('banner1')) {
                 $data =  [
-                    'status'=> false,
+                    'status' => false,
                     'message' => $this->validator->getError('banner1')
                 ];
                 echo json_encode($data);
-
-            }else if($this->validator->hasError('banner2')){
+            } else if ($this->validator->hasError('banner2')) {
                 $data =  [
-                    'status'=> false,
+                    'status' => false,
                     'message' => $this->validator->getError('banner2')
                 ];
                 echo json_encode($data);
-
             }
         } else {
 
@@ -326,36 +368,33 @@ class Votes_Controller extends BaseController
             $voteType  = $this->request->getPost('voteType');
             $file1 = $this->request->getFile('banner1');
             $file2 = $this->request->getFile('banner2');
-            if($file1 && $file2){
+            if ($file1 && $file2) {
 
-                if($file1->isValid() && !$file1->hasMoved() && $file2->isValid() && !$file2->hasMoved() ){
-                    
-                    
+                if ($file1->isValid() && !$file1->hasMoved() && $file2->isValid() && !$file2->hasMoved()) {
+
+
                     $path = './public/uploads/votes/';
-                    
+
                     $newName1 = $file1->getRandomName();
                     $newName2 = $file2->getRandomName();
 
-                    $file1->move($path,$newName1);
-                    $file2->move($path,$newName2);
-                     
-                }else{
+                    $file1->move($path, $newName1);
+                    $file2->move($path, $newName2);
+                } else {
                     //file not valid and has moved
                     $data = [
                         'status' => false,
                         'message' => 'Error occured while creating vote.'
                     ];
                     echo json_encode($data);
-
                 }
-            }else{
+            } else {
                 //file not get
                 $data = [
                     'status' => false,
                     'message' => 'Error occured while creating vote.'
                 ];
                 echo json_encode($data);
-
             }
 
 
@@ -369,7 +408,7 @@ class Votes_Controller extends BaseController
                 'banner2' => $newName2,
                 'description' => $description,
                 'type' => $voteType,
-                'user_id' => session('user_id') 
+                'user_id' => session('user_id')
             ];
             $query = $votes->save($data);
             if ($query) {

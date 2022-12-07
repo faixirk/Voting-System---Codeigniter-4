@@ -54,6 +54,7 @@ class Home extends BaseController
         $c = new Contact_Us_Model();
         $l = new Logos_Model();
         $social = new Social_Links_Model();
+        $results = new Votes_Results_Model();
 
         $data['social'] = $social->findAll();
         $data['about'] = $a->first();
@@ -61,6 +62,8 @@ class Home extends BaseController
         $data['logo'] = $l->first();
 
         $data['votes'] = $votes->where('status','result')->orderBy('vote_id','desc')->findAll();
+
+        
         return view('results', $data);
 
     }

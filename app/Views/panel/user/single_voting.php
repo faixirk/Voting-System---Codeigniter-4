@@ -9,15 +9,14 @@ include 'includes/header.php';
     <div>
       <h3>Room Members</h3>
       <table class="table">
-        <th>Group ID</th>
-        <th>User ID</th>
         <th>Name</th>
+        <th>Email</th>
         <?php foreach ($members as $m) :
           if ($m['has_joined'] == 'true') { ?>
             <tr>
-              <td id="groupID"><?= $m['group_id'] ?></td>
-              <td><?= $m['user_id'] ?></td>
+              <td style="display:none;" id="groupID"><?= $m['group_id'] ?></td>
               <td><?= $m['first_name'] ?></td>
+              <td><?= $m['user_email'] ?></td>
             </tr>
         <?php }
         endforeach; ?>

@@ -151,9 +151,12 @@ class Groups_Controller extends BaseController
     public function rooms(){
         $data = [];
         $data['title'] = 'Private | User';
-        $user = new User_Model();
+        $requests = new Requests_Model();
         $groups = new Groups_Model();
-        $data['private'] = $groups->select()->join('requests','requests.group_id=groups.group_id')->findAll();
+        $data['private'] = $requests->select()->join('groups','groups.group_id=requests.group_id','right')->findAll();
+        // echo '<pre>';
+        // print_r($data);
+        // die();
         // $data['private'] = $request->where('user_id', $userID)->get()->getResult();
         
         return view('panel/user/rooms', $data);

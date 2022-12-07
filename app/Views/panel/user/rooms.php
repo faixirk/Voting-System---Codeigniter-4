@@ -19,7 +19,7 @@ include 'includes/sidebar.php';
         ?>
         <?php foreach ($private as $p) : ?>
             <?php if ($userID == $p['user_id']) {
-                if ($p['has_joined'] == 'true' || $p['creator_id'] == session('user_id')) { ?>
+                if ($p['has_joined'] == 'true' || $p['user_id'] == session('user_id')) { ?>
 
                     <tr>
                         <td><?= $p['group_id'] ?> </td>

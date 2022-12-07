@@ -24,16 +24,14 @@ include 'includes/sidebar.php';
         <div class="mb-2">
             <div class="d-flex flex-column">
                 <ul class="list-group ">
-                    <?php foreach ($groups as $g) : 
-                        if($g['user_id'] != session('user_id')){ 
-                        ?>
+                    <?php foreach ($groups as $g) :  ?>
 
                         <li class="list-group-item text-white bg-secondary"><?= substr($g['group_name'], 0, 16) ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
 
 
                         </li>
-                    <?php } endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
@@ -46,7 +44,7 @@ include 'includes/sidebar.php';
     <!-- slider -->
     <div class="skitter-large-box">
         <div class="skitter skitter-large with-dots" style="width: 1019.2px; height: 300px;">
-            <ul >
+            <ul>
                 <li><a href="#">
                         <img src="<?= base_url() ?>/public/uploads/banners/banner1.jpeg" class="downBars"></a>
                     <div class="label_text">
@@ -75,7 +73,8 @@ include 'includes/sidebar.php';
                         <h2>Daily Voting</h2>
                         <p class="mb-4"></p> <a href="#"><button class="btn-custom"> find out more</button></a>
                     </div>
-                </div>   </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- categories -->

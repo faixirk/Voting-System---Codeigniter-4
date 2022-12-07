@@ -163,7 +163,10 @@ include 'includes/sidebar.php';
                         swal.fire({
                                 'icon': 'success',
                                 'text': "Successfully Added!",
-                            });
+                            }).then(() => {
+                        window.location.reload();
+                    })
+
                      }
                      else if(response==2){
                         swal.fire({

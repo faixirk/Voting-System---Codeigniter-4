@@ -19,22 +19,20 @@ include 'includes/sidebar.php';
         ?>
         <?php foreach ($private as $p) : ?>
             <?php if ($userID == $p['user_id']) {
-                if ($p['has_joined'] == 'true' || $p['user_id'] == session('user_id')) { ?>
+            ?>
 
-                    <tr>
-                        <td><?= $p['group_id'] ?> </td>
-                        <td><a href="<?= base_url('user/groups/private/single/' . $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
+                <tr>
+                    <td><?= $p['group_id'] ?> </td>
+                    <td><a href="<?= base_url('user/groups/private/single/' . $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
 
-                        <td><?php if ($p['user_id'] == session('user_id')) {
-                                echo 'Creator';
-                            } else {
-                                echo 'Member';
-                            } ?></td>
+                    <td><?php if ($p['user_id'] == session('user_id')) {
+                            echo 'Creator';
+                        } else {
+                            echo 'Member';
+                        } ?></td>
 
-                    </tr>
-                <?php } else {
-                    echo 'No data to show';
-                } ?>
+                </tr>
+
             <?php } ?>
         <?php endforeach; ?>
 

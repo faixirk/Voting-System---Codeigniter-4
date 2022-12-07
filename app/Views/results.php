@@ -48,14 +48,13 @@ include 'includes/header.php';
                                                 <tr>
                                                     <td data-label="#">1</td>
                                                     <td data-label="Name"><?= $vote['team_b'] ?></td>
-                                                    <td data-label="Result" id="resultA<?= $vote['vote_id'] ?>" >
+                                                    <td data-label="Result" id="resultA<?= $vote['vote_id'] ?>">
 
                                                         <script>
                                                             var id = <?= $vote['vote_id'] ?>;
-                                                                $.post("getVoteA", id, (result) => {
-                                                                    $('#resultA'+id).text(result);
-                                                                }); 
-
+                                                            $.post("getVoteA", id, (result) => {
+                                                                $('#resultA' + id).text(result);
+                                                            });
                                                         </script>
                                                     </td>
                                                 </tr>
@@ -63,25 +62,23 @@ include 'includes/header.php';
                                                     <td data-label="#">2</td>
                                                     <td data-label="Name"><?= $vote['team_b'] ?></td>
                                                     <td data-label="Result" id="resultB<?= $vote['vote_id'] ?>">
-                                                    <script>
+                                                        <script>
                                                             var id = <?= $vote['vote_id'] ?>;
-                                                                $.post("getVoteB", id, (result) => {
-                                                                    $('#resultB'+id).text(result);
-                                                                }); 
-
+                                                            $.post("getVoteB", id, (result) => {
+                                                                $('#resultB' + id).text(result);
+                                                            });
                                                         </script>
-                                                </td>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td data-label="#">3</td>
                                                     <td data-label="Name">Winner</td>
                                                     <td data-label="Result" id="result<?= $vote['vote_id'] ?>">
-                                                    <script>
+                                                        <script>
                                                             var id = <?= $vote['vote_id'] ?>;
-                                                                $.post("winner", id, (result) => {
-                                                                    $('#result'+id).text(result);
-                                                                }); 
-
+                                                            $.post("winner", id, (result) => {
+                                                                $('#result' + id).text(result);
+                                                            });
                                                         </script>
                                                     </td>
                                                 </tr>

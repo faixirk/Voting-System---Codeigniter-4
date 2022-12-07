@@ -125,6 +125,9 @@ $routes->get('/faq', 'Home::faq');
 $routes->get('/blog', 'Home::blog');
 $routes->get('/contact', 'Home::contact');
 $routes->get('/results', 'Home::results');
+$routes->post('/getVoteA', 'Votes_Controller::teamAVotes');
+$routes->post('/getVoteB', 'Votes_Controller::teamBVotes');
+$routes->post('/winner', 'Votes_Controller::winner');
 
 //  ------- X ------ All User Routes --------- X -------
 

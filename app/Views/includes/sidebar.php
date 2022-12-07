@@ -17,13 +17,14 @@
             <?php foreach($categories as $key => $cat): ?>
                 <?php if($cat['cat_status'] == 'on'){ ?>
             <li>
-                <a class="dropdown-toggle " data-bs-toggle="collapse" href="#collapse4" role="button" aria-expanded="true" aria-controls="collapseExample">
+                <a class="dropdown-toggle " data-bs-toggle="collapse" href="#collapse<?= $cat['cat_id']; ?>"
+                 role="button" aria-expanded="true" aria-controls="collapseExample">
                     <i class="far fa-futbol" aria-hidden="true"></i><?= $cat['cat_title']; ?>
-                    <span class="count"><span class="font-italic">(9)</span></span>
+                    <!-- <span class="count"><span class="font-italic">(9)</span></span> -->
                 </a>
                 <!-- dropdown item -->
                <?php if($cat['have_sub_cat'])  { ?>
-                <div class="collapse show" id="collapse4">
+                <div class="collapse show" id="collapse<?= $cat['cat_id']; ?>">
                     <ul class="">
                         <?php foreach($sub_categories as $sub_cat){ ?>
                         <?php if($sub_cat['cat_id'] == $cat['cat_id']) { ?>

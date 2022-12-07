@@ -16,47 +16,47 @@
 
             <!-- contents -->
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-10 mb-2">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">103</h2>
-                            <p class="info">Categories</p>
+                            <h2 class="price"><?= ($totalVotes) ? $totalVotes : '0' ?></h2>
+                            <p class="info">Total Votes</p>
                         </div>
                         <div class="dashboard__card-icon">
                             <img src="<?= base_url('public/assets/images/icons/categories.png') ?>" alt="categories">
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-10 mb-2">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">43423</h2>
-                            <p class="info">Users</p>
+                            <h2 class="price"><?= ($closeVotes) ? $closeVotes : '0' ?></h2>
+                            <p class="info">Close Votes</p>
                         </div>
                         <div class="dashboard__card-icon">
-                            <img src="<?= base_url('public/assets/images/icons/man.png') ?>" alt="users">
+                            <img src="<?= base_url('public/assets/images/icons/categories.png') ?>" alt="users">
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-10 mb-2">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">0</h2>
-                            <p class="info">Total Bet</p>
+                            <h2 class="price"><?= ($activeVotes) ? $activeVotes : '0' ?></h2>
+                            <p class="info">Active Votes</p>
                         </div>
                         <div class="dashboard__card-icon">
-                            <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/bet.png" alt="...">
+                            <img src="<?= base_url('public/assets/images/icons/categories.png') ?>" alt="...">
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-4 col-md-3 col-sm-10 mb-2">
+                <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10 mb-2">
                     <div class="dashboard__card">
                         <div class="dashboard__card-content">
-                            <h2 class="price">0</h2>
-                            <p class="info">Bet Win</p>
+                            <h2 class="price"><?= ($resultVotes) ? $resultVotes : '0' ?></h2>
+                            <p class="info">Show Results</p>
                         </div>
                         <div class="dashboard__card-icon">
-                            <img src="https://script.bugfinder.net/prophecy/assets/themes/betting/images/icon/earn.png" alt="...">
+                            <img src="<?= base_url('public/assets/images/icons/categories.png') ?>" alt="...">
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div id="container" class="apexcharts-canvas"></div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                     <div class="card">
                         <div class="card-body ">
                             <div class="table-parent table-responsive m-0">
@@ -91,42 +91,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-
-            <div class="modal fade" id="investLogList" role="dialog">
-                <div class="modal-dialog  modal-xl">
-                    <div class="modal-custom-content">
-                        <div class="modal-header modal-colored-header">
-                            <h5 class="modal-title service-title">Information</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <table class="table table-striped" id="service-table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Match Name</th>
-                                        <th>Category Name</th>
-                                        <th>Tournament Name</th>
-                                        <th>Question Name</th>
-                                        <th>Option Name</th>
-                                        <th>Ratio</th>
-                                        <th>Result</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="result-body">
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn-custom me-2 mb-2" data-bs-dismiss="modal"><span>Close</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+ 
 
         </div>
 

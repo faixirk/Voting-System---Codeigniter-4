@@ -35,7 +35,7 @@ class Home extends BaseController
         $data['user'] = $user->findAll();
         $data['logo'] = $l->first();
 
-        $data['votes'] = $votes->where('type', 'public')->orderBy('vote_id', 'desc')->findAll();
+        $data['votes'] = $votes->where('status','active')->orderBy('vote_id','desc')->findAll();
 
 
         //Both quereis can be used to find sub categories
@@ -45,6 +45,24 @@ class Home extends BaseController
         // ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
         // $data['votes'] = $cat->where('type','public');
         return view('index', $data);
+    }
+    function results(){
+
+        $data['title'] = 'Results';
+        $votes = new Votes_Model(); 
+        $a = new About_Us_Model();
+        $c = new Contact_Us_Model();
+        $l = new Logos_Model();
+        $social = new Social_Links_Model();
+
+        $data['social'] = $social->findAll();
+        $data['about'] = $a->first();
+        $data['contact'] = $c->first();
+        $data['logo'] = $l->first();
+
+        $data['votes'] = $votes->where('status','result')->orderBy('vote_id','desc')->findAll();
+        return view('results', $data);
+
     }
     public function about_us()
     {
@@ -61,8 +79,7 @@ class Home extends BaseController
 
         return view('about_us', $data);
     }
-    public function faq()
-    {
+    public function faq(){
         $data['title'] = 'FAQ';
         $l = new Logos_Model();
         $c = new Contact_Us_Model();

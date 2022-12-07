@@ -115,8 +115,9 @@ include 'includes/sidebar.php';
                         <td><?= $v['description'] ?></td>
                         <td>
                             <select class="form-select voteAction" name="vote_status" id="<?= $v['vote_id'] ?>">
-                                <option value="active">Active</option>
-                                <option value="closed">Closed</option>
+                                <option value="active"  <?= ($v['status'] === 'active') ?  'selected' : '' ?>  >Active</option>
+                                <option value="closed" <?= ($v['status'] === 'closed') ?  'selected' : '' ?>>Closed</option>
+                                <option value="result" <?= ($v['status'] === 'result') ?  'selected' : '' ?>>Result</option>
                             </select>
                         </td>
                         <td><button class="btn btn-danger" onclick="deleteVote(<?= $v['vote_id'] ?>)">Delete</button> </td>
@@ -159,7 +160,6 @@ include 'includes/sidebar.php';
                             var obj = JSON.parse(result);
 
                             if (obj.status == true) {
-                                window.location.reload();
                                 Swal.fire(
                                     'Deleted!',
                                     'Your vote has been deleted.',
@@ -310,9 +310,60 @@ include 'includes/sidebar.php';
     })
 </script>
 <script>
-    $('.voteAction').change(() => {
-        var id = $('#type').find('option:selected').val();
+    $('.voteAction').change(function() {
+        var status = $(this).find(":selected").val();
+         var id = $(this).attr('id');
+         var data = {
+            status, id
+    }
+         Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to update the status of  this vote!",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, update it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
 
-        alert(id);
+                    $.post("updatestatus", data, (result) => {
+                            var obj = JSON.parse(result);
+
+                            if (obj.status == true) {
+                                Swal.fire(
+                                    'Updated!',
+                                    'Your vote status has been updated.',
+                                    'success'
+                                ).then(() => {
+                                    window.location.reload();
+                                })
+                            } else if (obj.status == 500) {
+                                Swal.fire(
+                                    'Failed!',
+                                    'Internal server error!',
+                                    'error'
+                                )
+                            } else {
+                                Swal.fire(
+                                    'Failed!',
+                                    obj.message,
+                                    'error'
+                                )
+                            }
+                        })
+                        .fail(function(result) {
+                            Swal.fire(
+                                'Failed!',
+                                'Failed to update.',
+                                'error'
+                            )
+                        })
+
+
+
+                }
+            })
+
     })
 </script>

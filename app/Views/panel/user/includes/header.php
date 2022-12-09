@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('/public/assets/DVL.png')?>" alt="homepage">
+                <img src="<?= base_url('/public/assets/DVL.png') ?>" alt="homepage">
             </a>
             <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
@@ -98,3 +98,28 @@
             </div>
         </div>
     </nav>
+    <div class="bottom-bar fixed-bottom text-center">
+        <a href="<?= base_url('/') ?>" class="text-dark">
+            <i class="fa fa-home"></i>
+            Home </a>
+        <a href="javascript:void(0)" class="text-dark" onclick="toggleSidebar('leftbar')">
+            <i class="far fa-globe-americas"></i>
+            Categories </a>
+
+        <a href="javascript:void(0)" class="text-dark" onclick="toggleSidebar('rightbar')">
+            <i class="fal fa-ticket-alt"></i>
+            Private Rooms </a>
+
+        <?php
+        if (session('isLoggedIn') == false) {  ?>  
+         <button  class="text-dark" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <i class="fa fa-sign-in"></i>
+                Login </button>
+        <?php } else {?>
+            <a href="<?= base_url('user/logout') ?>" class="text-dark">
+                <i class="fa fa-sign-in"></i>
+                Logout </a>
+            <?php } ?>
+
+
+    </div>

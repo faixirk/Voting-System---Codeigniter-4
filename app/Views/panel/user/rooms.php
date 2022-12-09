@@ -9,32 +9,30 @@ include 'includes/sidebar.php';
         <h4> Rooms</h4>
         <p>Following are the room(s) which you have joined. Voting and chat in these rooms will be private. If you see no rooms then either you didn't sent the request to join any room or the request was not yet accepted. Please be patient until the admin accepts your request.</p>
     </div>
-    <table class="table">
+    <table class="table-hover table-responsive">
         <tr class="h6">
             <th>Room ID</th>
             <th>Room Name</th>
-            <th>Room Type</th>
+            <th>Type</th>
         </tr>
         <?php $userID = session('user_id');
         ?>
         <?php foreach ($private as $p) : ?>
             <?php if ($userID == $p['user_id']) {
-                if ($p['has_joined'] == 'true' || $p['user_id'] == session('user_id')) { ?>
+            ?>
 
-                    <tr>
-                        <td><?= $p['group_id'] ?> </td>
-                        <td><a href="<?= base_url('user/groups/private/single/' . $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
+                <tr>
+                    <td><?= $p['group_id'] ?> </td>
+                    <td><a href="<?= base_url('user/groups/private/single/' . $p['group_id']) ?>"><?= $p['group_name'] ?> </a></td>
 
-                        <td><?php if ($p['creator_id'] == session('user_id')) {
-                                echo 'Creator';
-                            } else {
-                                echo 'Member';
-                            } ?></td>
+                    <td><?php if ($p['user_id'] == session('user_id') && $p['creator_id'] == session('user_id')) {
+                            echo 'Creator';
+                        } else {
+                            echo 'Member';
+                        } ?></td>
 
-                    </tr>
-                <?php } else {
-                    echo 'No data to show';
-                } ?>
+                </tr>
+
             <?php } ?>
         <?php endforeach; ?>
 

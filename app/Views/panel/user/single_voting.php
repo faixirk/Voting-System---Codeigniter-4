@@ -9,15 +9,14 @@ include 'includes/header.php';
     <div>
       <h3>Room Members</h3>
       <table class="table">
-        <th>Group ID</th>
-        <th>User ID</th>
         <th>Name</th>
+        <th>Email</th>
         <?php foreach ($members as $m) :
           if ($m['has_joined'] == 'true') { ?>
             <tr>
-              <td id="groupID"><?= $m['group_id'] ?></td>
-              <td><?= $m['user_id'] ?></td>
+              <td style="display:none;" id="groupID"><?= $m['group_id'] ?></td>
               <td><?= $m['first_name'] ?></td>
+              <td><?= $m['user_email'] ?></td>
             </tr>
         <?php }
         endforeach; ?>
@@ -32,7 +31,7 @@ include 'includes/header.php';
 
         <div class="card" id="chat1" style="border-radius: 15px;">
           <div class="card-header d-flex justify-content-center p-3 bg-info text-white border-bottom-0" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            <p class="mb-0 fw-bold">Public Chat</p>
+            <p class="mb-0 fw-bold">Private Chat</p>
           </div>
           <div class="card-body ">
             <form id="chatForm" action="" class="col-md-9 col-lg-12" method="POST">

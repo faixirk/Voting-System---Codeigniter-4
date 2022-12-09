@@ -46,15 +46,30 @@ class Groups_Controller extends BaseController
                 'sub_cat_id' => $sub_cat,
                 'user_id' => session('user_id')
             ];
+            
             $group = new Groups_Model();
+            $request = new Requests_Model();
             $query = $group->insert($data);
             if ($query) {
-                //data inserted 
-                echo 1;
-            } else {
-                //query failed
-                echo 2;
-            }
+                $group_id = $group->where('user_id', session('user_id'))->first();
+                $data2 = [
+                    'group_id' => $group_id['group_id'],
+                    'creator_id' => session('user_id'),
+                    'user_id' => session('user_id'),
+                    'status' => '1',
+                    'has_joined' => 'true'
+                ];
+                $query2 = $request->insert($data2);
+                if($query2){
+                    //data inserted 
+                    echo 1;
+
+                }
+                else{
+                    //data not inserted
+                    echo 2;
+                }
+            } 
         } else {
             //data not validated
             echo 3;
@@ -153,11 +168,8 @@ class Groups_Controller extends BaseController
         $data['title'] = 'Private | User';
         $requests = new Requests_Model();
         $groups = new Groups_Model();
-        $data['private'] = $requests->select()->join('groups','groups.group_id=requests.group_id','right')->findAll();
-        // echo '<pre>';
-        // print_r($data);
-        // die();
-        // $data['private'] = $request->where('user_id', $userID)->get()->getResult();
+        $data['private'] = $groups->select()->join('requests','requests.group_id=groups.group_id')->findAll();
+       
         
         return view('panel/user/rooms', $data);
     }
@@ -168,6 +180,7 @@ class Groups_Controller extends BaseController
         $requests = new Requests_Model();
         $data['members'] = $requests->select('*')->join('user','user.user_id=requests.user_id');
         $data['members'] = $requests->where('group_id', $id)->findAll();
+
       
         return view('panel/user/single_voting', $data);
     }

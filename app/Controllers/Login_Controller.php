@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\User_Model;
+use App\Models\Logos_Model;
 use CodeIgniter\CLI\Console;
 
 class Login_Controller extends BaseController
 {
     public function index()
     {
-        if(!session('isLoggedIn')){
-        $data['title'] = 'User Login';
-        return view('login', $data);
-        }
-        else{
+        if (!session('isLoggedIn')) {
+            $data['title'] = 'User Login';
+            return view('login', $data);
+        } else {
             return redirect()->to('user/dashboard');
         }
     }
@@ -68,27 +68,35 @@ class Login_Controller extends BaseController
                     $verify = password_verify($pass, $user_info['user_pass']);
 
                     if ($verify) {
-                        $responce = $this->setUserSession($user_info);
-                        // $ses_data = [
-                        //     'user_id'        => $user_info['user_id'],
-                        //     'first_name'     => $user_info['first_name'],
-                        //     'last_name'      => $user_info['last_name'],
-                        //     'email'          => $user_info['user_email'],
-                        //     'pic'          => $user_info['pic'],
-                        //     // 'type'           => $user_info['type'],
-                        //     'logged_in'      => TRUE
-                        // ];
-                        // session()->set($ses_data);
-                        if ($responce) {
-                            $data = [
-                                'status' => true,
-                                'message' => 'Successfully login'
-                            ];
-                            echo json_encode($data);
+                        if ($user_info['status'] == 'active') {
+                            $responce = $this->setUserSession($user_info);
+                            // $ses_data = [
+                            //     'user_id'        => $user_info['user_id'],
+                            //     'first_name'     => $user_info['first_name'],
+                            //     'last_name'      => $user_info['last_name'],
+                            //     'email'          => $user_info['user_email'],
+                            //     'pic'          => $user_info['pic'],
+                            //     // 'type'           => $user_info['type'],
+                            //     'logged_in'      => TRUE
+                            // ];
+                            // session()->set($ses_data);
+                            if ($responce) {
+                                $data = [
+                                    'status' => true,
+                                    'message' => 'Successfully login'
+                                ];
+                                echo json_encode($data);
+                            } else {
+                                $data = [
+                                    'status' => false,
+                                    'message' => 'Failed to login'
+                                ];
+                                echo json_encode($data);
+                            }
                         } else {
                             $data = [
                                 'status' => false,
-                                'message' => 'Failed to login'
+                                'message' => 'Your email is not verified'
                             ];
                             echo json_encode($data);
                         }
@@ -123,19 +131,118 @@ class Login_Controller extends BaseController
             'l_name' => $user['last_name'],
             'useremail' => $user['user_email'],
             'pic' => $user['pic'],
-            'type'=>'user',
+            'type' => 'user',
             'isLoggedIn' => true
         ];
         session()->set($data);
         return true;
     }
 
-    public function reset_password()
+    public function index_forgot_password()
     {
         $data['title'] = 'Forgot Password';
+        $l = new Logos_Model();
+        $data['logo'] = $l->first();
+        return view('forgot_password', $data);
+    }
+    public function forgot_password()
+    {
+        $data['title'] = 'Forgot Password';
+        $l = new Logos_Model();
+        $data['logo'] = $l->first();
+        $email = $this->request->getPost('email');
+        $user = new User_Model();
+        $checkUser = $user->where('user_email', $email)->first();
+        if ($checkUser) {
+            if ($user->updatedAt($checkUser['code'])) {
+                $to = $email;
+                $subject = 'Reset Password Link';
+                $token = $checkUser['code'];
+                $message = 'Hi ' . $checkUser['first_name'] . '<br><br>'
+                    . 'Your reset password request has been received. Please click'
+                    . 'the below link to reset your password.<br><br>'
+                    . '<a href="' . base_url() . '/login/reset_password/' . $token . '">Click here to Reset Password</a><br><br>'
+                    . 'Thanks<br>Team Daily Voting';
+                $email = \Config\Services::email();
+                $email->setTo($to);
+                $email->setFrom('adnanqadirkhan@outlook.com', 'Daily Voting');
+                $email->setSubject($subject);
+                $email->setMessage($message);
+                if ($email->send()) {
+                    echo 0;
+                } else {
+                    //email not sent
+                    echo 3;
+                }
+            } else {
+                //unable to update data
+                echo 2;
+            }
+        } else {
+            //email does not exists
+            echo 1;
+        }
+    }
+    public function reset_passwordView($code)
+    {
+        $data['title'] = 'Reset Password';
+
         return view('reset_password', $data);
     }
-    public function logout(){
+    public function reset_password($code)
+    {
+        $user = new User_Model();
+
+        if (!empty($code)) {
+            $userdata = $user->verifyToken($code);
+            if (!empty($userdata)) {
+                if ($this->checkExpiryDate($userdata['updated_at'])) {
+                    if ($this->request->getMethod() == 'post') {
+                        $rules = [
+                            'pwd' => [
+                                'label' => 'Password',
+                                'rules' => 'required|min_length[8]|max_length[16]',
+                            ],
+                            'cpwd' => [
+                                'label' => 'Confirm Password',
+                                'rules' => 'required|matches[pwd]'
+                            ],
+                        ];
+                        if ($this->validate($rules)) {
+                            $pass =  password_hash($this->request->getPost('pwd'), PASSWORD_BCRYPT);
+                            if ($user->updatePassword($code, $pass)) {
+                                echo 0;
+                            } else {
+                                echo 1;
+                            }
+                        } else {
+                            $data['validation'] = $this->validator;
+                        }
+                    }
+                } else {
+                    //link expired
+                    echo 2;
+                }
+            } else {
+                //user not found
+                echo 3;
+            }
+        } else {
+            //unauthorized access
+            echo 4;
+        }
+    }
+    public function checkExpiryDate($time)
+    {
+        $timeDiff = strtotime(date("Y-m-d h:i:s")) - strtotime($time);
+        if ($timeDiff < 900) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function logout()
+    {
         session()->destroy();
         return redirect()->to('/');
     }

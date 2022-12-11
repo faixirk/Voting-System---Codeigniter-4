@@ -67,8 +67,11 @@ $routes->get('user/logout', 'Login_Controller::logout');
 $routes->group('', function ($routes) {
     $routes->get('register', 'Registration_Controller::index');
     $routes->match(['get', 'post'], 'register/add', 'Registration_Controller::registrationUser');
-    
 });
+$routes->get('user/reset/password', 'Login_Controller::index_forgot_password');
+$routes->post('user/forgot/password', 'Login_Controller::forgot_password');
+$routes->get('login/reset_password/(:any)', 'Login_Controller::reset_passwordView/$1');
+$routes->match(['get','post'],'login/reset_password/(:any)', 'Login_Controller::reset_password/$1');
 $routes->get('registration/activate/(:alphanum)', 'Registration_Controller::activate/$1');
 
 
@@ -116,9 +119,6 @@ $routes->group('user', function ($routes) {
     $routes->get('getcategory/(:num)', 'Admin_Sub_Category_Controller::getSubCategory/$1');
 });
 
-//  $routes->get('user/register', 'Registration::index');
-$routes->get('user/login', 'User_Login::index');
-$routes->get('user/reset/password', 'User_Login::reset_password');
 
 
 
@@ -127,7 +127,7 @@ $routes->get('/about-us', 'Home::about_us');
 $routes->get('/faq', 'Home::faq');
 $routes->get('/blog', 'Home::blog');
 $routes->get('/contact', 'Home::contact');
-$routes->get('/results', 'Home::results'); 
+$routes->get('/results', 'Home::results');
 
 //  ------- X ------ All User Routes --------- X -------
 
@@ -195,7 +195,6 @@ $routes->group('admin', function ($routes) {
     $routes->post('social/editLinks/(:num)', 'Website_Settings_Controller::linksEdit/$1');
     $routes->get('link/delete/(:num)', 'Website_Settings_Controller::linkDelete/$1');
     $routes->get('slider', 'Website_Settings_Controller::index_slider');
-
 });
 
 

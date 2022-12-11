@@ -1,106 +1,110 @@
-<?php
-include 'includes/head.php';
-include 'includes/header.php';
-?>
-    <section class="banner-section">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="header-text text-center">
-                        <h3>Contact Us</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!DOCTYPE html>
+<html lang="en">
 
-    <!-- contact section -->
-    <div class="contact-section">
-        <div class="container">
-            <div class="row gy-5 g-lg-5 align-items-center">
-                <div class="col-lg-6">
-                    <div class="text-box">
-                        <div class="header-text">
-                            <h5>Contact Us</h5>
-                            <h3>Get In Touch With Us</h3>
-                            <p>
-                                Give us a call or drop by anytime, we endeavour to answer all enquiries within 24 hours on business days. We will be happy to answer your questions.                            </p>
-                        </div>
-                        <div class="row">
-                            <div class="info-box col-md-6">
-                                <div class="icon-box">
-                                    <i class="fal fa-map-marker-alt"></i>
-                                </div>
-                                <div class="text">
-                                    <h5>Address</h5>
-                                    <p>22 Baker Street, London</p>
-                                </div>
-                            </div>
-                            <div class="info-box col-md-6">
-                                <div class="icon-box">
-                                    <i class="fal fa-building"></i>
-                                </div>
-                                <div class="text">
-                                    <h5>House</h5>
-                                    <p>22 Baker Street, London</p>
-                                </div>
-                            </div>
-                            <div class="info-box col-md-6">
-                                <div class="icon-box">
-                                    <i class="fal fa-envelope"></i>
-                                </div>
-                                <div class="text">
-                                    <h5>Email</h5>
-                                    <p>hello@website.com</p>
-                                </div>
-                            </div>
-                            <div class="info-box col-md-6">
-                                <div class="icon-box">
-                                    <i class="fal fa-phone-alt"></i>
-                                </div>
-                                <div class="text">
-                                    <h5>Phone</h5>
-                                    <p>+44-20-4526-2356</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $title; ?></title>
+    <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/bootstrap.min.css') ?>" />
+
+</head>
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-6" style="height:520px;">
+            <h1>Reset Your Password</h1>
+
+
+            <form action="" id="resetForm">
+                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+
+
+                <div class='form-group'>
+                    <label>Enter new password:</label>
+                    <input id="pwd" type="password" name="pwd" class='form-control'>
+                    <span class="text-danger"></span>
                 </div>
-                <div class="col-lg-6">
-                    <form action="#" method="post">
-                        <input type="hidden" name="_token" value="FGTjCAXsL4YpaaSt6nAMNhsrl75tDOALaOXwN2KG">                        <h4>just drop us a line</h4>
-                        <div class="row g-3">
-                            <div class="input-box col-md-6">
-                                <input class="form-control" type="text" name="name" value=""
-                                       placeholder="Full name"/>
-                                                            </div>
-                            <div class="input-box col-md-6">
-                                <input class="form-control" type="email" name="email" value=""
-                                       placeholder="Email address"/>
-                                                            </div>
-                            <div class="input-box col-12">
-                                <input class="form-control" type="text" name="subject"
-                                       value="" placeholder="Subject"/>
-                                                            </div>
-                            <div class="input-box col-12">
-                           <textarea class="form-control" cols="30" rows="3" name="message"
-                                     placeholder="Your message"></textarea>
-                                                            </div>
-                            <div class="input-box col-12">
-                                <button type="submit" class="btn-custom">submit</button>
-                            </div>
-                        </div>
-                    </form>
+                <div class='form-group '>
+                    <label>Confirm new password:</label>
+                    <input id="cpwd" type="password" name="cpwd" class='form-control'>
+                    <span class="text-danger"></span>
                 </div>
-            </div>
+                <div class='form-group'>
+                    <input id="resetPwdBtn" type="button" value='Update' class='btn btn-primary'>
+                </div>
+            </form>
+
+
+
         </div>
     </div>
+</div>
+<script src="<?= base_url('public/assets/js/jquery-3.6.0.min.js') ?>"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<?php include 'includes/footer.php'; ?>
+<script></script>
+<script>
+    $(document).ready(function() {
+        $('#resetPwdBtn').click(function() {
+            if ($('#pwd').val() == "") {
+                swal.fire({
+                    'icon': 'error',
+                    'text': "Password Field is empty",
 
+                });
+            } else if ($('#cpwd').val() == "") {
+                swal.fire({
+                    'icon': 'error',
+                    'text': "Confirm Password Field is Empty",
 
+                });
+            } else if ($('#pwd').val() != $('#cpwd').val()) {
+                swal.fire({
+                    'icon': 'error',
+                    'text': "Passwords don't match",
 
+                });
+            } else if ($('#pwd').val() == $('#cpwd').val()) {
+                $.ajax({
+                    type: 'POST',
+                    data: $('#resetForm').serialize(),
+                    success: function(data) {
+                        if (data == 0) {
+                            swal.fire({
+                                'icon': 'success',
+                                'text': "Password Updated Successfully!",
+                                
+                            }).then(() => {
+                        window.location.href="<?= base_url()?>" + '/';
+                    })
+                        } else if (data == 1) {
+                            swal.fire({
+                                'icon': 'error',
+                                'text': "Password could not be updated",
 
+                            });
+                        }
+                        else if (data == 2) {
+                            swal.fire({
+                                'icon': 'error',
+                                'text': "The link has expired!",
 
+                            });
 
+                        }
+                    },
+                    error: function(data) {
+                        swal.fire({
+                            'icon': 'info',
+                            'text': "Unexpected error. Please contact admin!",
 
+                        });
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+</html>

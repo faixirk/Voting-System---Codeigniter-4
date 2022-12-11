@@ -89,5 +89,19 @@ class User_Model extends Model {
             return false;
         }
     }
+    public function updatePassword($id,$pwd){
+        $builder = $this->db->table('user');
+        $builder->where('code', $id);
+        $builder->update(['user_pass'=>$pwd]);
+        if($this->db->affectedRows()==1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     
 }

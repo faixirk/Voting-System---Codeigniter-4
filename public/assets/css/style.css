@@ -2694,7 +2694,7 @@ a.btn-custom {
 }
 
 .faq-section .accordion-button::after {
-    background-image: url(../images/icon/plus.png);
+    background-image: url(../images/icons/plus.png);
     background-size: cover;
     position: absolute;
     right: 15px;

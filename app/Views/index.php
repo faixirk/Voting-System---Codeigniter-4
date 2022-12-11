@@ -49,7 +49,7 @@ include 'includes/sidebar.php';
                         <img src="<?= base_url() ?>/public/uploads/banners/banner1.jpeg" class="downBars"></a>
                     <div class="label_text">
                         <h2>Football</h2>
-                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> place a bet</button></a>
+                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> place a Vote</button></a>
                     </div>
                 </li>
                 <li><a href="<?= base_url() ?>/public/uploads/banners/banner2.jpeg" class="downBars"></a>

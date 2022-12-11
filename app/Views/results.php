@@ -47,7 +47,7 @@ include 'includes/header.php';
                                             <tbody class="result-body">
                                                 <tr>
                                                     <td data-label="#">1</td>
-                                                    <td data-label="Name"><?= $vote['team_b'] ?></td>
+                                                    <td data-label="Name"><?= $vote['team_a'] ?></td>
                                                     <td data-label="Result">  <?= $vote['teama_votes'] ?> </td>
                                                 </tr>
                                                 <tr>
@@ -58,7 +58,7 @@ include 'includes/header.php';
                                                 <tr>
                                                     <td data-label="#">3</td>
                                                     <td data-label="Name">Winner</td>
-                                                    <td data-label="Result"> <?php if($vote['teamb_votes'] > $vote['teama_votes']){
+                                                    <td data-label="Result"> <?php if($vote['teama_votes'] > $vote['teamb_votes']){
                                                         echo 'Team A Winner';
                                                     } else if($vote['teamb_votes'] > $vote['teama_votes']){
                                                         echo 'Team B Winner';

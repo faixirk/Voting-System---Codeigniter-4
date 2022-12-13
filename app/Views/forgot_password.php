@@ -47,7 +47,9 @@ if (session('type') == 'user') {
                                 <input id="pwdEmail" type="text" name="email" value="" class="form-control" placeholder="Email address" />
                             </div>
                         </div>
-
+                        <button id="loadingBtn1" class="btn-custom w-100" type="button" disabled>
+                            Verifying...
+                        </button>
                         <button id="pwdBtn" type="button" class="btn-custom w-100 mt-4">Send Password Reset Link</button>
                     </form>
                 </div>
@@ -62,7 +64,11 @@ if (session('type') == 'user') {
 <?php include 'includes/footer.php'; ?>
 <script>
     $(document).ready(function() {
+        $('#pwdBtn').show();
+        $('#loadingBtn1').hide();
         $('#pwdBtn').click(function() {
+            $('#pwdBtn').hide();
+            $('#loadingBtn1').show();
             if ($('#pwdEmail').val() != "") {
                 var email = $('#pwdEmail').val();
                 $.ajax({
@@ -71,26 +77,32 @@ if (session('type') == 'user') {
                     data: $('#pwdForm').serialize(),
                     success: function(data) {
                         if (data == 0) {
+                            $('#pwdBtn').show();
+                            $('#loadingBtn1').hide();
                             swal.fire({
                                 'icon': 'success',
                                 'text': "A link has been sent to your Email. Please change your password before the link expires.",
 
                             });
-                        } else if(data==1) {
+                        } else if (data == 1) {
+                            $('#pwdBtn').show();
+                            $('#loadingBtn1').hide();
                             swal.fire({
                                 'icon': 'error',
                                 'text': "This email does not exists!",
 
                             });
-                        }
-                        else if(data==2) {
+                        } else if (data == 2) {
+                            $('#pwdBtn').show();
+                            $('#loadingBtn1').hide();
                             swal.fire({
                                 'icon': 'error',
                                 'text': "Unable to update. Contact Admin!",
 
                             });
-                        }
-                        else if(data==3) {
+                        } else if (data == 3) {
+                            $('#pwdBtn').show();
+                            $('#loadingBtn1').hide();
                             swal.fire({
                                 'icon': 'error',
                                 'text': "The email could not be sent!",
@@ -101,15 +113,19 @@ if (session('type') == 'user') {
                     },
 
                     error: function(data) {
+                        $('#pwdBtn').show();
+                        $('#loadingBtn1').hide();
                         swal.fire({
-                                'icon': 'error',
-                                'text': "Unexpected error. Please contact admin!",
+                            'icon': 'error',
+                            'text': "Unexpected error. Please contact admin!",
 
-                            });
+                        });
                     }
 
                 });
             } else {
+                $('#pwdBtn').show();
+                $('#loadingBtn1').hide();
                 swal.fire({
                     'icon': 'info',
                     'text': "The email field cannot be blank!",

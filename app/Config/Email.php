@@ -33,7 +33,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $protocol = 'smtp';
+    public $protocol = '';
 
     /**
      * The server path to Sendmail.
@@ -47,28 +47,28 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPHost = 'smtp.outlook.com';
+    public $SMTPHost = '';
 
     /**
      * SMTP Username
      *
      * @var string
      */
-    public $SMTPUser = 'adnanqadirkhan@outlook.com';
+    public $SMTPUser = 'system@dailyvoting.com';
 
     /**
      * SMTP Password
      *
      * @var string
      */
-    public $SMTPPass = 'Abc&xyz1999';
+    public $SMTPPass = 'Qmwneb1122!';
 
     /**
      * SMTP Port
      *
      * @var int
      */
-    public $SMTPPort = 587;
+    public $SMTPPort = '';
 
     /**
      * SMTP Timeout (in seconds)
@@ -89,7 +89,7 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPCrypto = 'tls';
+    public $SMTPCrypto = '';
 
     /**
      * Enable word-wrap

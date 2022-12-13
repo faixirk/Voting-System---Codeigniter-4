@@ -165,7 +165,7 @@ class Login_Controller extends BaseController
                     . 'Thanks<br>Team Daily Voting';
                 $email = \Config\Services::email();
                 $email->setTo($to);
-                $email->setFrom('adnanqadirkhan@outlook.com', 'Daily Voting');
+                $email->setFrom('system@dailyvoting.com', 'Daily Voting');
                 $email->setSubject($subject);
                 $email->setMessage($message);
                 if ($email->send()) {

@@ -1,5 +1,3 @@
-
-
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -73,7 +71,9 @@
                         </div>
 
                     </div>
-
+                    <button id="loadingBtn1" class="btn-custom w-100" type="button" disabled>
+                        Verifying...
+                    </button>
                     <button type="submit" id="submitBtn" class="btn-custom w-100 mt-3 login-signup-auth-btn">sign up</button>
                     <div class="bottom">
                         Already have an account?
@@ -84,30 +84,30 @@
         </div>
     </div>
 </div>
-<script src="<?= base_url('public/assets/js/bootstrap.bundle.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/masonry.pkgd.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery-3.6.0.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/bootstrap.bundle.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/masonry.pkgd.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/jquery-3.6.0.min.js') ?>"></script>
 
 
-<script src="<?= base_url('public/assets/js/jquery.skitter.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.skitter.min.js') ?>"></script>
 <!-- <script src="https://script.bugfinder.net/prophecy/assets/themes/betting/js/jquery.easing.1.3.js"></script> -->
-<script src="<?= base_url('public/assets/js/owl.carousel.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/owl.carousel.min.js') ?>"></script>
 
 
-<script src="<?= base_url('public/assets/js/jquery.waypoints.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery.counterup.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/aos.js')?>"></script>
-<script src="<?= base_url('public/assets/js/jquery.fancybox.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/script.js')?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.waypoints.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.counterup.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/aos.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/jquery.fancybox.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/script.js') ?>"></script>
 
 
-<script src="<?= base_url('public/assets/js/pusher.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/vue.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/axios.min.js')?>"></script>
-<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
+<script src="<?= base_url('public/assets/js/pusher.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/vue.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/axios.min.js') ?>"></script>
+<script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js') ?>"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--Start of Google analytic Script-->
-<script async src="<?= base_url('public/assets/js/gtag/google-analytic.js')?>"></script>
+<script async src="<?= base_url('public/assets/js/gtag/google-analytic.js') ?>"></script>
 <script>
     "use strict";
     $(document).ready(function() {
@@ -121,7 +121,7 @@
         gtag('js', new Date());
         gtag('config', MEASUREMENT_ID);
     });
-</script> 
+</script>
 
 
 
@@ -464,12 +464,15 @@
 
 <script>
     $(document).ready(function() {
-        $('#registerform').click(()=>{
-            $('#loginModal').hide(); 
+        $('#loadingBtn1').hide();
+        $('#registerform').click(() => {
+            $('#loginModal').hide();
             $('#registerBtn').click();
         })
 
         $('#signup-form').submit(e => {
+            $('#loadingBtn1').show();
+            $('#submitBtn').hide();
             e.preventDefault();
             var f_name = $('#f_name').val();
             var l_name = $('#l_name').val();
@@ -491,13 +494,20 @@
                     },
                     success: (response) => {
                         if (response.status == '404') {
+                            $('#loadingBtn1').hide();
+                            $('#submitBtn').show();
                             swal.fire({
                                 'icon': 'error',
                                 'title': response.status,
                                 'text': response.message
                             })
+                            
                         } else if (response.status) {
+
+
                             $('#signup-form').trigger("reset");
+                            $('#loadingBtn1').hide();
+                            $('#submitBtn').show();
                             swal.fire({
                                 'icon': 'success',
                                 'title': 'Registered',
@@ -508,12 +518,14 @@
 
                             })
                         } else if (!response.status) {
-
+                            $('#loadingBtn1').hide();
+                            $('#submitBtn').show();
                             swal.fire({
                                 'icon': 'error',
                                 'title': response.type,
                                 'text': response.message
                             })
+                           
                         }
 
                     },
@@ -525,10 +537,16 @@
                             'title': error.type,
                             'text': error.message
                         })
+                        $('#loadingBtn1').hide();
+                        $('#submitBtn').show();
                     },
                 });
             } else {
                 swal.fire("Please fill all the fields");
+                $('#loadingBtn1').hide();
+
+                $('#submitBtn').show();
+
             }
             return false;
         });
@@ -552,19 +570,19 @@
                             $('#loginBtn').add('disable', true);
                             xhr.setRequestHeader('X-CSRF-Token', tokenHash);
                         },
-                        success: (response) => { 
+                        success: (response) => {
                             if (response.status) {
                                 $('#login-form').trigger("reset");
-                                
+
                                 swal.fire({
                                     'icon': 'success',
                                     'title': 'Authenticated',
                                     'text': response.message
                                 }).then((error) => {
-                                    $('#loginModal').hide(); 
+                                    $('#loginModal').hide();
                                     window.location.replace = '/';
                                 })
-                                window.location.href = '<?=base_url()?>'+ "/user/dashboard";
+                                window.location.href = '<?= base_url() ?>' + "/user/dashboard";
                             } else {
                                 swal.fire({
                                     'icon': 'error',

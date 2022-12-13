@@ -111,7 +111,7 @@ class Registration_Controller extends BaseController
                     . "<a href='" . base_url() . "/registration/activate/" . $code . "' target='_blank'>Activate Now</a><br><br>Regards,<br>Team Daily Voting";
 
                 $email1->setTo($to);
-                $email1->setFrom('adnanqadirkhan@outlook.com', 'Account Created Successfully');
+                $email1->setFrom('system@dailyvoting.com', 'Account Created Successfully');
 
                 $email1->setSubject($subject);
                 $email1->setMessage($message);

@@ -9,7 +9,7 @@ include 'includes/sidebar.php';
         <h4> Rooms</h4>
         <p>Following are the room(s) which you have joined. Voting and chat in these rooms will be private. If you see no rooms then either you didn't sent the request to join any room or the request was not yet accepted. Please be patient until the admin accepts your request.</p>
     </div>
-    <table class="table-hover table-responsive">
+    <table class="table table-hover table-responsive">
         <tr class="h6">
             <th>Room ID</th>
             <th>Room Name</th>

@@ -27,7 +27,7 @@ include 'includes/sidebar.php';
                     <?php foreach ($groups as $g) :  ?>
 
                         <li class="list-group-item text-white bg-secondary"><?= substr($g['group_name'], 0, 16) ?>
-                            <button value="<?= $g['group_id'] ?>" class="btn-custom1 ">Join</button>
+                            <button value="<?= $g['group_id'] ?>" class="btn-custom1" id="<?= $g['group_id'] ?>">Join</button>
 
 
                         </li>
@@ -223,9 +223,7 @@ include 'includes/footer.php';
             var id = $(this).val();
             $.ajax({
                 url: '<?= base_url() ?>' + "/user/groups/requests/" + id,
-                beforeSend: function() {
-                    $(".btn-custom1").hide();
-                },
+               
                 success: function(data) {
                     if (data == 0) {
                         swal.fire({
@@ -245,7 +243,14 @@ include 'includes/footer.php';
                             'text': "You need to login to join the group",
                         })
                         $(".btn-custom1").show();
-                    } else {
+                    }else if (data == 3) {
+                        swal.fire({
+                            'icon': 'info',
+                            'text': "Email could not be sent. Try again!",
+                        })
+                        $(".btn-custom1").show();
+                    } 
+                    else {
 
                         swal.fire({
                             'icon': 'error',

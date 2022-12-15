@@ -18,7 +18,7 @@ include 'includes/sidebar.php';
         <?php $userID = session('user_id');
         ?>
         <?php foreach ($private as $p) : ?>
-            <?php if ($userID == $p['user_id']) {
+            <?php if ($userID == $p['user_id'] && $p['has_joined'] == 'true') {
             ?>
 
                 <tr>

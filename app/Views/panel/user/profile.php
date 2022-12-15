@@ -19,22 +19,20 @@ include 'includes/sidebar.php';
         <div class="col-sm-4">
             <div class="card secbg br-4">
                 <div class="card-body br-4">
-                    <form method="post" action="" enctype="multipart/form-data" id="imageForm">
+                    <form action="" enctype="multipart/form-data" id="imageForm">
                         <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
-                        <div class="form-group">
 
+                        <div class="form-group">
                             <div id="profileImg" class="image-input ">
                                 <label for="image-upload" id="image-label"><i class="fas fa-upload"></i></label>
                                 <input type="file" name="profileimage" placeholder="Choose image" id="image">
-                                <img id="image_preview_container" src="<?= base_url('public/uploads/profile/'.session('pic'))?>" class="preview-image"  alt="preview image">
+                                <img id="image_preview_container" src="<?= base_url('public/uploads/profile/' . session('pic')) ?>" class="preview-image" alt="preview image">
                             </div>
 
                         </div>
                         <h3></h3>
                         <p><?= $user['created_at'] ?></p>
                         <div class="submit-btn-wrapper text-center text-md-left">
-                            <!-- <button type="submit" class="btn-custom w-100">
-                                <span>Image Update</span></button> -->
                             <button id="profileUpdateLoading" class="btn-custom w-100" type="button" disabled>
                                 <span class="btn-custom w-100" role="status" aria-hidden="true"></span>
                                 Updating...
@@ -45,66 +43,72 @@ include 'includes/sidebar.php';
                 </div>
             </div>
         </div>
+
         <div class="col-sm-8">
-        <div class="card secbg form-block br-4">
-            <div class="card-body">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link  active" data-bs-toggle="tab" href="#home">Profile Information</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " data-bs-toggle="tab" href="#menu1">Password Setting</a>
-                    </li>
+            <div class="card secbg form-block br-4">
+                <div class="card-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link  active" data-bs-toggle="tab" href="#home">Profile Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-bs-toggle="tab" href="#menu1">Password Setting</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link " data-bs-toggle="tab" href="#identity">Identity Verification</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " data-bs-toggle="tab" href="#addressVerification">Address
+                                Verification</a>
+                        </li> -->
 
+                    </ul>
 
-                </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content ">
+                        <div id="home" class="container mt-4 tab-pane   active">
 
-                <!-- Tab panes -->
-                <div class="tab-content ">
-                    <div id="home">
-
-                        <form action="" id="profileForm">
-                            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>First Name</label>
-                                    <div class="form-group input-box mb-3">
-                                        <input class="form-control" type="text" id="fn" name="firstname" value="<?= session('f_name'); ?>">
+                            <form action="" id="profileForm">
+                                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>First Name</label>
+                                        <div class="form-group input-box mb-3">
+                                            <input class="form-control" type="text" id="fn" name="firstname" value="<?= $user['first_name']; ?>">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-md-6">
-                                    <label>Last Name</label>
-                                    <div class="form-group input-box mb-3">
-                                        <input class="form-control" type="text" id="ln" name="lastname" value=<?= session('l_name') ?>>
+                                    <div class="col-md-6">
+                                        <label>Last Name</label>
+                                        <div class="form-group input-box mb-3">
+                                            <input class="form-control" type="text" id="ln" name="lastname" value="<?= $user['last_name']; ?>">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <label>Username</label>
                                         <div class="form-group input-box mb-3">
-                                            <input class="form-control" type="text" name="username" value="">
+                                            <input class="form-control" type="text" name="username" value="adnan">
                                         </div>
                                     </div> -->
 
 
-                                <div class="col-md-6">
-                                    <label>Email Address</label>
-                                    <div class="form-group input-box mb-3">
-                                        <input class="form-control" type="email" value="<?= session('useremail') ?>" disabled>
+                                    <div class="col-md-6">
+                                        <label>Email Address</label>
+                                        <div class="form-group input-box mb-3">
+                                            <input class="form-control" type="email" value="<?= session('useremail') ?>" disabled>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <label>Phone Number</label>
                                         <div class="form-group input-box mb-3">
-                                            <input class="form-control" type="text" readonly value="03235893425">
+                                            <input class="form-control" type="text" readonly value="222134124">
 
                                         </div>
                                     </div> -->
 
-                                <!-- <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <label>Preferred language</label>
                                         <div class="form-group input-box mb-3">
                                             <select name="language_id" id="language_id" class="form-select">
@@ -115,74 +119,118 @@ include 'includes/sidebar.php';
 
                                         </div>
                                     </div> -->
-                            </div>
+                                </div>
 
-                            <label>Address</label>
-                            <div class="form-group input-box mb-3">
-                                <textarea class="form-control" name="address" rows="5"></textarea>
+                                <!-- <label>Address</label>
+                                <div class="form-group input-box mb-3">
+                                    <textarea class="form-control" name="address" rows="5"></textarea>
 
-                            </div>
+                                </div> -->
 
-                            <div class="submit-btn-wrapper text-center text-md-left">
-                                <!-- <button type="submit" class="btn-custom w-100">
-                                        <span>Update User</span></button> -->
-                                <button id="loadingBtn" class="btn-custom w-100" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    Verifying...
-                                </button>
+                                <div class="submit-btn-wrapper text-center text-md-left">
+                                    <button id="loadingBtn" class="btn-custom w-100" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Verifying...
+                                    </button>
+                                    <button id="updateBtn" class="btn-custom w-100">Update User</button>
 
-                                <button id="updateBtn" class="btn-custom w-100">Update User</button>
-                            </div>
-                        </form>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <div id="menu1" class="container mt-4 tab-pane ">
+
+                            <form method="post" action="" id="passwordForm">
+                                <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+                                <label>Current Password</label>
+                                <div class="form-group input-box mb-3">
+                                    <input id="pass" type="password" class="form-control" name="current_password" autocomplete="off">
+                                </div>
+                                <label>New Password</label>
+                                <div class="form-group input-box mb-3">
+                                    <input id="new_pass" type="password" class="form-control" name="password" autocomplete="off">
+                                </div>
+
+                                <label>Confirm Password</label>
+                                <div class="form-group input-box mb-3">
+                                    <input id="confirm_pass" type="password" name="password_confirmation" autocomplete="off" class="form-control">
+                                </div>
+
+                                <div class="submit-btn-wrapper text-center">
+                                    <button id="loadingBtn1" class="btn-custom w-100" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Verifying...
+                                    </button>
+
+                                    <button id="updateBtn1" class="btn-custom w-100">Update Password</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <!-- <div id="identity" class="container mt-4 tab-pane ">
+                            <form method="post" action="https://script.bugfinder.net/prophecy/user/verificationSubmit"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="_token" value="y8JmcdjhTs99oJhSXpEYs3s75PrJrj04OvbRfdnE">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="identity_type">Identity Type</label>
+                                    <div class="form-group input-box mb-3">
+                                        <select name="identity_type" id="identity_type" class="form-select">
+                                            <option value="" selected disabled>Select Type</option>
+                                            <option value="driving-license">Driving License</option>
+                                            <option value="passport">Passport</option>
+                                            <option value="national-id">National ID</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> -->
+
+                        <!-- <div id="addressVerification" class="container mt-4 tab-pane ">
+                            <form method="post" action="https://script.bugfinder.net/prophecy/user/addressVerification"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="_token" value="y8JmcdjhTs99oJhSXpEYs3s75PrJrj04OvbRfdnE">
+                                <div class="col-md-12">
+                                    <label class="form-label">Address Proof <span class="text-danger">*</span>
+                                    </label><br>
+                                    <div class="form-group input-box">
+                                        <div class="fileinput fileinput-new " data-provides="fileinput">
+                                            <div class="fileinput-new thumbnail " data-trigger="fileinput">
+                                                <img class="wh-200-150"
+                                                    src="https://script.bugfinder.net/prophecy/assets/admin/images/default.png"
+                                                    alt="...">
+                                            </div>
+                                            <div class="fileinput-preview fileinput-exists thumbnail wh-200-150 "></div>
+
+                                            <div class="img-input-div">
+                                                <span class="btn btn-success btn-file">
+                                                    <span class="fileinput-new "> Select Image </span>
+                                                    <span class="fileinput-exists"> Change</span>
+                                                    <input type="file" name="addressProof" value="" accept="image/*">
+                                                </span>
+                                                <a href="#" class="btn btn-danger fileinput-exists"
+                                                    data-dismiss="fileinput"> Remove</a>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="submit-btn-wrapper text-center text-md-left">
+                                    <button type="submit" class="btn-custom w-100">Submit</button>
+                                </div>
+                            </form>
+
+                        </div> -->
+
                     </div>
-
-
-                    <div id="menu1" class="mt-4">
-
-                        <form method="post" action="" id="passwordForm">
-                            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
-
-                            <label>Current Password</label>
-                            <div class="form-group input-box mb-3">
-                                <input id="pass" type="password" class="form-control" name="current_password" autocomplete="off">
-                            </div>
-                            <label>New Password</label>
-                            <div class="form-group input-box mb-3">
-                                <input id="new_pass" type="password" class="form-control" name="password" autocomplete="off">
-                            </div>
-
-                            <label>Confirm Password</label>
-                            <div class="form-group input-box mb-3">
-                                <input id="confirm_pass" type="password" name="password_confirmation" autocomplete="off" class="form-control">
-                            </div>
-
-                            <div class="submit-btn-wrapper text-center">
-                                <!-- <button type="submit" class="btn-custom w-100"> -->
-                                <!-- <span>Update Password</span></button> -->
-                                <button id="loadingBtn1" class="btn-custom w-100" type="button" disabled>
-                                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                    Verifying...
-                                </button>
-
-                                <button id="updateBtn1" class="btn-custom w-100">Update Password</button>
-                            </div>
-                        </form>
-                    </div>
-
-
-
-
-
-
                 </div>
             </div>
+
         </div>
-
     </div>
-    </div>
-
-    
-</div>
 </div>
 
 </div>
@@ -190,97 +238,93 @@ include 'includes/sidebar.php';
 <?= include 'includes/footer.php'  ?>
 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
 
-    $('#updateProfile').show();
-    $('#profileUpdateLoading').hide();
-    $("#image").on("change", function(e) {
-        e.preventDefault();
-        if (this.files[0].size > 2000000) {
-            swal.fire("Please upload file less than 2MB. Thanks!!");
-            $(this).val('');
-        } else {
-            // $('#updateProfile').click((e)=>{
-            var ext = $(this).val().split('.').pop().toLowerCase();
-            if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
-                swal.fire("Invalid Image Format! Image Format Must Be JPG, JPEG or PNG.");
+        $('#updateProfile').show();
+        $('#profileUpdateLoading').hide();
+        $("#image").on("change", function(e) {
+            e.preventDefault();
+            if (this.files[0].size > 2000000) {
+                swal.fire("Please upload file less than 2MB. Thanks!!");
                 $(this).val('');
             } else {
-                $('#updateProfile').show();
-                $('#updateProfile').click((e) => {
-                    e.preventDefault();
-                    if($('#image').val() == ''){
-                      swal.fire("Please select an image to upload!");
-                    }
-                    else{
-                    var formdata = new FormData(document.getElementById('imageForm'));
-                    e.preventDefault();
-                    $.ajax({
-                        type: "POST",
-                        url: '<?= base_url() ?>' + "/user/photo/update",
-                        data: formdata,
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        dataType: "json",
-                        beforeSend: function() {
-                            $('#updateProfile').hide();
-                            $('#profileUpdateLoading').show();
+                // $('#updateProfile').click((e)=>{
+                var ext = $(this).val().split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
+                    swal.fire("Invalid Image Format! Image Format Must Be JPG, JPEG or PNG.");
+                    $(this).val('');
+                } else {
+                    $('#updateProfile').show();
+                    $('#updateProfile').click((e) => {
+                        e.preventDefault();
+                        if ($('#image').val() == '') {
+                            swal.fire("Please select an image to upload!");
+                        } else {
+                            var formdata = new FormData(document.getElementById('imageForm'));
+                            e.preventDefault();
+                            $.ajax({
+                                type: "POST",
+                                url: '<?= base_url() ?>' + "/user/photo/update",
+                                data: formdata,
+                                processData: false,
+                                contentType: false,
+                                cache: false,
+                                dataType: "json",
+                                beforeSend: function() {
+                                    $('#updateProfile').hide();
+                                    $('#profileUpdateLoading').show();
 
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                $('#profileUpdateLoading').hide();
-                            $('#updateProfile').show();
-                                $('#image').val('');
-                                swal.fire({
-                                'icon': 'success',
-                                'text': response.message,
+                                },
+                                success: function(response) {
+                                    if (response.success) {
+                                        $('#profileUpdateLoading').hide();
+                                        $('#updateProfile').show();
+                                        $('#image').val('');
+                                        swal.fire({
+                                            'icon': 'success',
+                                            'text': response.message,
+                                        });
+                                        $('#logo').attr('src', '<?= base_url() ?>' + "/public/uploads/profile/" + response.path);
+                                        $('#image_preview_container').attr('src', '<?= base_url() ?>' + "/public/uploads/profile/" + response.path);
+
+                                        // loadLogo();
+                                    } else if (response == 2) {
+                                        $('#updateProfile').show();
+                                        $('#profileUpdateLoading').hide();
+                                        $('#image').val('');
+                                        swal.fire("Invalid Image Format! Image Format Must Be JPG, JPEG or PNG.");
+
+                                    } else if (response == 3) {
+                                        $('#updateProfile').show();
+                                        $('#profileUpdateLoading').hide();
+                                        $('#image').val('');
+                                        swal.fire("Data could not be stored. Contact admin!");
+
+                                    } else if (response == 4) {
+                                        $('#updateProfile').show();
+                                        $('#profileUpdateLoading').hide();
+                                        $('#image').val('');
+                                        swal.fire("File is not valid.");
+
+                                    } else {
+                                        $('#updateProfile').show();
+                                        $('#profileUpdateLoading').hide();
+                                        swal.fire('Invalid error occur. Try again');
+                                        $('#image').val('');
+
+
+                                    }
+                                },
                             });
-                            $('#logo').attr('src', '<?= base_url() ?>' + "/public/uploads/profile/" + response.path);
-                            $('#image_preview_container').attr('src', '<?= base_url() ?>' + "/public/uploads/profile/" + response.path);
-                            
-                            // loadLogo();
-                            } else if (response == 2) {
-                                $('#updateProfile').show();
-                                $('#profileUpdateLoading').hide();
-                                $('#image').val('');
-                                swal.fire("Invalid Image Format! Image Format Must Be JPG, JPEG or PNG.");
-
-                            } 
-                            else if (response == 3) {
-                                $('#updateProfile').show();
-                                $('#profileUpdateLoading').hide();
-                                $('#image').val('');
-                                swal.fire("Data could not be stored. Contact admin!");
-
-                            }else if (response == 4) {
-                                $('#updateProfile').show();
-                                $('#profileUpdateLoading').hide();
-                                $('#image').val('');
-                                swal.fire("File is not valid.");
-
-                            }
-                            else {
-                                $('#updateProfile').show();
-                                $('#profileUpdateLoading').hide();
-                                swal.fire('Invalid error occur. Try again');
-                                $('#image').val('');
-
-
-                            }
-                        },
+                        }
                     });
+
+                }
+
+                // })
             }
         });
-
-            }
-
-            // })
-        }
     });
-});
-
 </script>
 <script>
     $(document).ready(function() {

@@ -51,7 +51,8 @@ class Groups_Controller extends BaseController
             $request = new Requests_Model();
             $query = $group->insert($data);
             if ($query) {
-                $group_id = $group->where('user_id', session('user_id'))->first();
+                $group_id = $group->where('user_id', session('user_id'))->orderBy('group_id', 'DESC')->first();
+                
                 $data2 = [
                     'group_id' => $group_id['group_id'],
                     'creator_id' => session('user_id'),
@@ -98,10 +99,10 @@ class Groups_Controller extends BaseController
         $checkGroup = $group->where('group_id', $id)->first();  //matches the group id from user passed to groups table
         $checkUser = $requests->select('*');
         $checkUser = $requests->where('group_id', $id);
-        $checkUser = $requests->where('user_id', $userID)->get()->getResult();
+        $checkUser = $requests->where('user_id', $userID)->first();
         $checkCreator = $user->select();
         $checkCreator = $user->where('user_id', $checkGroup['user_id'])->first();
-
+      
         if (session('isLoggedIn') == true) {  //true if user is logged in
             $data = [
                 'user_id' => session('user_id'),   //user who is logged in
@@ -136,8 +137,12 @@ class Groups_Controller extends BaseController
                     echo 1;
                 }
             } else {
-                //request already sent
-                echo 2;
+                if ($checkUser['has_joined'] == 'true') {
+                    echo 2;
+                } else {
+                    //request already sent and not accepted
+                    echo 5;
+                }
             }
         } else {
             //true if user is not logged in
@@ -183,8 +188,8 @@ class Groups_Controller extends BaseController
         $requests = new Requests_Model();
         $groups = new Groups_Model();
         $data['private'] = $groups->select()->join('requests', 'requests.group_id=groups.group_id')->findAll();
-
-
+       
+     
         return view('panel/user/rooms', $data);
     }
     public function single_room($id)

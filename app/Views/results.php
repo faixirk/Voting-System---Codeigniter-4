@@ -1,8 +1,13 @@
 <?php
-
 include 'includes/head.php';
-include 'includes/header.php';
+if (session('type') == 'user') {
+    include 'panel/user/includes/header.php';
+} else {
+    include 'includes/header.php';
+}
+
 ?>
+
 
 <section class="banner-section">
     <div class="container">

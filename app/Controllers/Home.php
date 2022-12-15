@@ -19,7 +19,7 @@ class Home extends BaseController
     public function index()
     {
 
-        $data['title'] = 'Voting System';
+        $data['title'] = 'Daily Voting';
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
         $group = new Groups_Model();
@@ -45,6 +45,40 @@ class Home extends BaseController
         // ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
         // $data['votes'] = $cat->where('type','public');
         return view('index', $data);
+    }
+    public function getCategory($id){
+        $data['title'] = 'Daily Voting';
+        $cat = new Category_Model();
+        $sub_cat = new Sub_Category_Model();
+        $group = new Groups_Model();
+        $user = new User_Model();
+        $requests = new Requests_Model();
+        $votes = new Votes_Model();
+        $results = new Votes_Results_Model();
+        $l = new Logos_Model();
+
+        $data['categories'] = $cat->findAll();
+        $data['groups'] = $group->findAll();
+        $data['requests'] = $requests->findAll();
+        $data['user'] = $user->findAll();
+        $data['logo'] = $l->first();
+
+        $data['votes'] = $votes->where('status','active');
+        $data['votes'] = $votes->where('category_id',$id)->orderBy('vote_id','DESC')->findAll();
+        $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();
+        
+        if($data['votes']){
+        //     echo '<pre>';
+        // print_r($data['votes']);
+        // die();
+            //category found
+            return json_encode($data['votes']);
+        }
+        
+            //category not found
+            return false;
+        
+
     }
     function results(){
 

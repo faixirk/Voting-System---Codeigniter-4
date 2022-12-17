@@ -79,7 +79,7 @@ include 'includes/sidebar.php';
     </div>
     <!-- categories -->
     <div class="categories" id="categories">
-        <a href="#" class="active">
+        <a href="#" id="999" class="active">
             <i class="far fa-globe-americas"></i> <span>All Categories</span>
         </a>
 
@@ -101,45 +101,9 @@ include 'includes/sidebar.php';
             <button class="btn-custom w-100 my-2" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Add Votes </button>
         <?php }  ?>
-
-
-        <?php
-        if ($votes) {
-            foreach ($votes as $vote) : ?>
-                    <div id="voteBox" class="box">
-                        <!-- <h5 class="mb-3">WHO WILL WIN?</h5> -->
-                        <div id="rowVote" class="row d-flex justify-content-around align-items-center">
-                            <div class="col-3 team">
-                                <img id="imgA" src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner1'] ?>" style="border-radius: 50%" alt="A" class="img-fluid">
-                                <p id="nameA"><?= $vote['team_a'] ?></p>
-                            </div>
-                            <div class="col-6"><span> </span>
-                                <!----> <button id="seeMore" class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
-                            </div>
-                            <div class="col-3 team">
-                                <img id="imgB" src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner2'] ?>" alt="B" style="border-radius: 50%" class="img-fluid">
-                                <p id="nameB"><?= $vote['team_b'] ?></p>
-                            </div>
-                            <div class="col-12 align-self-end">
-                                <div class="d-flex justify-content-between">
-                                    <button id="teamA" type="button" class="voteCount teamA teamA<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team A </button>
-                                    <button id="teamB" type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result<?= $vote['vote_id'] ?>"></button>
-                                    <button type="button" class="voteCount teamB teamB<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team B</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            <?php endforeach;
-        } else { ?>
-            <div class="box">
-                <h5 class="mb-3">Empty List.</h5>
-            </div>
-        <?php } ?>
+        <div class="votesList">
+        </div>
     </div>
-
-
-
-
 </div>
 
 </div>
@@ -151,59 +115,52 @@ include 'includes/footer.php';
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 <script>
-    //get Category IDs
-    $(".cat").click(function(event) {
-            var id = $(this).attr('id');
-            // alert(id);
-            $.ajax({
-                type: "GET",
-                url: "<?= base_url() ?>" + '/' + id,
-                success: function(response) {
-                    if (response) {
-                        $('.box').empty();
-                        $.each(JSON.parse(response), (key, value) => {
-                            $('#voteBox').append('<div class="row d-flex justify-content-around align-items-center">');
-                            $('#voteBox').append('<div class="col-3 ">');
-                            $('#voteBox').append('<img src="/public/uploads/votes/"' + value.banner1 + 'style="border-radius: 50%" alt="A" class="img-fluid" >');
-                            $('#voteBox').append('<p>' + value.team_a + '</p>');
-                            $('#voteBox').append('</div>');
-                            $('#voteBox').append('<div class="col-6"><span> </span>');
-                            $('#voteBox').append('<button id="seeMore" class="btn-custom w-75 my-2 btn-info" value=' + value.vote_id + '>' + 'See More' + '</button>');
-                            $('#voteBox').append('</div>');
-                            $('#voteBox').append('<div class="col-3 team">');
-                            $('#voteBox').append('<img src="/public/uploads/votes/"' + value.banner2 + 'style="border-radius: 50%" alt="B" class="img-fluid" >');
-                            $('#voteBox').append('<p>' + value.team_b + '</p>');
-                            $('#voteBox').append('</div>');
-                            $('#voteBox').append('<div class="col-12 align-self-end">');
-                            $('#voteBox').append('<div class="d-flex justify-content-between">');
-                            $('#voteBox').append('<button class="btn-light voteCount teamA downgrade-mobile" value=' + value.vote_id + '>' + 'Vote Team A' + '</button>');
-                            $('#voteBox').append('<button class="btn-light voteCount teamB downgrade-mobile" value=' + value.vote_id + '>' + 'Vote Team B' + '</button>');
-                            $('#voteBox').append('</div>');
-                            $('#voteBox').append('</div>');
-                            $('#voteBox').append('</div>');
+    function getVo(id){
+        $.ajax({
+            type: "GET",
+            url: "<?= base_url() ?>" + '/' + id,
+            success: function(response) { 
+                if (response) {
+                    $('.votesList').empty();
+                    var html = '';
+                    $.each(JSON.parse(response), (key, vote) => {
+                         html = '<div class="box">' +
+                            '<div class="row d-flex justify-content-around align-items-center"> <div class="col-3 team">' +
+                            '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner1']+'" style="border-radius: 50%" alt="A" class="img-fluid">' +
+                            '<p>'+vote['team_a'] + '</p> </div> <div class="col-6"><span> </span>' +
+                            '<button class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
+                            '</div> <div class="col-3 team">' +
+                            '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner2']+'" alt="B" style="border-radius: 50%" class="img-fluid">' +
+                            '<p>'+vote['team_b'] + '</p> </div>' +
+                            '<div class="col-12 align-self-end"> <div class="d-flex justify-content-between">' +
+                            '<button type="button" class="voteCount teamA teamA'+vote['vote_id'] + ' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team A </button>' +
+                            '<button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result'+vote['vote_id']+'"></button>' +
+                            '<button type="button" class="voteCount teamB teamB'+vote['vote_id'] + ' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team B</button>' +
+                            '</div> </div> </div> </div>';
+                            $('.votesList').append(html);
+                    });
 
-
-
-                            // alert(response);
-                        })
-
-                    } else {
-                        $('.box').empty();
-
-                    }
-
-                },
-                error: function(error) {
+                } else {
+                    $('.votesList').empty();
 
                 }
-            });
-        })
-        // ----------------------------------------------------------------
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+    //get Category IDs
+    $(".cat").click(function(event) {
+        var id = $(this).attr('id');
+        getVo(id);
+
+    });
+    getVo(999);
 </script>
 <script>
     $(document).ready(function() {
-        
-
         $(".btn-info").click(function() {
             var id = $(this).val();
             if (id != null) {

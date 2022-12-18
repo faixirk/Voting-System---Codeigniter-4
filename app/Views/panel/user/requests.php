@@ -25,7 +25,7 @@ include 'includes/sidebar.php';
                 <td><?= $r['group_name'] ?> </td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" value="<?= $r['group_id'] ?>" class="btn btn-success btn1">Accept</button>
+                        <button type="button" value="<?= $r['group_id'] ?>" id="<?= $r['user_id']?>" class="btn btn-success btn1">Accept</button>
                         <button type="button" value="<?= $r['request_id'] ?>" class="btn btn-danger btn2">Decline</button>
                     </div>
                 </td>
@@ -106,10 +106,12 @@ include 'includes/sidebar.php';
 
         $(".btn1").click(function(event){
             var id = $(this).val();
+            var userID = $(this).attr('id');
             $.ajax({
               type: "GET",
-              url: '<?= base_url() ?>' + "/user/groups/requests/accept/" + id,
+              url: '<?= base_url() ?>' + "/user/groups/requests/accept/" + id + '/' + userID,
               success: function(data){
+                alert(data);
                 if(data == 1){
                     swal.fire({
                             'icon': 'success',

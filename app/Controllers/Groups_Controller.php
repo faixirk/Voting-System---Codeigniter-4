@@ -149,10 +149,16 @@ class Groups_Controller extends BaseController
             echo 3;
         }
     }
-    public function setRequest($id)
+    public function setRequest($id, $user_id)
     {
         $requests = new Requests_Model();
-        $check = $requests->where('group_id', $id)->first();
+        $user = new User_Model();
+        $check = $requests->where('group_id', $id) && $requests->where()->first();
+        // $data['user'] = $requests->select()->join('user', 'user.user_id', 'requests.user_id');
+        $data['user'] = $user->where('user_id', $check['user_id'])->first();
+        echo '<pre>';
+        print_r($user_id);
+        die();
         if ($check) {
             $requests->set('has_joined', 'true');
             $requests->where('group_id', $id);

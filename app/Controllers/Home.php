@@ -35,7 +35,7 @@ class Home extends BaseController
         $data['user'] = $user->findAll();
         $data['logo'] = $l->first();
 
-        $data['votes'] = $votes->where('status','active')->orderBy('vote_id','desc')->findAll();
+        $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc')->findAll();
 
 
         //Both quereis can be used to find sub categories
@@ -46,44 +46,31 @@ class Home extends BaseController
         // $data['votes'] = $cat->where('type','public');
         return view('index', $data);
     }
-    public function getCategory($id){
-        $data['title'] = 'Daily Voting';
-        $cat = new Category_Model();
-        $sub_cat = new Sub_Category_Model();
-        $group = new Groups_Model();
-        $user = new User_Model();
-        $requests = new Requests_Model();
-        $votes = new Votes_Model();
-        $results = new Votes_Results_Model();
-        $l = new Logos_Model();
+    public function getCategory($id)
+    {
 
-        $data['categories'] = $cat->findAll();
-        $data['groups'] = $group->findAll();
-        $data['requests'] = $requests->findAll();
-        $data['user'] = $user->findAll();
-        $data['logo'] = $l->first();
+        if ($id!=null) {
+            $data['title'] = 'Daily Voting';
+            $votes = new Votes_Model();
+            $votes = $votes->where('status', 'active');
+            if($id == 999){
+                $votes = $votes->orderBy('vote_id', 'DESC')->findAll();
 
-        $data['votes'] = $votes->where('status','active');
-        $data['votes'] = $votes->where('category_id',$id)->orderBy('vote_id','DESC')->findAll();
-        $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();
-        
-        if($data['votes']){
-        //     echo '<pre>';
-        // print_r($data['votes']);
-        // die();
-            //category found
-            return json_encode($data['votes']);
-        }
-        
-            //category not found
+            }else{
+                $votes = $votes->where('category_id', $id)->orderBy('vote_id', 'DESC')->findAll();
+
+            }
+            echo json_encode($votes);
+        }else{
             return false;
-        
-
+        }
+       
     }
-    function results(){
+    function results()
+    {
 
         $data['title'] = 'Results';
-        $votes = new Votes_Model(); 
+        $votes = new Votes_Model();
         $a = new About_Us_Model();
         $c = new Contact_Us_Model();
         $l = new Logos_Model();
@@ -95,11 +82,10 @@ class Home extends BaseController
         $data['contact'] = $c->first();
         $data['logo'] = $l->first();
 
-        $data['votes'] = $votes->where('status','result')->orderBy('vote_id','desc')->findAll();
+        $data['votes'] = $votes->where('status', 'result')->orderBy('vote_id', 'desc')->findAll();
 
-        
+
         return view('results', $data);
-
     }
     public function about_us()
     {
@@ -116,7 +102,8 @@ class Home extends BaseController
 
         return view('about_us', $data);
     }
-    public function faq(){
+    public function faq()
+    {
         $data['title'] = 'FAQ';
         $l = new Logos_Model();
         $c = new Contact_Us_Model();

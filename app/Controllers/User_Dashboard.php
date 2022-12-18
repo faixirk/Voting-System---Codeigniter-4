@@ -1,14 +1,19 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\Votes_Model;
+use App\Models\Requests_Model;
+use CodeIgniter\API\ResponseTrait;
+
 
 class User_Dashboard extends BaseController
 {
+    use ResponseTrait;
     public function index()
     {
-         
-        $data['title'] = 'Dashboard'; 
+
+        $data['title'] = 'Dashboard';
 
         // total votes
         $totalVotes = new Votes_Model();
@@ -33,6 +38,17 @@ class User_Dashboard extends BaseController
         $data['closeVotes'] = $closeVotes->where('status', 'closed');
         $data['closeVotes'] = $closeVotes->countAllResults();
 
+
         return view('panel/user/dashboard', $data);
+    }
+    public function get_notification()
+    {
+
+        $requests = new Requests_Model();
+        $data['requests'] = $requests->select()->where('creator_id', session('user_id'))->findAll();
+        // echo '<pre>';
+        // print_r($data);
+        // die();
+        return $this->respond($data);
     }
 }

@@ -82,6 +82,8 @@ $routes->get('registration/activate/(:alphanum)', 'Registration_Controller::acti
 $routes->match(['get', 'post'], 'user/dashboard', 'User_Dashboard::index');
 
 //  ----------------- All User Routes ------------------
+//Notification
+$routes->get('getNotification', 'User_Dashboard::get_notification');
 // Chats
 // $routes->group('user',['filter'=>'AuthCheck'],function($routes){
 $routes->group('user', function ($routes) {
@@ -105,7 +107,7 @@ $routes->group('user', function ($routes) {
     $routes->get('getmsg/(:num)', 'Chats_Controller::msg/$1');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
-    $routes->get('groups/requests/accept/(:num)', 'Groups_Controller::setRequest/$1');
+    $routes->get('groups/requests/accept/(:any)', 'Groups_Controller::setRequest/$1/$1');
     $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
     $routes->get('groups/private', 'Groups_Controller::rooms');
     $routes->get('groups/private/single/(:num)', 'Groups_Controller::single_room/$1');

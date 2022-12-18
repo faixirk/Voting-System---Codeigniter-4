@@ -99,6 +99,8 @@
   float: left;
   color: #999;
 }
-
+.rightbar {
+    width: 360px !important;
+}
     </style>
 </head>

@@ -72,25 +72,25 @@
 
                 <!-- notification panel -->
                 <div class="notification-panel" id="pushNotificationArea">
-                    <button class="dropdown-toggle" v-cloak>
+                    <button class="dropdown-toggle" >
                         <i class="fal fa-bell"></i>
-                        <span v-if="items.length > 0" class="count">{{ items.length }}</span>
+                        <span  class="count">1</span>
                     </button>
                     <ul class="notification-dropdown">
                         <div class="dropdown-box">
                             <li>
-                                <a v-for="(item, index) in items" @click.prevent="readAt(item.id, item.description.link)" class="dropdown-item" href="javascript:void(0)">
+                                <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="fal fa-bell"></i>
                                     <div class="text">
-                                        <p v-cloak>{{ item.formatted_date }}</p>
-                                        <span v-cloak v-html="item.description.text"></span>
+                                        <p ></p>
+                                        <span id="getNotification"></span>
                                     </div>
                                 </a>
                             </li>
                         </div>
                         <div class="clear-all fixed-bottom">
-                            <a v-if="items.length > 0" @click.prevent="readAll" href="javascript:void(0)">Clear all</a>
-                            <a v-if="items.length == 0" href="javascript:void(0)">You have no notifications</a>
+                            <a href="javascript:void(0)">Clear all</a>
+                            <a href="javascript:void(0)" >You have no notifications</a>
                         </div>
                     </ul>
 

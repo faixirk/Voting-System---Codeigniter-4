@@ -101,3 +101,37 @@
 
 
 <?= include 'includes/footer.php'  ?>
+<script>
+  $(document).ready(function() {
+
+    setInterval(function() {
+      showmsg();
+    }, 5000);
+
+    showmsg();
+      function showmsg() {
+    //   var id = $("#groupID").html();
+      $.ajax({
+        type: "GET",
+        url: '<?= base_url() ?>' + "/getNotification",
+        // async: true,
+        // dataType: 'JSON',
+        success: function(data) {
+          var html = "";
+        //   alert(data);
+          for (i = 0; i < data.length; i++) {
+            html +=
+              "<div class='p-3 ms-3 mt-2 ' style='border-radius: 15px; background-color: rgba(57, 192, 237,.2);'>" +
+              data[i].user_id +
+              "</div>";
+          }
+          $("#getNotification").html(html);
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    }
+  });
+
+</script>

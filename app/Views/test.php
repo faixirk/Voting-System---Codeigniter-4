@@ -128,7 +128,7 @@ include 'includes/footer.php';
                             '<div class="row d-flex justify-content-around align-items-center"> <div class="col-3 team">' +
                             '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner1']+'" style="border-radius: 50%" alt="A" class="img-fluid">' +
                             '<p>'+vote['team_a'] + '</p> </div> <div class="col-6"><span> </span>' +
-                            '<button type="button" id="seeMore" class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
+                            '<button class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
                             '</div> <div class="col-3 team">' +
                             '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner2']+'" alt="B" style="border-radius: 50%" class="img-fluid">' +
                             '<p>'+vote['team_b'] + '</p> </div>' +

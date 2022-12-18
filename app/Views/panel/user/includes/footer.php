@@ -53,7 +53,7 @@
     var root = document.querySelector(':root');
     root.style.setProperty('--primary', '#8fb568');
 </script>
-<script>
+<!-- <script>
     'use strict';
     let pushNotificationArea = new Vue({
         el: "#pushNotificationArea",
@@ -113,7 +113,7 @@
             }
         }
     });
-</script>
+</script> -->
  
 
 
@@ -145,6 +145,7 @@
         $('#userList').addClass('d-block');
     });
 </script>
+
 </body>
 
 </html>

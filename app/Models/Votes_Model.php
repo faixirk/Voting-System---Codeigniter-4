@@ -5,6 +5,8 @@ class Votes_Model extends Model {
     protected $table = 'votes';
     protected $primaryKey = 'vote_id';
     protected $allowedFields = [
+        'title',
+        'question',
         'team_a',
         'team_b',  
         'category_id',

@@ -63,8 +63,6 @@ class Votes_Controller extends BaseController
                             ];
                             echo json_encode($data);
                         }
-
-
                     }else{
                         $query  = $votes->set('status', $status)->where('vote_id', $id);
                         $query = $votes->update();
@@ -156,12 +154,14 @@ class Votes_Controller extends BaseController
 
         if ($id != null) {
 
-            $isUnique = $votes->select('vote_id, description');      // check use_id exist in table
+            $isUnique = $votes->select('vote_id,title,question description');      // check use_id exist in table
             $isUnique = $votes->where('vote_id', $id)->first();
             if ($isUnique) {                                              // If found then send back | already voted
                 $data = [
                     'status' => true,
-                    'description' => $isUnique['description']
+                    'title' => $isUnique['title'],
+                    'qustion' => $isUnique['qustion'],
+                    'description' => $isUnique['description'],
 
                 ];
                 echo json_encode($data);
@@ -289,12 +289,13 @@ class Votes_Controller extends BaseController
     {
 
         $validation = [
+            "title" => 'required|trim|max_length[255]',
+            "question" => 'required|trim|max_length[255]',
             "teamA" => 'required|trim',
             "teamB" => 'required|trim',
             "category" => 'required|trim',
             "subCategory" => 'trim',
-            "description" => 'required|trim|min_length[15]|max_length[150]',
-            "voteType" => 'required|trim',
+            "description" => 'required|trim|min_length[15]|max_length[150]', 
             'banner1' => [
                 'rules' => 'uploaded[banner1]'
                     . '|is_image[banner1]'
@@ -310,7 +311,21 @@ class Votes_Controller extends BaseController
             ],
         ];
         if ($this->validate($validation) == FALSE) {
-            if ($this->validator->hasError('teamA')) {
+            if ($this->validator->hasError('title')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('title'),
+                ];
+                echo json_encode($data);
+            }
+            else if ($this->validator->hasError('question')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('question'),
+                ];
+                echo json_encode($data);
+            }
+            else if ($this->validator->hasError('teamA')) {
                 $data = [
                     'status' => false,
                     'message' => $this->validator->getError('teamA'),
@@ -328,14 +343,7 @@ class Votes_Controller extends BaseController
                     'status' => false,
                     'message' => $this->validator->getError('category'),
                 ];
-                echo json_encode($data);
-            } else if ($this->validator->hasError('voteType')) {
-                $data = [
-                    'status' => false,
-                    'message' => $this->validator->getError('voteType'),
-                ];
-                echo json_encode($data);
-            } else if ($this->validator->hasError('banner1')) {
+                echo json_encode($data); } else if ($this->validator->hasError('banner1')) {
                 $data =  [
                     'status' => false,
                     'message' => $this->validator->getError('banner1')
@@ -352,24 +360,22 @@ class Votes_Controller extends BaseController
 
             $votes = new Votes_Model();
 
+            $title  = $this->request->getPost('title');
+            $question  = $this->request->getPost('question');
             $teamA  = $this->request->getPost('teamA');
             $teamB  = $this->request->getPost('teamB');
             $category  = $this->request->getPost('category');
             $subCategory  = $this->request->getPost('subCategory');
             $description  = $this->request->getPost('description');
-            $voteType  = $this->request->getPost('voteType');
+            $voteType  = "public";
             $file1 = $this->request->getFile('banner1');
             $file2 = $this->request->getFile('banner2');
             if ($file1 && $file2) {
 
                 if ($file1->isValid() && !$file1->hasMoved() && $file2->isValid() && !$file2->hasMoved()) {
-
-
                     $path = './public/uploads/votes/';
-
                     $newName1 = $file1->getRandomName();
                     $newName2 = $file2->getRandomName();
-
                     $file1->move($path, $newName1);
                     $file2->move($path, $newName2);
                 } else {
@@ -391,6 +397,8 @@ class Votes_Controller extends BaseController
 
 
             $data = [
+                'title' => $title,
+                'question' => $question,
                 'team_a' => $teamA,
                 'team_b' => $teamB,
                 'category_id' => $category,

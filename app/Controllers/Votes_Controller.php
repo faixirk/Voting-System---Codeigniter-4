@@ -154,13 +154,13 @@ class Votes_Controller extends BaseController
 
         if ($id != null) {
 
-            $isUnique = $votes->select('vote_id,title,question description');      // check use_id exist in table
+            // $isUnique = $votes->select('vote_id,title,question description');      // check use_id exist in table
             $isUnique = $votes->where('vote_id', $id)->first();
             if ($isUnique) {                                              // If found then send back | already voted
                 $data = [
                     'status' => true,
                     'title' => $isUnique['title'],
-                    'qustion' => $isUnique['qustion'],
+                    'question' => $isUnique['question'],
                     'description' => $isUnique['description'],
 
                 ];

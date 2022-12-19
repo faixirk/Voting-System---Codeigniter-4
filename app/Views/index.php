@@ -131,7 +131,7 @@ include 'includes/footer.php';
                             '<div class="row d-flex justify-content-around align-items-center"> <div class="col-3 team">' +
                             '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner1']+'" style="border-radius: 50%" alt="A" class="img-fluid">' +
                             '<p>'+vote['team_a'] + '</p> </div> <div class="col-6"><h6>'+vote['question'].slice(0,15)+ '...' +'</h6>' +
-                            '<button type="button" id="seeMore" class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
+                            '<button type="button" class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
                             '</div> <div class="col-3 team">' +
                             '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner2']+'" alt="B" style="border-radius: 50%" class="img-fluid">' +
                             '<p>'+vote['team_b']+'</p> </div>' +
@@ -160,15 +160,11 @@ include 'includes/footer.php';
     getVo(999);
 </script>
 <script>
-
+  
     $(document).ready(function() {
-        $('#seeMore').click(function(){
-            alert(234);
-        })
-        $("#seeMorere").click(function() {
-            console.log("fsdfs");
-            alert(id);
-            var id = $(this).val();
+        
+        $("body").on("click", ".btn-info", function(){
+            var id = $(this).val(); 
             if (id != null) {
                 $.post("user/getDesc", {
                         id
@@ -176,8 +172,8 @@ include 'includes/footer.php';
                         var obj = JSON.parse(result);
                         if (obj.status == true) {
                             Swal.fire(
-                                'Description',
-                                ` <center>  ${obj.description} </center> `,
+                                `<b>${obj.title}</b>`,
+                                ` <center> ${obj.question} <br> ${obj.description} </center> `,
                             )
                         } else {
 
@@ -193,7 +189,8 @@ include 'includes/footer.php';
                 );
             }
         })
-        $(".voteCount").click(function() {
+        $("body").on("click", ".voteCount", function(){ 
+
             var id = $(this).val();
             var classType = this.className.split(" ")[1];
             var data = {
@@ -219,7 +216,7 @@ include 'includes/footer.php';
 
                             Swal.fire(
                                 'Votes',
-                                `${obj.message} <br> Votes: ${obj.teamA} -- ${obj.teamB}`,
+                                `${obj.message}`,
                                 'info'
                             )
                         }

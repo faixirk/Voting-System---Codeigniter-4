@@ -79,13 +79,13 @@ include 'includes/sidebar.php';
     </div>
     <!-- categories -->
     <div class="categories" id="categories">
-        <a href="#" id="999" class="active">
+        <a href="#" id="999" class="cat cat999 ">
             <i class="far fa-globe-americas"></i> <span>All Categories</span>
         </a>
 
 
         <?php foreach ($categories as $cat) : ?>
-            <a id="<?= $cat['cat_id'] ?>" class="btn cat">
+            <a id="<?= $cat['cat_id'] ?>" class="btn cat cat<?=$cat['cat_id'] ?> ">
                 <i class="far fa-futbol" aria-hidden="true"></i> <span><?= $cat['cat_title']; ?></span>
             </a>
         <?php endforeach; ?>
@@ -113,27 +113,30 @@ include 'includes/footer.php';
 ?>
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-
 <script>
+    
     function getVo(id){
+        $('.cat').removeClass('active');
+        $(`.cat${id}`).addClass(" active");
         $.ajax({
             type: "GET",
             url: "<?= base_url() ?>" + '/' + id,
             success: function(response) { 
-                if (response) {
+                if (response) { 
                     $('.votesList').empty();
                     var html = '';
                     $.each(JSON.parse(response), (key, vote) => {
                          html = '<div class="box">' +
+                            '<h5 class="mb-3">'+ vote['title'].slice(0,20) + '...' +'</h5>'+
                             '<div class="row d-flex justify-content-around align-items-center"> <div class="col-3 team">' +
                             '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner1']+'" style="border-radius: 50%" alt="A" class="img-fluid">' +
-                            '<p>'+vote['team_a'] + '</p> </div> <div class="col-6"><span> </span>' +
-                            '<button type="button" id="seeMore" class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
+                            '<p>'+vote['team_a'] + '</p> </div> <div class="col-6"><h6>'+vote['question'].slice(0,15)+ '...' +'</h6>' +
+                            '<button type="button" class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
                             '</div> <div class="col-3 team">' +
                             '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner2']+'" alt="B" style="border-radius: 50%" class="img-fluid">' +
-                            '<p>'+vote['team_b'] + '</p> </div>' +
+                            '<p>'+vote['team_b']+'</p> </div>' +
                             '<div class="col-12 align-self-end"> <div class="d-flex justify-content-between">' +
-                            '<button type="button" class="voteCount teamA teamA'+vote['vote_id'] + ' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team A </button>' +
+                            '<button type="button" class="voteCount teamA teamA'+vote['vote_id']+' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team A </button>' +
                             '<button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result'+vote['vote_id']+'"></button>' +
                             '<button type="button" class="voteCount teamB teamB'+vote['vote_id'] + ' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team B</button>' +
                             '</div> </div> </div> </div>';
@@ -145,9 +148,6 @@ include 'includes/footer.php';
 
                 }
 
-            },
-            error: function(error) {
-                console.log(error);
             }
         });
     }
@@ -160,9 +160,11 @@ include 'includes/footer.php';
     getVo(999);
 </script>
 <script>
+  
     $(document).ready(function() {
-        $(".btn-info").click(function() {
-            var id = $(this).val();
+        
+        $("body").on("click", ".btn-info", function(){
+            var id = $(this).val(); 
             if (id != null) {
                 $.post("user/getDesc", {
                         id
@@ -170,8 +172,8 @@ include 'includes/footer.php';
                         var obj = JSON.parse(result);
                         if (obj.status == true) {
                             Swal.fire(
-                                'Description',
-                                ` <center>  ${obj.description} </center> `,
+                                `<b>${obj.title}</b>`,
+                                ` <center> ${obj.question} <br> ${obj.description} </center> `,
                             )
                         } else {
 
@@ -187,7 +189,8 @@ include 'includes/footer.php';
                 );
             }
         })
-        $(".voteCount").click(function() {
+        $("body").on("click", ".voteCount", function(){ 
+
             var id = $(this).val();
             var classType = this.className.split(" ")[1];
             var data = {
@@ -213,7 +216,7 @@ include 'includes/footer.php';
 
                             Swal.fire(
                                 'Votes',
-                                `${obj.message} <br> Votes: ${obj.teamA} -- ${obj.teamB}`,
+                                `${obj.message}`,
                                 'info'
                             )
                         }
@@ -263,7 +266,7 @@ include 'includes/footer.php';
                     } else {
 
                         swal.fire({
-                            'icon': 'error',
+                            'icon': 'warning',
                             'text': "Request Failed!",
                         });
 

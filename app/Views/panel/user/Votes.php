@@ -26,6 +26,16 @@ include 'includes/sidebar.php';
                             <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                             <div class="row mb-3">
                                 <div class="form-group col-md-6">
+                                    <label for="title">Short Title</label>
+                                    <input type="text" class="form-control" placeholder="Enter Short Title" name="title" id="title">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="qstn">Question</label>
+                                    <input type="text" class="form-control" placeholder="Enter Question" name="question" id="qstn">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="form-group col-md-6">
                                     <label for="team1">Team A</label>
                                     <input type="text" class="form-control" placeholder="Team A" name="teamA" id="team1">
                                 </div>
@@ -67,17 +77,7 @@ include 'includes/sidebar.php';
                                     <label for="desc">Description</label>
                                     <textarea name="description" class="form-control" id="desc" required></textarea>
                                 </div>
-                            </div>
-                            <div class="row mb-3">
-                                <div class="form-group col-12">
-                                    <label for="type">Type</label>
-                                    <select class="custom-select form-control mr-sm-2" name="voteType" id="type" required>
-                                        <option default value="0">Choose...</option>
-                                        <option value="public">Public</option>
-                                        <option disabled value="2">Private</option>
-                                    </select>
-                                </div>
-                            </div>
+                            </div> 
 
                             <div class="modal-footer mr-3 my-2">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -96,9 +96,9 @@ include 'includes/sidebar.php';
             <thead class="thead-inverse">
                 <tr>
                     <th>ID</th>
+                    <th>Question</th>
                     <th>Team A</th>
-                    <th>Team B</th>
-                    <th>Created At</th>
+                    <th>Team B</th> 
                     <th> Status</th>
                     <th> Action</th>
                 </tr>
@@ -110,9 +110,9 @@ include 'includes/sidebar.php';
                 foreach ($votes as $v) :  ?>
                     <tr>
                         <td scope="row"><?= $count++; ?></td>
+                        <td><?= $v['question'] ?></td>
                         <td><?= $v['team_a'] ?></td>
-                        <td><?= $v['team_b'] ?></td>
-                        <td><?= $v['description'] ?></td>
+                        <td><?= $v['team_b'] ?></td> 
                         <td>
                             <select class="form-select voteAction" name="vote_status" id="<?= $v['vote_id'] ?>">
                                 <option value="active" <?= ($v['status'] === 'active') ?  'selected' : '' ?>>Active</option>
@@ -221,6 +221,16 @@ include 'includes/sidebar.php';
     })
     $('#vote-form').validate({
         rules: {
+            title: {
+                required: true,
+                minlength: 3,
+                maxlength: 50
+            },
+            question: {
+                required: true,
+                minlength: 3,
+                maxlength: 50
+            },
             teamA: {
                 required: true,
                 minlength: 3,
@@ -296,10 +306,10 @@ include 'includes/sidebar.php';
                             window.location.reload();
                         })
                     } else {
-                        swal.fire(
-                            'warning',
-                            'Failed',
-                            result.message
+                        swal.fire({
+                            icon: 'info',
+                            title: 'Failed',
+                            text: result.message,}
                         )
 
                     }

@@ -51,14 +51,12 @@ class Home extends BaseController
 
         if ($id!=null) {
             $data['title'] = 'Daily Voting';
-            $votes = new Votes_Model();
-            $votes = $votes->where('status', 'active');
-            if($id == 999){
-                $votes = $votes->orderBy('vote_id', 'DESC')->findAll();
-
+            $votesModel = new Votes_Model();
+            $votes = $votesModel->where('status', 'active');
+            if($id != 999){
+                $votes = $votesModel->where('category_id', $id)->orderBy('vote_id', 'DESC')->findAll();
             }else{
-                $votes = $votes->where('category_id', $id)->orderBy('vote_id', 'DESC')->findAll();
-
+                $votes = $votesModel->orderBy('vote_id', 'DESC')->findAll();
             }
             echo json_encode($votes);
         }else{

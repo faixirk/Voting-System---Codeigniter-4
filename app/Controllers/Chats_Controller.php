@@ -15,8 +15,13 @@ class Chats_Controller extends BaseController
 	use ResponseTrait;
 	public function index()
 	{
+		if(!session('isLoggedIn')){
+            return redirect()->to('/');
+        }
+        else{
 		$data['title'] = "Chats";
 		return view('panel/user/chats', $data);
+		}
 	}
 	public function public_chat()
 	{

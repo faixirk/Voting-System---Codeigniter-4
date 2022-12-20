@@ -35,9 +35,9 @@ class Home extends BaseController
         $data['user'] = $user->findAll();
         $data['logo'] = $l->first();
 
-        $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc')->findAll();
-
-
+        $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc');
+        $data['votes'] = $votes->where('type', 'public')->findAll();
+        
         //Both quereis can be used to find sub categories
         // $data['sub_categories'] = $sub_cat->findAll();
         $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();
@@ -53,6 +53,7 @@ class Home extends BaseController
             $data['title'] = 'Daily Voting';
             $votesModel = new Votes_Model();
             $votes = $votesModel->where('status', 'active');
+            $votes = $votesModel->where('type', 'public');
             if($id != 999){
                 $votes = $votesModel->where('category_id', $id)->orderBy('vote_id', 'DESC')->findAll();
             }else{

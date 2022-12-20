@@ -14,7 +14,10 @@ class User_Dashboard extends BaseController
     {
 
         $data['title'] = 'Dashboard';
-
+        if(!session('isLoggedIn')){
+            return redirect()->to('/');
+        }
+        else{
         // total votes
         $totalVotes = new Votes_Model();
         $data['totalVotes'] = $totalVotes->where('user_id', session('user_id'));
@@ -40,6 +43,8 @@ class User_Dashboard extends BaseController
 
 
         return view('panel/user/dashboard', $data);
+        }
+
     }
     public function get_notification()
     {

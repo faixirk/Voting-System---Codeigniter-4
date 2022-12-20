@@ -1,70 +1,73 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\User_Model;
 use App\Libraries\Validation;
 
-class User_Profile_Controller extends BaseController{
+class User_Profile_Controller extends BaseController
+{
 
-    public function index(){
+    public function index()
+    {
         $data = [];
         $data['title'] = 'User | Profile';
-        $user = new User_Model();
-        $data['user'] = $user->where('user_id', session('user_id'))->first();
-      
-        return view('panel/user/profile', $data);
+        if (!session('isLoggedIn')) {
+            return redirect()->to('/');
+        } else {
+            $user = new User_Model();
+            $data['user'] = $user->where('user_id', session('user_id'))->first();
+
+            return view('panel/user/profile', $data);
+        }
     }
-    public function profileUpdate(){
-        $data=[];
-        if($this->request->getMethod()=='post'){
+    public function profileUpdate()
+    {
+        $data = [];
+        if ($this->request->getMethod() == 'post') {
             //validation rules
             $rules = [
-              
-              'firstname' => [
-                'rules' => 'required|min_length[3]|max_length[40]',
-                'errors'=> [
-                    'required' => 'First name is required',
-                    'min_length' => 'Minimum length is 3 characters short',
-                    'max_length' => 'Maximuim length is 40 characters long'
-                ]
+
+                'firstname' => [
+                    'rules' => 'required|min_length[3]|max_length[40]',
+                    'errors' => [
+                        'required' => 'First name is required',
+                        'min_length' => 'Minimum length is 3 characters short',
+                        'max_length' => 'Maximuim length is 40 characters long'
+                    ]
                 ],
-              'lastname' => [
-                'rules' => 'required|min_length[3]|max_length[40]',
-                'errors'=> [
-                    'required' => 'First name is required',
-                    'min_length' => 'Minimum length is 3 characters short',
-                    'max_length' => 'Maximuim length is 40 characters long'
+                'lastname' => [
+                    'rules' => 'required|min_length[3]|max_length[40]',
+                    'errors' => [
+                        'required' => 'First name is required',
+                        'min_length' => 'Minimum length is 3 characters short',
+                        'max_length' => 'Maximuim length is 40 characters long'
+                    ]
                 ]
-              ]
             ];
-            if($this->validate($rules)){
+            if ($this->validate($rules)) {
                 $user = new User_Model();
                 $f_name = $this->request->getPost('firstname');
                 $l_name = $this->request->getPost('lastname');
                 $emailCheck = $user->where('user_id', session('user_id'))->first();
-                if($emailCheck){
-                $user->set('first_name',$f_name);
-                $user->set('last_name',$l_name);
-                $user->where('user_id', session('user_id'));
-                $query = $user->update();
-                if($query){
-                    //user user name updated successfully
-                    echo 1; 
-                }
-                else{
-                
-                    echo 0;     
-                }
-                    
-            }
-            else{
-                //email not verified
-                echo 3;
-            }
-                
+                if ($emailCheck) {
+                    $user->set('first_name', $f_name);
+                    $user->set('last_name', $l_name);
+                    $user->where('user_id', session('user_id'));
+                    $query = $user->update();
+                    if ($query) {
+                        //user user name updated successfully
+                        echo 1;
+                    } else {
 
-            }
-            else{
+                        echo 0;
+                    }
+                } else {
+                    //email not verified
+                    echo 3;
+                }
+            } else {
                 //validation failed
                 echo 2;
             }
@@ -135,35 +138,36 @@ class User_Profile_Controller extends BaseController{
     public function profileimageUpdate()
     {
         $validationRule = [
-            'profileimage' => [ 
-                'rules'=>[
+            'profileimage' => [
+                'rules' => [
                     'uploaded[profileimage]',
                     'mime_in[profileimage,image/jpg,image/jpeg,image/png]',
                 ]
             ],
         ];
-        
-        if (!$this->validate($validationRule)) { 
+
+        if (!$this->validate($validationRule)) {
             echo 2;
-        }else{
-            if($file = $this->request->getFile('profileimage')){
-                if($file->isValid() && !$file->hasMoved()){
+        } else {
+            if ($file = $this->request->getFile('profileimage')) {
+                if ($file->isValid() && !$file->hasMoved()) {
                     $old_pic = session('pic');
-                    
+
                     $path = './public/uploads/profile/';
-                    if($old_pic!='avatar.jpg'){
-                    if(is_file($path.$old_pic)){
-                        unlink($path.$old_pic); 
-                    }}
+                    if ($old_pic != 'avatar.jpg') {
+                        if (is_file($path . $old_pic)) {
+                            unlink($path . $old_pic);
+                        }
+                    }
                     $newName = $file->getRandomName();
-                    $file->move($path,$newName);
+                    $file->move($path, $newName);
                     $user = new User_Model();
                     // gives UPDATE `mytable` SET `field` = 'field' WHERE `id` = ?
-                    $user->set('pic',$newName);
-                    $user->where('user_id',session('user_id'));
-                    $query = $user->update(); 
-                    if($query){ 
-                        session()->set('pic',$newName);
+                    $user->set('pic', $newName);
+                    $user->where('user_id', session('user_id'));
+                    $query = $user->update();
+                    if ($query) {
+                        session()->set('pic', $newName);
                         $data = [
                             'success' => true,
                             'message' => "Successfully Updated!",
@@ -171,19 +175,17 @@ class User_Profile_Controller extends BaseController{
                         ];
                         //success
                         return $this->response->setJSON($data);
-                    }else{
+                    } else {
                         //query failed
                         echo 3;
                     }
-                }else{
+                } else {
                     //file not valid and has moved
                     echo 4;
-
                 }
-            }else{
+            } else {
                 //file not get
                 echo 5;
-
             }
         }
     }

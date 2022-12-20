@@ -13,12 +13,16 @@ class Groups_Controller extends BaseController
 {
     public function index()
     {
-        $data['title'] = "User | Groups";
-        $user = new User_Model();
-        $data['user'] = $user->select('*');
-        $data['user'] = $user->where('user_id', session('user_id'))->first();
+        if (!session('isLoggedIn')) {
+            return redirect()->to('/');
+        } else {
+            $data['title'] = "User | Groups";
+            $user = new User_Model();
+            $data['user'] = $user->select('*');
+            $data['user'] = $user->where('user_id', session('user_id'))->first();
 
-        return view('panel/user/groups', $data);
+            return view('panel/user/groups', $data);
+        }
     }
     public function add_group()
     {

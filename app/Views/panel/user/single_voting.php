@@ -134,7 +134,7 @@ include 'includes/header.php';
                   <option value="closed" <?= ($vote['status'] === 'closed') ?  'selected' : '' ?>>Closed</option>
                   <option value="result" <?= ($vote['status'] === 'result') ?  'selected' : '' ?>>Result</option>
                 </select>
-                <button class="btn-custom w-75 my-2" onclick="deleteVote(<?= $vote['vote_id'] ?>)">Delete</button>
+                <button class="btn-custom btn-danger w-75 my-2" onclick="deleteVote(<?= $vote['vote_id'] ?>)">Delete</button>
               <?php } ?>
 
 

@@ -8,7 +8,7 @@
     <?= csrf_meta() ?>
 
     <meta name="description" content="Daily Voting - An Online Voting Platform">
-    <meta name="keywords" content="bet, voting, betting, cricket, gambling, game, hyip, invest, ipl, , online voting, soccer, sports">
+    <meta name="keywords" content="vote, voting, voting, cricket, gambling, game, hyip, invest, ipl, , online voting, soccer, sports">
     <link rel="shortcut icon" href="#" type="image/x-icon">
 
     <link rel="apple-touch-icon" href="#">
@@ -19,11 +19,11 @@
     <meta name="apple-mobile-web-app-title" content="Daily Voting | Dashboard">
 
     <meta itemprop="name" content="Voting | Dashboard">
-    <meta itemprop="description" content="Voting - An Online Betting Platform">
+    <meta itemprop="description" content="Voting - An Online voting Platform">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Voting - An Online Betting Platform">
-    <meta property="og:description" content="Voting - An Online Betting Platform">
+    <meta property="og:title" content="Voting - An Online Voting Platform">
+    <meta property="og:description" content="Voting - An Online voting Platform">
     <meta property="og:image:type" content="image/png" />
 
 

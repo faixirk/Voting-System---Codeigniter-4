@@ -111,7 +111,6 @@ include 'includes/sidebar.php';
               type: "GET",
               url: '<?= base_url() ?>' + "/user/groups/requests/accept/" + id + '/' + userID,
               success: function(data){
-                alert(data);
                 if(data == 1){
                     swal.fire({
                             'icon': 'success',

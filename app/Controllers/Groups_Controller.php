@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\Groups_Model;
 use App\Models\User_Model;
 use App\Models\Requests_Model;
+use App\Models\Votes_Model;
+use App\Models\Private_Members_Model;
 
 class Groups_Controller extends BaseController
 {
@@ -52,7 +54,7 @@ class Groups_Controller extends BaseController
             $query = $group->insert($data);
             if ($query) {
                 $group_id = $group->where('user_id', session('user_id'))->orderBy('group_id', 'DESC')->first();
-                
+
                 $data2 = [
                     'group_id' => $group_id['group_id'],
                     'creator_id' => session('user_id'),
@@ -102,7 +104,7 @@ class Groups_Controller extends BaseController
         $checkUser = $requests->where('user_id', $userID)->first();
         $checkCreator = $user->select();
         $checkCreator = $user->where('user_id', $checkGroup['user_id'])->first();
-      
+
         if (session('isLoggedIn') == true) {  //true if user is logged in
             $data = [
                 'user_id' => session('user_id'),   //user who is logged in
@@ -149,22 +151,34 @@ class Groups_Controller extends BaseController
             echo 3;
         }
     }
-    public function setRequest($id, $user_id)
+    public function setRequest($id, $userID)
     {
         $requests = new Requests_Model();
         $user = new User_Model();
-        $check = $requests->where('group_id', $id) && $requests->where()->first();
-        // $data['user'] = $requests->select()->join('user', 'user.user_id', 'requests.user_id');
-        $data['user'] = $user->where('user_id', $check['user_id'])->first();
-        echo '<pre>';
-        print_r($user_id);
-        die();
+        $private = new Private_Members_Model();
+        $check = $requests->where('group_id', $id);
+        $check = $requests->where('user_id', $userID)->first();
+        $users = $user->select()->where('user_id', $userID)->first();
+
+
         if ($check) {
             $requests->set('has_joined', 'true');
             $requests->where('group_id', $id);
             $query = $requests->update();
+            $data = [
+                'first_name' => $users['first_name'],
+                'last_name' => $users['last_name'],
+                'user_email' => $users['user_email'],
+                'pic' => $users['pic'],
+                'created_at' => $users['created_at'],
+                'updated_at' => $users['updated_at'],
+                'creator_id' => $check['creator_id'],
+                'group_id' => $id,
+                'user_id' => $userID,
+            ];
+            $query2 = $private->insert($data);
 
-            if ($query) {
+            if ($query && $query2) {
                 //has joined set to 1
                 echo 1;
             } else {
@@ -194,8 +208,8 @@ class Groups_Controller extends BaseController
         $requests = new Requests_Model();
         $groups = new Groups_Model();
         $data['private'] = $groups->select()->join('requests', 'requests.group_id=groups.group_id')->findAll();
-       
-     
+
+
         return view('panel/user/rooms', $data);
     }
     public function single_room($id)
@@ -203,11 +217,145 @@ class Groups_Controller extends BaseController
         $data['title'] = 'Private Room';
         $groups = new Groups_Model();
         $users = new User_Model();
+        $votes = new Votes_Model();
         $requests = new Requests_Model();
         $data['members'] = $requests->select('*')->join('user', 'user.user_id=requests.user_id');
         $data['members'] = $requests->where('group_id', $id)->findAll();
+        $data['member'] = $requests->where('user_id', session('user_id'));
+        $data['member'] = $requests->where('group_id', $id);
+        $data['member'] = $requests->where('has_joined', 'true')->first();
+        $data['votes'] = $votes->where('type', 'private');
+        $data['votes'] = $votes->where('group_id', $id);
+        $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc')->findAll();
 
 
         return view('panel/user/single_voting', $data);
+    }
+    function addVote($id)
+    {
+
+        $validation = [
+            "teamA" => 'required|trim',
+            "teamB" => 'required',
+            "category" => 'required|trim',
+            "subCategory" => 'trim',
+            "description" => 'required|trim|min_length[15]|max_length[150]',
+            'banner1' => [
+                'rules' => 'uploaded[banner1]'
+                    . '|is_image[banner1]'
+                    . '|mime_in[banner1,image/jpg,image/jpeg,image/gif,image/png]'
+
+            ],
+            'banner2' => [
+                'rules' => [
+                    'uploaded[banner2]',
+                    // 'mime_in[banner2,image/jpg,image/jpeg,image/png]',
+                ]
+            ],
+        ];
+        if ($this->validate($validation) == FALSE) {
+            if ($this->validator->hasError('teamA')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('teamA'),
+                ];
+                echo json_encode($data);
+            }
+            if ($this->validator->hasError('teamB')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('teamB'),
+                ];
+                echo json_encode($data);
+            } else if ($this->validator->hasError('category')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('category'),
+                ];
+                echo json_encode($data);
+            } else if ($this->validator->hasError('banner1')) {
+                $data =  [
+                    'status' => false,
+                    'message' => $this->validator->getError('banner1')
+                ];
+                echo json_encode($data);
+            } else if ($this->validator->hasError('banner2')) {
+                $data =  [
+                    'status' => false,
+                    'message' => $this->validator->getError('banner2')
+                ];
+                echo json_encode($data);
+            }
+        } else {
+
+            $votes = new Votes_Model();
+
+            $teamA  = $this->request->getPost('teamA');
+            $teamB  = $this->request->getPost('teamB');
+            $category  = $this->request->getPost('category');
+            $subCategory  = $this->request->getPost('subCategory');
+            $description  = $this->request->getPost('description');
+            $file1 = $this->request->getFile('banner1');
+            $file2 = $this->request->getFile('banner2');
+            $group_id = $id;
+            if ($file1 && $file2) {
+
+                if ($file1->isValid() && !$file1->hasMoved() && $file2->isValid() && !$file2->hasMoved()) {
+
+
+                    $path = './public/uploads/votes/';
+
+                    $newName1 = $file1->getRandomName();
+                    $newName2 = $file2->getRandomName();
+
+                    $file1->move($path, $newName1);
+                    $file2->move($path, $newName2);
+                } else {
+                    //file not valid and has moved
+                    $data = [
+                        'status' => false,
+                        'message' => 'Error occured while creating vote.'
+                    ];
+                    echo json_encode($data);
+                }
+            } else {
+                //file not get
+                $data = [
+                    'status' => false,
+                    'message' => 'Error occured while creating vote.'
+                ];
+                echo json_encode($data);
+            }
+
+
+            $data = [
+                'team_a' => $teamA,
+                'team_b' => $teamB,
+                'category_id' => $category,
+                'description' => $description,
+                'subCategory_id' => $subCategory,
+                'banner1' => $newName1,
+                'banner2' => $newName2,
+                'description' => $description,
+                'type' => 'private',
+                'group_id' => $id,
+                'user_id' => session('user_id')
+            ];
+            $query = $votes->save($data);
+            if ($query) {
+                $data = [
+                    'status' => true,
+                    'message' => 'Successfully created.'
+                ];
+                echo json_encode($data);
+            } else {
+                $data = [
+                    'status' => false,
+                    'message' => 'Error occured while creating vote.'
+                ];
+                echo json_encode($data);
+            }
+            exit(0);
+        }
     }
 }

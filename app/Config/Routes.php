@@ -107,13 +107,14 @@ $routes->group('user', function ($routes) {
     $routes->get('getmsg/(:num)', 'Chats_Controller::msg/$1');
     $routes->get('groups/requests', 'Groups_Controller::requests_index');
     $routes->get('groups/requests/(:num)', 'Groups_Controller::requests/$1');
-    $routes->get('groups/requests/accept/(:any)', 'Groups_Controller::setRequest/$1/$1');
+    $routes->get('groups/requests/accept/(:num)/(:any)', 'Groups_Controller::setRequest/$1/$2');
     $routes->get('groups/requests/delete/(:num)', 'Groups_Controller::deleteRequest/$1');
     $routes->get('groups/private', 'Groups_Controller::rooms');
     $routes->get('groups/private/single/(:num)', 'Groups_Controller::single_room/$1');
 
     // Votes
     $routes->post('addvote', 'Votes_Controller::addVote');
+    $routes->post('private/addvote/(:num)', 'Groups_Controller::addVote/$1');
     $routes->post('countvote', 'Votes_Controller::addVoteCount');
     $routes->post('updatestatus', 'Votes_Controller::updateVoteStatus');
     $routes->post('getDesc', 'Votes_Controller::getDescription');

@@ -15,6 +15,7 @@ class Votes_Model extends Model {
         'type',
         'teama_votes',
         'teamb_votes',
+        'group_id',
         'user_id',
         'status'
     ];

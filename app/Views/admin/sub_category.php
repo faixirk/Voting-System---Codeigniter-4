@@ -59,14 +59,14 @@ include 'includes/sidebar.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($sub_category as $sub_cat) : ?>
+                        <?php $count=0; foreach ($sub_category as $sub_cat) : ?>
                             <tr>
                                 <td class="text-center">
                                     <input type="checkbox" id="chk-23" class="form-check-input row-tic tic-check" name="check" value="23" data-id="23">
                                     <label for="chk-23"></label>
                                 </td>
 
-                                <td data-label="SL No." class="text-center"><?= $sub_cat['sub_cat_id']; ?></td>
+                                <td data-label="SL No." class="text-center"><?= ++$count; ?></td>
                                 <td data-label="Name">
                                     <div class="d-lg-flex d-block align-items-center ">
 
@@ -97,7 +97,7 @@ include 'includes/sidebar.php';
                                             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <button class="dropdown-item editBtn"  value="<?= $sub_cat['sub_cat_id'] ?>" data-title="<?= $sub_cat['sub_cat_title'] ?>" data-status="<?= $sub_cat['status']; ?>" data-target="#editModal" data-toggle="modal">
+                                            <button class="dropdown-item editBtn" value="<?= $sub_cat['sub_cat_id'] ?>" data-title="<?= $sub_cat['sub_cat_title'] ?>" data-status="<?= $sub_cat['status']; ?>" data-target="#editModal" data-toggle="modal">
                                                 <i class="fa fa-edit text-warning pr-2" aria-hidden="true"></i> Edit </button>
 
                                             <button class="dropdown-item notiflix-confirm deleteSubCat" data-target="#delete-modal" data-toggle="modal" value="<?= $sub_cat['sub_cat_id'] ?>">
@@ -237,23 +237,23 @@ include 'includes/sidebar.php';
 
                             </select>
                         </div>
-                            <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control" name="title" value="" required>
-                            </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" name="title" value="" required>
+                        </div>
 
 
 
-                            <div class="form-group">
-                                <label for="edit-status" class="text-dark"> Status </label>
-                                <input data-toggle="toggle" id="edit-status" data-onstyle="success" data-offstyle="info" data-on="Active" data-off="Deactive" data-width="100%" type="checkbox" name="status">
-                            </div>
+                        <div class="form-group">
+                            <label for="edit-status" class="text-dark"> Status </label>
+                            <input data-toggle="toggle" id="edit-status" data-onstyle="success" data-offstyle="info" data-on="Active" data-off="Deactive" data-width="100%" type="checkbox" name="status">
+                        </div>
 
                     </div>
-                <div class="modal-footer">
-                    <button id="editConfirm" type="button" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
-                </div>
+                    <div class="modal-footer">
+                        <button id="editConfirm" type="button" class="btn btn-primary">Update</button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -353,8 +353,9 @@ include 'includes/sidebar.php';
                             swal.fire({
                                 'icon': 'success',
                                 'text': "Sub Category Updated!",
+                            }).then(() => {
+                                window.location.reload();
                             });
-                            window.location.reload();
                         } else if (data == 2) {
                             swal.fire({
                                 'icon': 'info',
@@ -408,3 +409,13 @@ include 'includes/sidebar.php';
         });
         // -------------------------------------------------------------------------------------------
     </script>
+     <script>
+    $(document).ready(function() {
+        $('.notiflix-confirm').on('click', function() {
+
+        })
+        $('#zero_config').DataTable({
+            pagingType: 'full_numbers',
+        });
+    });
+</script>

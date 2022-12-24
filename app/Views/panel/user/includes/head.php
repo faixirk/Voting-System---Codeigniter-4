@@ -102,8 +102,8 @@
 .rightbar {
     width: 360px !important;
 }
-.leftbar {
+/* .leftbar {
   width: 290px !important;
-}
+} */
     </style>
 </head>

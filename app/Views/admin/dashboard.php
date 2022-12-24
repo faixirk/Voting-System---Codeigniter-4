@@ -64,44 +64,50 @@ include 'includes/sidebar.php';
                             <th>Question</th>
                             <th class="text-center">Match</th>
                             <th>Start Time</th>
-                            <th>Result</th>
+                            <th>Winner</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                            $count = 0;
-                        foreach($votes as $v):
-                            $count++; 
+                        <?php
+                        $count = 0;
+                        foreach ($votes as $v) :
+                            $count++;
                         ?>
-                        <tr>
-                            <td data-label="SL No."><?= $count ?></td>
-                            <td data-label="Question">Who will win?</td>
-                            <td data-label="Match">
-                                <div class="d-lg-flex d-block align-items-center ">
-                                    <div class="mr-3 cursor-pointer" title="Team A">
-                                        <small class="text-dark font-weight-bold"><?= $v['team_a'] ?></small>
-                                    </div>
-                                    <div class="mr-2 cursor-pointer" title="CSK">
-                                        <img src="<?= base_url('public/uploads/votes/'.$v['banner1'])?>" alt="user" class="rounded-circle" width="25" height="25">
-                                    </div>
-                                    <small class="font-italic mb-0 font-16 ">vs</small>
+                            <tr>
+                                <td data-label="SL No."><?= $count ?></td>
+                                <td data-label="Question">Who will win?</td>
+                                <td data-label="Match">
+                                    <div class="d-lg-flex d-block align-items-center ">
+                                        <div class="mr-3 cursor-pointer" title="Team A">
+                                            <small class="text-dark font-weight-bold"><?= $v['team_a'] ?></small>
+                                        </div>
+                                        <div class="mr-2 cursor-pointer" title="CSK">
+                                            <img src="<?= base_url('public/uploads/votes/' . $v['banner1']) ?>" alt="user" class="rounded-circle" width="25" height="25">
+                                        </div>
+                                        <small class="font-italic mb-0 font-16 ">vs</small>
 
-                                    <div class="mr-3 ml-2 cursor-pointer" title="Team B">
-                                        <img src="<?= base_url('public/uploads/votes/'.$v['banner2'])?>" alt="user" class="rounded-circle" width="25" height="25">
+                                        <div class="mr-3 ml-2 cursor-pointer" title="Team B">
+                                            <img src="<?= base_url('public/uploads/votes/' . $v['banner2']) ?>" alt="user" class="rounded-circle" width="25" height="25">
+                                        </div>
+                                        <div class="cursor-pointer" title="KKR">
+                                            <small class="text-dark font-weight-bold"><?= $v['team_b'] ?></small>
+                                        </div>
                                     </div>
-                                    <div class="cursor-pointer" title="KKR">
-                                        <small class="text-dark font-weight-bold"><?= $v['team_b'] ?></small>
-                                    </div>
-                                </div>
-                            </td>
-                            <td data-label="End Time">
-                            <?= $v['created_at'] ?>
-                            </td>
-                            <td data-label="Predictions"><span class="badge badge-success">3</span></td>
-                           
-                        </tr>
+                                </td>
+                                <td data-label="End Time">
+                                    <?= $v['created_at'] ?>
+                                </td>
+                                <?php if ($v['teama_vote'] > $v['teamb_vote']) { ?>
+                                <td data-label="Predictions"><span class="badge badge-success"><?= $v['team_a']?></span></td>
+                                <?php } else if($v['teama_vote'] < $v['teamb_vote']){ ?>
+                                    <td data-label="Predictions"><span class="badge badge-success"><?= $v['team_b']?></span></td>
+                                <?php } else{?>
+                                    <td data-label="Predictions"><span class="badge badge-info"> In-progress</span></td>
+                                    <?php } ?>
+
+                            </tr>
                         <?php endforeach; ?>
-                        
+
                     </tbody>
                 </table>
                 <nav id="pagination">
@@ -111,7 +117,7 @@ include 'includes/sidebar.php';
         </div>
     </div>
 
-  
+
 
     <?php
     include 'includes/footer.php';

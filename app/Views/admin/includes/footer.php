@@ -23,34 +23,35 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap4.min.js"></script>
-<script>
-        'use strict'
-        $(document).ready(function () {
-            
-            $('.iconPicker').iconpicker({
-                align: 'center', // Only in div tag
-                arrowClass: 'btn-danger',
-                arrowPrevIconClass: 'fas fa-angle-left',
-                arrowNextIconClass: 'fas fa-angle-right',
-                cols: 10,
-                footer: true,
-                header: true,
-                icon: 'fas fa-bomb',
-                iconset: 'fontawesome5',
-                labelHeader: '{0} of {1} pages',
-                labelFooter: '{0} - {1} of {2} icons',
-                placement: 'bottom', // Only in button tag
-                rows: 5,
-                search: true,
-                searchText: 'Search icon',
-                selectedClass: 'btn-success',
-                unselectedClass: ''
-            }).on('change', function (e) {
-                $(this).parent().siblings('.icon').val(`${e.icon}`);
-            });
 
+<script>
+    'use strict'
+    $(document).ready(function() {
+
+        $('.iconPicker').iconpicker({
+            align: 'center', // Only in div tag
+            arrowClass: 'btn-danger',
+            arrowPrevIconClass: 'fas fa-angle-left',
+            arrowNextIconClass: 'fas fa-angle-right',
+            cols: 10,
+            footer: true,
+            header: true,
+            icon: 'fas fa-bomb',
+            iconset: 'fontawesome5',
+            labelHeader: '{0} of {1} pages',
+            labelFooter: '{0} - {1} of {2} icons',
+            placement: 'bottom', // Only in button tag
+            rows: 5,
+            search: true,
+            searchText: 'Search icon',
+            selectedClass: 'btn-success',
+            unselectedClass: ''
+        }).on('change', function(e) {
+            $(this).parent().siblings('.icon').val(`${e.icon}`);
         });
-    </script>
+
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('.notiflix-confirm').on('click', function() {
@@ -71,7 +72,6 @@
         var modal = $('#editModal');
         var obj = $(this).data('resource');
         modal.find('input[name=name]').val(obj.name);
-        alert('dasdas');
         $('.questionId').val(obj.id);
         $('#editStatus').val(obj.status);
         $('#editEndDate').val(obj.end_time);

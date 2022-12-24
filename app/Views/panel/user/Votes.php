@@ -43,7 +43,7 @@ include 'includes/sidebar.php';
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="subCateg">Sub Category</label>
-                                    <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
+                                    <select class="custom-select form-control mr-sm-2 subCateg" required name="subCategory" id="subCateg">
                                         <option selected>Choose...</option>
                                     </select>
                                 </div>
@@ -211,11 +211,14 @@ include 'includes/sidebar.php';
         var id = $('#categ').find('option:selected').val();
         $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
             if (result) {
+                $('.subCateg').empty();
+
                 $.each(JSON.parse(result), (key, value) => {
                     $('#subCateg').append('<option value=' + value.sub_cat_id + '>' + value.sub_cat_title + '</option>');
                 })
             } else {
-                $('#subCateg').append('<option value=' + 99 + '>' + "Empty List" + '</option>');
+                $('.subCateg').empty();
+
             }
         })
     })

@@ -5,14 +5,16 @@ namespace App\Controllers;
 use App\Libraries\Validation;
 use CodeIgniter\Controller;
 use App\Models\Admin_Model;
+use App\Models\Breadcrumb_Model;
 
 class Admin_Login_Controller extends BaseController
 {
     public function index()
     {
         if (session('isLoggedIn') != true) {
-
+            $breadcrumb = new Breadcrumb_Model();
             $data['title'] = 'Login';
+            $data['breadcrumb'] = $breadcrumb->first();
             return view('admin/admin_login', $data);
         } else {
             return redirect()->to('/admin/dashboard');

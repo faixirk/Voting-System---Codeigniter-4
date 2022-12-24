@@ -67,14 +67,14 @@ include 'includes/sidebar.php';
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($categories as $cat) : ?>
+                        <?php $count = 0; foreach ($categories as $cat) : ?>
                             <tr>
                                 <td class="text-center">
                                     <input type="checkbox" id="chk-26" class="form-check-input row-tic tic-check" name="check" value="26" data-id="26">
                                     <label for="chk-26"></label>
                                 </td>
 
-                                <td data-label="SL No." class="text-center"><?= $cat['cat_id']; ?></td>
+                                <td data-label="SL No." class="text-center"><?= ++$count; ?></td>
                                 <td data-label="Name">
                                     <?= $cat['cat_title']; ?>
                                 </td>
@@ -189,26 +189,91 @@ include 'includes/sidebar.php';
                                 <option value="&lt;i class=&quot;far fa-shuttlecock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-shuttlecock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Badminton">
                                     Badminton </i>
                                 </option>
+                                <option value="&lt;i class=&quot;fas fa-bath&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bath&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bath">
+                                    Bath </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-baseball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-baseball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Baseball">
                                     Baseball </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-basketball-ball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-basketball-ball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Basketball">
                                     Basketball </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bell">
+                                    Bell </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-bicycle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bicycle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bicycle">
+                                    Bicycle </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-book-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-book-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Book">
+                                    Book </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-box-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-box-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Box">
+                                    Box </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-boxing-glove&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-boxing-glove&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Boxing">
                                     Boxing </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-building&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-building&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Building">
+                                    Building </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-bullhorn&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bullhorn&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bullhorn">
+                                    Bullhorn </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-camera&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-camera&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Camera">
+                                    Camera </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-graduation-cap&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-graduation-cap&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cap">
+                                    Cap </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-car&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-car&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Car">
+                                    Car </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-cat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-cat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cat">
+                                    Cat </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-chess&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-chess&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Chess">
                                     Chess </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-clipboard-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-clipboard-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Clipboard">
+                                    Clipboard </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cricket">
                                     Cricket </i>
                                 </option>
+                                <option value="&lt;i class=&quot;far fa-comment&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-comment&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Comment">
+                                    Comment </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-couch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-couch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Couch">
+                                    Couch </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-desktop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-desktop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Desktop">
+                                    Desktop </i>
+                                </option>
+
                                 <option value="&lt;i class=&quot;far fa-dice&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-dice&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Dice">
                                     Dice </i>
                                 </option>
+                                <option value="&lt;i class=&quot;fas fa-dog&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-dog&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Dog">
+                                    Dog </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-dollar-sign&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-dollar-sign&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Dollar">
+                                    Dollar </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-donate&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-donate&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Donate">
+                                    Donate </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-envelope&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-envelope&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Envelope">
+                                    Envelope </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-gamepad-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-gamepad-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; ESports">
                                     ESports </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-venus-double&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-venus-double&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Female">
+                                    Female </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-futbol&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-futbol&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Football">
                                     Football </i>
@@ -219,18 +284,93 @@ include 'includes/sidebar.php';
                                 <option value="&lt;i class=&quot;far fa-golf-club&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-golf-club&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Golf">
                                     Golf </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-hamburger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-hamburger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Hamburger">
+                                    Hamburger </i>
+                                </option>
+                                <option value="&lt;i class=&quot;far fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Health">
+                                    Health </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-headphones&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-headphones&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Headphones">
+                                    Headphones </i>
+                                </option>
+
                                 <option value="&lt;i class=&quot;far fa-field-hockey&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-field-hockey&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Hockey">
                                     Hockey </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-horse-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-horse-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Horse Racing">
                                     Horse Racing </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-ice-cream&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-ice-cream&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Icecream">
+                                    Icecream </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Key">
+                                    Key </i>
+                                </option>
+                                <option value="&lt;i class=&quot;	fas fa-mars-stroke-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;	fas fa-mars-stroke-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Male">
+                                    Male </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-map-marker&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-map-marker&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Map">
+                                    Map Marker </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fab fa-cc-mastercard&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fab fa-cc-mastercard&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Mastercard">
+                                    Mastercard </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-mobile&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-mobile&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Mobile">
+                                    Mobile </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-music&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-music&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Music">
+                                    Music </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-pen&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-pen&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Pen">
+                                    Pen </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-phone&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-phone&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Phone">
+                                    Phone </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-plug&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-plug&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Plug">
+                                    Plug </i>
+                                </option>
+
+
                                 <option value="&lt;i class=&quot;far fa-swimmer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-swimmer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Swimming">
                                     Swimming </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-syringe&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-syringe&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Syringe">
+                                    Syringe </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-tablet&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tablet&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Tablet">
+                                    Tablet </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-table-tennis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-table-tennis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Table tennis">
                                     Table tennis </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-tshirt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tshirt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Tshirt">
+                                    Tshirt </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Tools">
+                                    Tools </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-tv&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tv&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; TV">
+                                    TV </i>
+                                </option>
+                                <option value="&lt;i class=&quot;far fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; User">
+                                    User </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-vote-yea&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-vote-yea&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Vote">
+                                    Vote </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-cloud-rain&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-cloud-rain&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Weather">
+                                    Weather </i>
+                                </option>
+
+
+
+
                             </select>
 
 
@@ -277,10 +417,13 @@ include 'includes/sidebar.php';
                             <label>Icon</label>
 
 
-                            <select name="icon" id="editIcon" class="form-control selectpicker" data-live-search="true">
+                            <select name="icon" id="cat_icon" class="form-control" class="selectpicker" data-live-search="true">
                                 <option value="" selected disabled>Select Icon</option>
                                 <option value="&lt;i class=&quot;far fa-shuttlecock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-shuttlecock&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Badminton">
                                     Badminton </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-bath&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bath&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bath">
+                                    Bath </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-baseball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-baseball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Baseball">
                                     Baseball </i>
@@ -288,20 +431,82 @@ include 'includes/sidebar.php';
                                 <option value="&lt;i class=&quot;far fa-basketball-ball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-basketball-ball&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Basketball">
                                     Basketball </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bell">
+                                    Bell </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-bicycle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bicycle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bicycle">
+                                    Bicycle </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-book-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-book-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Book">
+                                    Book </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-box-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-box-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Box">
+                                    Box </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-boxing-glove&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-boxing-glove&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Boxing">
                                     Boxing </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-building&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-building&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Building">
+                                    Building </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-bullhorn&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-bullhorn&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Bullhorn">
+                                    Bullhorn </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-camera&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-camera&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Camera">
+                                    Camera </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-graduation-cap&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-graduation-cap&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cap">
+                                    Cap </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-car&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-car&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Car">
+                                    Car </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-cat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-cat&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cat">
+                                    Cat </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-chess&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-chess&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Chess">
                                     Chess </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-clipboard-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-clipboard-check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Clipboard">
+                                    Clipboard </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-cricket&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Cricket">
                                     Cricket </i>
                                 </option>
+                                <option value="&lt;i class=&quot;far fa-comment&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-comment&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Comment">
+                                    Comment </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-couch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-couch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Couch">
+                                    Couch </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-desktop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-desktop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Desktop">
+                                    Desktop </i>
+                                </option>
+
                                 <option value="&lt;i class=&quot;far fa-dice&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-dice&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Dice">
                                     Dice </i>
                                 </option>
+                                <option value="&lt;i class=&quot;fas fa-dog&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-dog&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Dog">
+                                    Dog </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-dollar-sign&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-dollar-sign&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Dollar">
+                                    Dollar </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-donate&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-donate&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Donate">
+                                    Donate </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-envelope&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-envelope&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Envelope">
+                                    Envelope </i>
+                                </option>
                                 <option value="&lt;i class=&quot;far fa-gamepad-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-gamepad-alt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; ESports">
                                     ESports </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-venus-double&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-venus-double&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Female">
+                                    Female </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-futbol&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-futbol&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Football">
                                     Football </i>
@@ -312,18 +517,93 @@ include 'includes/sidebar.php';
                                 <option value="&lt;i class=&quot;far fa-golf-club&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-golf-club&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Golf">
                                     Golf </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-hamburger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-hamburger&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Hamburger">
+                                    Hamburger </i>
+                                </option>
+                                <option value="&lt;i class=&quot;far fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-heart&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Health">
+                                    Health </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-headphones&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-headphones&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Headphones">
+                                    Headphones </i>
+                                </option>
+
                                 <option value="&lt;i class=&quot;far fa-field-hockey&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-field-hockey&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Hockey">
                                     Hockey </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-horse-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-horse-head&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Horse Racing">
                                     Horse Racing </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-ice-cream&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-ice-cream&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Icecream">
+                                    Icecream </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Key">
+                                    Key </i>
+                                </option>
+                                <option value="&lt;i class=&quot;	fas fa-mars-stroke-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;	fas fa-mars-stroke-h&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Male">
+                                    Male </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-map-marker&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-map-marker&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Map">
+                                    Map Marker </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fab fa-cc-mastercard&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fab fa-cc-mastercard&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Mastercard">
+                                    Mastercard </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-mobile&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-mobile&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Mobile">
+                                    Mobile </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-music&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-music&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Music">
+                                    Music </i>
+                                </option>
+
+                                <option value="&lt;i class=&quot;fas fa-pen&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-pen&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Pen">
+                                    Pen </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-phone&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-phone&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Phone">
+                                    Phone </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-plug&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-plug&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Plug">
+                                    Plug </i>
+                                </option>
+
+
                                 <option value="&lt;i class=&quot;far fa-swimmer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-swimmer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Swimming">
                                     Swimming </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-syringe&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-syringe&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Syringe">
+                                    Syringe </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-tablet&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tablet&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Tablet">
+                                    Tablet </i>
                                 </option>
                                 <option value="&lt;i class=&quot;far fa-table-tennis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-table-tennis&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Table tennis">
                                     Table tennis </i>
                                 </option>
+
+                                <option value="&lt;i class=&quot;fas fa-tshirt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tshirt&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Tshirt">
+                                    Tshirt </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tools&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Tools">
+                                    Tools </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-tv&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-tv&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; TV">
+                                    TV </i>
+                                </option>
+                                <option value="&lt;i class=&quot;far fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;far fa-user&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; User">
+                                    User </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-vote-yea&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-vote-yea&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Vote">
+                                    Vote </i>
+                                </option>
+                                <option value="&lt;i class=&quot;fas fa-cloud-rain&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;" data-content="&lt;i class=&quot;fas fa-cloud-rain&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Weather">
+                                    Weather </i>
+                                </option>
+
+
+
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -333,9 +613,9 @@ include 'includes/sidebar.php';
 
                     </div>
                     <div class="modal-footer">
-                    <!-- <form class="update-action"> -->
+                        <!-- <form class="update-action"> -->
                         <button id="updateCat" type="button" class="btn btn-primary">Update</button>
-                    <!-- </form> -->
+                        <!-- </form> -->
 
                         <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
                     </div>
@@ -398,6 +678,8 @@ include 'includes/sidebar.php';
                                 swal.fire({
                                     'icon': 'success',
                                     'text': "Successfully Added!"
+                                }).then(() => {
+                                    window.location.reload();
                                 });
                                 $('#updateBtn').show();
                                 $('#loadingBtn').hide();
@@ -424,35 +706,39 @@ include 'includes/sidebar.php';
         //-------------------------------------------------------------------------------
 
         //------------------------------- Edit Category ---------------------------------
-        $('.editBtn').click(function(event){
+        $('.editBtn').click(function(event) {
             var id = $(this).val();
-            $('#updateCat').click(function(){
+            $('#updateCat').click(function() {
                 $.ajax({
                     type: "POST",
                     url: '<?= base_url() ?>' + "/admin/edit/category/" + id,
                     data: $('#form2').serialize(),
-                    success: function(data){
+                    success: function(data) {
                         if (data == 1) {
-                                window.location.reload();
-                            } 
-                        else if(data ==2){
                             swal.fire({
-                                    'icon': 'info',
-                                    'text': "Oops! There was an error. Contact Admin!",
-                                });
-                        }    
-                        else {
-                                swal.fire({
-                                    'icon': 'info',
-                                    'text': "Validation Failed!",
-                                });
-                            }
+                                'icon': 'success',
+                                'text': "Updated Successfully!",
+                            }).then(()=>{
+                                window.location.reload();
+                            });
+                            window.location.reload();
+                        } else if (data == 2) {
+                            swal.fire({
+                                'icon': 'info',
+                                'text': "Oops! There was an error. Contact Admin!",
+                            });
+                        } else {
+                            swal.fire({
+                                'icon': 'info',
+                                'text': "Validation Failed!",
+                            });
+                        }
                     },
-                    error: function(data){
+                    error: function(data) {
                         swal.fire({
-                                    'icon': 'info',
-                                    'text': "Oops! There was an error. Contact Admin!",
-                                });
+                            'icon': 'info',
+                            'text': "Oops! There was an error. Contact Admin!",
+                        });
 
                     }
 
@@ -473,22 +759,21 @@ include 'includes/sidebar.php';
             var id = $(this).val();
             $('#confirm_cat').click(function() {
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "<?= base_url() ?>" + '/admin/delete/category/' + id,
                     success: function(data) {
-                        alert(id);
-                        // if (data == 1) {
-                        //     window.location.reload();
-                        // } else {
-                        //     alert(id);
-                        //     swal.fire({
-                        //         'icon': 'info',
-                        //         'text': "Oops! There was an error. Contact Admin!",
-                        //     });
-                        // }
+                        if (data == 1) {
+                            window.location.reload();
+                        } else {
+                            // alert(id);
+                            swal.fire({
+                                'icon': 'info',
+                                'text': "Oops! There was an error. Contact Admin!",
+                            });
+                        }
                     },
                     error(data) {
-                        alert(id);
+                        // alert(id);
 
                         swal.fire({
                             'icon': 'error',
@@ -499,4 +784,14 @@ include 'includes/sidebar.php';
             });
         });
         //--------------------------------------------------------------------------------
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.notiflix-confirm').on('click', function() {
+
+            })
+            $('#zero_config').DataTable({
+                pagingType: 'full_numbers',
+            });
+        });
     </script>

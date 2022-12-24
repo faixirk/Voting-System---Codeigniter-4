@@ -41,7 +41,7 @@ class Admin_Category_Controller extends BaseController
 
             $rules = [
                 'title' => [
-                    'rules'  => 'required|min_length[5]|max_length[100]',
+                    'rules'  => 'required|min_length[2]|max_length[100]',
                     'errors' => [
                         'required' => 'Category name is required',
                         'min_length' => 'Category name at least 5 character',

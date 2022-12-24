@@ -15,6 +15,7 @@
     <link href="<?= base_url('public/assets/css/style.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('public/assets/css/custom.css') ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap4.min.css">
+    <script src="https://kit.fontawesome.com/4303e06f63.js" crossorigin="anonymous"></script>
 
     <script src="<?= base_url('public/assets/js/fontawesome/fontawesomepro.js') ?>"></script>
 </head>

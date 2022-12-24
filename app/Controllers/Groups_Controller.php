@@ -8,6 +8,7 @@ use App\Models\User_Model;
 use App\Models\Requests_Model;
 use App\Models\Votes_Model;
 use App\Models\Private_Members_Model;
+use CodeIgniter\Exceptions\AlertError;
 
 class Groups_Controller extends BaseController
 {
@@ -167,10 +168,11 @@ class Groups_Controller extends BaseController
         $check = $requests->where('user_id', $userID)->first();
         $users = $user->select()->where('user_id', $userID)->first();
 
-
         if ($check) {
             $requests->set('has_joined', 'true');
+            //condition to check if the user id and group id matches, then set has_joined to true
             $requests->where('group_id', $id);
+            $requests->where('user_id', $userID);  
             $query = $requests->update();
             $data = [
                 'first_name' => $users['first_name'],
@@ -183,6 +185,7 @@ class Groups_Controller extends BaseController
                 'group_id' => $id,
                 'user_id' => $userID,
             ];
+            //insert data into private members table
             $query2 = $private->insert($data);
 
             if ($query && $query2) {

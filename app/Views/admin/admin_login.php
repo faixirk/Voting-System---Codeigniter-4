@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="#">
     <title>Admin Login | Daily Voting</title>
-    <link href="<?= base_url('public/assets/css/style.min.css')?>" rel="stylesheet">
+    <link href="<?= base_url('public/assets/css/style.min.css') ?>" rel="stylesheet">
     <style>
         .logoWidth-64 img {
             width: 64px !important;
@@ -26,15 +26,15 @@
             </div>
         </div>
 
-        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(<?= base_url('public/uploads/logo/auth-bg.jpg')?>) no-repeat center center;">
+        <div class="auth-wrapper d-flex no-block justify-content-center align-items-center position-relative" style="background:url(<?= base_url('public/uploads/logo/auth-bg.jpg') ?>) no-repeat center center;">
             <div class="auth-box row">
-                <div class="col-lg-6 col-md-5 modal-bg-img" style="background-image: url(<?= base_url('public/uploads/logo/theme.jpg')?>);">
+                <div class="col-lg-6 col-md-5 modal-bg-img" style="background-image: url(<?= base_url('public/uploads/logo/').$breadcrumb['login_image'] ?>);">
                 </div>
 
                 <div class="col-lg-6 col-md-7 bg-white">
                     <div class="p-3">
                         <div class="text-center logoWidth-64">
-                            <img src="<?= base_url('public/uploads/logo/profile.png')?>" alt="wrapkit">
+                            <img src="<?= base_url('public/uploads/logo/profile.png') ?>" alt="wrapkit">
                         </div>
                         <h2 class="mt-3 text-center">Admin Login</h2>
 
@@ -79,11 +79,11 @@
 
 
 
-    <script src="<?= base_url('public/assets/js/jquery.min.js')?>"></script>
-    <script src="<?= base_url('public/assets/js/popper.min.js')?>"></script>
-    <script src="<?= base_url('public/assets/js/bootstrap.min.js')?>"></script>
+    <script src="<?= base_url('public/assets/js/jquery.min.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js/popper.min.js') ?>"></script>
+    <script src="<?= base_url('public/assets/js/bootstrap.min.js') ?>"></script>
 
-    <script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js')?>"></script>
+    <script src="<?= base_url('public/assets/js/notiflix-aio-2.7.0.min.js') ?>"></script>
 
     <script>
         $(document).ready(function() {

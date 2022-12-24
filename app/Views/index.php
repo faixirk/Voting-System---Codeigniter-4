@@ -71,7 +71,7 @@ include 'includes/sidebar.php';
                     <a href="#" target="_self"><img class="image_main" src="<?= base_url('public/uploads/banners/'. $breadcrumb['banner']) ?>" style="width: 100%; height: auto; display: inline;"></a>
                     <div class="label_skitter" style="display: block;">
                         <h2>Daily Voting</h2>
-                        <p class="mb-4"></p> <a href="#"><button class="btn-custom"> find out more</button></a>
+                        <p class="mb-4"></p> <a href="<?= base_url('about-us') ?>"><button class="btn-custom"> find out more</button></a>
                     </div>
                 </div>
             </div>

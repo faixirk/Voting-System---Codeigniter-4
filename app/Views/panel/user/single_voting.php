@@ -32,12 +32,12 @@ include 'includes/header.php';
 
   <!-- </div> -->
   <div class="content user-panel p-5">
-    <div class="row">
-
-      <div class="col-6">
-        <h4> Votes</h4>
-      </div>
       <?php if ($member['creator_id'] == session('user_id')) { ?>
+      <div class="row">
+
+        <div class="col-6">
+          <h4> Votes</h4>
+        </div>
         <div class="col-8 "><button type="button" id="addModelBtn" class="btn btn-primary w-100" data-toggle="modal" data-target=".bd-example-modal-lg">Add Vote</button></div>
 
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -81,7 +81,7 @@ include 'includes/header.php';
                     </div>
                     <div class="form-group col-md-6">
                       <label for="subCateg">Sub Category</label>
-                      <select class="custom-select form-control mr-sm-2" required name="subCategory" id="subCateg">
+                      <select class="custom-select form-control mr-sm-2 subCateg" required name="subCategory" id="subCateg">
                         <option selected>Choose...</option>
                       </select>
                     </div>
@@ -118,99 +118,99 @@ include 'includes/header.php';
             </div>
           </div>
         </div>
-    </div>
-  <?php } ?>
-  <div class="live-matches ">
-
-
-    <?php if ($votes && $member) {
-      foreach ($votes as $vote) : ?>
-
-        <div class="box col-8">
-          <h5 class="mb-3"><?= $vote['title'] ?></h5>
-          <div class="row d-flex justify-content-around align-items-center">
-
-            <div class="col-3 team">
-              <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner1'] ?>" style="border-radius: 50%" alt="A" class="img-fluid">
-              <p><?= $vote['team_a'] ?></p>
-            </div>
-            <div class="col-6">
-              <h6><?= $vote['question'] ?></h6>
-              <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
-              <?php if ($member['creator_id'] == session('user_id')) { ?>
-
-                <select class="btn-custom w-25 my-2 voteAction" name="vote_status" id="<?= $vote['vote_id'] ?>">
-
-                  <option value="active" <?= ($vote['status'] === 'active') ?  'selected' : '' ?>>Active</option>
-                  <option value="closed" <?= ($vote['status'] === 'closed') ?  'selected' : '' ?>>Closed</option>
-                  <option value="result" <?= ($vote['status'] === 'result') ?  'selected' : '' ?>>Result</option>
-                </select>
-                <button class="btn btn-danger w-30 my-2" onclick="deleteVote(<?= $vote['vote_id'] ?>)">Delete</button>
-              <?php } ?>
-
-
-            </div>
-            <div class="col-3 team">
-              <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner2'] ?>" alt="B" style="border-radius: 50%" class="img-fluid">
-              <p><?= $vote['team_b'] ?></p>
-            </div>
-            <div class="col-12 align-self-end">
-              <div class="d-flex justify-content-between">
-                <button type="button" class="voteCount teamA teamA<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team A </button>
-                <button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result<?= $vote['vote_id'] ?>"></button>
-                <button type="button" class="voteCount teamB teamB<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team B</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      <?php endforeach;
-    } else { ?>
-      <div class="box col-8">
-        <h5 class="mb-3">Empty List.</h5>
       </div>
     <?php } ?>
-  </div>
-  <div class="rightbar">
-    <div class="container py-5">
+    <div class="live-matches ">
 
-      <div class="row d-flex justify-content-end">
-        <!-- <div class="col-md-4 col-lg-4 col-xl-4"> -->
 
-        <div class="card" id="chat1" style="border-radius: 15px;">
-          <div class="card-header d-flex justify-content-center p-3 bg-info text-white border-bottom-0" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
-            <p class="mb-0 fw-bold">Private Chat</p>
+      <?php if ($votes && $member) {
+        foreach ($votes as $vote) : ?>
+
+          <div class="box col-8">
+            <h5 class="mb-3"><?= $vote['title'] ?></h5>
+            <div class="row d-flex justify-content-around align-items-center">
+
+              <div class="col-3 team">
+                <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner1'] ?>" style="border-radius: 50%" alt="A" class="img-fluid">
+                <p><?= $vote['team_a'] ?></p>
+              </div>
+              <div class="col-6">
+                <h6><?= $vote['question'] ?></h6>
+                <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
+                <?php if ($member['creator_id'] == session('user_id')) { ?>
+
+                  <select class="btn-custom w-25 my-2 voteAction" name="vote_status" id="<?= $vote['vote_id'] ?>">
+
+                    <option value="active" <?= ($vote['status'] === 'active') ?  'selected' : '' ?>>Active</option>
+                    <option value="closed" <?= ($vote['status'] === 'closed') ?  'selected' : '' ?>>Closed</option>
+                    <option value="result" <?= ($vote['status'] === 'result') ?  'selected' : '' ?>>Result</option>
+                  </select>
+                  <button class="btn btn-danger w-30 my-2" onclick="deleteVote(<?= $vote['vote_id'] ?>)">Delete</button>
+                <?php } ?>
+
+
+              </div>
+              <div class="col-3 team">
+                <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner2'] ?>" alt="B" style="border-radius: 50%" class="img-fluid">
+                <p><?= $vote['team_b'] ?></p>
+              </div>
+              <div class="col-12 align-self-end">
+                <div class="d-flex justify-content-between">
+                  <button type="button" class="voteCount teamA teamA<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team A </button>
+                  <button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result<?= $vote['vote_id'] ?>"></button>
+                  <button type="button" class="voteCount teamB teamB<?= $vote['vote_id'] ?> btn-light  downgrade-mobile" value="<?= $vote['vote_id'] ?>">Vote Team B</button>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="card-body ">
-            <form id="chatForm" action="" class="col-md-9 col-lg-12" method="POST">
+        <?php endforeach;
+      } else { ?>
+        <div class="box col-8">
+          <h5 class="mb-3">Empty List.</h5>
+        </div>
+      <?php } ?>
+    </div>
+    <div class="rightbar">
+      <div class="container py-5">
 
-              <div class="d-flex  flex-row justify-content-start mb-4 DivWithScroll ">
-                <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;"> -->
-                <!-- <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);"> -->
-                <p id="getmsg" class="small mb-0 "></p>
-                <!-- </div> -->
-              </div>
+        <div class="row d-flex justify-content-end">
+          <!-- <div class="col-md-4 col-lg-4 col-xl-4"> -->
+
+          <div class="card" id="chat1" style="border-radius: 15px;">
+            <div class="card-header d-flex justify-content-center p-3 bg-info text-white border-bottom-0" style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+              <p class="mb-0 fw-bold">Private Chat</p>
+            </div>
+            <div class="card-body ">
+              <form id="chatForm" action="" class="col-md-9 col-lg-12" method="POST">
+
+                <div class="d-flex  flex-row justify-content-start mb-4 DivWithScroll ">
+                  <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp" alt="avatar 1" style="width: 45px; height: 100%;"> -->
+                  <!-- <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);"> -->
+                  <p id="getmsg" class="small mb-0 "></p>
+                  <!-- </div> -->
+                </div>
 
 
 
-              <div class="form-outline">
-                <textarea class="form-control" name="message" id="msg" rows="2"></textarea>
-                <label class="form-label" for="textAreaExample">Type your message</label>
-                <span id="msg_err"></span>
-              </div>
-              <div class="form-group pt-3">
-                <button type="submit" id="send" class="btn btn-success">Send</button>
-              </div>
-            </form>
+                <div class="form-outline">
+                  <textarea class="form-control" name="message" id="msg" rows="2"></textarea>
+                  <label class="form-label" for="textAreaExample">Type your message</label>
+                  <span id="msg_err"></span>
+                </div>
+                <div class="form-group pt-3">
+                  <button type="submit" id="send" class="btn btn-success">Send</button>
+                </div>
+              </form>
 
+            </div>
           </div>
+
+          <!-- </div> -->
         </div>
 
-        <!-- </div> -->
       </div>
-
     </div>
-  </div>
-  </div>
+    </div>
 
 </div>
 
@@ -366,11 +366,12 @@ include 'includes/header.php';
     var id = $('#categ').find('option:selected').val();
     $.get("<?= base_url() ?>/user/getcategory/" + id, (result) => {
       if (result) {
+        $('.subCateg').empty();
         $.each(JSON.parse(result), (key, value) => {
           $('#subCateg').append('<option value=' + value.sub_cat_id + '>' + value.sub_cat_title + '</option>');
         })
       } else {
-        $('#subCateg').append('<option value=' + 99 + '>' + "Empty List" + '</option>');
+        $('.subCateg').empty();
       }
     })
   })

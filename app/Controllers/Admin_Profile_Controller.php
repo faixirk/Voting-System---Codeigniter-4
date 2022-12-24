@@ -11,15 +11,16 @@ class Admin_Profile_Controller extends BaseController
 
     public function index()
     {
-        if (session('isLoggedIn') == true) {
+        if (!session('isLoggedIn')) {
+            return redirect()->to('admin');
+        } 
+        else {
 
             $data['title'] = 'Admin | Profile';
             $l = new Logos_Model();
 
             $data['logo'] = $l->first();
             return view('admin/profile', $data);
-        } else {
-            return redirect()->to('admin');
         }
     }
     public function profileUpdate()

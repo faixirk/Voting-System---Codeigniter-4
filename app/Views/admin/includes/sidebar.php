@@ -384,11 +384,11 @@
                         <span class="hide-menu">Content Settings</span>
                     </a>
                     <ul aria-expanded="false" class="collapse first-level base-level-line ">
-                        <li class="sidebar-item  ">
-                            <a class="sidebar-link " href="<?= base_url('admin/slider')?>">
+                        <!-- <li class="sidebar-item  ">
+                            <a class="sidebar-link " href="">
                                 <span class="hide-menu">Slider</span>
                             </a>
-                        </li>
+                        </li> -->
                         <!-- <li class="sidebar-item  ">
                             <a class="sidebar-link " href="l">
                                 <span class="hide-menu">Testimonial</span>

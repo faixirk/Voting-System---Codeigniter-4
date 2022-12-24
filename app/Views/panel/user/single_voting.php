@@ -31,7 +31,7 @@ include 'includes/header.php';
 
 
   <!-- </div> -->
-  <div class="content user-panel p-4">
+  <div class="content user-panel p-5">
     <div class="row">
 
       <div class="col-6">
@@ -52,6 +52,16 @@ include 'includes/header.php';
               <div class="modal-body">
                 <form onsubmit="return false" class="p-0 m-0" id="vote-form" style="width: 100% !important; max-width: 100% !important" enctype="multipart/form-data">
                   <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+                  <div class="row mb-3">
+                    <div class="form-group col-md-6">
+                      <label for="title">Short Title</label>
+                      <input type="text" class="form-control" placeholder="Enter Short Title" name="title" id="title">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="qstn">Question</label>
+                      <input type="text" class="form-control" placeholder="Enter Question" name="question" id="qstn">
+                    </div>
+                  </div>
                   <div class="row mb-3">
                     <div class="form-group col-md-6">
                       <label for="team1">Team A</label>
@@ -117,24 +127,25 @@ include 'includes/header.php';
       foreach ($votes as $vote) : ?>
 
         <div class="box col-8">
-          <!-- <h5 class="mb-3">WHO WILL WIN?</h5> -->
+          <h5 class="mb-3"><?= $vote['title'] ?></h5>
           <div class="row d-flex justify-content-around align-items-center">
 
             <div class="col-3 team">
               <img src="<?= base_url() ?>/public/uploads/votes/<?= $vote['banner1'] ?>" style="border-radius: 50%" alt="A" class="img-fluid">
               <p><?= $vote['team_a'] ?></p>
             </div>
-            <div class="col-6"><span> </span>
-              <!----> <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
+            <div class="col-6">
+              <h6><?= $vote['question'] ?></h6>
+              <button class="btn-custom w-75 my-2 btn-info" value="<?= $vote['vote_id'] ?>">See More</button>
               <?php if ($member['creator_id'] == session('user_id')) { ?>
 
-                <select class="btn-custom w-75 my-2 voteAction" name="vote_status" id="<?= $vote['vote_id'] ?>">
+                <select class="btn-custom w-25 my-2 voteAction" name="vote_status" id="<?= $vote['vote_id'] ?>">
 
                   <option value="active" <?= ($vote['status'] === 'active') ?  'selected' : '' ?>>Active</option>
                   <option value="closed" <?= ($vote['status'] === 'closed') ?  'selected' : '' ?>>Closed</option>
                   <option value="result" <?= ($vote['status'] === 'result') ?  'selected' : '' ?>>Result</option>
                 </select>
-                <button class="btn-custom btn-danger w-75 my-2" onclick="deleteVote(<?= $vote['vote_id'] ?>)">Delete</button>
+                <button class="btn btn-danger w-30 my-2" onclick="deleteVote(<?= $vote['vote_id'] ?>)">Delete</button>
               <?php } ?>
 
 
@@ -365,6 +376,16 @@ include 'includes/header.php';
   })
   $('#vote-form').validate({
     rules: {
+      title: {
+        required: true,
+        minlength: 3,
+        maxlength: 50
+      },
+      question: {
+        required: true,
+        minlength: 3,
+        maxlength: 50
+      },
       teamA: {
         required: true,
         minlength: 3,
@@ -457,116 +478,116 @@ include 'includes/header.php';
   //Delete Vote
   $('#votesTable').DataTable();
 
-function deleteVote(id) {
+  function deleteVote(id) {
     if (id) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to delete this vote!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this vote!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
 
-                $.post('<?= base_url() ?>' + "/user/deletevote", {
-                        id
-                    }, (result) => {
-                        var obj = JSON.parse(result);
+          $.post('<?= base_url() ?>' + "/user/deletevote", {
+              id
+            }, (result) => {
+              var obj = JSON.parse(result);
 
-                        if (obj.status == true) {
-                            Swal.fire(
-                                'Deleted!',
-                                'Your vote has been deleted.',
-                                'success'
-                            ).then(() => {
-                                window.location.reload();
-                            })
-                        } else if (obj.status == 500) {
-                            Swal.fire(
-                                'Failed!',
-                                'Internal server error!',
-                                'error'
-                            )
-                        } else {
-                            Swal.fire(
-                                'Failed!',
-                                obj.message,
-                                'error'
-                            )
-                        }
-                    })
-                    .fail(function(result) {
-                        Swal.fire(
-                            'Failed!',
-                            'Failed to delete.',
-                            'error'
-                        )
-                    })
+              if (obj.status == true) {
+                Swal.fire(
+                  'Deleted!',
+                  'Your vote has been deleted.',
+                  'success'
+                ).then(() => {
+                  window.location.reload();
+                })
+              } else if (obj.status == 500) {
+                Swal.fire(
+                  'Failed!',
+                  'Internal server error!',
+                  'error'
+                )
+              } else {
+                Swal.fire(
+                  'Failed!',
+                  obj.message,
+                  'error'
+                )
+              }
+            })
+            .fail(function(result) {
+              Swal.fire(
+                'Failed!',
+                'Failed to delete.',
+                'error'
+              )
+            })
 
 
 
-            }
-        })
-    }
-};
-  //Status Update
-    $('.voteAction').change(function() {
-        var status = $(this).find(":selected").val();
-        var id = $(this).attr('id');
-        var data = {
-            status,
-            id
         }
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to update the status of  this vote!",
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, update it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
+      })
+    }
+  };
+  //Status Update
+  $('.voteAction').change(function() {
+    var status = $(this).find(":selected").val();
+    var id = $(this).attr('id');
+    var data = {
+      status,
+      id
+    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to update the status of  this vote!",
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-                $.post('<?= base_url() ?>'+"/user/updatestatus", data, (result) => {
-                        var obj = JSON.parse(result);
+        $.post('<?= base_url() ?>' + "/user/updatestatus", data, (result) => {
+            var obj = JSON.parse(result);
 
-                        if (obj.status == true) {
-                            Swal.fire(
-                                'Updated!',
-                                'Your vote status has been updated.',
-                                'success'
-                            ).then(() => {
-                                window.location.reload();
-                            })
-                        } else if (obj.status == 500) {
-                            Swal.fire(
-                                'Failed!',
-                                'Internal server error!',
-                                'error'
-                            )
-                        } else {
-                            Swal.fire(
-                                'Failed!',
-                                obj.message,
-                                'error'
-                            )
-                        }
-                    })
-                    .fail(function(result) {
-                        Swal.fire(
-                            'Failed!',
-                            'Failed to update.',
-                            'error'
-                        )
-                    })
-
-
-
+            if (obj.status == true) {
+              Swal.fire(
+                'Updated!',
+                'Your vote status has been updated.',
+                'success'
+              ).then(() => {
+                window.location.reload();
+              })
+            } else if (obj.status == 500) {
+              Swal.fire(
+                'Failed!',
+                'Internal server error!',
+                'error'
+              )
+            } else {
+              Swal.fire(
+                'Failed!',
+                obj.message,
+                'error'
+              )
             }
-        })
+          })
+          .fail(function(result) {
+            Swal.fire(
+              'Failed!',
+              'Failed to update.',
+              'error'
+            )
+          })
 
+
+
+      }
     })
+
+  })
 </script>

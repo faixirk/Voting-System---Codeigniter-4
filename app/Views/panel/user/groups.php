@@ -11,28 +11,28 @@ include 'includes/sidebar.php';
         <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
-                    <h2 class="price"><a href="<?= base_url('user/groups/private')?>" style="color:white" >Private Rooms</a></h2>
+                    <h2 class="price"><a href="<?= base_url('user/groups/private') ?>" style="color:white">Private Rooms</a></h2>
                     <p class="info">User: <small><?= session('f_name') ?></small><br><small><?= $user['created_at']; ?></small></p>
                 </div>
                 <div class="dashboard__card-icon">
-                <a href="<?= base_url('user/groups/private')?>">
-                    <img src="<?= base_url('public/assets/images/icons/private.png') ?>" alt="...">
-                </a>
+                    <a href="<?= base_url('user/groups/private') ?>">
+                        <img src="<?= base_url('public/assets/images/icons/private.png') ?>" alt="...">
+                    </a>
                 </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-2">
             <div class="dashboard__card">
                 <div class="dashboard__card-content">
-                    <h2 class="price"><a href="<?= base_url('user/groups/requests')?>" style="color:white" >Requests </a></h2>
+                    <h2 class="price"><a href="<?= base_url('user/groups/requests') ?>" style="color:white">Requests </a></h2>
                     <p class="info">Admin: <small><?= session('f_name') ?></small><br><small><?= $user['created_at']; ?></small></p>
                 </div>
                 <div class="dashboard__card-icon">
-                <a href="<?= base_url('user/groups/requests')?>">
-                    <img src="<?= base_url('public/assets/images/icons/request.png') ?>" alt="..."> </button>
+                    <a href="<?= base_url('user/groups/requests') ?>">
+                        <img src="<?= base_url('public/assets/images/icons/request.png') ?>" alt="..."> </button>
                     </a>
 
-                    </div>
+                </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-6 mb-2">
@@ -58,7 +58,7 @@ include 'includes/sidebar.php';
                             <form class="p-0 m-0" id="group-form" style="width: 100% !important; max-width: 100% !important" enctype="multipart/form-data">
                                 <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                                 <div class="row mb-3">
-                                    
+
                                     <div class="form-group col-md-12">
                                         <label for="team1">Group Name</label>
                                         <input type="text" class="form-control" name="group">
@@ -80,22 +80,7 @@ include 'includes/sidebar.php';
                                     </div>
                                 </div>
 
-                                <!-- <div class="row mb-3">
-                                <div class="form-group col-12">
-                                    <label for="desc">Description</label>
-                                    <textarea name="description" class="form-control" id="desc" required></textarea>
-                                </div>
-                            </div> -->
-                                <!-- <div class="row mb-3">
-                                <div class="form-group col-12">
-                                    <label for="type">Type</label>
-                                    <select class="custom-select form-control mr-sm-2" class="voteType" id="type" required>
-                                        <option selected>Choose...</option>
-                                        <option value="public">Public</option>
-                                        <option disabled value="2">Private</option>
-                                    </select>
-                                </div>
-                            </div> -->
+                                
 
                                 <div class="modal-footer mr-3 my-2">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -119,7 +104,6 @@ include 'includes/sidebar.php';
 <?= include 'includes/footer.php'  ?>
 
 <script>
-    
     renderList = (id, obj) => {
         if (obj) {
             $.each(JSON.parse(obj), (key, value) => {
@@ -159,27 +143,25 @@ include 'includes/sidebar.php';
                 dataType: "JSON",
                 data: $('#group-form').serialize(),
                 success: function(response) {
-                     if(response==1){
+                    if (response == 1) {
                         swal.fire({
-                                'icon': 'success',
-                                'text': "Successfully Added!",
-                            }).then(() => {
-                        window.location.reload();
-                    })
+                            'icon': 'success',
+                            'text': "Successfully Added!",
+                        }).then(() => {
+                            window.location.reload();
+                        })
 
-                     }
-                     else if(response==2){
+                    } else if (response == 2) {
                         swal.fire({
-                                'icon': 'danger',
-                                'text': "Error! Please conact admin.",
-                            });
-                     }
-                     else{
+                            'icon': 'danger',
+                            'text': "Error! Please conact admin.",
+                        });
+                    } else {
                         swal.fire({
-                                'icon': 'danger',
-                                'text': "Please Enter Correct Data!",
-                            });
-                     }
+                            'icon': 'danger',
+                            'text': "Please Enter Correct Data!",
+                        });
+                    }
                 },
                 error: function(err) {
                     $("#msg_err").text(err.responseJSON.messages.message);

@@ -13,6 +13,7 @@ use App\Models\About_Us_Model;
 use App\Models\Contact_Us_Model;
 use App\Models\Logos_Model;
 use App\Models\Social_Links_Model;
+use App\Models\Breadcrumb_Model;
 
 class Home extends BaseController
 {
@@ -28,7 +29,9 @@ class Home extends BaseController
         $votes = new Votes_Model();
         $results = new Votes_Results_Model();
         $l = new Logos_Model();
-
+        $breadcrumb = new Breadcrumb_Model();
+        
+        $data['breadcrumb'] = $breadcrumb->first();
         $data['categories'] = $cat->findAll();
         $data['groups'] = $group->findAll();
         $data['requests'] = $requests->findAll();
@@ -75,7 +78,10 @@ class Home extends BaseController
         $l = new Logos_Model();
         $social = new Social_Links_Model();
         $results = new Votes_Results_Model();
+        $breadcrumb = new Breadcrumb_Model();
 
+
+        $data['breadcrumb'] = $breadcrumb->first();
         $data['social'] = $social->findAll();
         $data['about'] = $a->first();
         $data['contact'] = $c->first();
@@ -93,11 +99,14 @@ class Home extends BaseController
         $c = new Contact_Us_Model();
         $l = new Logos_Model();
         $social = new Social_Links_Model();
+        $breadcrumb = new Breadcrumb_Model();
 
+        $data['breadcrumb'] = $breadcrumb->first();
         $data['social'] = $social->findAll();
         $data['about'] = $a->first();
         $data['contact'] = $c->first();
         $data['logo'] = $l->first();
+       
 
         return view('about_us', $data);
     }

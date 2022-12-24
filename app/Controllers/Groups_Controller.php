@@ -82,18 +82,21 @@ class Groups_Controller extends BaseController
     }
     public function requests_index()
     {
-        $data['title'] = 'Requests | User';
-        $requests = new Requests_Model();
-        //--------- join requests->groups && requests->users ----------------------------------------------
-        $data['requests'] = $requests->select()->join('groups', 'groups.group_id=requests.group_id')->join('user', 'user.user_id=requests.user_id');
-        //-------------------- END 'JOIN' -----------------------------------------------------------------
+        if (!session('isLoggedIn')) {
+            return redirect()->to('/');
+        } else {
+            $data['title'] = 'Requests | User';
+            $requests = new Requests_Model();
+            //--------- join requests->groups && requests->users ----------------------------------------------
+            $data['requests'] = $requests->select()->join('groups', 'groups.group_id=requests.group_id')->join('user', 'user.user_id=requests.user_id');
+            //-------------------- END 'JOIN' -----------------------------------------------------------------
 
-        //------------------- find all data where creator id matches session id of user --------------------
-        $data['requests'] = $requests->where('creator_id', session('user_id'))->findAll();
-        //----------------------- END 'WHERE' --------------------------------------------------------------
+            //------------------- find all data where creator id matches session id of user --------------------
+            $data['requests'] = $requests->where('creator_id', session('user_id'))->findAll();
+            //----------------------- END 'WHERE' --------------------------------------------------------------
 
-
-        return view('panel/user/requests', $data);
+            return view('panel/user/requests', $data);
+        }
     }
     public function requests($id)
     {
@@ -218,27 +221,32 @@ class Groups_Controller extends BaseController
     }
     public function single_room($id)
     {
-        $data['title'] = 'Private Room';
-        $groups = new Groups_Model();
-        $users = new User_Model();
-        $votes = new Votes_Model();
-        $requests = new Requests_Model();
-        $data['members'] = $requests->select('*')->join('user', 'user.user_id=requests.user_id');
-        $data['members'] = $requests->where('group_id', $id)->findAll();
-        $data['member'] = $requests->where('user_id', session('user_id'));
-        $data['member'] = $requests->where('group_id', $id);
-        $data['member'] = $requests->where('has_joined', 'true')->first();
-        $data['votes'] = $votes->where('type', 'private');
-        $data['votes'] = $votes->where('group_id', $id);
-        $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc')->findAll();
+        if (!session('isLoggedIn')) {
+            return redirect()->to('/');
+        } else {
+            $data['title'] = 'Private Room';
+            $groups = new Groups_Model();
+            $users = new User_Model();
+            $votes = new Votes_Model();
+            $requests = new Requests_Model();
+            $data['members'] = $requests->select('*')->join('user', 'user.user_id=requests.user_id');
+            $data['members'] = $requests->where('group_id', $id)->findAll();
+            $data['member'] = $requests->where('user_id', session('user_id'));
+            $data['member'] = $requests->where('group_id', $id);
+            $data['member'] = $requests->where('has_joined', 'true')->first();
+            $data['votes'] = $votes->where('type', 'private');
+            $data['votes'] = $votes->where('group_id', $id);
+            $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc')->findAll();
 
-
-        return view('panel/user/single_voting', $data);
+            return view('panel/user/single_voting', $data);
+        }
     }
     function addVote($id)
     {
 
         $validation = [
+            "title" => 'required|trim|max_length[255]',
+            "question" => 'required|trim|max_length[255]',
             "teamA" => 'required|trim',
             "teamB" => 'required',
             "category" => 'required|trim',
@@ -253,12 +261,24 @@ class Groups_Controller extends BaseController
             'banner2' => [
                 'rules' => [
                     'uploaded[banner2]',
-                    // 'mime_in[banner2,image/jpg,image/jpeg,image/png]',
+                    'mime_in[banner2,image/jpg,image/jpeg,image/png]',
                 ]
             ],
         ];
         if ($this->validate($validation) == FALSE) {
-            if ($this->validator->hasError('teamA')) {
+            if ($this->validator->hasError('title')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('title'),
+                ];
+                echo json_encode($data);
+            } else if ($this->validator->hasError('question')) {
+                $data = [
+                    'status' => false,
+                    'message' => $this->validator->getError('question'),
+                ];
+                echo json_encode($data);
+            } else if ($this->validator->hasError('teamA')) {
                 $data = [
                     'status' => false,
                     'message' => $this->validator->getError('teamA'),
@@ -293,7 +313,8 @@ class Groups_Controller extends BaseController
         } else {
 
             $votes = new Votes_Model();
-
+            $title  = $this->request->getPost('title');
+            $question  = $this->request->getPost('question');
             $teamA  = $this->request->getPost('teamA');
             $teamB  = $this->request->getPost('teamB');
             $category  = $this->request->getPost('category');
@@ -333,6 +354,8 @@ class Groups_Controller extends BaseController
 
 
             $data = [
+                'title' => $title,
+                'question' => $question,
                 'team_a' => $teamA,
                 'team_b' => $teamB,
                 'category_id' => $category,

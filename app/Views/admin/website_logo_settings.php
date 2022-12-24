@@ -13,7 +13,7 @@ include 'includes/sidebar.php';
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
                             <li class="breadcrumb-item text-muted active" aria-current="page">Dashboard</li>
-                            
+
                         </ol>
                     </nav>
                 </div>
@@ -37,13 +37,13 @@ include 'includes/sidebar.php';
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#home">Logo </a>
                             </li>
-                            
+
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div id="home" class="mt-3 container tab-pane active">
-                                <form id="logo-form" action=""  enctype="multipart/form-data">
+                                <form id="logo-form" action="" enctype="multipart/form-data">
                                     <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
 
                                     <div class="row justify-content-center">
@@ -57,7 +57,7 @@ include 'includes/sidebar.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
 
 
                                         <div class="col-md-9">
@@ -65,7 +65,7 @@ include 'includes/sidebar.php';
                                             <div class="submit-btn-wrapper text-center mt-4">
                                                 <button id="logo-submit" type="button" class="btn waves-effect waves-light btn-primary btn-block btn-rounded">
                                                     <span>Save Changes</span></button>
-                                                    <input type="hidden" value="<?= $logo['header_logo']?>" name="old_logo" >
+                                                <input type="hidden" value="<?= $logo['header_logo'] ?>" name="old_logo">
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@ include 'includes/sidebar.php';
                             </div>
 
 
-                        
+
 
 
                         </div>
@@ -88,8 +88,8 @@ include 'includes/sidebar.php';
         $(document).ready(function() {
             $('#logo-submit').click(function(event) {
                 var id1 = $('#image').val();
-               
-                if (id1 != '' ) {
+
+                if (id1 != '') {
                     var formdata = new FormData(document.getElementById('logo-form'));
                     $.ajax({
                         type: "POST",
@@ -99,7 +99,7 @@ include 'includes/sidebar.php';
                         contentType: false,
                         cache: false,
                         dataType: "json",
-                        
+
                         success: function(data) {
                             if (data == 1) {
                                 swal.fire({
@@ -139,9 +139,9 @@ include 'includes/sidebar.php';
                     });
                 } else {
                     swal.fire({
-                                'icon': 'info',
-                                'text': "Select An Image First!",
-                            });
+                        'icon': 'info',
+                        'text': "Select An Image First!",
+                    });
                 }
             });
         });

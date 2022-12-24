@@ -184,6 +184,7 @@ $routes->group('admin', function ($routes) {
 //Admin Breadcumb Settings
 $routes->group('admin', function ($routes) {
     $routes->get('breadcrumb', 'Website_Settings_Controller::index_breadcrumb');
+    $routes->post('breadcrumb/update', 'Website_Settings_Controller::breadcrumb_update');
 });
 
 //Admin Miscellenious

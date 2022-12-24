@@ -7,6 +7,7 @@ use App\Models\Logos_Model;
 use App\Models\About_Us_Model;
 use App\Models\Contact_Us_Model;
 use App\Models\Social_Links_Model;
+use App\Models\Breadcrumb_Model;
 
 class Website_Settings_Controller extends BaseController
 {
@@ -27,8 +28,11 @@ class Website_Settings_Controller extends BaseController
 
             $data['title'] = 'Breadcrumb';
             $l = new Logos_Model();
+            $breadcrumb = new Breadcrumb_Model();
 
+            $data['breadcrumb'] = $breadcrumb->first();
             $data['logo'] = $l->first();
+            
             return view('admin/website_breadcrumb', $data);
         } else {
             return redirect()->to('admin');
@@ -388,5 +392,183 @@ class Website_Settings_Controller extends BaseController
             //issue in query
             echo 0;
         }
+    }
+    public function breadcrumb_update()
+    {
+        // $validationRule = [
+        //     // 'loginImage' => [
+        //     //     'rules' => [
+        //     //         'uploaded[loginImage]',
+        //     //         'mime_in[loginImage,image/jpg,image/jpeg,image/png]',
+        //     //     ]
+        //     // ],
+        //     'image' => [
+        //         'rules' => [
+        //             'uploaded[image]',
+        //             'mime_in[image,image/jpg,image/jpeg,image/png]',
+        //         ]
+        //     ],
+        //     // 'footer' => [
+        //     //     'rules' => [
+        //     //         'uploaded[footer]',
+        //     //         'mime_in[footer,image/jpg,image/jpeg,image/png]',
+        //     //     ]
+        //     // ],
+
+
+        // ];
+
+        // if (!$this->validate($validationRule)) {
+        //     echo 5;
+        // } else {
+            $file1 = $this->request->getFile('loginImage');
+            $file2 = $this->request->getFile('image');
+            $file3 = $this->request->getFile('footer');
+            $breadcrumb = new Breadcrumb_Model();
+            $path1 = './public/uploads/logo/';
+            $path2 = './public/uploads/banners/';
+            $path3 = './public/uploads/footer/';
+            $old_pic1 = $this->request->getFile('old_loginImage');
+            $old_pic2 = $this->request->getFile('old_image');
+            $old_pic3 = $this->request->getFile('old_footer');
+            
+            if ($file1 || $file2 || $file3) {
+                $condition1 = $file1->isValid() && !$file1->hasMoved();
+                $condition2 = $file2->isValid() && !$file2->hasMoved();
+                $condition3 = $file3->isValid() && !$file3->hasMoved();
+                
+
+                if ($condition1 || $condition2 || $condition3) {
+                    if ($condition1 && $condition2 && $condition3) {
+                        if ($old_pic1 != 'theme1.jpg' && $old_pic2 != 'banner1.jpg' && $old_pic1 != 'footer.jpg') {
+                            if (is_file($path1 . $old_pic1) && is_file($path2 . $old_pic2) && is_file($path3 . $old_pic3)) {
+                                unlink($path1 . $old_pic1);
+                                unlink($path2 . $old_pic2);
+                                unlink($path3 . $old_pic3);
+                            }
+                        }
+                        $newName1 = $file1->getRandomName();
+                        $newName2 = $file2->getRandomName();
+                        $newName3 = $file3->getRandomName();
+                        $file1->move($path1, $newName1);
+                        $file2->move($path2, $newName2);
+                        $file3->move($path3, $newName3);
+                        $breadcrumb->set('login_image', $newName1);
+                        $breadcrumb->set('banner', $newName2);
+                        $breadcrumb->set('footer', $newName3);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    } else if ($condition1 && $condition2) {
+                        $newName1 = $file1->getRandomName();
+                        $newName2 = $file2->getRandomName();
+                        $file1->move($path1, $newName1);
+                        $file2->move($path2, $newName2);
+                        $breadcrumb->set('login_image', $newName1);
+                        $breadcrumb->set('banner', $newName2);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    } else if ($condition1 && $condition3) {
+                        $newName1 = $file1->getRandomName();
+                        $newName3 = $file3->getRandomName();
+                        $file1->move($path1, $newName1);
+                        $file3->move($path3, $newName3);
+                        $breadcrumb->set('login_image', $newName1);
+                        $breadcrumb->set('footer', $newName3);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    } else if ($condition2 && $condition3) {
+                        $newName2 = $file2->getRandomName();
+                        $newName3 = $file3->getRandomName();
+                        $file2->move($path2, $newName2);
+                        $file3->move($path3, $newName3);
+                        $breadcrumb->set('banner', $newName2);
+                        $breadcrumb->set('footer', $newName3);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    } else if ($condition1) {
+                        if ($old_pic1 != 'theme1.jpg') {
+                            if (is_file($path1 . $old_pic1)) {
+                                unlink($path1 . $old_pic1);
+                            }
+                        }
+                        $newName1 = $file1->getRandomName();
+                        $file1->move($path1, $newName1);
+                        $breadcrumb->set('login_image', $newName1);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    } else if ($condition2) {
+                        if ($old_pic2 != 'banner1.jpg') {
+                            if (is_file($path2 . $old_pic2)) {
+                                unlink($path2 . $old_pic2);
+                            }
+                        }
+                        $newName2 = $file2->getRandomName();
+                        $file2->move($path2, $newName2);
+                        $breadcrumb->set('banner', $newName2);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    } else if ($condition3) {
+                        if ($old_pic3 != 'footer.jpg') {
+                            if (is_file($path3 . $old_pic3)) {
+                                unlink($path3 . $old_pic3);
+                            }
+                        }
+                        $newName3 = $file3->getRandomName();
+                        $file3->move($path3, $newName3);
+                        $breadcrumb->set('footer', $newName3);
+                        $query = $breadcrumb->update();
+                        if ($query) {
+                            //success
+                            echo 1;
+                        } else {
+                            //query failed
+                            echo 2;
+                        }
+                    }
+                } else {
+                    //file not valid and has moved
+                    echo 3;
+                }
+            } else {
+                //file not get
+                echo 4;
+            }
+        // }
     }
 }

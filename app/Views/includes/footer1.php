@@ -88,7 +88,7 @@
 
 <style>
     .footer-section {
-        background: url(https://script.bugfinder.net/prophecy/assets/uploads/logo/footer.jpg);
+        background: url(<?= base_url('public/uploads/footer/'. $breadcrumb['footer'])?>);
         background-size: cover;
         background-position: center top;
     }

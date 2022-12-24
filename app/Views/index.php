@@ -68,7 +68,7 @@ include 'includes/sidebar.php';
             <a href="#" class="prev_button" style="display: none;">prev</a><a href="#" class="next_button" style="display: none;">next</a><span class="info_slide" style="display: none; left: 50%; transform: translateX(-50%);"><span class="image_number" rel="0" id="image_n_1_0">1</span> <span class="image_number image_number_select" rel="1" id="image_n_2_0">2</span> <span class="image_number" rel="2" id="image_n_3_0">3</span> </span>
             <div class="container_skitter" style="width: 1019.2px; height: 300px;">
                 <div class="image">
-                    <a href="#" target="_self"><img class="image_main" src="<?= base_url() ?>/public/uploads/banners/banner1.jpeg" style="width: 100%; height: auto; display: inline;"></a>
+                    <a href="#" target="_self"><img class="image_main" src="<?= base_url('public/uploads/banners/'. $breadcrumb['banner']) ?>" style="width: 100%; height: auto; display: inline;"></a>
                     <div class="label_skitter" style="display: block;">
                         <h2>Daily Voting</h2>
                         <p class="mb-4"></p> <a href="#"><button class="btn-custom"> find out more</button></a>

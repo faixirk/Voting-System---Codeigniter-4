@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\User_Model;
+use App\Models\Logos_Model;
 use App\Libraries\Validation;
 
 class User_Profile_Controller extends BaseController
@@ -17,6 +18,8 @@ class User_Profile_Controller extends BaseController
             return redirect()->to('/');
         } else {
             $user = new User_Model();
+            $l = new Logos_Model();
+            $data['logo'] = $l->first();
             $data['user'] = $user->where('user_id', session('user_id'))->first();
 
             return view('panel/user/profile', $data);

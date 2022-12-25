@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Votes_Model;
+use App\Models\Logos_Model;
 use App\Models\Requests_Model;
 use CodeIgniter\API\ResponseTrait;
 
@@ -18,6 +19,10 @@ class User_Dashboard extends BaseController
             return redirect()->to('/');
         }
         else{
+        $l = new Logos_Model();
+        $data['logo'] = $l->first();
+
+        
         // total votes
         $totalVotes = new Votes_Model();
         $data['totalVotes'] = $totalVotes->where('user_id', session('user_id'));

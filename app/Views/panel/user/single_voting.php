@@ -165,7 +165,7 @@ include 'includes/header.php';
           </div>
         <?php endforeach;
       } else { ?>
-        <div class="box col-8">
+        <div class="box col-12">
           <h5 class="mb-3">Empty List.</h5>
         </div>
       <?php } ?>

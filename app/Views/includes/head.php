@@ -18,13 +18,10 @@
     <meta name="apple-mobile-web-app-title" content="Daily Voting | Home">
     <meta itemprop="name" content="Voting | Home">
     <meta itemprop="description" content="Daily Voting - An Online Voting Platform">
-    <!-- <meta itemprop="image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png600x315"> -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Daily Voting - An Online Voting Platform">
     <meta property="og:description" content="Daily Voting - An Online Voting Platform">
-    <!-- <meta property="og:image" content="https://script.bugfinder.net/prophecy/assets/uploads/logo/meta.png" /> -->
     <meta property="og:image:type" content="image/png" />
-    <!-- <meta property="og:url" content="https://script.bugfinder.net/prophecy"> -->
     <meta name="twitter:card" content="summary_large_image">
 
 
@@ -36,6 +33,7 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/jquery.fancybox.min.css') ?>" />
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/owl.theme.default.min.css') ?>" />
     <link rel="stylesheet" type="text/css" href="<?= base_url('public/assets/css/aos.css') ?>" />
+    <script src="https://kit.fontawesome.com/4303e06f63.js" crossorigin="anonymous"></script>
 
     <script src="<?= base_url('public/assets/js/fontawesomepro.js') ?>"></script>
     <meta name="<?= csrf_token() ?>" content="<?= csrf_hash(); ?>">

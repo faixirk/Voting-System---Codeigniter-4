@@ -70,16 +70,7 @@ class Login_Controller extends BaseController
                     if ($verify) {
                         if ($user_info['status'] == 'active') {
                             $responce = $this->setUserSession($user_info);
-                            // $ses_data = [
-                            //     'user_id'        => $user_info['user_id'],
-                            //     'first_name'     => $user_info['first_name'],
-                            //     'last_name'      => $user_info['last_name'],
-                            //     'email'          => $user_info['user_email'],
-                            //     'pic'          => $user_info['pic'],
-                            //     // 'type'           => $user_info['type'],
-                            //     'logged_in'      => TRUE
-                            // ];
-                            // session()->set($ses_data);
+
                             if ($responce) {
                                 $data = [
                                     'status' => true,
@@ -104,7 +95,7 @@ class Login_Controller extends BaseController
 
                         $data = [
                             'status' => false,
-                            'message' => 'Incorrrect email and password'
+                            'message' => 'Incorrrect email or password'
                         ];
                         echo json_encode($data);
                         // echo sprintf('{"status":false,"message":"%s"}', 'Incorrect Password.');

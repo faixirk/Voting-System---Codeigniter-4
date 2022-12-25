@@ -8,7 +8,7 @@ class Admin_User_Controller extends BaseController{
     
     public function index(){
         $data = [];
-        if(session('type') == 'admin'){
+        if(session('type') == 'admin' && session('type') == 'admin'){
         $data['title'] = 'All Users';
         $user = new User_Model();
         $l = new Logos_Model();
@@ -19,7 +19,7 @@ class Admin_User_Controller extends BaseController{
         return view('admin/users', $data);
     }
     else{
-        return redirect()->to('./');
+        return redirect()->to('/');
     }
     }
     public function deleteUser($id){

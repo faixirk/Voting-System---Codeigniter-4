@@ -12,7 +12,7 @@ class Admin_Dashboard_Controller extends BaseController
 
     public function index()
     {
-        if (session('isLoggedIn') == true) {
+        if (session('isLoggedIn') == true && session('type') == 'admin')  {
             $data = [];
             $l = new Logos_Model();
             $votes = new Votes_Model();
@@ -21,7 +21,7 @@ class Admin_Dashboard_Controller extends BaseController
             $data['votes'] = $votes->select()->join('votes_results','votes_results.vote_id=votes.vote_id','left')->findAll();
             return view('admin/dashboard', $data);
         } else {
-            return redirect()->to('admin');
+            return redirect()->to('/');
         }
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Groups_Model;
 use App\Models\User_Model;
 use App\Models\Requests_Model;
 use App\Models\Votes_Model;
+use App\Models\Logos_Model;
 use App\Models\Private_Members_Model;
 use CodeIgniter\Exceptions\AlertError;
 
@@ -19,6 +20,8 @@ class Groups_Controller extends BaseController
         } else {
             $data['title'] = "User | Groups";
             $user = new User_Model();
+            $l = new Logos_Model();
+            $data['logo'] = $l->first();
             $data['user'] = $user->select('*');
             $data['user'] = $user->where('user_id', session('user_id'))->first();
 

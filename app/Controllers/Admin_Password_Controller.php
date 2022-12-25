@@ -12,14 +12,14 @@ class Admin_Password_Controller extends BaseController
 
     public function index()
     {
-        if (session('isLoggedIn') == true) {
+        if (session('isLoggedIn') == true && session('type') == 'admin') {
             $l = new Logos_Model();
 
             $data['logo'] =$l->first();
             $data['title'] = 'Admin | Password';
             return view('admin/password_update', $data);
         } else {
-            return redirect()->to('admin');
+            return redirect()->to('/');
         }
     }
     public function updatePassword()

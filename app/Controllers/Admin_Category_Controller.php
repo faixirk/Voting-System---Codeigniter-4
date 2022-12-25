@@ -10,7 +10,7 @@ class Admin_Category_Controller extends BaseController
 {
     public function index()
     {
-        if (session('isLoggedIn') == true) {
+        if (session('isLoggedIn') == true && session('type') == 'admin') {
 
             $data['title'] = 'Admin | Category';
             $categories = new Category_Model();
@@ -20,7 +20,7 @@ class Admin_Category_Controller extends BaseController
             $data['categories'] = $categories->findAll();
             return view('admin/category', $data);
         } else {
-            return redirect()->to('admin');
+            return redirect()->to('/');
         }
     }
 

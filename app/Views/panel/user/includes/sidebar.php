@@ -38,12 +38,12 @@ $activePage = basename($_SERVER['PHP_SELF']);
             </li>
             <li>
                 <a href="<?= base_url('user/groups') ?> " class="<?= ($activePage == 'groups') ? 'active' : ''  ?>">
-                    <i class="fal fa-users-cog"></i>
+                <i class="fa fa-user-group"></i>
                     Rooms </a>
             </li>
             <li>
                 <a href="<?= base_url('user/votes') ?>" class="<?= ($activePage == 'groups') ? 'history' : ''  ?>">
-                    <i class="fal fa-history" aria-hidden="true"></i>
+                <i class="fal fa-box-ballot"></i>
                     Votes </a>
             </li>
 

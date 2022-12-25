@@ -10,11 +10,13 @@ include 'includes/sidebar.php';
         <p>Following are the room(s) which you have joined. Voting and chat in these rooms will be private. If you see no rooms then either you didn't sent the request to join any room or the request was not yet accepted. Please be patient until the admin accepts your request.</p>
     </div>
     <table class="table table-hover table-responsive">
-        <tr class="h6">
+    <thead class="thead-inverse">
+        <tr>
             <th>Room ID</th>
             <th>Room Name</th>
             <th>Type</th>
         </tr>
+    </thead>
         <?php $userID = session('user_id');
         ?>
         <?php foreach ($private as $p) : ?>

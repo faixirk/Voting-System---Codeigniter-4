@@ -11,7 +11,7 @@ class Admin_Login_Controller extends BaseController
 {
     public function index()
     {
-        if (session('isLoggedIn') != true) {
+        if (!session('isLoggedIn') && session('type') != 'admin') {
             $breadcrumb = new Breadcrumb_Model();
             $data['title'] = 'Login';
             $data['breadcrumb'] = $breadcrumb->first();

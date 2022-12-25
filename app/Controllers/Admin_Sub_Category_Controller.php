@@ -14,7 +14,7 @@ class Admin_Sub_Category_Controller extends BaseController
     public function index()
     {
         
-        if(session('isLoggedIn')==true){
+        if(session('isLoggedIn')==true && session('type') == 'admin'){
         $cat = new Category_Model();
         $sub_cat = new Sub_Category_Model();
         $l = new Logos_Model();
@@ -27,7 +27,7 @@ class Admin_Sub_Category_Controller extends BaseController
         return view('admin/sub_category', $data);
         }
     else{
-        return redirect()->to('admin');
+        return redirect()->to('/');
     }
     }
     function getSubCategory($id = null)

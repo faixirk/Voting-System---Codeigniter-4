@@ -11,7 +11,7 @@ class Admin_Profile_Controller extends BaseController
 
     public function index()
     {
-        if (!session('isLoggedIn')) {
+        if (!session('isLoggedIn') && session('type') != 'admin') {
             return redirect()->to('admin');
         } 
         else {

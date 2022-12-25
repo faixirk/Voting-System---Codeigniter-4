@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?= base_url() ?>">
-                <img src="<?= base_url('/public/assets/DVL.png') ?>" alt="homepage">
+                <img src="<?= base_url('public/uploads/logo/' . $logo['header_logo'])?>" alt="homepage">
             </a>
             <button class="navbar-toggler p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
@@ -47,12 +47,12 @@
                         </li>
                         <li>
                             <a href="<?= base_url('user/groups') ?> " class="dropdown-item">
-                                <i class="fal fa-users-cog"></i>
+                                <i class="fa fa-user-group"></i>
                                 Rooms </a>
                         </li>
                         <li>
                             <a href="<?= base_url('user/votes') ?>" class="dropdown-item">
-                                <i class="fal fa-history" aria-hidden="true"></i>
+                                <i class="fal fa-box-ballot"></i>
                                 Votes </a>
                         </li>
 
@@ -72,9 +72,9 @@
 
                 <!-- notification panel -->
                 <div class="notification-panel" id="pushNotificationArea">
-                    <button class="dropdown-toggle" >
+                    <button class="dropdown-toggle">
                         <i class="fal fa-bell"></i>
-                        <span  class="count">1</span>
+                        <span class="count">1</span>
                     </button>
                     <ul class="notification-dropdown">
                         <div class="dropdown-box">
@@ -82,7 +82,7 @@
                                 <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="fal fa-bell"></i>
                                     <div class="text">
-                                        <p ></p>
+                                        <p></p>
                                         <span id="getNotification"></span>
                                     </div>
                                 </a>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="clear-all fixed-bottom">
                             <a href="javascript:void(0)">Clear all</a>
-                            <a href="javascript:void(0)" >You have no notifications</a>
+                            <a href="javascript:void(0)">You have no notifications</a>
                         </div>
                     </ul>
 
@@ -111,15 +111,15 @@
             Private Rooms </a>
 
         <?php
-        if (session('isLoggedIn') == false) {  ?>  
-         <button  class="text-dark" data-bs-toggle="modal" data-bs-target="#loginModal">
+        if (session('isLoggedIn') == false) {  ?>
+            <button class="text-dark" data-bs-toggle="modal" data-bs-target="#loginModal">
                 <i class="fa fa-sign-in"></i>
                 Login </button>
-        <?php } else {?>
+        <?php } else { ?>
             <a href="<?= base_url('user/logout') ?>" class="text-dark">
                 <i class="fa fa-sign-in"></i>
                 Logout </a>
-            <?php } ?>
+        <?php } ?>
 
 
     </div>

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\Message_Model;
+use App\Models\Logos_Model;
 use App\Models\Requests_Model;
 use App\Models\Public_Chat_Model;
 use CodeIgniter\API\ResponseTrait;
@@ -15,12 +16,13 @@ class Chats_Controller extends BaseController
 	use ResponseTrait;
 	public function index()
 	{
-		if(!session('isLoggedIn')){
-            return redirect()->to('/');
-        }
-        else{
-		$data['title'] = "Chats";
-		return view('panel/user/chats', $data);
+		if (!session('isLoggedIn')) {
+			return redirect()->to('/');
+		} else {
+			$l = new Logos_Model();
+			$data['logo'] = $l->first();
+			$data['title'] = "Chats";
+			return view('panel/user/chats', $data);
 		}
 	}
 	public function public_chat()
@@ -40,13 +42,12 @@ class Chats_Controller extends BaseController
 			} else {
 				$model = new Public_Chat_Model();
 
-					$msg = [
-						'username' => session()->get('f_name'),
-						'message' => $this->request->getVar('message'),
-					];
-					$model->save($msg);
-					return $this->respondCreated($msg);
-				
+				$msg = [
+					'username' => session()->get('f_name'),
+					'message' => $this->request->getVar('message'),
+				];
+				$model->save($msg);
+				return $this->respondCreated($msg);
 			}
 		}
 		return view('panel/user/chats');

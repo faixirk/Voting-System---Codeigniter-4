@@ -6,6 +6,7 @@ use App\Models\Category_Model;
 use App\Models\Sub_Category_Model;
 use App\Models\Votes_Model;
 use App\Models\Votes_Results_Model;
+use App\Models\Logos_Model;
 
 class Votes_Controller extends BaseController
 {
@@ -14,6 +15,8 @@ class Votes_Controller extends BaseController
         if (session('isLoggedIn')) {
             $data['title'] = 'Votes';
             $votes = new Votes_Model();
+            $l = new Logos_Model();
+            $data['logo'] = $l->first();
             $data['votes'] = $votes->where('user_id', session('user_id'));
             $data['votes'] = $votes->orderBy('vote_id', 'desc')->findAll();
             return view('panel/user/votes', $data);

@@ -99,11 +99,14 @@
   float: left;
   color: #999;
 }
-.rightbar {
-    width: 360px !important;
-}
+
 /* .leftbar {
   width: 290px !important;
 } */
+#fixedbutton {
+    position: fixed;
+    bottom: 70px;
+    right: 12px; 
+}
     </style>
 </head>

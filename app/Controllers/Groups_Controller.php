@@ -163,16 +163,18 @@ class Groups_Controller extends BaseController
     {
         $requests = new Requests_Model();
         $user = new User_Model();
+        $group = new Groups_Model();
         $private = new Private_Members_Model();
         $check = $requests->where('group_id', $id);
         $check = $requests->where('user_id', $userID)->first();
         $users = $user->select()->where('user_id', $userID)->first();
+        $group_desc = $group->where('group_id', $id)->first();
 
         if ($check) {
             $requests->set('has_joined', 'true');
             //condition to check if the user id and group id matches, then set has_joined to true
             $requests->where('group_id', $id);
-            $requests->where('user_id', $userID);  
+            $requests->where('user_id', $userID);
             $query = $requests->update();
             $data = [
                 'first_name' => $users['first_name'],
@@ -187,7 +189,19 @@ class Groups_Controller extends BaseController
             ];
             //insert data into private members table
             $query2 = $private->insert($data);
+            $email = \Config\Services::email();
 
+            $to = $users['user_email'];
+            $subject = 'Congratulations 🎉. Your Request has been Accepted';
+            $message = 'Hey ' . $users['first_name'] . ",<br><br>Your request to join the group: " . $group_desc['group_name'] . " has been accepted. Please visit your Private Rooms Section to visit the group<br><br>
+                Regards,<br>Team Daily Voting";
+
+            $email->setTo($to);
+            $email->setFrom('system@dailyvoting.com', 'Request to Join The Group');
+
+            $email->setSubject($subject);
+            $email->setMessage($message);
+            $email->send();
             if ($query && $query2) {
                 //has joined set to 1
                 echo 1;

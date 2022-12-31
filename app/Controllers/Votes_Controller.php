@@ -24,9 +24,6 @@ class Votes_Controller extends BaseController
             return redirect()->to('/');
         }
     }
- 
- 
-   
     function updateVoteStatus()
     {
         if (session('isLoggedIn')) {

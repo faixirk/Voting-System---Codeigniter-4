@@ -30,7 +30,6 @@ class Home extends BaseController
         $results = new Votes_Results_Model();
         $l = new Logos_Model();
         $breadcrumb = new Breadcrumb_Model();
-        
         $data['breadcrumb'] = $breadcrumb->first();
         $data['categories'] = $cat->findAll();
         $data['groups'] = $group->findAll();
@@ -40,7 +39,7 @@ class Home extends BaseController
 
         $data['votes'] = $votes->where('status', 'active')->orderBy('vote_id', 'desc');
         $data['votes'] = $votes->where('type', 'public')->findAll();
-        
+
         //Both quereis can be used to find sub categories
         // $data['sub_categories'] = $sub_cat->findAll();
         $data['sub_categories'] = $sub_cat->select()->join('category', 'category.cat_id=sub_category.cat_id')->findAll();
@@ -52,21 +51,37 @@ class Home extends BaseController
     public function getCategory($id)
     {
 
-        if ($id!=null) {
+        if ($id != null) {
             $data['title'] = 'Daily Voting';
             $votesModel = new Votes_Model();
             $votes = $votesModel->where('status', 'active');
             $votes = $votesModel->where('type', 'public');
-            if($id != 999){
+            if ($id != 999) {
                 $votes = $votesModel->where('category_id', $id)->orderBy('vote_id', 'DESC')->findAll();
-            }else{
+            } else {
                 $votes = $votesModel->orderBy('vote_id', 'DESC')->findAll();
             }
             echo json_encode($votes);
-        }else{
+        } else {
             return false;
         }
-       
+    }
+    public function getRooms($id)
+    {
+
+        if ($id != null) {
+            $data['title'] = 'Daily Voting';
+            $group = new Groups_Model();
+            if ($id == 0) {
+                $groups = $group->orderBy('group_id', 'DESC')->findAll();
+            } else {
+                $groups = $group->where('cat_id', $id)->orderBy('group_id', 'DESC')->findAll();
+            }
+            echo json_encode($groups);
+
+        } else {
+            return false;
+        }
     }
     function results()
     {
@@ -106,7 +121,7 @@ class Home extends BaseController
         $data['about'] = $a->first();
         $data['contact'] = $c->first();
         $data['logo'] = $l->first();
-       
+
 
         return view('about_us', $data);
     }

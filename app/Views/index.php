@@ -23,15 +23,15 @@ include 'includes/sidebar.php';
     <div class="col-12">
         <div class="mb-2">
             <div class="d-flex flex-column">
-                <ul class="list-group ">
-                    <?php foreach ($groups as $g) :  ?>
+                <ul class="list-group" id="rooms">
+                    <!-- <?php foreach ($groups as $g) :  ?>
 
                         <li class="list-group-item text-white bg-secondary"><?= substr($g['group_name'], 0, 16) ?>
                             <button value="<?= $g['group_id'] ?>" class="btn-custom1" id="<?= $g['group_id'] ?>">Join</button>
 
 
                         </li>
-                    <?php endforeach; ?>
+                    <?php endforeach; ?> -->
                 </ul>
             </div>
         </div>
@@ -114,8 +114,31 @@ include 'includes/footer.php';
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
-    
-    function getVo(id){
+    function getRooms(id){
+        if(id>=0){
+            $.ajax({
+            type: "GET",
+            url: "<?= base_url() ?>" + '/rooms/' + id,
+            success: function(response) { 
+                if (response) { 
+                    $('#rooms').empty();
+                    var html = '';
+                    $.each(JSON.parse(response), (key, room) => {
+                        html = '<li class="list-group-item text-white bg-secondary">'+ room['group_name'].slice(0, 16) +''+
+                            '<button value="'+room['group_id'] +'" class="btn-custom1" id="'+room['group_id'] +'">Join</button>'+
+                            '</li>'; 
+                            $('#rooms').append(html);
+                    });
+                } else {
+                    $('#rooms').empty();
+
+                }
+            }
+        }); 
+
+    }}
+    getRooms(0);
+    function getVotes(id){
         $('.cat').removeClass('active');
         $(`.cat${id}`).addClass(" active");
         $.ajax({
@@ -154,10 +177,12 @@ include 'includes/footer.php';
     //get Category IDs
     $(".cat").click(function(event) {
         var id = $(this).attr('id');
-        getVo(id);
+        getVotes(id);
+        getRooms(id);
 
     });
-    getVo(999);
+    
+    getVotes(999);
 </script>
 <script>
   
@@ -228,8 +253,7 @@ include 'includes/footer.php';
 
         });
 
-
-        $(".btn-custom1").click(function(e) {
+        $("body").on("click", ".btn-custom1", function(e){  
             var id = $(this).val();
             $.ajax({
                 url: '<?= base_url() ?>' + "/user/groups/requests/" + id,

@@ -90,6 +90,8 @@ class Groups_Controller extends BaseController
             return redirect()->to('/');
         } else {
             $data['title'] = 'Requests | User';
+            $l = new Logos_Model();
+            $data['logo'] = $l->first();
             $requests = new Requests_Model();
             //--------- join requests->groups && requests->users ----------------------------------------------
             $data['requests'] = $requests->select()->join('groups', 'groups.group_id=requests.group_id')->join('user', 'user.user_id=requests.user_id');
@@ -232,6 +234,8 @@ class Groups_Controller extends BaseController
     {
         $data = [];
         $data['title'] = 'Private | User';
+        $l = new Logos_Model();
+        $data['logo'] = $l->first();
         $requests = new Requests_Model();
         $groups = new Groups_Model();
         $data['private'] = $groups->select()->join('requests', 'requests.group_id=groups.group_id')->findAll();
@@ -249,6 +253,8 @@ class Groups_Controller extends BaseController
             $users = new User_Model();
             $votes = new Votes_Model();
             $requests = new Requests_Model();
+            $l = new Logos_Model();
+            $data['logo'] = $l->first();
             $data['members'] = $requests->select('*')->join('user', 'user.user_id=requests.user_id');
             $data['members'] = $requests->where('group_id', $id)->findAll();
             $data['member'] = $requests->where('user_id', session('user_id'));

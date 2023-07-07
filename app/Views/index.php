@@ -27,7 +27,8 @@ include 'includes/sidebar.php';
                     <?php foreach ($groups as $g) :  ?>
 
                         <li class="list-group-item text-white bg-secondary"><?= substr($g['group_name'], 0, 16) ?>
-                            <button value="<?= $g['group_id'] ?>" class="btn-custom1" id="<?= $g['group_id'] ?>">Join</button>
+
+                            <button value="<?= $g['group_id'] ?>" class="btn-custom1" id="<?= $g['group_id'] ?>"><?php if (session('user_id') != $g['user_id']) { ?>Join <?php } else { ?> Open <?php } ?></button>
 
 
                         </li>
@@ -68,7 +69,7 @@ include 'includes/sidebar.php';
             <a href="#" class="prev_button" style="display: none;">prev</a><a href="#" class="next_button" style="display: none;">next</a><span class="info_slide" style="display: none; left: 50%; transform: translateX(-50%);"><span class="image_number" rel="0" id="image_n_1_0">1</span> <span class="image_number image_number_select" rel="1" id="image_n_2_0">2</span> <span class="image_number" rel="2" id="image_n_3_0">3</span> </span>
             <div class="container_skitter" style="width: 1019.2px; height: 300px;">
                 <div class="image">
-                    <a href="#" target="_self"><img class="image_main" src="<?= base_url('public/uploads/banners/'. $breadcrumb['banner']) ?>" style="width: 100%; height: auto; display: inline;"></a>
+                    <a href="#" target="_self"><img class="image_main" src="<?= base_url('public/uploads/banners/' . $breadcrumb['banner']) ?>" style="width: 100%; height: auto; display: inline;"></a>
                     <div class="label_skitter" style="display: block;">
                         <h2>Daily Voting</h2>
                         <p class="mb-4"></p> <a href="<?= base_url('about-us') ?>"><button class="btn-custom"> find out more</button></a>
@@ -85,7 +86,7 @@ include 'includes/sidebar.php';
 
 
         <?php foreach ($categories as $cat) : ?>
-            <a id="<?= $cat['cat_id'] ?>" class="btn cat cat<?=$cat['cat_id'] ?> ">
+            <a id="<?= $cat['cat_id'] ?>" class="btn cat cat<?= $cat['cat_id'] ?> ">
                 <i class="far fa-futbol" aria-hidden="true"></i> <span><?= $cat['cat_title']; ?></span>
             </a>
         <?php endforeach; ?>
@@ -114,33 +115,32 @@ include 'includes/footer.php';
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script>
-    
-    function getVo(id){
+    function getVo(id) {
         $('.cat').removeClass('active');
         $(`.cat${id}`).addClass(" active");
         $.ajax({
             type: "GET",
             url: "<?= base_url() ?>" + '/' + id,
-            success: function(response) { 
-                if (response) { 
+            success: function(response) {
+                if (response) {
                     $('.votesList').empty();
                     var html = '';
                     $.each(JSON.parse(response), (key, vote) => {
-                         html = '<div class="box">' +
-                            '<h5 class="mb-3">'+ vote['title'].slice(0,20) + '...' +'</h5>'+
+                        html = '<div class="box">' +
+                            '<h5 class="mb-3">' + vote['title'].slice(0, 20) + '...' + '</h5>' +
                             '<div class="row d-flex justify-content-around align-items-center"> <div class="col-3 team">' +
-                            '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner1']+'" style="border-radius: 50%" alt="A" class="img-fluid">' +
-                            '<p>'+vote['team_a'] + '</p> </div> <div class="col-6"><h6>'+vote['question'].slice(0,15)+ '...' +'</h6>' +
-                            '<button type="button" class="btn-custom w-75 my-2 btn-info" value="'+vote['vote_id']+'">See More</button>' +
+                            '<img src="<?= base_url() ?>/public/uploads/votes/' + vote['banner1'] + '" style="border-radius: 50%" alt="A" class="img-fluid">' +
+                            '<p>' + vote['team_a'] + '</p> </div> <div class="col-6"><h6>' + vote['question'].slice(0, 15) + '...' + '</h6>' +
+                            '<button type="button" class="btn-custom w-75 my-2 btn-info" value="' + vote['vote_id'] + '">See More</button>' +
                             '</div> <div class="col-3 team">' +
-                            '<img src="<?= base_url() ?>/public/uploads/votes/'+vote['banner2']+'" alt="B" style="border-radius: 50%" class="img-fluid">' +
-                            '<p>'+vote['team_b']+'</p> </div>' +
+                            '<img src="<?= base_url() ?>/public/uploads/votes/' + vote['banner2'] + '" alt="B" style="border-radius: 50%" class="img-fluid">' +
+                            '<p>' + vote['team_b'] + '</p> </div>' +
                             '<div class="col-12 align-self-end"> <div class="d-flex justify-content-between">' +
-                            '<button type="button" class="voteCount teamA teamA'+vote['vote_id']+' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team A </button>' +
-                            '<button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result'+vote['vote_id']+'"></button>' +
-                            '<button type="button" class="voteCount teamB teamB'+vote['vote_id'] + ' btn-light  downgrade-mobile" value="'+vote['vote_id']+'">Vote Team B</button>' +
+                            '<button type="button" class="voteCount teamA teamA' + vote['vote_id'] + ' btn-light  downgrade-mobile" value="' + vote['vote_id'] + '">Vote Team A </button>' +
+                            '<button type="button" disabled="disabled" class="btn-light disabled downgrade-mobile result' + vote['vote_id'] + '"></button>' +
+                            '<button type="button" class="voteCount teamB teamB' + vote['vote_id'] + ' btn-light  downgrade-mobile" value="' + vote['vote_id'] + '">Vote Team B</button>' +
                             '</div> </div> </div> </div>';
-                            $('.votesList').append(html);
+                        $('.votesList').append(html);
                     });
 
                 } else {
@@ -160,11 +160,10 @@ include 'includes/footer.php';
     getVo(999);
 </script>
 <script>
-  
     $(document).ready(function() {
-        
-        $("body").on("click", ".btn-info", function(){
-            var id = $(this).val(); 
+
+        $("body").on("click", ".btn-info", function() {
+            var id = $(this).val();
             if (id != null) {
                 $.post("user/getDesc", {
                         id
@@ -189,7 +188,7 @@ include 'includes/footer.php';
                 );
             }
         })
-        $("body").on("click", ".voteCount", function(){ 
+        $("body").on("click", ".voteCount", function() {
 
             var id = $(this).val();
             var classType = this.className.split(" ")[1];

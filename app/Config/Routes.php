@@ -37,6 +37,7 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/(:num)', 'Home::getCategory/$1');
+$routes->get('/rooms/(:num)', 'Home::getRooms/$1');
 // $routes->get('/server', 'Server::index');
 
 

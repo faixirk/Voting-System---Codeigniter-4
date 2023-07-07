@@ -7,7 +7,7 @@
                 <i class="fal fa-chevron-left"></i> Back </button>
         </div>
         <div class="top p-1 d-flex">
-            <button disabled type="button" :class="" class="btn-custom me-1">
+            <button disabled type="button"  class="btn-custom me-1">
                 <i class="las la-podcast"></i>
                 All Categories </button>
             

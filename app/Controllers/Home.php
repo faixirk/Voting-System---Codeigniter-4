@@ -47,6 +47,7 @@ class Home extends BaseController
         // $data['votes'] = $cat->select()
         // ->join('votes', 'votes.category_id=category.cat_id')->join('sub_category', 'sub_category.cat_id=votes.category_id')->findAll();
         // $data['votes'] = $cat->where('type','public');
+        die();
         return view('index', $data);
     }
     public function getCategory($id)

@@ -35,7 +35,7 @@ include 'includes/sidebar.php';
                     <div class="card-body">
                         <h4 class="card-title mb-3"><i class="icon-user"></i> Profile Setting</h4>
                         <form class="form-body file-upload" id="profileForm" enctype="multipart/form-data">
-                            <input type="hidden" name="<?=csrf_token()?>" value="<?=csrf_hash()?>">  
+                            <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                             <div class="form-row justify-content-between">
                                 <div class="col-sm-6 col-md-3">
                                     <div class="image-input ">
@@ -48,7 +48,7 @@ include 'includes/sidebar.php';
                                 <div class="col-sm-6 col-md-8">
 
                                     <div class="row">
-                                      
+
 
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -68,7 +68,7 @@ include 'includes/sidebar.php';
                                     </div>
 
                                     <div class="row">
-                                        
+
                                         <!-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Phone Number </label>
@@ -118,14 +118,14 @@ include 'includes/sidebar.php';
     <script>
         $(document).ready(function() {
             $('#loadingBtn').hide();
-            
+
             $("#updateBtn").click((e) => {
                 e.preventDefault();
                 if ($('#userName').val() != "") {
                     $('#userName').addClass('is-valid').fadeIn();
                     $.ajax({
                         type: "POST",
-                        url: '<?=base_url()?>' + "/admin/profile/update",
+                        url: '<?= base_url() ?>' + "/admin/profile/update",
                         data: $('#profileForm').serialize(),
                         beforeSend: function() {
                             $('#updateBtn').hide();
@@ -134,7 +134,7 @@ include 'includes/sidebar.php';
                         success: function(response) {
                             if (response == 1) {
                                 swal.fire({
-                                    'icon' : 'success',
+                                    'icon': 'success',
                                     'text': "Successfully Updated!"
                                 });
                                 $('#updateBtn').show();
